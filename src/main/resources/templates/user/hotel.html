@@ -389,13 +389,15 @@
 						<div class="col text-center">
 							<div class="block-27">
 								<ul>
-									<li><a href="#">&lt;</a></li>
-									<li class="active"><span>1</span></li>
-									<li><a href="#">2</a></li>
-									<li><a href="#">3</a></li>
-									<li><a href="#">4</a></li>
-									<li><a href="#">5</a></li>
-									<li><a href="#">&gt;</a></li>
+									<li>
+										<a th:href="@{/TravelFpoly/Home(page=${products.number - 1})}">&lt;</a>
+									</li>
+									<li th:each="item : ${#numbers.sequence(0, products.totalPages-1)}" th:class="${item} == ${products.number} ? 'active' : ''">
+										<a th:href="@{/TravelFpoly/Home(page=${item})}" th:text="${item+1}"></a>
+									</li>
+									<li>
+										<a th:href="@{/TravelFpoly/Home(page=${products.number + 1})}">&gt;</a>
+									</li>
 								</ul>
 							</div>
 						</div>

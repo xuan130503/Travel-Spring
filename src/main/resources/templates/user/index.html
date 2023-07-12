@@ -285,7 +285,7 @@
 		</div>
 		<div class="container-fluid">
 			<div class="row">
-				<div class="col-sm col-md-6 col-lg ftco-animate">
+				<div th:each="item : ${productTour.content}" class="col-sm col-md-6 col-lg-3 col-3 ftco-animate">
 					<div class="destination">
 						<a href="#"
 							class="img img-2 d-flex justify-content-center align-items-center"
@@ -308,11 +308,10 @@
 									</p>
 								</div>
 								<div class="two">
-									<span class="price">$200</span>
+									<span class="price">[[${item.price}]]</span>
 								</div>
 							</div>
-							<p>Far far away, behind the word mountains, far from the
-								countries</p>
+							<p>[[${item.name}]]</p>
 							<p class="days">
 								<span>2 days 3 nights</span>
 							</p>
@@ -324,7 +323,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-sm col-md-6 col-lg ftco-animate">
+				<!-- <div class="col-sm col-md-6 col-lg ftco-animate">
 					<div class="destination">
 						<a href="#"
 							class="img img-2 d-flex justify-content-center align-items-center"
@@ -362,8 +361,8 @@
 							</p>
 						</div>
 					</div>
-				</div>
-				<div class="col-sm col-md-6 col-lg ftco-animate">
+				</div> -->
+				<!-- <div class="col-sm col-md-6 col-lg ftco-animate">
 					<div class="destination">
 						<a href="#"
 							class="img img-2 d-flex justify-content-center align-items-center"
@@ -401,8 +400,8 @@
 							</p>
 						</div>
 					</div>
-				</div>
-				<div class="col-sm col-md-6 col-lg ftco-animate">
+				</div> -->
+				<!-- <div class="col-sm col-md-6 col-lg ftco-animate">
 					<div class="destination">
 						<a href="#"
 							class="img img-2 d-flex justify-content-center align-items-center"
@@ -440,8 +439,8 @@
 							</p>
 						</div>
 					</div>
-				</div>
-				<div class="col-sm col-md-6 col-lg ftco-animate">
+				</div> -->
+				<!-- <div class="col-sm col-md-6 col-lg ftco-animate">
 					<div class="destination">
 						<a href="#"
 							class="img img-2 d-flex justify-content-center align-items-center"
@@ -479,6 +478,24 @@
 							</p>
 						</div>
 					</div>
+				</div>
+			</div> -->
+
+		</div>
+		<div class="row mt-5">
+			<div class="col text-center">
+				<div class="block-27">
+					<ul>
+						<li>
+							<a th:href="@{/TravelFpoly/Home(pageTour=${productTour.number - 1})}">&lt;</a>
+						</li>
+						<li th:each="item : ${#numbers.sequence(0, productTour.totalPages-1)}" th:class="${item} == ${productTour.number} ? 'active' : ''">
+							<a th:href="@{/TravelFpoly/Home(pageTour=${item})}" th:text="${item+1}"></a>
+						</li>
+						<li>
+							<a th:href="@{/TravelFpoly/Home(pageTour=${productTour.number + 1})}">&gt;</a>
+						</li>
+					</ul>
 				</div>
 			</div>
 		</div>
@@ -734,6 +751,23 @@
 					</div>
 				</div>
 			</div>
+			<!-- <div class="row mt-5">
+				<div class="col text-center">
+					<div class="block-27">
+						<ul>
+							<li>
+								<a th:href="@{/TravelFpoly/Home(pageTour=${productTour.number - 1})}">&lt;</a>
+							</li>
+							<li th:each="item : ${#numbers.sequence(0, productTour.totalPages-1)}" th:class="${item} == ${productTour.number} ? 'active' : ''">
+								<a th:href="@{/TravelFpoly/Home(pageTour=${item})}" th:text="${item+1}"></a>
+							</li>
+							<li>
+								<a th:href="@{/TravelFpoly/Home(pageTour=${productTour.number + 1})}">&gt;</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div> -->
 		</div>
 	</section>
 	<section class="ftco-section testimony-section bg-light">
