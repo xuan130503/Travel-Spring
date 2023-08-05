@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div th:each="item:${list}">
+		<img alt="" th:src="@{|https://res.cloudinary.com/dpyp2vvdm/image/upload/v1689940772/Travel_FPoly/${item.avatar}|}">
+		<img alt="" src="https://res.cloudinary.com/dpyp2vvdm/image/upload/v1689940772/Travel_FPoly/${item.image1}">
+		
+	</div>
+	<ul th:each="item:${list}">
+		<li>[[${item.avatar}]]</li>
+		<li>[[${item.image1}]]</li>
+		<li>[[${item.image2}]]</li>
+		<li>[[${item.image3}]]</li>
+		<li>[[${item.image4}]]</li>
+		<li>[[${item.image5}]]</li>
+		<li>[[${item.image6}]]</li>
+		<li>[[${item.image7}]]</li>
+		<li>[[${item.image8}]]</li>
+		<li>[[${item.image9}]]</li>
+		<li>[[${item.image10}]]</li>
+	</ul>
+</body>
+</html>

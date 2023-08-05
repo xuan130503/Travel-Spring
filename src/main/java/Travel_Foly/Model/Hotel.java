@@ -24,6 +24,7 @@ public class Hotel {
 	String Name;
 	Double Price;
 	Boolean Available;
+	@Column(columnDefinition = "nvarchar(500)")
 	String Description;
 	String Address;
 	String Map;

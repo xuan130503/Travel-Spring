@@ -5,7 +5,7 @@
 <title>Travel-FPoly</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="/user/images/bee1.png" rel="icon">
+<link href="/user/images/bee.png" rel="icon">
 <link
 	href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700"
 	rel="stylesheet">
@@ -146,7 +146,7 @@
 			</div>
 		</div>
 	</section>
-	<section class="ftco-section ftco-destination">
+	<section class="ftco-section ftco-destination container">
 		<div class="container">
 			<div class="row justify-content-start mb-5 pb-3">
 				<div class="col-md-7 heading-section ftco-animate">
@@ -156,14 +156,14 @@
 					</h2>
 				</div>
 			</div>
-			<div class="row">
+			<!-- <div class="row">
 				<div class="col-md-12">
 					<div class="destination-slider owl-carousel ftco-animate">
-						<div class="item">
+						<div class="item" th:each="category : ${categories}">
 							<div class="destination">
-								<a href="#"
+								<a th:href="@{|/travelfpoly/tour/${category[0]}|}"
 									class="img d-flex justify-content-center align-items-center"
-									style="background-image: url(/user/images/destination-1.jpg);">
+									th:style="'background-image: url('+ ${category[2]} +');'">
 									<div
 										class="icon d-flex justify-content-center align-items-center">
 										<span class="icon-search2"></span>
@@ -171,105 +171,16 @@
 								</a>
 								<div class="text p-3">
 									<h3>
-										<a href="#">Paris, Italy</a>
+										<a href="#">[[${category[1]}]]</a>
 									</h3>
-									<span class="listing">15 Listing</span>
+									<span class="listing">[[${category[3]}]] Chuyến</span>
 								</div>
 							</div>
 						</div>
-						<div class="item">
-							<div class="destination">
-								<a href="#"
-									class="img d-flex justify-content-center align-items-center"
-									style="background-image: url(/user/images/destination-2.jpg);">
-									<div
-										class="icon d-flex justify-content-center align-items-center">
-										<span class="icon-search2"></span>
-									</div>
-								</a>
-								<div class="text p-3">
-									<h3>
-										<a href="#">San Francisco, USA</a>
-									</h3>
-									<span class="listing">20 Listing</span>
-								</div>
-							</div>
-						</div>
-						<div class="item">
-							<div class="destination">
-								<a href="#"
-									class="img d-flex justify-content-center align-items-center"
-									style="background-image: url(/user/images/destination-3.jpg);">
-									<div
-										class="icon d-flex justify-content-center align-items-center">
-										<span class="icon-search2"></span>
-									</div>
-								</a>
-								<div class="text p-3">
-									<h3>
-										<a href="#">Lodon, UK</a>
-									</h3>
-									<span class="listing">10 Listing</span>
-								</div>
-							</div>
-						</div>
-						<div class="item">
-							<div class="destination">
-								<a href="#"
-									class="img d-flex justify-content-center align-items-center"
-									style="background-image: url(/user/images/destination-4.jpg);">
-									<div
-										class="icon d-flex justify-content-center align-items-center">
-										<span class="icon-search2"></span>
-									</div>
-								</a>
-								<div class="text p-3">
-									<h3>
-										<a href="#">Lion, Singapore</a>
-									</h3>
-									<span class="listing">3 Listing</span>
-								</div>
-							</div>
-						</div>
-						<div class="item">
-							<div class="destination">
-								<a href="#"
-									class="img d-flex justify-content-center align-items-center"
-									style="background-image: url(/user/images/destination-5.jpg);">
-									<div
-										class="icon d-flex justify-content-center align-items-center">
-										<span class="icon-search2"></span>
-									</div>
-								</a>
-								<div class="text p-3">
-									<h3>
-										<a href="#">Australia</a>
-									</h3>
-									<span class="listing">3 Listing</span>
-								</div>
-							</div>
-						</div>
-						<div class="item">
-							<div class="destination">
-								<a href="#"
-									class="img d-flex justify-content-center align-items-center"
-									style="background-image: url(/user/images/destination-6.jpg);">
-									<div
-										class="icon d-flex justify-content-center align-items-center">
-										<span class="icon-search2"></span>
-									</div>
-								</a>
-								<div class="text p-3">
-									<h3>
-										<a href="#">Paris, Italy</a>
-									</h3>
-									<span class="listing">3 Listing</span>
-								</div>
-							</div>
-						</div>
+						
 					</div>
 				</div>
-			</div>
+			</div> -->
 		</div>
 	</section>
 	<section class="ftco-section bg-light">
@@ -283,15 +194,14 @@
 				</div>
 			</div>
 		</div>
-		<div class="container-fluid">
-			<div class="row">
+		<div class="container">
+			<div class="row w-100">
 				<div th:each="item : ${productTour.content}" class="col-sm col-md-6 col-lg-3 col-3 ftco-animate">
 					<div class="destination">
 						<a href="#"
 							class="img img-2 d-flex justify-content-center align-items-center"
-							style="background-image: url(/user/images/destination-1.jpg);">
-							<div
-								class="icon d-flex justify-content-center align-items-center">
+							th:style="'background-image: url(' +${item.Image}+ ');'">
+							<div class="icon d-flex justify-content-center align-items-center">
 								<span class="icon-search2"></span>
 							</div>
 						</a>
@@ -299,7 +209,7 @@
 							<div class="d-flex">
 								<div class="one">
 									<h3>
-										<a href="#">Paris, Italy</a>
+										<a href="#"></a>
 									</h3>
 									<p class="rate">
 										<i class="icon-star"></i> <i class="icon-star"></i> <i
@@ -308,10 +218,10 @@
 									</p>
 								</div>
 								<div class="two">
-									<span class="price">[[${item.price}]]</span>
+									<span class="price">[[${item.Tour.price}]]</span>
 								</div>
 							</div>
-							<p>[[${item.name}]]</p>
+							<p>[[${item.Tour.description}]]</p>
 							<p class="days">
 								<span>2 days 3 nights</span>
 							</p>
@@ -323,177 +233,20 @@
 						</div>
 					</div>
 				</div>
-				<!-- <div class="col-sm col-md-6 col-lg ftco-animate">
-					<div class="destination">
-						<a href="#"
-							class="img img-2 d-flex justify-content-center align-items-center"
-							style="background-image: url(/user/images/destination-2.jpg);">
-							<div
-								class="icon d-flex justify-content-center align-items-center">
-								<span class="icon-search2"></span>
-							</div>
-						</a>
-						<div class="text p-3">
-							<div class="d-flex">
-								<div class="one">
-									<h3>
-										<a href="#">Paris, Italy</a>
-									</h3>
-									<p class="rate">
-										<i class="icon-star"></i> <i class="icon-star"></i> <i
-											class="icon-star"></i> <i class="icon-star"></i> <i
-											class="icon-star-o"></i> <span>8 Rating</span>
-									</p>
-								</div>
-								<div class="two">
-									<span class="price">$200</span>
-								</div>
-							</div>
-							<p>Far far away, behind the word mountains, far from the
-								countries</p>
-							<p class="days">
-								<span>2 days 3 nights</span>
-							</p>
-							<hr>
-							<p class="bottom-area d-flex">
-								<span><i class="icon-map-o"></i> San Franciso, CA</span> <span
-									class="ml-auto"><a href="#">Discover</a></span>
-							</p>
-						</div>
-					</div>
-				</div> -->
-				<!-- <div class="col-sm col-md-6 col-lg ftco-animate">
-					<div class="destination">
-						<a href="#"
-							class="img img-2 d-flex justify-content-center align-items-center"
-							style="background-image: url(/user/images/destination-3.jpg);">
-							<div
-								class="icon d-flex justify-content-center align-items-center">
-								<span class="icon-search2"></span>
-							</div>
-						</a>
-						<div class="text p-3">
-							<div class="d-flex">
-								<div class="one">
-									<h3>
-										<a href="#">Paris, Italy</a>
-									</h3>
-									<p class="rate">
-										<i class="icon-star"></i> <i class="icon-star"></i> <i
-											class="icon-star"></i> <i class="icon-star"></i> <i
-											class="icon-star-o"></i> <span>8 Rating</span>
-									</p>
-								</div>
-								<div class="two">
-									<span class="price">$200</span>
-								</div>
-							</div>
-							<p>Far far away, behind the word mountains, far from the
-								countries</p>
-							<p class="days">
-								<span>2 days 3 nights</span>
-							</p>
-							<hr>
-							<p class="bottom-area d-flex">
-								<span><i class="icon-map-o"></i> San Franciso, CA</span> <span
-									class="ml-auto"><a href="#">Discover</a></span>
-							</p>
-						</div>
-					</div>
-				</div> -->
-				<!-- <div class="col-sm col-md-6 col-lg ftco-animate">
-					<div class="destination">
-						<a href="#"
-							class="img img-2 d-flex justify-content-center align-items-center"
-							style="background-image: url(/user/images/destination-4.jpg);">
-							<div
-								class="icon d-flex justify-content-center align-items-center">
-								<span class="icon-search2"></span>
-							</div>
-						</a>
-						<div class="text p-3">
-							<div class="d-flex">
-								<div class="one">
-									<h3>
-										<a href="#">Paris, Italy</a>
-									</h3>
-									<p class="rate">
-										<i class="icon-star"></i> <i class="icon-star"></i> <i
-											class="icon-star"></i> <i class="icon-star"></i> <i
-											class="icon-star-o"></i> <span>8 Rating</span>
-									</p>
-								</div>
-								<div class="two">
-									<span class="price">$200</span>
-								</div>
-							</div>
-							<p>Far far away, behind the word mountains, far from the
-								countries</p>
-							<p class="days">
-								<span>2 days 3 nights</span>
-							</p>
-							<hr>
-							<p class="bottom-area d-flex">
-								<span><i class="icon-map-o"></i> San Franciso, CA</span> <span
-									class="ml-auto"><a href="#">Discover</a></span>
-							</p>
-						</div>
-					</div>
-				</div> -->
-				<!-- <div class="col-sm col-md-6 col-lg ftco-animate">
-					<div class="destination">
-						<a href="#"
-							class="img img-2 d-flex justify-content-center align-items-center"
-							style="background-image: url(/user/images/destination-5.jpg);">
-							<div
-								class="icon d-flex justify-content-center align-items-center">
-								<span class="icon-search2"></span>
-							</div>
-						</a>
-						<div class="text p-3">
-							<div class="d-flex">
-								<div class="one">
-									<h3>
-										<a href="#">Paris, Italy</a>
-									</h3>
-									<p class="rate">
-										<i class="icon-star"></i> <i class="icon-star"></i> <i
-											class="icon-star"></i> <i class="icon-star"></i> <i
-											class="icon-star-o"></i> <span>8 Rating</span>
-									</p>
-								</div>
-								<div class="two">
-									<span class="price">$200</span>
-								</div>
-							</div>
-							<p>Far far away, behind the word mountains, far from the
-								countries</p>
-							<p class="days">
-								<span>2 days 3 nights</span>
-							</p>
-							<hr>
-							<p class="bottom-area d-flex">
-								<span><i class="icon-map-o"></i> San Franciso, CA</span> <span
-									class="ml-auto"><a href="#">Discover</a></span>
-							</p>
-						</div>
-					</div>
-				</div>
-			</div> -->
-
+			</div>
 		</div>
 		<div class="row mt-5">
 			<div class="col text-center">
 				<div class="block-27">
 					<ul>
 						<li>
-							<a th:href="@{/TravelFpoly/Home(pageTour=${productTour.number - 1})}">&lt;</a>
+							<a th:href="@{/travelfpoly/home(pageTour=${productTour.number - 1})}">&lt;</a>
 						</li>
 						<li th:each="item : ${#numbers.sequence(0, productTour.totalPages-1)}" th:class="${item} == ${productTour.number} ? 'active' : ''">
-							<a th:href="@{/TravelFpoly/Home(pageTour=${item})}" th:text="${item+1}"></a>
+							<a th:href="@{/travelfpoly/home(pageTour=${item})}" th:text="${item+1}"></a>
 						</li>
 						<li>
-							<a th:href="@{/TravelFpoly/Home(pageTour=${productTour.number + 1})}">&gt;</a>
+							<a th:href="@{/travelfpoly/home(pageTour=${productTour.number + 1})}">&gt;</a>
 						</li>
 					</ul>
 				</div>

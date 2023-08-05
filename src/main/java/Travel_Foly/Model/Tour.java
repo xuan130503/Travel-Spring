@@ -24,6 +24,7 @@ public class Tour {
 	String Name;
 	Double Price;
 	Boolean Available;
+	@Column(columnDefinition = "nvarchar(500)")
 	String Description;
 	@ManyToOne @JoinColumn(name="CategoryTourId")
 	CategoryTour Tour;

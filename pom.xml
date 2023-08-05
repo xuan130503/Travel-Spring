@@ -49,10 +49,6 @@
 			<artifactId>tomcat-embed-jasper</artifactId>
 		</dependency>
 		<dependency>
-    		<groupId>org.glassfish.web</groupId>
-    		<artifactId>jakarta.servlet.jsp.jstl</artifactId>
-		</dependency>
-		<dependency>
 		    <groupId>jakarta.servlet.jsp.jstl</groupId>
 		    <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
 		</dependency>
@@ -63,11 +59,6 @@
 		<dependency>
 		   <groupId>org.hibernate.validator</groupId>
 		   <artifactId>hibernate-validator</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>jstl</artifactId>
-			<version>1.2</version>
 		</dependency>
 		<dependency>
 		    <groupId>org.springframework.boot</groupId>
@@ -91,6 +82,15 @@
 		    <artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>org.thymeleaf.extras</groupId>
+			<artifactId>thymeleaf-extras-springsecurity6</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
+			<scope>test</scope>
+		</dependency>-->
+		<!-- <dependency>
 		    <groupId>org.springframework.boot</groupId>
 		    <artifactId>spring-boot-starter-oauth2-client</artifactId>
 		</dependency>-->
