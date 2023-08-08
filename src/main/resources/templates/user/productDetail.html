@@ -4,13 +4,27 @@
 <head>
 <title>Travel-FPoly</title>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="/user/images/bee1.png" rel="icon">
+<link href="/user/images/bee.png" rel="icon">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="/user/images/bee.png" rel="icon">
 <link
 	href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700"
 	rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Alex+Brush"
 	rel="stylesheet">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+	crossorigin="anonymous"></script>
+
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 <link rel="stylesheet" href="/user/css/open-iconic-bootstrap.min.css">
 <link rel="stylesheet" href="/user/css/animate.css">
 <link rel="stylesheet" href="/user/css/owl.carousel.min.css">
@@ -23,7 +37,39 @@
 <link rel="stylesheet" href="/user/css/flaticon.css">
 <link rel="stylesheet" href="/user/css/icomoon.css">
 <link rel="stylesheet" href="/user/css/style.css">
+<link rel="stylesheet" href="/user/css/tour-detail.css">
 <script nonce="6d052e1f-c170-4fc3-9b38-e3eeb83f439d">(function(w,d){!function(dK,dL,dM,dN){dK[dM]=dK[dM]||{};dK[dM].executed=[];dK.zaraz={deferred:[],listeners:[]};dK.zaraz.q=[];dK.zaraz._f=function(dO){return function(){var dP=Array.prototype.slice.call(arguments);dK.zaraz.q.push({m:dO,a:dP})}};for(const dQ of["track","set","debug"])dK.zaraz[dQ]=dK.zaraz._f(dQ);dK.zaraz.init=()=>{var dR=dL.getElementsByTagName(dN)[0],dS=dL.createElement(dN),dT=dL.getElementsByTagName("title")[0];dT&&(dK[dM].t=dL.getElementsByTagName("title")[0].text);dK[dM].x=Math.random();dK[dM].w=dK.screen.width;dK[dM].h=dK.screen.height;dK[dM].j=dK.innerHeight;dK[dM].e=dK.innerWidth;dK[dM].l=dK.location.href;dK[dM].r=dL.referrer;dK[dM].k=dK.screen.colorDepth;dK[dM].n=dL.characterSet;dK[dM].o=(new Date).getTimezoneOffset();if(dK.dataLayer)for(const dX of Object.entries(Object.entries(dataLayer).reduce(((dY,dZ)=>({...dY[1],...dZ[1]})),{})))zaraz.set(dX[0],dX[1],{scope:"page"});dK[dM].q=[];for(;dK.zaraz.q.length;){const d_=dK.zaraz.q.shift();dK[dM].q.push(d_)}dS.defer=!0;for(const ea of[localStorage,sessionStorage])Object.keys(ea||{}).filter((ec=>ec.startsWith("_zaraz_"))).forEach((eb=>{try{dK[dM]["z_"+eb.slice(7)]=JSON.parse(ea.getItem(eb))}catch{dK[dM]["z_"+eb.slice(7)]=ea.getItem(eb)}}));dS.referrerPolicy="origin";dS.src="../../cdn-cgi/zaraz/sd0d9.js?z="+btoa(encodeURIComponent(JSON.stringify(dK[dM])));dR.parentNode.insertBefore(dS,dR)};["complete","interactive"].includes(dL.readyState)?zaraz.init():dK.addEventListener("DOMContentLoaded",zaraz.init)}(w,d,"zarazData","script");})(window,document);</script>
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+<script
+	src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+<script type="module">
+  const swiper = new Swiper(".swiper", {
+    // Optional parameters
+    slidesPerView: 3,
+    loop: true,
+    spaceBetween: 30,
+
+    // If we need pagination
+    pagination: {
+      el: ".swiper-pagination",
+    },
+
+    // Navigation arrows
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+
+    // And if we need scrollbar
+    scrollbar: {
+      el: ".swiper-scrollbar",
+    },
+  });
+</script>
+
 </head>
 <body>
 	<div th:insert="~{include/_Nav}"></div>
@@ -143,6 +189,456 @@
 						</div>
 					</div>
 				</div>
+			</div>
+		</div>
+	</section>
+	<section class="ftco-section ftco-destination">
+		<div class="swiper">
+			<!-- Additional required wrapper -->
+			<div th:object="${tour}" class="swiper-wrapper">
+				<!-- Slides -->
+				<div class="swiper-slide">
+					<img th:src="${tour.Name}"
+						alt="" width="100%" height="100%" />
+					<span th:text="${tour.Name}"></span>	
+				</div>
+				<div class="swiper-slide">
+					<img
+						src="https://owa.bestprice.vn/images/articles/uploads/10-dia-diem-du-lich-thanh-pho-ho-chi-minh-noi-tieng-nhat-5fa126f60578d.jpg?fbclid=IwAR2KZvPvGy_Xst1WnctrAAHpjYZVUgrcYM5zw4cXzxjoSB_vrw2UOwW2lUI"
+						alt="" width="100%" height="100%" />
+				</div>
+				<div class="swiper-slide">
+					<img
+						src="https://congthuong.vn/stores/news_dataimages/2022/102022/02/09/5-copy20221002095418.jpg?rt=20221002095603?221002103813"
+						alt="" width="100%" height="100%" />
+				</div>
+				<div class="swiper-slide">
+					<img
+						src="https://media.hanamtv.vn/upload/image/202010/medium/23175_12-1601724763557.jpg"
+						alt="" width="100%" height="100%" />
+				</div>
+				<div class="swiper-slide">
+					<img
+						src="https://ik.imagekit.io/tvlk/blog/2022/02/dia-diem-du-lich-viet-nam-cover.jpeg"
+						alt="" width="100%" height="100%" />
+				</div>
+				<div class="swiper-slide">
+					<img
+						src="https://cdn.tgdd.vn/Files/2021/06/15/1360385/top-10-bai-bien-vung-tau-dep-noi-tieng-ban-nhat-dinh-phai-di-202106160011402743.jpg"
+						alt="" width="100%" height="100%" />
+				</div>
+				...
+			</div>
+			<!-- If we need pagination -->
+			<div class="swiper-pagination"></div>
+
+			<!-- If we need navigation buttons -->
+			<div class="swiper-button-prev"></div>
+			<div class="swiper-button-next"></div>
+
+			<!-- If we need scrollbar -->
+			<div class="swiper-scrollbar"></div>
+		</div>
+		<div class="container mt-5 mb-5">
+			<div class="d-flex row">
+				<div class="col-3 d-flex flex-column">
+					<h2 class="title-h2">TRAVELFPOLY</h2>
+					<span class="text-hiden"> <svg
+							xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+							fill="currentColor" class="bi bi-geo-alt-fill mb-2"
+							viewBox="0 0 16 16">
+            <path
+								d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
+          </svg> Hồ Chí Minh
+					</span>
+				</div>
+
+				<div class="col-3 d-flex">
+					<div class="d-flex gap-3 align-items-center">
+						<div class="icon-navbar">
+							<i class="fas fa-clock fa-lg"></i>
+						</div>
+						<div class="d-flex flex-column text-hiden">
+							<h1 class="text-hiden">Durations</h1>
+							<span class="title-span">1 Week</span>
+						</div>
+					</div>
+					<div></div>
+				</div>
+
+				<div class="col-3 d-flex">
+					<div class="d-flex gap-3 align-items-center">
+						<div class="icon-navbar">
+							<i class="fas fa-road fa-lg" style="color: #ffffff;"></i>
+						</div>
+						<div class="d-flex flex-column">
+							<h1 class="text-hiden">Difficulty</h1>
+							<span class="title-span">Easy</span>
+						</div>
+					</div>
+					<div></div>
+				</div>
+
+				<div class="col-3 d-flex">
+					<div class="d-flex gap-3 align-items-center">
+						<div class="icon-navbar">
+							<i class="fas fa-child fa-lg" style="color: #ffffff;"></i>
+						</div>
+						<div class="d-flex flex-column">
+							<h1 class="text-hiden">Min Age</h1>
+							<span class="title-span">0</span>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<hr class="new1">
+		<div class="container">
+			<div class="row justify-content-between">
+				<div class="col-7 col-lg-7 col-sm-12 col-md-7 row title">
+					<div class="col-12 title">
+						<h3>Enjoy the Adventure</h3>
+						<p>Are you looking for an adventure of a lifetime? Join us on
+							an unforgettable journey through some of the world's most
+							stunning landscapes and cultural destinations. Our expertly
+							curated tours take you to incredible destinations, from the
+							rugged mountains of Patagonia to the vibrant cities of Asia. Our
+							itineraries are designed to immerse you in the local culture,
+							with opportunities to meet locals, try new foods, and learn about
+							the history and traditions of each destination. Our experienced
+							guides will lead you through each destination, sharing their
+							knowledge and passion for travel. We offer a range of activities
+							to suit every traveler, from hiking and kayaking to cultural
+							tours and culinary experiences.</p>
+					</div>
+					<div class="col-12">
+						<div class="">
+							<h3>Included / Excluded</h3>
+							<p>To help you plan your trip, we have put together a list of
+								what's included and what's not included in your tour package.
+								This will give you a clear understanding of what to expect and
+								help you make any necessary arrangements before your journey
+								begins.</p>
+
+							<div class="d-flex">
+								<div>
+									<div>
+										<span> <i class="fas fa-check" style="color: #1bbc9b;"></i>
+										</span> <span> Train tickets and Bus transportation </span>
+									</div>
+									<div>
+										<span> <i class="fas fa-check" style="color: #1bbc9b;"></i>
+										</span> <span> Train tickets and Bus transportation </span>
+									</div>
+									<div>
+										<span> <i class="fas fa-check" style="color: #1bbc9b;"></i>
+										</span> <span> Train tickets and Bus transportation </span>
+									</div>
+									<div>
+										<span> <i class="fas fa-check" style="color: #1bbc9b;"></i>
+										</span> <span> Train tickets and Bus transportation </span>
+									</div>
+								</div>
+								&emsp;&emsp;
+								<div>
+									<div>
+										<span> <i class="fas fa-check" style="color: #1bbc9b;"></i>
+										</span> <span> Train tickets and Bus transportation </span>
+									</div>
+									<div>
+										<span> <i class="fas fa-check" style="color: #1bbc9b;"></i>
+										</span> <span> Train tickets and Bus transportation </span>
+									</div>
+									<div>
+										<span> <i class="fas fa-check" style="color: #1bbc9b;"></i>
+										</span> <span> Train tickets and Bus transportation </span>
+									</div>
+									<div>
+										<span> <i class="fas fa-check" style="color: #1bbc9b;"></i>
+										</span> <span> Train tickets and Bus transportation </span>
+									</div>
+								</div>
+							</div>
+							<hr class="new1">
+						</div>
+						<section class="mt-5 title">
+							<div class="col-12">
+								<h3>Gallery</h3>
+								<p>Each image tells a unique story, inviting us into a world
+									of emotion, beauty, and complexity. Get ready to be moved,
+									inspired, and challenged as we journey through this captivating
+									collection of images.</p>
+							</div>
+							<div class="m-0 p-0 row d-flex justify-content-between">
+								<!-- <div class="col-md-4 col-sm-5 col-4 col-lg-4 row"
+                  style="background-image: url('image/tulip.jpg'); 
+                  background-repeat: no-repeat;
+                  background-size: cover; height: 150px;
+                  border: 1px solid white;
+                  border-radius: 10%;">
+                  <div class="col-8 col-sm-12 col-lg-8 col-md-8">
+                  </div>
+                    <img src="image/tulip.jpg" width="100%" alt="">
+                </div> -->
+								<div class="col-md-4 col-sm-5 col-4 col-lg-4 gy-4">
+									<div class="row">
+										<div class="col-11 col-sm-12 col-lg-11 col-md-11"
+											style="background-image: url('image/tulip.jpg'); background-repeat: no-repeat; background-size: cover; height: 160px; border: 1px solid white; border-radius: 10%;">
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4 col-sm-5 col-4 col-lg-4 gy-4">
+									<div class="row">
+										<div class="col-11 col-sm-12 col-lg-11 col-md-11"
+											style="background-image: url('image/tulip.jpg'); background-repeat: no-repeat; background-size: cover; height: 160px; border: 1px solid white; border-radius: 10%;">
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4 col-sm-5 col-4 col-lg-4 gy-4">
+									<div class="row">
+										<div class="col-11 col-sm-12 col-lg-11 col-md-11"
+											style="background-image: url('image/tulip.jpg'); background-repeat: no-repeat; background-size: cover; height: 160px; border: 1px solid white; border-radius: 10%;">
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4 col-sm-5 col-4 col-lg-4 gy-4">
+									<div class="row">
+										<div class="col-11 col-sm-12 col-lg-11 col-md-11"
+											style="background-image: url('image/tulip.jpg'); background-repeat: no-repeat; background-size: cover; height: 160px; border: 1px solid white; border-radius: 10%;">
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4 col-sm-5 col-4 col-lg-4 gy-4">
+									<div class="row">
+										<div class="col-11 col-sm-12 col-lg-11 col-md-11"
+											style="background-image: url('image/tulip.jpg'); background-repeat: no-repeat; background-size: cover; height: 160px; border: 1px solid white; border-radius: 10%;">
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4 col-sm-5 col-4 col-lg-4 gy-4">
+									<div class="row">
+										<div class="col-11 col-sm-12 col-lg-11 col-md-11"
+											style="background-image: url('image/tulip.jpg'); background-repeat: no-repeat; background-size: cover; height: 160px; border: 1px solid white; border-radius: 10%;">
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>
+						<section class="mt-5 title">
+							<div class="col-12">
+								<h3>Itinerary</h3>
+								<p>We have carefully planned out each day to give you the
+									best possible experience. From exploring historic landmarks to
+									tasting delicious local cuisine, each day is packed with
+									adventure and excitement. Join us as we take you on a journey
+									through some of the most fascinating destinations in the world.
+								</p>
+							</div>
+							<div class="accordion" id="accordionExample">
+								<div class="accordion-item">
+									<h2 class="accordion-header">
+										<button class="accordion-button" type="button"
+											data-bs-toggle="collapse" data-bs-target="#collapseOne"
+											aria-expanded="true" aria-controls="collapseOne">
+											<a class="text-decoration-none" href=""> <span>DAY
+													1 </span> - Arrival and Orientation
+											</a>
+										</button>
+									</h2>
+									<div id="collapseOne" class="accordion-collapse collapse show"
+										data-bs-parent="#accordionExample">
+										<div class="accordion-body">
+											<strong>This is the first item's accordion body.</strong> It
+											is shown by default, until the collapse plugin adds the
+											appropriate classes that we use to style each element. These
+											classes control the overall appearance, as well as the
+											showing and hiding via CSS transitions. You can modify any of
+											this with custom CSS or overriding our default variables.
+											It's also worth noting that just about any HTML can go within
+											the
+											<code>.accordion-body</code>
+											, though the transition does limit overflow.
+										</div>
+									</div>
+								</div>
+								<div class="accordion-item">
+									<h2 class="accordion-header">
+										<button class="accordion-button collapsed" type="button"
+											data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+											aria-expanded="false" aria-controls="collapseTwo">
+											<a href=""> <span>DAY 2 </span> - City Tour
+											</a>
+										</button>
+									</h2>
+									<div id="collapseTwo" class="accordion-collapse collapse"
+										data-bs-parent="#accordionExample">
+										<div class="accordion-body">
+											<strong>This is the second item's accordion body.</strong> It
+											is hidden by default, until the collapse plugin adds the
+											appropriate classes that we use to style each element. These
+											classes control the overall appearance, as well as the
+											showing and hiding via CSS transitions. You can modify any of
+											this with custom CSS or overriding our default variables.
+											It's also worth noting that just about any HTML can go within
+											the
+											<code>.accordion-body</code>
+											, though the transition does limit overflow.
+										</div>
+									</div>
+								</div>
+								<div class="accordion-item">
+									<h2 class="accordion-header">
+										<button class="accordion-button collapsed" type="button"
+											data-bs-toggle="collapse" data-bs-target="#collapseThree"
+											aria-expanded="false" aria-controls="collapseThree">
+											<a href=""> <span>DAY 3 </span> - Cooking Class
+											</a>
+										</button>
+									</h2>
+									<div id="collapseThree" class="accordion-collapse collapse"
+										data-bs-parent="#accordionExample">
+										<div class="accordion-body">
+											<strong>This is the third item's accordion body.</strong> It
+											is hidden by default, until the collapse plugin adds the
+											appropriate classes that we use to style each element. These
+											classes control the overall appearance, as well as the
+											showing and hiding via CSS transitions. You can modify any of
+											this with custom CSS or overriding our default variables.
+											It's also worth noting that just about any HTML can go within
+											the
+											<code>.accordion-body</code>
+											, though the transition does limit overflow.
+										</div>
+									</div>
+								</div>
+								<div class="accordion-item">
+									<h2 class="accordion-header">
+										<button class="accordion-button collapsed" type="button"
+											data-bs-toggle="collapse" data-bs-target="#collapseFour"
+											aria-expanded="false" aria-controls="collapseThree">
+											<a href=""> <span>DAY 4 </span> - Nature Hike
+											</a>
+										</button>
+									</h2>
+									<div id="collapseFour" class="accordion-collapse collapse"
+										data-bs-parent="#accordionExample">
+										<div class="accordion-body">
+											<strong>This is the third item's accordion body.</strong> It
+											is hidden by default, until the collapse plugin adds the
+											appropriate classes that we use to style each element. These
+											classes control the overall appearance, as well as the
+											showing and hiding via CSS transitions. You can modify any of
+											this with custom CSS or overriding our default variables.
+											It's also worth noting that just about any HTML can go within
+											the
+											<code>.accordion-body</code>
+											, though the transition does limit overflow.
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>
+						<hr class="new1">
+
+					</div>
+				</div>
+
+				<!-- Form booking -->
+				<div class="col-5 col-lg-5 col-sm-6 col-md-5 ">
+					<div class="col-12">
+						<div class="row">
+							<div class="booking-form">
+								<div class="form-header">
+									<h1>Make your tour</h1>
+								</div>
+								<form>
+									<div class="form-group">
+										<input class="form-control" type="text"
+											placeholder="Country, ZIP, city..."> <span
+											class="form-label">Destination</span>
+									</div>
+									<div class="row">
+										<div class="col-md-12">
+											<div class="form-group">
+												<input class="form-control" type="email"
+													placeholder="Enter your Email"> <span
+													class="form-label">Email</span>
+											</div>
+										</div>
+										<div class="col-md-12">
+											<div class="form-group">
+												<input class="form-control" type="tel"
+													placeholder="Enter you Phone"> <span
+													class="form-label">Phone</span>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<input class="form-control" type="date" required> <span
+													class="form-label">Check In</span>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<input class="form-control" type="date" required> <span
+													class="form-label">Check out</span>
+											</div>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<select class="form-control" required>
+													<option value="" selected hidden>no of adults</option>
+													<option>1</option>
+													<option>2</option>
+													<option>3</option>
+												</select> <span class="select-arrow"></span> <span class="form-label">Adults</span>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<select class="form-control" required>
+													<option value="" selected hidden>no of children</option>
+													<option>0</option>
+													<option>1</option>
+													<option>2</option>
+												</select> <span class="select-arrow"></span> <span class="form-label">Children</span>
+											</div>
+										</div>
+									</div>
+
+									<div class="form-btn">
+										<button class="submit-btn">Book Now</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+					<hr class="new1">
+					<div class="col-12">
+						<div class="mt-5 title">
+							<h3>Tour Map</h3>
+							<p>To help you plan your trip, we have put together a list of
+								what's included and what's not included in your tour package.
+								This will give you a clear understanding of what to expect and
+								help you make any necessary arrangements before your journey
+								begins.</p>
+							<div id="map" class="w-100">
+								<iframe
+									src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d62762.86551594846!2d106.36213705167799!3d10.525921678374791!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x310ab622649f777b%3A0x2746728a8c94c45a!2zVHAuIFTDom4gQW4sIExvbmcgQW4sIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1690048042160!5m2!1svi!2s"
+									width="100%" height="450" style="border: 0;" allowfullscreen=""
+									loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+								</iframe>
+							</div>
+						</div>
+					</div>
+				</div>
+
 			</div>
 		</div>
 	</section>

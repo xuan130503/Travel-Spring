@@ -2,6 +2,7 @@ package Travel_Foly.Model;
 
 import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,8 +17,9 @@ import lombok.Data;
 public class CategoryHotel{
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	Integer CategoryHotelId;
-	String Name;
+	private Integer CategoryHotelId;
+	@Column(columnDefinition = "nvarchar(100)")
+	private String Name;
 	@OneToMany(mappedBy = "CategoryHotel")
-	List<Hotel> Hotels;
+	private List<Hotel> Hotels;
 }

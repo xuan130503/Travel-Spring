@@ -246,15 +246,15 @@ ALTER COLUMN account varchar(50)
     
 INSERT INTO tour_images(avatar, image1, image2, image3, image4, image5, image6,image7, image8, image9 )
  VALUES( 
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018141/Travel_FPoly/Image_Tourism/Da_Nang/avatar.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018091/Travel_FPoly/Image_Tourism/Da_Nang/image1.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018092/Travel_FPoly/Image_Tourism/Da_Nang/image2.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018091/Travel_FPoly/Image_Tourism/Da_Nang/image3.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018091/Travel_FPoly/Image_Tourism/Da_Nang/image4.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018090/Travel_FPoly/Image_Tourism/Da_Nang/image5.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018090/Travel_FPoly/Image_Tourism/Da_Nang/image6.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018090/Travel_FPoly/Image_Tourism/Da_Nang/image7.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018090/Travel_FPoly/Image_Tourism/Da_Nang/image8.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018141/Travel_FPoly/Image_Hotel/Hilton_Hotel/avatar.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018091/Travel_FPoly/Image_Hotel/Hilton_Hotel/image1.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018092/Travel_FPoly/Image_Hotel/Hilton_Hotel/image2.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018091/Travel_FPoly/Image_Hotel/Hilton_Hotel/image3.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018091/Travel_FPoly/Image_Hotel/Hilton_Hotel/image4.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018090/Travel_FPoly/Image_Hotel/Hilton_Hotel/image5.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018090/Travel_FPoly/Image_Hotel/Hilton_Hotel/image6.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018090/Travel_FPoly/Image_Hotel/Hilton_Hotel/image7.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018090/Travel_FPoly/Image_Hotel/Hilton_Hotel/image8.jpg',
  'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018095/Travel_FPoly/Image_Tourism/Da_Nang/image9.jpg'
 
  )
@@ -354,8 +354,8 @@ INSERT INTO tour_images(avatar, image1, image2, image3, image4, image5, image6,i
 
 
 -- Mẫu Của Tân
-	select * from category_tours
-	delete category_tours
+
+	use TravelFPoly
 	-- Thêm loại tours
 	INSERT INTO category_tours (name) 
 	VALUES
@@ -365,7 +365,7 @@ INSERT INTO tour_images(avatar, image1, image2, image3, image4, image5, image6,i
     (N'Tour du lịch nghỉ dưỡng');
 
 	--Thêm tour
-	select *from tours
+	
 	INSERT INTO tours (category_tour_id, Name, Price, Available, Description)
 VALUES
     (1, N'Tour du lịch tự nhiên', 100, 1, N'Khám phá thiên nhiên tươi đẹp và hùng vĩ.'),
@@ -390,8 +390,6 @@ VALUES
 
 
 	--thêm lịch trình
-	select * from tour_schedules;
-
 	INSERT INTO tour_schedules(tour_id, title, description, date, time)
 VALUES
     -- Lịch trình cho TourId = 1
@@ -492,8 +490,6 @@ VALUES
     (19, N'Lịch trình ngày 4', N'Lịch trình thư giãn và tận hưởng phong cảnh đẹp.', '2023-08-17', '09:45:00')
 	;
 	--thêm hình ảnh cho tour
-	select * from tours
-	select * from tour_images
 	 INSERT INTO tour_images(tour_id,avatar, image1, image2, image3, image4, image5 )
  VALUES
  (1,
@@ -546,11 +542,11 @@ VALUES
   ),
   (7,
  'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Tourism/Old_City_HoiAn/avatar.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Hotel/Hilton_Hotel/image1.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Hotel/Hilton_Hotel/image2.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Hotel/Hilton_Hotel/image3.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Hotel/Hilton_Hotel/image4.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Hotel/Hilton_Hotel/image5.jpg'
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Tourism/Old_City_HoiAn/image1.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Tourism/Old_City_HoiAn/image2.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Tourism/Old_City_HoiAn/image3.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Tourism/Old_City_HoiAn/image4.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Tourism/Old_City_HoiAn/image5.jpg'
   ),
   (8,
  'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Hotel/Hilton_Hotel/avatar1.jpg',
@@ -650,7 +646,6 @@ VALUES
   )
 
   --Thêm bảng chi tiết tour
-  select * from tour_variants
   insert into tour_variants(tour_id,departure,quantity,destination,date,map,introduction)
   VALUES
     (1, N'Hà Nội', 20, N'Hạ Long Bay', '2023-08-20', 'https://example.com/map_halong', N'Hành trình khám phá vịnh Hạ Long đẹp nhất Việt Nam.'),
@@ -673,9 +668,7 @@ VALUES
     (18, N'Đà Nẵng', 14, N'Bà Nà Hills', '2023-09-05', 'https://example.com/map_banahills2', N'Tận hưởng không gian nghỉ dưỡng tại khu du lịch Bà Nà Hills.'),
 	(19, N'Hồ Chí Minh', 15, N'Vũng Tàu', '2023-08-25', 'https://example.com/map_vungtau', N'Thưởng thức các món hải sản tươi ngon và tắm biển tại Vũng Tàu.');
     
-	-- Insert CategoryHotel
-
-	use TravelFPoly
+-- Insert CategoryHotel
 Insert into category_hotels (name)
 values
 (N'Khách sạn Sang Trọng'),
@@ -690,32 +683,118 @@ values
 (N'Khách sạn Phong Cách Cổ')
 
 --Insert category Room
-
+select * from category_rooms
 INSERT INTO category_rooms (name)
 VALUES
-    ('Phòng Đơn'),
-    ('Phòng Đôi'),
-    ('Phòng Gia Đình'),
-    ('Phòng Hạng Sang'),
-    ('Phòng Suite'),
-    ('Phòng Studio'),
-    ('Phòng Biển View'),
-    ('Phòng Cao Cấp'),
-    ('Phòng Góc'),
-    ('Phòng Giường Kích Thước Lớn');
+    (N'Phòng Đơn'),
+    (N'Phòng Đôi'),
+    (N'Phòng Gia Đình'),
+    (N'Phòng Hạng Sang'),
+    (N'Phòng Suite'),
+    (N'Phòng Studio'),
+    (N'Phòng Biển View'),
+    (N'Phòng Cao Cấp'),
+    (N'Phòng Góc'),
+    (N'Phòng Giường Kích Thước Lớn');
 
 --Insert Hotel
-
-Insert Into hotels(category_hotel_id,category_room_id,category_room_id,name,available,description,start,address,map,price,quantity)
+select * from hotels
+Insert Into hotels(category_hotel_id,category_room_id,name,available,description,start,address,map,price,quantity)
 values
-(1, 1, N'Khách sạn Mẫu 1', 1, N'Khách sạn sang trọng với các tiện nghi hiện đại', '2023-08-05', N'Địa chỉ khách sạn Mẫu 1', N'Mã địa điểm bản đồ', 150, 10),
-(1, 1, N'Khách sạn Mẫu 1', 1, N'Khách sạn sang trọng với các tiện nghi hiện đại', '2023-08-05', N'Địa chỉ khách sạn Mẫu 1', N'Mã địa điểm bản đồ', 150, 10),
-(1, 1, N'Khách sạn Mẫu 1', 1, N'Khách sạn sang trọng với các tiện nghi hiện đại', '2023-08-05', N'Địa chỉ khách sạn Mẫu 1', N'Mã địa điểm bản đồ', 150, 10),
-(1, 1, N'Khách sạn Mẫu 1', 1, N'Khách sạn sang trọng với các tiện nghi hiện đại', '2023-08-05', N'Địa chỉ khách sạn Mẫu 1', N'Mã địa điểm bản đồ', 150, 10),
-(1, 1, N'Khách sạn Mẫu 1', 1, N'Khách sạn sang trọng với các tiện nghi hiện đại', '2023-08-05', N'Địa chỉ khách sạn Mẫu 1', N'Mã địa điểm bản đồ', 150, 10),
-(1, 1, N'Khách sạn Mẫu 1', 1, N'Khách sạn sang trọng với các tiện nghi hiện đại', '2023-08-05', N'Địa chỉ khách sạn Mẫu 1', N'Mã địa điểm bản đồ', 150, 10),
-(1, 1, N'Khách sạn Mẫu 1', 1, N'Khách sạn sang trọng với các tiện nghi hiện đại', '2023-08-05', N'Địa chỉ khách sạn Mẫu 1', N'Mã địa điểm bản đồ', 150, 10),
-(1, 1, N'Khách sạn Mẫu 1', 1, N'Khách sạn sang trọng với các tiện nghi hiện đại', '2023-08-05', N'Địa chỉ khách sạn Mẫu 1', N'Mã địa điểm bản đồ', 150, 10),
-(1, 1, N'Khách sạn Mẫu 1', 1, N'Khách sạn sang trọng với các tiện nghi hiện đại', '2023-08-05', N'Địa chỉ khách sạn Mẫu 1', N'Mã địa điểm bản đồ', 150, 10),
+(1, 1, N'Acor Hotel', 1, N'Khách sạn sang trọng với các tiện nghi hiện đại', 5, N'Địa chỉ khách sạn Mẫu 1', N'Mã địa điểm bản đồ', 150, 10),
+(2, 2, N'Hilton Hotel', 1, N'Khách sạn sang trọng với các tiện nghi hiện đại', 5, N'Địa chỉ khách sạn Mẫu 1', N'Mã địa điểm bản đồ', 150, 10),
+(3, 3, N'Marriott Hotel', 1, N'Khách sạn sang trọng với các tiện nghi hiện đại', 5, N'Địa chỉ khách sạn Mẫu 1', N'Mã địa điểm bản đồ', 150, 10),
+(4, 4, N'Plateno Hotel', 1, N'Khách sạn sang trọng với các tiện nghi hiện đại', 5, N'Địa chỉ khách sạn Mẫu 1', N'Mã địa điểm bản đồ', 150, 10),
+(5, 5, N'Hotel Six Senses', 1, N'Khách sạn sang trọng với các tiện nghi hiện đại', 5, N'Địa chỉ khách sạn Mẫu 1', N'Mã địa điểm bản đồ', 150, 10),
+(6, 6, N'Bess West Tem', 1, N'Khách sạn sang trọng với các tiện nghi hiện đại', 5, N'Địa chỉ khách sạn Mẫu 1', N'Mã địa điểm bản đồ', 150, 10),
+(7, 7, N'CHI Hotel', 1, N'Khách sạn sang trọng với các tiện nghi hiện đại', 5, N'Địa chỉ khách sạn Mẫu 1', N'Mã địa điểm bản đồ', 150, 10),
+(8, 8, N'InterContinental Hotels', 1, N'Khách sạn sang trọng với các tiện nghi hiện đại', 5, N'Địa chỉ khách sạn Mẫu 1', N'Mã địa điểm bản đồ', 150, 10),
+(9, 9, N'Starwood Hotel', 1, N'Khách sạn sang trọng với các tiện nghi hiện đại', 5, N'Địa chỉ khách sạn Mẫu 1', N'Mã địa điểm bản đồ', 150, 10),
+(10, 10, N'Wyndham Hotel', 1, N'Khách sạn sang trọng với các tiện nghi hiện đại', 5, N'Địa chỉ khách sạn Mẫu 1', N'Mã địa điểm bản đồ', 150, 10)
 
-   
+
+-- Insert Hotel Image
+delete hotel_images
+select * from hotel_images
+INSERT INTO hotel_images(hotel_id,avatar, image1, image2, image3, image4, image5 )
+ VALUES
+ (1,
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018141/Travel_FPoly/Image_Hotel/Accor/avatar.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018091/Travel_FPoly/Image_Hotel/Accor/image1.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Hotel/Accor/image2.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Hotel/Accor/image3.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Hotel/Accor/image4.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Hotel/Accor/image5.jpg'
+  ),
+  (2,
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Hotel/Hilton_Hotel/avatar.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Hotel/Hilton_Hotel/image1.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Hotel/Hilton_Hotel/image2.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Hotel/Hilton_Hotel/image3.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Hotel/Hilton_Hotel/image4.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Hotel/Hilton_Hotel/image5.jpg'
+  ),
+  (3,
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Hotel/Marriott_Hotel/avatar.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Hotel/Marriott_Hotel/image1.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Hotel/Marriott_Hotel/image2.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Hotel/Marriott_Hotel/image3.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Hotel/Marriott_Hotel/image4.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Hotel/Marriott_Hotel/image5.jpg'
+  ),
+  (4,
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Hotel/Plateno_Hotel/avatar.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Hotel/Plateno_Hotel/image1.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Hotel/Plateno_Hotel/image2.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Hotel/Plateno_Hotel/image3.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Hotel/Plateno_Hotel/image4.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Hotel/Plateno_Hotel/image5.jpg'
+  ),
+  (5,
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Hotel/Hotel_Six_Senses/avatar.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Hotel/Hotel_Six_Senses/image1.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Hotel/Hotel_Six_Senses/image2.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Hotel/Hotel_Six_Senses/image3.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Hotel/Hotel_Six_Senses/image4.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Hotel/Hotel_Six_Senses/image5.jpg'
+  ),
+  (6,
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Hotel/Best_Western_Hotel/avatar.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Hotel/Best_Western_Hotel/image1.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Hotel/Best_Western_Hotel/image2.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Hotel/Best_Western_Hotel/image3.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Hotel/Best_Western_Hotel/image4.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Hotel/Best_Western_Hotel/image5.jpg'
+  ),
+  (7,
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Hotel/CHI_Hotel/avatar.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Hotel/CHI_Hotel/image1.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Hotel/CHI_Hotel/image2.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Hotel/CHI_Hotel/image3.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Hotel/CHI_Hotel/image4.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Hotel/CHI_Hotel/image5.jpg'
+  ),
+  (8,
+	'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014869/Travel_FPoly/Image_Hotel/InterCondinetal_Hotel/avatar.jpg',
+	 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Hotel/InterContinental_Hotel/image1.jpg',
+	 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Hotel/InterContinental_Hotel/image2.jpg',
+	 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Hotel/InterContinental_Hotel/image3.jpg',
+	 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Hotel/InterContinental_Hotel/image4.jpg',
+	 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Hotel/InterContinental_Hotel/image5.jpg'
+  ),
+  (9,
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Hotel/Starwood_Hotel/avatar.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Hotel/Starwood_Hotel/image1.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Hotel/Starwood_Hotel/image2.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Hotel/Starwood_Hotel/image3.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Hotel/Starwood_Hotel/image4.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Hotel/Starwood_Hotel/image5.jpg'
+  ),
+  (10,
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Hotel/Wyndham_Hotel/avatar.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Hotel/Wyndham_Hotel/image1.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Hotel/Wyndham_Hotel/image2.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Hotel/Wyndham_Hotel/image3.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Hotel/Wyndham_Hotel/image4.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Hotel/Wyndham_Hotel/image5.jpg'
+  )

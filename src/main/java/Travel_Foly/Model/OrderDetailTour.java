@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.List;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -19,12 +20,13 @@ import lombok.Data;
 public class OrderDetailTour {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	Integer OrderDetailTourId;
-	Integer Quantity;
-	Double Price;
-	Date Date;
-	@ManyToOne @JoinColumn(name = "TourId")
-	Tour OrderDetailTour;
+	private Integer OrderDetailTourId;
+	private Integer Quantity;
+	private Double Price;
+	private Date Date;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "TourId")
+	private Tour OrderDetailTour;
 	@OneToMany(mappedBy = "OrderDetailTour")
-	List<OrderTour> OrderTours;
+	private List<OrderTour> OrderTours;
 }

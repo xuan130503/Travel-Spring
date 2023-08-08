@@ -17,9 +17,9 @@ import lombok.Data;
 public class CategoryTour{
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	Integer CategoryTourId;
+	private Integer CategoryTourId;
 	@Column(columnDefinition = "nvarchar(100)")
-	String Name;
+	private String Name;
 	@OneToMany(mappedBy = "Tour")
-	List<Tour> Tours;
+	private List<Tour> Tours;
 }

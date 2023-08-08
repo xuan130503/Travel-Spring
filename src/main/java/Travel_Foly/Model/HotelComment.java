@@ -2,6 +2,7 @@ package Travel_Foly.Model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -16,12 +17,14 @@ import lombok.Data;
 public class HotelComment {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	Integer CommentId;
+	private Integer CommentId;
 	@Column(columnDefinition = "nvarchar(500)")
-	String Content;
-	Integer Vote;
-	@ManyToOne @JoinColumn(name="UserName")
-	User HotelCommentUser;
-	@ManyToOne @JoinColumn(name="HotelId")
-	Hotel HotelCommentId;
+	private String Content;
+	private Integer Vote;
+	@ManyToOne(fetch = FetchType.LAZY) 
+	@JoinColumn(name="UserName")
+	private User HotelCommentUser;
+	@ManyToOne(fetch = FetchType.LAZY) 
+	@JoinColumn(name="HotelId")
+	private Hotel HotelCommentId;
 }

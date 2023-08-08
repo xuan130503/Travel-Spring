@@ -5,6 +5,7 @@ import java.sql.Date;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -19,13 +20,14 @@ import lombok.Data;
 public class TourSchedule{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	Integer TourScheduleId;
+	private Integer TourScheduleId;
 	@Column(columnDefinition = "nvarchar(200)")
-	String Title;
+	private String Title;
 	@Column(columnDefinition = "nvarchar(500)")
-	String Description;
-	Date Date;
-	Time Time;
-	@ManyToOne @JoinColumn(name="TourId")
-	Tour TourSchedule;
+	private String Description;
+	private Date Date;
+	private Time Time;
+	@ManyToOne(fetch = FetchType.LAZY) 
+	@JoinColumn(name="TourId")
+	private Tour TourSchedule;
 }

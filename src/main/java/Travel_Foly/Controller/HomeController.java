@@ -18,9 +18,9 @@ import Travel_Foly.DAO.CategoryTourDAO;
 import Travel_Foly.DAO.HotelDAO;
 import Travel_Foly.DAO.TourDAO;
 import Travel_Foly.DAO.TourImageDAO;
+import Travel_Foly.DTO.HotelDTO;
 import Travel_Foly.DTO.TourWithImageDTO;
 import Travel_Foly.Model.Tour;
-import Travel_Foly.Model.TourImage;
 
 @Controller
 @RequestMapping("/travelfpoly/")
@@ -38,16 +38,23 @@ public class HomeController {
 	@GetMapping("home")
 	public String home(Model model, 
 			@RequestParam("pageTour") Optional<Integer> pageTour
-//			,@RequestParam("pageHotel") Optional<Integer> pageHotel
+			,@RequestParam("pageHotel") Optional<Integer> pageHotel
 			) {
+		
+		// Tour 
 		Pageable pageableTour= PageRequest.of(pageTour.orElse(0), 8);
 		Page<TourWithImageDTO> tour = tourDao.findAllTourWithImage(pageableTour);
+		
+		//Category
 		List<Object[]> categories = categoryTourDao.findAllCategory();
-//		Pageable pageableHotel= PageRequest.of(pageHotel.orElse(0), 10);
-//		Page<Hotel> hotel = hotelDao.findAll(pageableHotel);
+		
+		//Hotel
+		Pageable pageableHotel= PageRequest.of(pageHotel.orElse(0), 8);
+		Page<HotelDTO> hotel = hotelDao.findAllHotelWithImage(pageableHotel);
+		
 		model.addAttribute("productTour", tour);
 		model.addAttribute("categories", categories);
-//		model.addAttribute("productHotel", hotel);
+		model.addAttribute("productHotel", hotel);
 		return "user/index-2";
 	}
 	@GetMapping("test")
@@ -61,9 +68,16 @@ public class HomeController {
 		model.addAttribute("categories", categories);
 		return "user/index-2";
 	}
-	@GetMapping("productdetail")
-	public String productDetail() {
-		return "user/productDetail";
+	@GetMapping("tour-detail")
+	public String tourdetail(Model model) {
+		
+		return "user/productdetail";
+	}
+	@GetMapping("tour-detail/{id}")
+	public String productDetail(@PathVariable("id") Integer id, Model model) {
+		Tour tour = tourDao.findById(id).get();
+		model.addAttribute("tour", tour);
+		return "user/productdetail";
 	}
 	@GetMapping("home2")
 	public String home2() {
@@ -89,7 +103,7 @@ public class HomeController {
 	public String hotel() {
 		return "user/hotel";
 	}
-	@GetMapping("hotel-Detail")
+	@GetMapping("hotel-detail")
 	public String hotelDetail() {
 		return "user/hotel-single";
 	}

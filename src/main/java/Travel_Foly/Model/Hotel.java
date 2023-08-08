@@ -19,26 +19,31 @@ import lombok.Data;
 public class Hotel {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	Integer HotelId;
+	private Integer HotelId;
 	@Column(columnDefinition = "nvarchar(100)")
-	String Name;
-	Double Price;
-	Boolean Available;
+	private String Name;
+	private Double Price;
+	private Boolean Available;
 	@Column(columnDefinition = "nvarchar(500)")
-	String Description;
-	String Address;
-	String Map;
-	Integer Start;
-	Integer Quantity;
+	private String Description;
+	@Column(columnDefinition = "nvarchar(200)")
+	private String Address;
+	private String Map;
+	private Integer Start;
+	private Integer Quantity;
 	@ManyToOne @JoinColumn(name="CategoryHotelId")
-	CategoryHotel CategoryHotel;
+	private CategoryHotel CategoryHotel;
 	@ManyToOne @JoinColumn(name="CategoryRoomId")
-	CategoryRoom CategoryRoom;
+	private CategoryRoom CategoryRoom;
 	@OneToMany(mappedBy = "HotelImage")
-	List<HotelImage> HotelImages;
+	private List<HotelImage> HotelImages;
 	@OneToMany(mappedBy = "HotelCommentId")
-	List<HotelComment> HotelComments;
+	private List<HotelComment> HotelComments;
 	@OneToMany(mappedBy = "OrderDetailHotel")
-	List<OrderDetailHotel> OrderDetailHotels;
+	private List<OrderDetailHotel> OrderDetailHotels;
+	
+	//Cart
+	@OneToMany(mappedBy = "HotelId")
+	private List<CartItem> CartItems;
 	
 }

@@ -2,12 +2,16 @@ package Travel_Foly.Model;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -15,25 +19,35 @@ import lombok.Data;
 @Data
 @Table(name="Users")
 public class User {
-	@Id
-	String UserName;
-	String PassWord;
-	Boolean Role;
-	Boolean Activated;
-	String Image;
-	Integer Age;
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer UserId;
+	private String UserName;
+	private String PassWord;
+	private Boolean Role;
+	private Boolean Activated;
+	private String Image;
+	private Integer Age;
 	@Column(columnDefinition = "nvarchar(100)")
-	String FullName;
-	String Email;
+	private String FullName;
+	private String Email;
 	@Column(columnDefinition = "nvarchar(200)")
-	String Address;
-	String Phone;
+	private String Address;
+	private String Phone;
+	
 	@OneToOne @JoinColumn(name="IntimateId")
-	Intimate User;
+	private Intimate User;
+	
 	@OneToMany(mappedBy = "TourCommentUser")
-	List<TourComment> TourComments;
+	private List<TourComment> TourComments;
+	
 	@OneToMany(mappedBy = "HotelCommentUser")
-	List<HotelComment> HotelComments;
+	private List<HotelComment> HotelComments;
+	
 	@OneToMany(mappedBy = "OrderTour")
-	List<OrderTour> OrderTours;
+	private List<OrderTour> OrderTours;
+	
+	//One to One Cart
+	@OneToOne(mappedBy = "Cart", cascade = CascadeType.ALL, orphanRemoval = true)
+	@PrimaryKeyJoinColumn
+	private Cart cart;
 }

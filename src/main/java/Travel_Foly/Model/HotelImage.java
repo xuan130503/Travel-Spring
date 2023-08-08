@@ -2,6 +2,7 @@ package Travel_Foly.Model;
 
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -16,18 +17,19 @@ import lombok.Data;
 public class HotelImage{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	Integer HotelImageId;
-	String Avatar;
-	String Image1;
-	String Image2;
-	String Image3;
-	String Image4;
-	String Image5;
-	String Image6;
-	String Image7;
-	String Image8;
-	String Image9;
-	String Image10;
-	@ManyToOne @JoinColumn(name="HotelId")
-	Hotel HotelImage;
+	private Integer HotelImageId;
+	private String Avatar;
+	private String Image1;
+	private String Image2;
+	private String Image3;
+	private String Image4;
+	private String Image5;
+	private String Image6;
+	private String Image7;
+	private String Image8;
+	private String Image9;
+	private String Image10;
+	@ManyToOne(fetch = FetchType.LAZY) 
+	@JoinColumn(name="HotelId")
+	private Hotel HotelImage;
 }

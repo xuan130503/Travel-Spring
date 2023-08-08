@@ -4,6 +4,7 @@ import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -19,24 +20,36 @@ import lombok.Data;
 public class Tour {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	Integer TourId;
+	private Integer TourId;
 	@Column(columnDefinition = "nvarchar(100)")
-	String Name;
-	Double Price;
-	Boolean Available;
+	private String Name;
+	private Double Price;
+	private Boolean Available;
+	
 	@Column(columnDefinition = "nvarchar(500)")
-	String Description;
-	@ManyToOne @JoinColumn(name="CategoryTourId")
-	CategoryTour Tour;
+	private String Description;
+	
+	@ManyToOne(fetch = FetchType.LAZY) 
+	@JoinColumn(name="CategoryTourId")
+	private CategoryTour Tour;
+	
 	@OneToMany(mappedBy = "TourSchedule")
-	List<TourSchedule> TourSchedules;
+	private List<TourSchedule> TourSchedules;
+	
 	@OneToMany(mappedBy = "TourImage")
-	List<TourImage> TourImages;
+	private List<TourImage> TourImages;
+	
 	@OneToMany(mappedBy = "TourVariant")
-	List<TourVariant> TourVariants;
+	private List<TourVariant> TourVariants;
+	
 	@OneToMany(mappedBy = "TourCommentId")
-	List<TourComment> TourComments;
+	private List<TourComment> TourComments;
+	
 	@OneToMany(mappedBy = "OrderDetailTour")
-	List<OrderDetailTour> OrderDetailTours;
+	private List<OrderDetailTour> OrderDetailTours;
+	
+	//Cart
+	@OneToMany(mappedBy = "TourId")
+	private List<CartItem> CartItem;
 	
 }
