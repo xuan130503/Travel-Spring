@@ -35,7 +35,6 @@ public class AccountController {
 	}
 	@GetMapping("login")
 	public String login() {
-		System.out.println(accountDao.findAll().size());
 		return "user/signin";
 	}
 	@PostMapping("login")
