@@ -18,8 +18,8 @@ public class Intimate {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer IntimateId;
-	private String name;
-	@OneToOne(mappedBy = "User", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+	private String Name;
+	@OneToOne(mappedBy = "Account", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
 	@PrimaryKeyJoinColumn
-	private User User;
+	private Account Account;
 }

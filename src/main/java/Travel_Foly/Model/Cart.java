@@ -2,6 +2,7 @@ package Travel_Foly.Model;
 
 import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -24,9 +25,14 @@ public class Cart {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer CartId;
 	
+	@Column(columnDefinition = "nvarchar(50)")
+	private String Name;
+	private String Phone;
+	private String Email;
+	private String Address;
 	@OneToOne(fetch = FetchType.LAZY)
 	@MapsId
-	private User Cart;
+	private Account Cart;
 	
 	@OneToMany(mappedBy = "CartItem")
 	private List<CartItem> CartItems;

@@ -23,8 +23,8 @@ public class TourComment {
 	private Integer Vote;
 	
 	@ManyToOne(fetch = FetchType.LAZY) 
-	@JoinColumn(name="UserName")
-	private User TourCommentUser;
+	@JoinColumn(name="AccountId")
+	private Account TourCommentUser;
 	
 	@ManyToOne(fetch = FetchType.LAZY) 
 	@JoinColumn(name="TourId")

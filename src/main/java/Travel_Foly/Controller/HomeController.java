@@ -1,5 +1,7 @@
 package Travel_Foly.Controller;
 
+import java.security.Principal;
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -7,38 +9,72 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import Travel_Foly.DAO.AccountDAO;
 import Travel_Foly.DAO.CategoryTourDAO;
 import Travel_Foly.DAO.HotelDAO;
 import Travel_Foly.DAO.TourDAO;
 import Travel_Foly.DAO.TourImageDAO;
+import Travel_Foly.DAO.TourScheduleDAO;
+import Travel_Foly.DAO.TourVariantDAO;
+import Travel_Foly.DTO.AccountDTO;
 import Travel_Foly.DTO.HotelDTO;
 import Travel_Foly.DTO.TourWithImageDTO;
+import Travel_Foly.Model.Account;
 import Travel_Foly.Model.Tour;
+import Travel_Foly.Model.TourImage;
+import Travel_Foly.Model.TourSchedule;
+import Travel_Foly.Model.TourVariant;
+import Travel_Foly.Service.SessionService;
+import Travel_Foly.Service.UserDetailServiceImpl;
 
 @Controller
 @RequestMapping("/travelfpoly/")
 public class HomeController {
 	@Autowired
-	TourDAO tourDao;
+	private SessionService session;
 	@Autowired
-	HotelDAO hotelDao;
+	private TourDAO tourDao;
 	@Autowired
-	TourImageDAO tourImageDao;
+	private HotelDAO hotelDao;
 	
 	@Autowired
-	CategoryTourDAO categoryTourDao;
+	private TourImageDAO tourImageDao;
 	
+	@Autowired
+	private CategoryTourDAO categoryTourDao;
+	
+	@Autowired
+	private TourVariantDAO tourVatiantDao;
+	
+	@Autowired 
+	private TourScheduleDAO tourScheduleDao;
+	@Autowired
+	private AccountDAO accountDao;
+	public void getPricical(Principal principal) {
+		if (principal != null && principal instanceof Authentication) {
+            Authentication authentication = (Authentication) principal;
+            if (authentication.getPrincipal() instanceof Account) {
+                String username = ((Account) authentication.getPrincipal()).getUsername();
+                AccountDTO account = accountDao.findOneUsername(username);
+                session.setAttribute("account", account);
+            }
+        }
+	}
 	@GetMapping("home")
-	public String home(Model model, 
-			@RequestParam("pageTour") Optional<Integer> pageTour
-			,@RequestParam("pageHotel") Optional<Integer> pageHotel
+	public String home(
+				Principal princical
+				,Model model
+				,@RequestParam("pageTour") Optional<Integer> pageTour
+				,@RequestParam("pageHotel") Optional<Integer> pageHotel
 			) {
 		
 		// Tour 
@@ -55,18 +91,14 @@ public class HomeController {
 		model.addAttribute("productTour", tour);
 		model.addAttribute("categories", categories);
 		model.addAttribute("productHotel", hotel);
+		getPricical(princical);
 		return "user/index-2";
+		
 	}
-	@GetMapping("test")
-	public String testData(Model model
-				,@RequestParam("pageTour") Optional<Integer> pageTour
-				) {
-		Pageable pageableTour= PageRequest.of(pageTour.orElse(0), 8);
-		Page<TourWithImageDTO> tour = tourDao.findAllTourWithImage(pageableTour);
-		List<Object[]> categories = categoryTourDao.findAllCategory();
-		model.addAttribute("productTour", tour);
-		model.addAttribute("categories", categories);
-		return "user/index-2";
+	@GetMapping("cart")
+	public String cart(Model model) {
+		
+		return "user/cart1";
 	}
 	@GetMapping("tour-detail")
 	public String tourdetail(Model model) {
@@ -75,9 +107,20 @@ public class HomeController {
 	}
 	@GetMapping("tour-detail/{id}")
 	public String productDetail(@PathVariable("id") Integer id, Model model) {
-		Tour tour = tourDao.findById(id).get();
-		model.addAttribute("tour", tour);
+		TourImage image = tourImageDao.findByTourId(id);
+		TourVariant variant = tourVatiantDao.findAllByTourId(id);
+		List<TourSchedule> schedules = tourScheduleDao.findByTourId(id);
+		model.addAttribute("image", image);
+		model.addAttribute("variant", variant);
+		model.addAttribute("schedules", schedules);
 		return "user/productdetail";
+	}
+	@PostMapping("bookNow")
+	public String booknow(Model model
+			,@RequestParam("fullname") String fullname
+			) {
+		System.out.println("Fullname" + fullname);
+		return "redirect:/travelfpoly/home";
 	}
 	@GetMapping("home2")
 	public String home2() {
@@ -100,7 +143,12 @@ public class HomeController {
 		return "user/contact";
 	}
 	@GetMapping("hotel")
-	public String hotel() {
+	public String hotel(Model model, 
+			@RequestParam("pageHotel") Optional<Integer> page) {
+		Pageable pageable=PageRequest.of(page.orElse(0), 9);
+		Page<HotelDTO> hotels = hotelDao.findAllHotelWithImage(pageable);
+		model.addAttribute("hotels", hotels);
+		
 		return "user/hotel";
 	}
 	@GetMapping("hotel-detail")
@@ -123,9 +171,5 @@ public class HomeController {
 		Page<TourWithImageDTO> tours = tourDao.findByCategoryId(id, pageable);
 		model.addAttribute("tours", tours);
 		return "user/tour";
-	}
-	@GetMapping("login")
-	public String login() {
-		return "user/login";
 	}
 }

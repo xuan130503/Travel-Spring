@@ -1,7 +1,6 @@
 package Travel_Foly.Model;
 
 import java.sql.Time;
-import java.sql.Date;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -25,7 +24,6 @@ public class TourSchedule{
 	private String Title;
 	@Column(columnDefinition = "nvarchar(500)")
 	private String Description;
-	private Date Date;
 	private Time Time;
 	@ManyToOne(fetch = FetchType.LAZY) 
 	@JoinColumn(name="TourId")

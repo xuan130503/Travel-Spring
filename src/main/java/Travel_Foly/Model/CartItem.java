@@ -1,6 +1,8 @@
 package Travel_Foly.Model;
 
 
+import java.sql.Date;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -34,5 +36,8 @@ public class CartItem {
 	@JoinColumn(name="TourId")
 	private Tour TourId;
 	
-	private Integer Quantity;
+	private Integer QuantityChildren;
+	private Integer QuantityAdult;
+	private Date StartDate;
+	private Date EndDate;
 }

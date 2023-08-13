@@ -5,45 +5,45 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/TravelFpoly/Admin/")
+@RequestMapping("/travelfpoly/admin/")
 public class AdminController {
-	@GetMapping("Index")
+	@GetMapping("index")
 	public String index() {
 		return "admin/index";
 	}
-	@GetMapping("AddInternal")
+	@GetMapping("addinternal")
 	public String addInternal() {
 		return "admin/form-add-bi-cam";
 	}
-	@GetMapping("AddOrder")
+	@GetMapping("addOrder")
 	public String addOrder() {
 		return "admin/form-add-don-hang";
 	}
-	@GetMapping("AddStaff")
+	@GetMapping("addstaff")
 	public String addStaff() {
 		return "admin/form-add-nhan-vien";
 	}
-	@GetMapping("AddProduct")
+	@GetMapping("addproduct")
 	public String addProduct() {
 		return "admin/form-add-san-pham";
 	}
-	@GetMapping("AddSalary")
+	@GetMapping("addsalary")
 	public String internal() {
 		return "admin/form-add-tien-luong";
 	}
-	@GetMapping("Calendar")
+	@GetMapping("calendar")
 	public String calendar() {
 		return "admin/page-calendar";
 	}
-	@GetMapping("Sale")
+	@GetMapping("sale")
 	public String sale() {
 		return "admin/phan-mem-ban-hang";
 	}
-	@GetMapping("Report")
+	@GetMapping("report")
 	public String report() {
 		return "admin/quan-ly-bao-cao";
 	}
-	@GetMapping("Login")
+	@GetMapping("login")
 	public String login() {
 		return "admin/index";
 	}

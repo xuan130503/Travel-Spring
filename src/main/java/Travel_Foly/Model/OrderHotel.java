@@ -18,8 +18,8 @@ public class OrderHotel {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer OrderHotelId;
 	@ManyToOne(fetch = FetchType.LAZY) 
-	@JoinColumn(name = "UserName")
-	private User OrderHotel;
+	@JoinColumn(name = "AccountId")
+	private Account OrderHotel;
 	@ManyToOne(fetch = FetchType.LAZY) 
 	@JoinColumn(name = "OrderDetailHotelId")
 	private OrderDetailHotel OrderDetailHotel;

@@ -32,4 +32,6 @@ public class TourVariant{
 	@ManyToOne(fetch = FetchType.LAZY) 
 	@JoinColumn(name="TourId")
 	private Tour TourVariant;
+	
+	private Integer Duration;
 }

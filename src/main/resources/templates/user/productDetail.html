@@ -195,37 +195,31 @@
 	<section class="ftco-section ftco-destination">
 		<div class="swiper">
 			<!-- Additional required wrapper -->
-			<div th:object="${tour}" class="swiper-wrapper">
+			<div th:object="${image}" class="swiper-wrapper">
 				<!-- Slides -->
 				<div class="swiper-slide">
-					<img th:src="${tour.Name}"
-						alt="" width="100%" height="100%" />
-					<span th:text="${tour.Name}"></span>	
+					<img th:src="@{{image} (image=${image.Image1})}" alt=""
+						width="100%" height="100%" />
 				</div>
 				<div class="swiper-slide">
-					<img
-						src="https://owa.bestprice.vn/images/articles/uploads/10-dia-diem-du-lich-thanh-pho-ho-chi-minh-noi-tieng-nhat-5fa126f60578d.jpg?fbclid=IwAR2KZvPvGy_Xst1WnctrAAHpjYZVUgrcYM5zw4cXzxjoSB_vrw2UOwW2lUI"
-						alt="" width="100%" height="100%" />
+					<img th:src="@{{image} (image=${image.Image2})}" alt=""
+						width="100%" height="100%" />
 				</div>
 				<div class="swiper-slide">
-					<img
-						src="https://congthuong.vn/stores/news_dataimages/2022/102022/02/09/5-copy20221002095418.jpg?rt=20221002095603?221002103813"
-						alt="" width="100%" height="100%" />
+					<img th:src="@{{image} (image=${image.Image3})}" alt=""
+						width="100%" height="100%" />
 				</div>
 				<div class="swiper-slide">
-					<img
-						src="https://media.hanamtv.vn/upload/image/202010/medium/23175_12-1601724763557.jpg"
-						alt="" width="100%" height="100%" />
+					<img th:src="@{{image} (image=${image.Image4})}" alt=""
+						width="100%" height="100%" />
 				</div>
 				<div class="swiper-slide">
-					<img
-						src="https://ik.imagekit.io/tvlk/blog/2022/02/dia-diem-du-lich-viet-nam-cover.jpeg"
-						alt="" width="100%" height="100%" />
+					<img th:src="@{{image} (image=${image.Image5})}" alt=""
+						width="100%" height="100%" />
 				</div>
 				<div class="swiper-slide">
-					<img
-						src="https://cdn.tgdd.vn/Files/2021/06/15/1360385/top-10-bai-bien-vung-tau-dep-noi-tieng-ban-nhat-dinh-phai-di-202106160011402743.jpg"
-						alt="" width="100%" height="100%" />
+					<img th:src="@{{image} (image=${image.Image1})}" alt=""
+						width="100%" height="100%" />
 				</div>
 				...
 			</div>
@@ -239,17 +233,19 @@
 			<!-- If we need scrollbar -->
 			<div class="swiper-scrollbar"></div>
 		</div>
+	</section>	
+	<section th:object="${variant}">
 		<div class="container mt-5 mb-5">
 			<div class="d-flex row">
 				<div class="col-3 d-flex flex-column">
-					<h2 class="title-h2">TRAVELFPOLY</h2>
+					<h2 class="title-h2">[[${variant.TourVariant.Name}]]</h2>
 					<span class="text-hiden"> <svg
 							xmlns="http://www.w3.org/2000/svg" width="20" height="20"
 							fill="currentColor" class="bi bi-geo-alt-fill mb-2"
 							viewBox="0 0 16 16">
             <path
 								d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
-          </svg> Hồ Chí Minh
+          </svg>[[${variant.Departure}]] - [[${variant.Destination}]]
 					</span>
 				</div>
 
@@ -260,7 +256,7 @@
 						</div>
 						<div class="d-flex flex-column text-hiden">
 							<h1 class="text-hiden">Durations</h1>
-							<span class="title-span">1 Week</span>
+							<span class="title-span">[[${variant.Duration}]] Day - [[${variant.Duration-1}]] Night</span>
 						</div>
 					</div>
 					<div></div>
@@ -299,7 +295,8 @@
 				<div class="col-7 col-lg-7 col-sm-12 col-md-7 row title">
 					<div class="col-12 title">
 						<h3>Enjoy the Adventure</h3>
-						<p>Are you looking for an adventure of a lifetime? Join us on
+						<p>
+							Are you looking for an adventure of a lifetime? Join us on
 							an unforgettable journey through some of the world's most
 							stunning landscapes and cultural destinations. Our expertly
 							curated tours take you to incredible destinations, from the
@@ -310,9 +307,94 @@
 							guides will lead you through each destination, sharing their
 							knowledge and passion for travel. We offer a range of activities
 							to suit every traveler, from hiking and kayaking to cultural
-							tours and culinary experiences.</p>
+							tours and culinary experiences.
+						</p>
 					</div>
 					<div class="col-12">
+						<section class="mt-5 title">
+							<div class="col-12">
+								<h3>Gallery</h3>
+								<p>Each image tells a unique story, inviting us into a world
+									of emotion, beauty, and complexity. Get ready to be moved,
+									inspired, and challenged as we journey through this captivating
+									collection of images.</p>
+							</div>
+							<div th:object="${image}" class="m-0 p-0 row d-flex justify-content-between">
+								<div class="col-md-4 col-sm-5 col-4 col-lg-4 gy-4">
+									<div class="row">
+										<div class="col-11 col-sm-12 col-lg-11 col-md-11"
+											th:style="'background-image: url('+ ${image.Image1} +'); background-repeat: no-repeat; background-size: cover; height: 160px; border: 1px solid white; border-radius: 10%;'">
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4 col-sm-5 col-4 col-lg-4 gy-4">
+									<div class="row">
+										<div class="col-11 col-sm-12 col-lg-11 col-md-11"
+											th:style="'background-image: url('+ ${image.Image1} +'); background-repeat: no-repeat; background-size: cover; height: 160px; border: 1px solid white; border-radius: 10%;'">
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4 col-sm-5 col-4 col-lg-4 gy-4">
+									<div class="row">
+										<div class="col-11 col-sm-12 col-lg-11 col-md-11"
+											th:style="'background-image: url('+ ${image.Image2} +'); background-repeat: no-repeat; background-size: cover; height: 160px; border: 1px solid white; border-radius: 10%;'">
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4 col-sm-5 col-4 col-lg-4 gy-4">
+									<div class="row">
+										<div class="col-11 col-sm-12 col-lg-11 col-md-11"
+											th:style="'background-image: url('+ ${image.Image3} +'); background-repeat: no-repeat; background-size: cover; height: 160px; border: 1px solid white; border-radius: 10%;'">
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4 col-sm-5 col-4 col-lg-4 gy-4">
+									<div class="row">
+										<div class="col-11 col-sm-12 col-lg-11 col-md-11"
+											th:style="'background-image: url('+ ${image.Image4} +'); background-repeat: no-repeat; background-size: cover; height: 160px; border: 1px solid white; border-radius: 10%;'">
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4 col-sm-5 col-4 col-lg-4 gy-4">
+									<div class="row">
+										<div class="col-11 col-sm-12 col-lg-11 col-md-11"
+											th:style="'background-image: url('+ ${image.Image5} +'); background-repeat: no-repeat; background-size: cover; height: 160px; border: 1px solid white; border-radius: 10%;'">
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>
+						<section class="mt-5 title">
+							<div class="col-12">
+								<h3>Itinerary</h3>
+								<p>We have carefully planned out each day to give you the
+									best possible experience. From exploring historic landmarks to
+									tasting delicious local cuisine, each day is packed with
+									adventure and excitement. Join us as we take you on a journey
+									through some of the most fascinating destinations in the world.
+								</p>
+							</div>
+							<div  class="accordion" id="accordionExample">
+								<div th:each="schedule:${schedules}" class="accordion-item">
+									<h2 class="accordion-header">
+										<button class="accordion-button" type="button"
+											data-bs-toggle="collapse" data-bs-target="#collapseOne"
+											aria-expanded="false" aria-controls="collapseOne">
+											<a class="text-decoration-none" href=""> 
+											<span>DAY 1</span> - [[${schedule.title}]] ([[${schedule.Time}]])
+											</a>
+										</button>
+									</h2>
+									<div id="collapseOne" class="accordion-collapse collapse show"
+										data-bs-parent="#accordionExample">
+										<div class="accordion-body">
+											[[${schedule.description}]]
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>
+						<hr class="new1">
 						<div class="">
 							<h3>Included / Excluded</h3>
 							<p>To help you plan your trip, we have put together a list of
@@ -362,237 +444,58 @@
 							</div>
 							<hr class="new1">
 						</div>
-						<section class="mt-5 title">
-							<div class="col-12">
-								<h3>Gallery</h3>
-								<p>Each image tells a unique story, inviting us into a world
-									of emotion, beauty, and complexity. Get ready to be moved,
-									inspired, and challenged as we journey through this captivating
-									collection of images.</p>
-							</div>
-							<div class="m-0 p-0 row d-flex justify-content-between">
-								<!-- <div class="col-md-4 col-sm-5 col-4 col-lg-4 row"
-                  style="background-image: url('image/tulip.jpg'); 
-                  background-repeat: no-repeat;
-                  background-size: cover; height: 150px;
-                  border: 1px solid white;
-                  border-radius: 10%;">
-                  <div class="col-8 col-sm-12 col-lg-8 col-md-8">
-                  </div>
-                    <img src="image/tulip.jpg" width="100%" alt="">
-                </div> -->
-								<div class="col-md-4 col-sm-5 col-4 col-lg-4 gy-4">
-									<div class="row">
-										<div class="col-11 col-sm-12 col-lg-11 col-md-11"
-											style="background-image: url('image/tulip.jpg'); background-repeat: no-repeat; background-size: cover; height: 160px; border: 1px solid white; border-radius: 10%;">
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4 col-sm-5 col-4 col-lg-4 gy-4">
-									<div class="row">
-										<div class="col-11 col-sm-12 col-lg-11 col-md-11"
-											style="background-image: url('image/tulip.jpg'); background-repeat: no-repeat; background-size: cover; height: 160px; border: 1px solid white; border-radius: 10%;">
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4 col-sm-5 col-4 col-lg-4 gy-4">
-									<div class="row">
-										<div class="col-11 col-sm-12 col-lg-11 col-md-11"
-											style="background-image: url('image/tulip.jpg'); background-repeat: no-repeat; background-size: cover; height: 160px; border: 1px solid white; border-radius: 10%;">
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4 col-sm-5 col-4 col-lg-4 gy-4">
-									<div class="row">
-										<div class="col-11 col-sm-12 col-lg-11 col-md-11"
-											style="background-image: url('image/tulip.jpg'); background-repeat: no-repeat; background-size: cover; height: 160px; border: 1px solid white; border-radius: 10%;">
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4 col-sm-5 col-4 col-lg-4 gy-4">
-									<div class="row">
-										<div class="col-11 col-sm-12 col-lg-11 col-md-11"
-											style="background-image: url('image/tulip.jpg'); background-repeat: no-repeat; background-size: cover; height: 160px; border: 1px solid white; border-radius: 10%;">
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4 col-sm-5 col-4 col-lg-4 gy-4">
-									<div class="row">
-										<div class="col-11 col-sm-12 col-lg-11 col-md-11"
-											style="background-image: url('image/tulip.jpg'); background-repeat: no-repeat; background-size: cover; height: 160px; border: 1px solid white; border-radius: 10%;">
-										</div>
-									</div>
-								</div>
-							</div>
-						</section>
-						<section class="mt-5 title">
-							<div class="col-12">
-								<h3>Itinerary</h3>
-								<p>We have carefully planned out each day to give you the
-									best possible experience. From exploring historic landmarks to
-									tasting delicious local cuisine, each day is packed with
-									adventure and excitement. Join us as we take you on a journey
-									through some of the most fascinating destinations in the world.
-								</p>
-							</div>
-							<div class="accordion" id="accordionExample">
-								<div class="accordion-item">
-									<h2 class="accordion-header">
-										<button class="accordion-button" type="button"
-											data-bs-toggle="collapse" data-bs-target="#collapseOne"
-											aria-expanded="true" aria-controls="collapseOne">
-											<a class="text-decoration-none" href=""> <span>DAY
-													1 </span> - Arrival and Orientation
-											</a>
-										</button>
-									</h2>
-									<div id="collapseOne" class="accordion-collapse collapse show"
-										data-bs-parent="#accordionExample">
-										<div class="accordion-body">
-											<strong>This is the first item's accordion body.</strong> It
-											is shown by default, until the collapse plugin adds the
-											appropriate classes that we use to style each element. These
-											classes control the overall appearance, as well as the
-											showing and hiding via CSS transitions. You can modify any of
-											this with custom CSS or overriding our default variables.
-											It's also worth noting that just about any HTML can go within
-											the
-											<code>.accordion-body</code>
-											, though the transition does limit overflow.
-										</div>
-									</div>
-								</div>
-								<div class="accordion-item">
-									<h2 class="accordion-header">
-										<button class="accordion-button collapsed" type="button"
-											data-bs-toggle="collapse" data-bs-target="#collapseTwo"
-											aria-expanded="false" aria-controls="collapseTwo">
-											<a href=""> <span>DAY 2 </span> - City Tour
-											</a>
-										</button>
-									</h2>
-									<div id="collapseTwo" class="accordion-collapse collapse"
-										data-bs-parent="#accordionExample">
-										<div class="accordion-body">
-											<strong>This is the second item's accordion body.</strong> It
-											is hidden by default, until the collapse plugin adds the
-											appropriate classes that we use to style each element. These
-											classes control the overall appearance, as well as the
-											showing and hiding via CSS transitions. You can modify any of
-											this with custom CSS or overriding our default variables.
-											It's also worth noting that just about any HTML can go within
-											the
-											<code>.accordion-body</code>
-											, though the transition does limit overflow.
-										</div>
-									</div>
-								</div>
-								<div class="accordion-item">
-									<h2 class="accordion-header">
-										<button class="accordion-button collapsed" type="button"
-											data-bs-toggle="collapse" data-bs-target="#collapseThree"
-											aria-expanded="false" aria-controls="collapseThree">
-											<a href=""> <span>DAY 3 </span> - Cooking Class
-											</a>
-										</button>
-									</h2>
-									<div id="collapseThree" class="accordion-collapse collapse"
-										data-bs-parent="#accordionExample">
-										<div class="accordion-body">
-											<strong>This is the third item's accordion body.</strong> It
-											is hidden by default, until the collapse plugin adds the
-											appropriate classes that we use to style each element. These
-											classes control the overall appearance, as well as the
-											showing and hiding via CSS transitions. You can modify any of
-											this with custom CSS or overriding our default variables.
-											It's also worth noting that just about any HTML can go within
-											the
-											<code>.accordion-body</code>
-											, though the transition does limit overflow.
-										</div>
-									</div>
-								</div>
-								<div class="accordion-item">
-									<h2 class="accordion-header">
-										<button class="accordion-button collapsed" type="button"
-											data-bs-toggle="collapse" data-bs-target="#collapseFour"
-											aria-expanded="false" aria-controls="collapseThree">
-											<a href=""> <span>DAY 4 </span> - Nature Hike
-											</a>
-										</button>
-									</h2>
-									<div id="collapseFour" class="accordion-collapse collapse"
-										data-bs-parent="#accordionExample">
-										<div class="accordion-body">
-											<strong>This is the third item's accordion body.</strong> It
-											is hidden by default, until the collapse plugin adds the
-											appropriate classes that we use to style each element. These
-											classes control the overall appearance, as well as the
-											showing and hiding via CSS transitions. You can modify any of
-											this with custom CSS or overriding our default variables.
-											It's also worth noting that just about any HTML can go within
-											the
-											<code>.accordion-body</code>
-											, though the transition does limit overflow.
-										</div>
-									</div>
-								</div>
-							</div>
-						</section>
-						<hr class="new1">
-
 					</div>
 				</div>
 
 				<!-- Form booking -->
-				<div class="col-5 col-lg-5 col-sm-6 col-md-5 ">
+				<div class="col-5 col-lg-5 col-sm-6 col-md-5" style="z-index:0;">
 					<div class="col-12">
 						<div class="row">
 							<div class="booking-form">
 								<div class="form-header">
 									<h1>Make your tour</h1>
 								</div>
-								<form>
+								<form method="post">
 									<div class="form-group">
-										<input class="form-control" type="text"
-											placeholder="Country, ZIP, city..."> <span
-											class="form-label">Destination</span>
+										<input th:name="fullname" class="form-control" type="text"
+											placeholder="Enter your Name..."> <span
+											class="form-label">FullName</span>
 									</div>
 									<div class="row">
 										<div class="col-md-12">
 											<div class="form-group">
-												<input class="form-control" type="email"
+												<input th:name="email" class="form-control" type="email"
 													placeholder="Enter your Email"> <span
 													class="form-label">Email</span>
 											</div>
 										</div>
 										<div class="col-md-12">
-											<div class="form-group">
+											<div th:name="phone" class="form-group">
 												<input class="form-control" type="tel"
-													placeholder="Enter you Phone"> <span
+													placeholder="Enter your Phone"> <span
 													class="form-label">Phone</span>
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-md-6">
-											<div class="form-group">
-												<input class="form-control" type="date" required> <span
-													class="form-label">Check In</span>
+											<div th:name="startdate" class="form-group">
+												<input class="form-control" type="date"> <span
+													class="form-label">Start date</span>
 											</div>
 										</div>
-										<div class="col-md-6">
+										<!-- <div class="col-md-6">
 											<div class="form-group">
 												<input class="form-control" type="date" required> <span
-													class="form-label">Check out</span>
+													class="form-label">End date</span>
 											</div>
-										</div>
+										</div> -->
 									</div>
 
 									<div class="row">
 										<div class="col-md-6">
 											<div class="form-group">
-												<select class="form-control" required>
+												<select th:name="quantityAdult" class="form-control">
 													<option value="" selected hidden>no of adults</option>
 													<option>1</option>
 													<option>2</option>
@@ -602,7 +505,7 @@
 										</div>
 										<div class="col-md-6">
 											<div class="form-group">
-												<select class="form-control" required>
+												<select th:name="quantityChildren" class="form-control">
 													<option value="" selected hidden>no of children</option>
 													<option>0</option>
 													<option>1</option>
@@ -613,8 +516,12 @@
 									</div>
 
 									<div class="form-btn">
-										<button class="submit-btn">Book Now</button>
+										<button formaction="/travelfpoly/bookNow" class="submit-btn">Book Now</button>
 									</div>
+									<!-- <div class="form-btn mt-2">
+										<button class="submit-btn bg-warning">Add to cart</button>
+										th:attr="ng-click=@{|cart.add(${variant.TourVariant.TourId})|}"
+									</div> -->
 								</form>
 							</div>
 						</div>
@@ -629,10 +536,7 @@
 								help you make any necessary arrangements before your journey
 								begins.</p>
 							<div id="map" class="w-100">
-								<iframe
-									src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d62762.86551594846!2d106.36213705167799!3d10.525921678374791!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x310ab622649f777b%3A0x2746728a8c94c45a!2zVHAuIFTDom4gQW4sIExvbmcgQW4sIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1690048042160!5m2!1svi!2s"
-									width="100%" height="450" style="border: 0;" allowfullscreen=""
-									loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+								<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d125418.05621372208!2d106.65328639999998!3d10.7872256!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1svi!2s!4v1691645572040!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
 								</iframe>
 							</div>
 						</div>
@@ -642,6 +546,7 @@
 			</div>
 		</div>
 	</section>
+
 	<div th:insert="~{include/_Footer}"></div>
 
 	<div id="ftco-loader" class="show fullscreen">
