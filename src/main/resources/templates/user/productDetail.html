@@ -252,7 +252,7 @@
 				<div class="col-3 d-flex">
 					<div class="d-flex gap-3 align-items-center">
 						<div class="icon-navbar">
-							<i class="fas fa-clock fa-lg"></i>
+							<i class="fas fa-clock"></i>
 						</div>
 						<div class="d-flex flex-column text-hiden">
 							<h1 class="text-hiden">Durations</h1>
@@ -265,24 +265,22 @@
 				<div class="col-3 d-flex">
 					<div class="d-flex gap-3 align-items-center">
 						<div class="icon-navbar">
-							<i class="fas fa-road fa-lg" style="color: #ffffff;"></i>
+							<i class="fas fa-money-bill-wave"></i>
 						</div>
 						<div class="d-flex flex-column">
-							<h1 class="text-hiden">Difficulty</h1>
-							<span class="title-span">Easy</span>
+							<h1 class="text-hiden">Price for adult:</h1>
+							<span id="price" th:data-price="${variant.TourVariant.Price}" class="title-span"  style="color: #FF4B2B;">[[${variant.TourVariant.Price}]] $</span>
 						</div>
 					</div>
-					<div></div>
 				</div>
-
 				<div class="col-3 d-flex">
 					<div class="d-flex gap-3 align-items-center">
 						<div class="icon-navbar">
-							<i class="fas fa-child fa-lg" style="color: #ffffff;"></i>
+							<i class="fas fa-money-bill-wave"></i>
 						</div>
 						<div class="d-flex flex-column">
-							<h1 class="text-hiden">Min Age</h1>
-							<span class="title-span">0</span>
+							<h1 class="text-hiden">Price for child:</h1>
+							<span class="title-span" style="color: #FF4B2B;"><del>[[${variant.TourVariant.Price}]]$</del> - [[${variant.TourVariant.Price*0.5}]]$</span>
 						</div>
 					</div>
 				</div>
@@ -452,71 +450,56 @@
 					<div class="col-12">
 						<div class="row">
 							<div class="booking-form">
-								<div class="form-header">
-									<h1>Make your tour</h1>
+								<div class="form-header mb-3">
+									<h3>Make your adventure</h3>
 								</div>
 								<form method="post">
-									<div class="form-group">
-										<input th:name="fullname" class="form-control" type="text"
-											placeholder="Enter your Name..."> <span
-											class="form-label">FullName</span>
-									</div>
-									<div class="row">
-										<div class="col-md-12">
-											<div class="form-group">
-												<input th:name="email" class="form-control" type="email"
-													placeholder="Enter your Email"> <span
-													class="form-label">Email</span>
-											</div>
+									<div class="row mb-3">
+										<div class="col-md-12 mb-3">
+											<label class="title-input">FullName</label>
+											<input th:name="fullname" class="form-control" type="text"
+											placeholder="Enter your Name..." required>
 										</div>
-										<div class="col-md-12">
-											<div th:name="phone" class="form-group">
-												<input class="form-control" type="tel"
-													placeholder="Enter your Phone"> <span
-													class="form-label">Phone</span>
-											</div>
+										<div class="col-md-12 mb-3">
+											<label class="title-input">Email</label>
+											<input th:name="email" class="form-control" type="email"
+												placeholder="Enter your Email" required>
 										</div>
-									</div>
-									<div class="row">
-										<div class="col-md-6">
-											<div th:name="startdate" class="form-group">
-												<input class="form-control" type="date"> <span
-													class="form-label">Start date</span>
-											</div>
-										</div>
-										<!-- <div class="col-md-6">
-											<div class="form-group">
-												<input class="form-control" type="date" required> <span
-													class="form-label">End date</span>
-											</div>
-										</div> -->
-									</div>
-
-									<div class="row">
-										<div class="col-md-6">
-											<div class="form-group">
-												<select th:name="quantityAdult" class="form-control">
-													<option value="" selected hidden>no of adults</option>
-													<option>1</option>
-													<option>2</option>
-													<option>3</option>
-												</select> <span class="select-arrow"></span> <span class="form-label">Adults</span>
-											</div>
+										<div class="col-md-6 mb-3">
+											<label class="title-input">Phone</label>
+											<input th:name="phone" class="form-control" type="text"
+												placeholder="Enter your Phone" required>
 										</div>
 										<div class="col-md-6">
+											<label class="title-input">StartDate</label>
 											<div class="form-group">
-												<select th:name="quantityChildren" class="form-control">
-													<option value="" selected hidden>no of children</option>
-													<option>0</option>
-													<option>1</option>
-													<option>2</option>
-												</select> <span class="select-arrow"></span> <span class="form-label">Children</span>
+												<input th:name="startdate" class="form-control" type="date" required>
 											</div>
 										</div>
+										<div class="col-md-12 m-0 p-0 row mb-3">
+											<div class="col-md-6">
+												<label class="title-input">Quantity Adult</label>
+												<select th:name="quantityAdult" id="adult" class="form-control">
+													<option th:each="quantity : ${#numbers.sequence(0,variant.Quantity)}" th:value="${quantity}">
+														[[${quantity}]]
+													</option>
+													
+												</select>
+											</div>
+											<div class="col-md-6">
+												<label class="title-input">Quantity Children</label>
+												<select th:name="quantityChildren" id="children" class="form-control">
+													<option th:each="quantityChildren : ${#numbers.sequence(0,variant.QuantityChildren)}" th:value="${quantityChildren}">
+														[[${quantityChildren}]]
+													</option>
+												</select> 
+											</div>
+										</div>
+										<div class="row" id="totalPriceDisplay"></div>
 									</div>
-
 									<div class="form-btn">
-										<button formaction="/travelfpoly/bookNow" class="submit-btn">Book Now</button>
+										<button th:formaction="@{|/travelfpoly/bookNow/${variant.TourVariant.TourId}|}" class="submit-btn mb-3">Book Now</button>
+										<button th:formaction="@{|/travelfpoly/bookNow/${variant.TourVariant.TourId}|}" class="cart-btn" style="color:black;">Add to cart</button>
 									</div>
 									<!-- <div class="form-btn mt-2">
 										<button class="submit-btn bg-warning">Add to cart</button>
@@ -556,6 +539,33 @@
 			<circle class="path" cx="24" cy="24" r="22" fill="none"
 				stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg>
 	</div>
+	<script>
+        const adultsSelect = document.getElementById('adult');
+        const childrenSelect = document.getElementById('children');
+        const priceElement = document.getElementById('price');
+        const displayElement = document.getElementById('totalPriceDisplay');
+        
+        adultsSelect.addEventListener('change', calculateTotalPrice);
+        childrenSelect.addEventListener('change', calculateTotalPrice);
+        
+        function calculateTotalPrice() {
+            const adultsQuantity = parseInt(adultsSelect.value);
+            const childrenQuantity = parseInt(childrenSelect.value);
+            const tourPrice = parseFloat(priceElement.getAttribute('data-price'));
+			console.log(tourPrice);
+            const totalPrice = (adultsQuantity * tourPrice) + (childrenQuantity * (tourPrice / 2));
+            displayElement.textContent = 'Tổng tiền: ' + totalPrice;
+        }
+    </script>
+    <script>
+	    $.ajax({
+	        success: function(response) {
+	            const successMessage = response.message;
+	            // Hiển thị thông báo
+	            alert(successMessage);
+	        }
+	    });
+    </script>
 	<script src="/user/js/jquery.min.js"></script>
 	<script src="/user/js/jquery-migrate-3.0.1.min.js"></script>
 	<script src="/user/js/popper.min.js"></script>
@@ -578,17 +588,18 @@
 	<script async
 		src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
 	<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-23581568-13');
-</script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+	
+	  gtag('config', 'UA-23581568-13');
+	</script>
 	<script defer
 		src="https://static.cloudflareinsights.com/beacon.min.js/v52afc6f149f6479b8c77fa569edb01181681764108816"
 		integrity="sha512-jGCTpDpBAYDGNYR5ztKt4BQPGef1P0giN6ZGVUi835kFF88FOmmn8jBQWNgrNd8g/Yu421NdgWhwQoaOPFflDw=="
 		data-cf-beacon='{"rayId":"7de3eacc580c0ebc","version":"2023.4.0","b":1,"token":"cd0b4b3a733644fc843ef0b185f98241","si":100}'
-		crossorigin="anonymous"></script>
+		crossorigin="anonymous">
+	</script>
 </body>
 
 <!-- Mirrored from preview.colorlib.com/theme/direngine/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 28 Jun 2023 06:37:10 GMT -->

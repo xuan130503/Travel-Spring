@@ -23,4 +23,7 @@ public interface TourDAO extends JpaRepository<Tour,Integer>{
 	
 	@Query("Select t from Tour t Where t.TourId = ?1")
 	Tour findByTourId(Integer id);
+	
+	@Query("Select t.Price from Tour t Where t.TourId = ?1")
+	Double findPriceByTourId(Integer id);
 }

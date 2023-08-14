@@ -22,6 +22,7 @@ public class OrderDetailTour {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer OrderDetailTourId;
 	private Integer Quantity;
+	private Integer QuantityChildren;
 	private Double Price;
 	private Date Date;
 	@ManyToOne(fetch = FetchType.LAZY)

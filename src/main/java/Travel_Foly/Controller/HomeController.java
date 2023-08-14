@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,10 +18,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import Travel_Foly.DAO.AccountDAO;
 import Travel_Foly.DAO.CategoryTourDAO;
 import Travel_Foly.DAO.HotelDAO;
+import Travel_Foly.DAO.OrderDetailTourDAO;
 import Travel_Foly.DAO.TourDAO;
 import Travel_Foly.DAO.TourImageDAO;
 import Travel_Foly.DAO.TourScheduleDAO;
@@ -29,6 +32,7 @@ import Travel_Foly.DTO.AccountDTO;
 import Travel_Foly.DTO.HotelDTO;
 import Travel_Foly.DTO.TourWithImageDTO;
 import Travel_Foly.Model.Account;
+import Travel_Foly.Model.OrderDetailTour;
 import Travel_Foly.Model.Tour;
 import Travel_Foly.Model.TourImage;
 import Travel_Foly.Model.TourSchedule;
@@ -59,6 +63,11 @@ public class HomeController {
 	private TourScheduleDAO tourScheduleDao;
 	@Autowired
 	private AccountDAO accountDao;
+	
+	@Autowired
+	private OrderDetailTourDAO orderDetailTourDao;
+	
+	//get information after login successfully
 	public void getPricical(Principal principal) {
 		if (principal != null && principal instanceof Authentication) {
             Authentication authentication = (Authentication) principal;
@@ -100,6 +109,11 @@ public class HomeController {
 		
 		return "user/cart1";
 	}
+	@PostMapping("addToCart")
+	public String addToCart(Model model) {
+		
+		return "user/cart1";
+	}
 	@GetMapping("tour-detail")
 	public String tourdetail(Model model) {
 		
@@ -115,12 +129,42 @@ public class HomeController {
 		model.addAttribute("schedules", schedules);
 		return "user/productdetail";
 	}
-	@PostMapping("bookNow")
-	public String booknow(Model model
+	@PostMapping("bookNow/{id}")
+	public String booknow(Model model,@PathVariable("id") Integer TourId
 			,@RequestParam("fullname") String fullname
+			,@RequestParam("email") String email
+			,@RequestParam("phone") String phone
+			,@RequestParam("startdate") Date date
+			,@RequestParam("quantityAdult") Integer quantityAdult
+			,@RequestParam("quantityAdult") Integer quantityChildren
+			,TourVariant variant
 			) {
-		System.out.println("Fullname" + fullname);
-		return "redirect:/travelfpoly/home";
+		Double price =(Double) tourDao.findPriceByTourId(TourId);
+		Tour tour= tourDao.findById(TourId).get();
+		try {
+			if(fullname!=null && email!=null && date!=null && phone!=null && quantityAdult!=null && quantityChildren!=null) {
+				//Add to Order detail Tour
+				OrderDetailTour order= new OrderDetailTour();
+				order.setDate(date);
+				order.setPrice(price);
+				order.setQuantity(quantityAdult);
+				order.setQuantityChildren(quantityChildren);
+				order.setOrderDetailTour(tour);
+				orderDetailTourDao.save(order);
+				System.out.println("OrderId: " + order.getOrderDetailTourId());
+				//Add to Order Tour
+				
+				return "user/order";
+			}
+			model.addAttribute("message", "Book tour is error please check your information!");
+			return "user/productdetail";
+		} catch (Exception e) {
+			model.addAttribute("message", "Can't book tour");
+			e.printStackTrace();
+			return "user/productdetail";
+
+		}
+		
 	}
 	@GetMapping("home2")
 	public String home2() {

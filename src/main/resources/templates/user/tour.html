@@ -166,7 +166,7 @@
 					<div class="row">
 						<div th:each="tour : ${tours.content}" class="col-md-4 ftco-animate">
 							<div class="destination">
-								<a href="#"
+								<a th:href="@{|/travelfpoly/tour-detail/${tour.Tour.TourId}|}"
 									class="img img-2 d-flex justify-content-center align-items-center"
 									th:style="'background-image: url('+ ${tour.Image} +');'">
 									<div

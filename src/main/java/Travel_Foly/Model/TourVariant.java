@@ -25,6 +25,7 @@ public class TourVariant{
 	@Column(columnDefinition = "nvarchar(100)")
 	private String Destination;
 	private Integer Quantity;
+	private Integer QuantityChildren;
 	private Date date;
 	private String map;
 	@Column(columnDefinition = "nvarchar(500)")

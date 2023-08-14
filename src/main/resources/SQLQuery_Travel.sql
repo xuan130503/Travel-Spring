@@ -4,12 +4,16 @@ use TravelFPoly;
 select * from accounts;
  INSERT INTO accounts(user_name, pass_word, activated, address,age, email, full_name, phone, role)
  VALUES
- --123
- ('tanduong001','$2a$12$dPw43chz4FBNO8zCrbQRFuYeS4UKUyqiayqF1PHhYgLHYh0FuTZ2S', 1, N'112 Trần Hưng Đạo',21, 'tanduong69@gmail.com', 'Dương Nhựt Tân', '0785123654',1),
+ --12345
+('tanduong','$2a$12$.FGCfBI6l8LlZgtT3q6dF.N73YqUgvjXQfod1tmO7wRltIaAtvYt.', 1, N'168 Võ Văn Kiệt', 21, 'duongnhuttan@gmail.com', 'Duong nhut tan', '0785123655',0),
+--123
+('tanduong001','$2a$12$dPw43chz4FBNO8zCrbQRFuYeS4UKUyqiayqF1PHhYgLHYh0FuTZ2S', 1, N'112 Trần Hưng Đạo',21, 'tanduong69@gmail.com', 'Dương Nhựt Tân', '0785123654',1),
  ('thanhtu002','$2a$12$DqHKOXHtBvJutoE6zB3dxumwcs5r.InlhKN0we06pLj5fMKSkhg02', 1, N'338 Nguyễn Văn Quá',12, 'tuthanh22012003@gmail.com', 'Ung Thanh Tú', '07541254',1),
  --1234
  ('vantu003','$2a$12$a1rIDHNWRd/GhUCmOhJW6.0SrxFaF/gNSTESrULuey.ble4fCbSES', 1, N'168 Võ Văn Kiệt', 21, 'vantu@gmail.com', 'Tô Vân Tú', '0785123655',1)
 
+ 
+ select * from tour_variants
 
  INSERT INTO category_hotels([name])
  VALUES('Nhân Đức')
@@ -650,27 +654,27 @@ VALUES
   select * from tour_variants
   select * from cart_items
   delete tour_variants
-  insert into tour_variants(tour_id,departure,quantity,destination,date,map,introduction,duration)
+  insert into tour_variants(tour_id,departure,quantity,quantity_children,destination,date,map,introduction,duration)
   VALUES
-    (1, N'Hà Nội', 20, N'Hạ Long Bay', '2023-08-20', 'https://example.com/map_halong', N'Hành trình khám phá vịnh Hạ Long đẹp nhất Việt Nam.',3),
-    (2, N'Hà Nội', 25, N'Sapa', '2023-09-02', 'https://example.com/map_sapa', N'Khám phá vùng cao nguyên bí ẩn và thăm thú bản làng Sapa.',3),
-    (3, N'Hồ Chí Minh', 15, N'Đà Lạt', '2023-08-25', N'https://example.com/map_dalat', N'Du ngoạn thành phố ngàn hoa và thưởng thức không khí trong lành.',3),
-    (4, N'Hồ Chí Minh', 18, N'Cần Thơ', '2023-09-10', 'https://example.com/map_cantho', N'Khám phá vùng đồng bằng sông Cửu Long và trải nghiệm văn hóa miền Tây.',3),
-    (5, N'Đà Nẵng', 12, N'Hội An', '2023-08-15', 'https://example.com/map_hoian', N'Tham quan các di sản văn hóa tại phố cổ Hội An.',3),
-    (6, N'Đà Nẵng', 14, N'Huế', '2023-09-05', 'https://example.com/map_hue', N'Khám phá các di tích lịch sử và kiến trúc cổ đại của đô thành Huế.',3),
-	(7, N'Hà Nội', 30, N'Tam Đảo', '2023-08-20', 'https://example.com/map_tamdao', N'Du ngoạn cao nguyên mát mẻ với Tam Đảo xinh đẹp.',3),
-    (8, N'Hà Nội', 25, N'Mai Châu', '2023-09-02', 'https://example.com/map_maichau', N'Khám phá văn hóa dân tộc sắc sảo tại Mai Châu.',3),
-    (9, N'Hồ Chí Minh', 20, N'Phú Quốc', '2023-08-25', 'https://example.com/map_phuquoc', N'Thư giãn và tận hưởng biển xanh tại đảo ngọc Phú Quốc.',3),
-    (10, N'Hồ Chí Minh', 15, N'Côn Đảo', '2023-09-10', 'https://example.com/map_condao', N'Khám phá cảnh đẹp hoang sơ của quần đảo Côn Đảo.',3),
-    (11, N'Đà Nẵng', 18, N'Bà Nà Hills', '2023-08-15', 'https://example.com/map_banahills', N'Trải nghiệm cảm giác mạnh tại khu du lịch Bà Nà Hills.',3),
-    (12, N'Đà Nẵng', 20, N'Cù Lao Chàm', '2023-09-05', 'https://example.com/map_culaocham', N'Thư giãn và ngắm san hô tuyệt đẹp tại Cù Lao Chàm.',3),
-	(13, N'Hà Nội', 25, N'Mộc Châu', '2023-08-20', 'https://example.com/map_mocchau', N'Khám phá vùng cao nguyên Mộc Châu tuyệt đẹp vào mùa hoa tam giác mạch.',3),
-    (14, N'Hà Nội', 20, N'Điện Biên', '2023-09-02', 'https://example.com/map_dienbien', N'Thăm thú các di tích lịch sử và văn hóa độc đáo tại Điện Biên Phủ.',3),
-    (15, N'Hồ Chí Minh', 15, N'Vũng Tàu', '2023-08-25', 'https://example.com/map_vungtau', N'Thưởng thức các món hải sản tươi ngon và tắm biển tại Vũng Tàu.',3),
-    (16, N'Hồ Chí Minh', 18, N'Cần Giờ', '2023-09-10', 'https://example.com/map_cangio', N'Khám phá vùng đồng bằng sông Sài Gòn và hệ sinh thái đa dạng tại Cần Giờ.',3),
-    (17, N'Đà Nẵng', 12, 'Bán đảo Sơn Trà', '2023-08-15', 'https://example.com/map_sontra', N'Tham quan cảnh đẹp hoang sơ của bán đảo Sơn Trà.',3),
-    (18, N'Đà Nẵng', 14, N'Bà Nà Hills', '2023-09-05', 'https://example.com/map_banahills2', N'Tận hưởng không gian nghỉ dưỡng tại khu du lịch Bà Nà Hills.',3),
-	(19, N'Hồ Chí Minh', 15, N'Vũng Tàu', '2023-08-25', 'https://example.com/map_vungtau', N'Thưởng thức các món hải sản tươi ngon và tắm biển tại Vũng Tàu.',3);
+    (1, N'Hà Nội', 10,5, N'Hạ Long Bay', '2023-08-20', 'https://example.com/map_halong', N'Hành trình khám phá vịnh Hạ Long đẹp nhất Việt Nam.',3),
+    (2, N'Hà Nội', 10,5, N'Sapa', '2023-09-02', 'https://example.com/map_sapa', N'Khám phá vùng cao nguyên bí ẩn và thăm thú bản làng Sapa.',3),
+    (3, N'Hồ Chí Minh', 10, 5, N'Đà Lạt', '2023-08-25', N'https://example.com/map_dalat', N'Du ngoạn thành phố ngàn hoa và thưởng thức không khí trong lành.',3),
+    (4, N'Hồ Chí Minh', 10, 5, N'Cần Thơ', '2023-09-10', 'https://example.com/map_cantho', N'Khám phá vùng đồng bằng sông Cửu Long và trải nghiệm văn hóa miền Tây.',3),
+    (5, N'Đà Nẵng', 10, 5, N'Hội An', '2023-08-15', 'https://example.com/map_hoian', N'Tham quan các di sản văn hóa tại phố cổ Hội An.',3),
+    (6, N'Đà Nẵng', 10, 5, N'Huế', '2023-09-05', 'https://example.com/map_hue', N'Khám phá các di tích lịch sử và kiến trúc cổ đại của đô thành Huế.',3),
+	(7, N'Hà Nội', 10, 5, N'Tam Đảo', '2023-08-20', 'https://example.com/map_tamdao', N'Du ngoạn cao nguyên mát mẻ với Tam Đảo xinh đẹp.',3),
+    (8, N'Hà Nội', 10, 5, N'Mai Châu', '2023-09-02', 'https://example.com/map_maichau', N'Khám phá văn hóa dân tộc sắc sảo tại Mai Châu.',3),
+    (9, N'Hồ Chí Minh', 10, 5, N'Phú Quốc', '2023-08-25', 'https://example.com/map_phuquoc', N'Thư giãn và tận hưởng biển xanh tại đảo ngọc Phú Quốc.',3),
+    (10, N'Hồ Chí Minh', 10, 5, N'Côn Đảo', '2023-09-10', 'https://example.com/map_condao', N'Khám phá cảnh đẹp hoang sơ của quần đảo Côn Đảo.',3),
+    (11, N'Đà Nẵng', 10, 5, N'Bà Nà Hills', '2023-08-15', 'https://example.com/map_banahills', N'Trải nghiệm cảm giác mạnh tại khu du lịch Bà Nà Hills.',3),
+    (12, N'Đà Nẵng', 10, 5, N'Cù Lao Chàm', '2023-09-05', 'https://example.com/map_culaocham', N'Thư giãn và ngắm san hô tuyệt đẹp tại Cù Lao Chàm.',3),
+	(13, N'Hà Nội', 10, 5, N'Mộc Châu', '2023-08-20', 'https://example.com/map_mocchau', N'Khám phá vùng cao nguyên Mộc Châu tuyệt đẹp vào mùa hoa tam giác mạch.',3),
+    (14, N'Hà Nội', 10, 5, N'Điện Biên', '2023-09-02', 'https://example.com/map_dienbien', N'Thăm thú các di tích lịch sử và văn hóa độc đáo tại Điện Biên Phủ.',3),
+    (15, N'Hồ Chí Minh', 10, 5, N'Vũng Tàu', '2023-08-25', 'https://example.com/map_vungtau', N'Thưởng thức các món hải sản tươi ngon và tắm biển tại Vũng Tàu.',3),
+    (16, N'Hồ Chí Minh', 10, 5, N'Cần Giờ', '2023-09-10', 'https://example.com/map_cangio', N'Khám phá vùng đồng bằng sông Sài Gòn và hệ sinh thái đa dạng tại Cần Giờ.',3),
+    (17, N'Đà Nẵng', 10, 5, 'Bán đảo Sơn Trà', '2023-08-15', 'https://example.com/map_sontra', N'Tham quan cảnh đẹp hoang sơ của bán đảo Sơn Trà.',3),
+    (18, N'Đà Nẵng', 10, 5, N'Bà Nà Hills', '2023-09-05', 'https://example.com/map_banahills2', N'Tận hưởng không gian nghỉ dưỡng tại khu du lịch Bà Nà Hills.',3),
+	(19, N'Hồ Chí Minh', 10, 5, N'Vũng Tàu', '2023-08-25', 'https://example.com/map_vungtau', N'Thưởng thức các món hải sản tươi ngon và tắm biển tại Vũng Tàu.',3);
    
 
    --insert Tour-Schedule

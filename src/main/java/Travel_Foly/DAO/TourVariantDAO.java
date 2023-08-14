@@ -9,4 +9,5 @@ import Travel_Foly.Model.TourVariant;
 public interface TourVariantDAO extends JpaRepository<TourVariant,Integer>{
 	@Query("Select tv from TourVariant tv Where tv.TourVariant.TourId = ?1")
 	TourVariant findAllByTourId(Integer id);
+
 }
