@@ -37,7 +37,6 @@
 <link rel="stylesheet" href="/user/css/flaticon.css">
 <link rel="stylesheet" href="/user/css/icomoon.css">
 <link rel="stylesheet" href="/user/css/style.css">
-<link rel="stylesheet" type="text/css" href="/admin/css/main.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
   <!-- or -->
   <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
@@ -173,136 +172,110 @@
 			</div>
 		</div>
 	</section>
-	<main class="container-fluid col-11 app app-ban-hang">
-		<div class="row">
-			<div class="col-md-8">
-				<div class="tile">
-					<h3 class="tile-title">Cart Detail</h3>
-					<input type="text" id="myInput" onkeyup="myFunction()"
-						placeholder="Nhập mã sản phẩm hoặc tên sản phẩm để tìm kiếm...">
-					<div class="du--lieu-san-pham">
-						<table class="table table-hover table-bordered">
-							<thead>
-								<tr>
-
-									<th class="so--luong">Tour Name</th>
-									<th class="so--luong">Star date - End date</th>
-									<th class="so--luong" width="10">Adult</th>
-									<th class="so--luong" width="10">Children</th>
-									<th class="so--luong">Price</th>
-									<th class="so--luong text-center"
-										style="text-align: center; vertical-align: middle;">Action</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr th:if="${cartItems}" th:each="cartItem : ${cartItems}" class="cart-item">
-									<td>[[${cartItem.cartItem.TourId.Name}]]</td>
-									<td>[[${#dates.format(cartItem.cartItem.StartDate, 'dd-MM-yyyy')}]] - [[${#dates.format(cartItem.cartItem.EndDate, 'dd-MM-yyyy')}]]</td>
-									<td>
-										<select th:name="quantityChildren" id="adult" class="quantityAdult form-control">
-											<option th:value="${cartItem.cartItem.QuantityAdult}">[[${cartItem.cartItem.QuantityAdult}]]</option>
-											<option th:each="quantityAdult : ${#numbers.sequence(0,cartItem.quantityTotalAdult)}" th:value="${quantityAdult}">
-												[[${quantityAdult}]]
-											</option>
-										</select>
-									</td>
-									<td>
-										<select th:name="quantityChildren" id="children" class="quantityChildren form-control">
-											<option th:value="${cartItem.cartItem.QuantityChildren}">[[${cartItem.cartItem.QuantityChildren}]]</option>
-											<option th:each="quantityChildren : ${#numbers.sequence(0,cartItem.quantityTotalChildren)}" th:value="${quantityChildren}">
-												[[${quantityChildren}]]
-											</option>
-										</select>	
-									</td>
-									<td class="pricePerAdult" data-price="[[${cartItem.cartItem.TourId.Price}]]">
-										[[${cartItem.cartItem.TourId.Price}]]$ 
-										<span style="color:red;">
-											(Child:[[${cartItem.cartItem.TourId.Price*0.5}]]$)
-										</span>
-									 </td>
-
-									<td style="text-align: center; vertical-align: middle;">
-										<a th:href="@{|/travelfpoly/cart/delete/${cartItem.cartItem.CartItemId}|}">
-											<button class="btn btn-primary btn-sm trash" type="button"
-												title="Xóa">
-												<i class="fas fa-trash-alt"></i>
-											</button>
-										</a>
-										
-									</td>
-								</tr>
-								<tr th:unless="${cartItems}">
-									<td>Chưa có sản phẩm trong giỏ hàng</td>
-								</tr>
-								
-							</tbody>
-						</table>
-					</div>
-					<div class="alert">
-
-						<i class="fas fa-exclamation-triangle"></i> Enter product code or product name to search
+	
+	<div class="container mt-5">
+        <h2 class="text-center">Order Tour</h2>
+    	<div class="block-17 my-4" style="border: 1px solid black;">
+			<form th:action="@{/travelfpoly/order/search}" method="get" class="d-block d-flex">
+				<div class="fields d-block d-flex">
+					<div class="textfield-search one-third">
+						<input th:name="searchKey" type="text" class="form-control"
+							placeholder="Ex: Tour name, price,...">
 					</div>
 				</div>
-			</div>
-			<div class="col-md-4">
-				<div th:object="${cart}" class="tile">
-					<h3 class="tile-title">Order notification</h3>
-					<form method="post">
-						<div class="row">
-							<div class="form-group  col-md-12">
-								<label class="control-label">Fullname</label> 
-								<input class="form-control" th:name="fullname" type="text" placeholder="Enter your fullname">
-							</div>
-							
-							<div class="form-group  col-md-12">
-								<label class="control-label">Phone</label> 
-								<input class="form-control" th:name="phone" type="text" placeholder="Enter your phone">
-							</div>
-							
-							<div class="form-group  col-md-12">
-								<label class="control-label">Address</label> 
-								<input class="form-control" th:name="address" type="text" placeholder="Cách mạng tháng 8, Quận Tân Bình">
-							</div>
-							
-							<div class="form-group  col-md-12">
-								<label class="control-label">Email</label> 
-								<input class="form-control" th:name="email" type="text" placeholder="Enter your email">
-							</div>
-							<!-- <div class="form-group  col-md-12">
-								<label class="control-label">Nhân viên bán hàng</label> <select
-									class="form-control" id="exampleSelect1">
-									<option>--- Chọn nhân viên bán hàng ---</option>
-									<option>Võ Trường</option>
-									<option>Nhật Kim Anh</option>
-									<option>Đào Thanh Tuấn</option>
-									<option>Phạm Phong Phú</option>
-								</select>
-							</div> -->
-							<div class="form-group  col-md-12">
-								<label class="control-label">Not</label>
-								<textarea class="form-control" rows="4"
-									placeholder="Extra notes for your tour"></textarea>
-							</div>
-	
-						</div>
-						<div class="row">
-							<div class="form-group  col-md-6">
-								<label class="control-label">Total Price: </label>
-								<p class="control-all-money-tamtinh"><span id="totalAmount" th:text="${totalPrice}"></span> $</p>
-							</div>
-							<div class="tile-footer col-md-12">
-								<button th:formaction="@{|/travelfpoly/cart/book/*{Cart.UserId}|}" class="btn btn-primary luu-san-pham">
-									Book Tour
-								</button>
-							</div>
-						</div>
-					</form>
+				<input type="submit" class="search-submit btn btn-primary"
+					value="Search">
+			</form>
+		</div>    
+        <table class="table table-bordered border-info table-info">
+            <thead>
+              <tr>
+                <th scope="col">
+                	Tour name
+                	<a th:href="@{/travelfpoly/order(field=OrderDetailTour.Name,sort=asc)}"><i class="fas fa-arrow-up"></i></a>
+					<a th:href="@{/travelfpoly/order(field=OrderDetailTour.Name,sort=desc)}"><i class="fas fa-arrow-down"></i></a>
+                </th>
+                <th scope="col">
+                	Start Date
+                	<a th:href="@{/travelfpoly/order(field=StarDate,sort=asc)}"><i class="fas fa-arrow-up"></i></a>
+					<a th:href="@{/travelfpoly/order(field=StarDate,sort=desc)}"><i class="fas fa-arrow-down"></i></a>
+               	</th>
+                <th scope="col">
+                	End Date
+                	<a th:href="@{/travelfpoly/order(field=EndDate,sort=asc)}"><i class="fas fa-arrow-up"></i></a>
+					<a th:href="@{/travelfpoly/order(field=EndDate,sort=desc)}"><i class="fas fa-arrow-down"></i></a>
+               	</th>
+                <th scope="col">
+                	QuantityAdult
+                	<a th:href="@{/travelfpoly/order(field=Quantity,sort=asc)}"><i class="fas fa-arrow-up"></i></a>
+					<a th:href="@{/travelfpoly/order(field=Quantity,sort=desc)}"><i class="fas fa-arrow-down"></i></a>
+                </th>
+                <th scope="col">
+                	QuantityChildren
+                	<a th:href="@{/travelfpoly/order(field=QuantityChidren,sort=asc)}"><i class="fas fa-arrow-up"></i></a>
+					<a th:href="@{/travelfpoly/order(field=QuantityChildren,sort=desc)}"><i class="fas fa-arrow-down"></i></a>
+                </th>
+                <th scope="col">
+                	Price
+                	<a th:href="@{/travelfpoly/order(field=Price,sort=asc)}"><i class="fas fa-arrow-up"></i></a>
+					<a th:href="@{/travelfpoly/order(field=Price,sort=desc)}"><i class="fas fa-arrow-down"></i></a>
+                </th>
+                <th scope="col">
+                	Book Date
+                	<a th:href="@{/travelfpoly/order(field=BookDate,sort=asc)}"><i class="fas fa-arrow-up"></i></a>
+					<a th:href="@{/travelfpoly/order(field=BookDate,sort=desc)}"><i class="fas fa-arrow-down"></i></a>
+                </th>
+                <th scope="col">
+                	Delete Tour
+               	</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="order : ${list.content}">
+                <td>[[${order.OrderDetailTour.Name}]]</td>
+                <td>[[${#dates.format(order.StarDate, 'dd-MM-yyyy')}]]</td>
+                <td>[[${#dates.format(order.EndDate, 'dd-MM-yyyy')}]]</td>
+                <td>[[${order.Quantity}]]</td>
+                <td>[[${order.QuantityChildren}]]</td>
+                <td>
+                	[[${order.Price}]]$ 
+                	<span style="color:red;">
+						(Child:[[${order.Price*0.5}]]$)
+					</span>
+                
+                </td>
+                <td>[[${#dates.format(order.BookDate, 'dd-MM-yyyy')}]]</td>
+              	<td style="text-align: center; vertical-align: middle;">
+					<a th:href="@{|/travelfpoly/order/delete/${order.OrderDetailTourId}|}">
+						<button class="btn btn-primary btn-sm trash" type="button"
+							title="Xóa">
+							<i class="fas fa-trash-alt"></i>
+						</button>
+					</a>
 					
+				</td>
+              </tr>
+              
+            </tbody>
+        </table>
+        <div class="row mt-5">
+			<div class="col text-center">
+				<div class="block-27">
+					<ul>
+						<li>
+							<a th:href="@{/travelfpoly/order(page=${list.number - 1})}">&lt;</a>
+						</li>
+						<li th:each="item : ${#numbers.sequence(0, list.totalPages-1)}" th:class="${item} == ${list.number} ? 'active' : ''">
+							<a th:href="@{/travelfpoly/order(page=${item})}" th:text="${item+1}"></a>
+						</li>
+						<li>
+							<a th:href="@{/travelfpoly/order(page=${list.number + 1})}">&gt;</a>
+						</li>
+					</ul>
 				</div>
 			</div>
 		</div>
-	</main>
-
+    </div>
 	<!--
   MODAL
 -->
@@ -315,33 +288,6 @@
 			<circle class="path" cx="24" cy="24" r="22" fill="none"
 				stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg>
 	</div>
-	<script>
-	    // Bắt sự kiện khi giá trị thay đổi trong bất kỳ thẻ <select> nào trong class "cart-item"
-	    
-	    var selectElements = document.querySelectorAll(".cart-item select");
-	    var totalAmount = parseFloat([[${totalPrice}]])
-	    selectElements.forEach(function(selectElement) {
-	        selectElement.addEventListener("change", updateTotalAmount);
-	    });
-	
-	    // Hàm tính tổng tiền dựa trên số lượng và giá từng dòng
-	    function updateTotalAmount() {
-	        var totalAmount = 0;
-	        
-	        // Duyệt qua từng dòng
-	        var rows = document.querySelectorAll(".cart-item");
-	        rows.forEach(function(row) {
-	            var quantityAdult = parseInt(row.querySelector(".quantityAdult").value);
-	            var quantityChildren = parseInt(row.querySelector(".quantityChildren").value);
-	            var pricePerAdult = parseFloat(row.querySelector(".pricePerAdult").textContent.replace('$', ''));
-	
-	            totalAmount += (quantityAdult * pricePerAdult) + (0.5 * pricePerAdult * quantityChildren);
-	        });
-	
-	        // Cập nhật giá trị tổng tiền trên giao diện
-	        document.getElementById("totalAmount").textContent = totalAmount.toFixed(2); // Làm tròn đến 2 chữ số thập phân
-	    }
-	</script>
 	<script src="/user/js/jquery.min.js"></script>
 	<script src="/user/js/jquery-migrate-3.0.1.min.js"></script>
 	<script src="/user/js/popper.min.js"></script>

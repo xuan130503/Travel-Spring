@@ -1,6 +1,6 @@
 package Travel_Foly.Model;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import jakarta.persistence.Entity;
@@ -24,10 +24,13 @@ public class OrderDetailTour {
 	private Integer Quantity;
 	private Integer QuantityChildren;
 	private Double Price;
-	private Date Date;
+	private Date StarDate;
+	private Date EndDate;
+	private Date BookDate;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "TourId")
 	private Tour OrderDetailTour;
-	@OneToMany(mappedBy = "OrderDetailTour")
-	private List<OrderTour> OrderTours;
+	@ManyToOne(fetch = FetchType.LAZY) 
+	@JoinColumn(name = "OrderTourId")
+	private OrderTour OrderTour;
 }

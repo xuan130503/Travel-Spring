@@ -11,7 +11,7 @@ select * from accounts;
  ('thanhtu002','$2a$12$DqHKOXHtBvJutoE6zB3dxumwcs5r.InlhKN0we06pLj5fMKSkhg02', 1, N'338 Nguyễn Văn Quá',12, 'tuthanh22012003@gmail.com', 'Ung Thanh Tú', '07541254',1),
  --1234
  ('vantu003','$2a$12$a1rIDHNWRd/GhUCmOhJW6.0SrxFaF/gNSTESrULuey.ble4fCbSES', 1, N'168 Võ Văn Kiệt', 21, 'vantu@gmail.com', 'Tô Vân Tú', '0785123655',1)
-
+ select * from order_detail_tours
  
  select * from tour_variants
 
@@ -650,6 +650,7 @@ VALUES
   )
 
   --Thêm bảng chi tiết tour
+  select *from order_detail_tours
   select * from tour_images
   select * from tour_variants
   select * from cart_items
@@ -758,6 +759,7 @@ VALUES
 (19, N'Lịch trình ngày 3', N'Mô tả lịch trình cho ngày thứ ba', '08:00:00');
 
 -- Insert CategoryHotel
+select * from category_hotels
 Insert into category_hotels (name)
 values
 (N'Khách sạn Sang Trọng'),

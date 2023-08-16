@@ -34,7 +34,8 @@ public class AccountController {
         }
 	}
 	@GetMapping("login")
-	public String login() {
+	public String login(Principal principal) {
+		getPricipal(principal);
 		return "user/signin";
 	}
 	@PostMapping("login")
@@ -44,5 +45,10 @@ public class AccountController {
 	@GetMapping("signup")
 	public String logout() {
 		return "user/signup";
+	}
+	@PostMapping("logout")
+	public void logoutUser() {
+		session.removeAttribute("amount");
+		session.removeAttribute("account");
 	}
 }

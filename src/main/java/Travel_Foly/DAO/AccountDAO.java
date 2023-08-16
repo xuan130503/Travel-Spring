@@ -12,7 +12,7 @@ import Travel_Foly.DTO.AccountDTO;
 import Travel_Foly.Model.Account;
 
 @Repository
-public interface AccountDAO extends JpaRepository<Account,String>{
+public interface AccountDAO extends JpaRepository<Account,Integer>{
 	@Query("Select a from Account a")
 	List<Account> findAllUser();
 	
@@ -21,4 +21,5 @@ public interface AccountDAO extends JpaRepository<Account,String>{
 	
 	@Query("Select new Travel_Foly.DTO.AccountDTO(a.UserId, a.UserName, a.Role)  From Account a Where a.UserName=?1")
 	AccountDTO findOneUsername(String Username);
+	
 }

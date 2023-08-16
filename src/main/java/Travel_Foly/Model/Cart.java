@@ -29,6 +29,7 @@ public class Cart {
 	private String Name;
 	private String Phone;
 	private String Email;
+	@Column(columnDefinition = "nvarchar(200)")
 	private String Address;
 	@OneToOne(fetch = FetchType.LAZY)
 	@MapsId

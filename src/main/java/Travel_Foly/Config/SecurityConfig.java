@@ -40,7 +40,7 @@ public class SecurityConfig {
 		.formLogin(login ->{
 			login.loginPage("/travelfpoly/account/login")
 			.loginProcessingUrl("/travelfpoly/account/login")
-			.defaultSuccessUrl("/travelfpoly/home",false);
+			.defaultSuccessUrl("/travelfpoly/home",true);
 			
 		})
 		.logout(logout ->{
@@ -48,7 +48,7 @@ public class SecurityConfig {
 			.logoutSuccessUrl("/travelfpoly/account/login");
 		})
 		.oauth2Login(auth ->{
-			auth.defaultSuccessUrl("/travelfpoly/home",false);
+			auth.defaultSuccessUrl("/travelfpoly/home",true);
 		})
 		.exceptionHandling(ex ->{
 			ex.accessDeniedHandler((request,respone,asscessDeni) -> respone.sendRedirect("/travelfpoly/account/login"));

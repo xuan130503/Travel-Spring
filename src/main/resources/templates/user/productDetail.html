@@ -465,6 +465,11 @@
 											<input th:name="email" class="form-control" type="email"
 												placeholder="Enter your Email" required>
 										</div>
+										<div class="col-md-12 mb-3">
+											<label class="title-input">Address</label>
+											<input th:name="address" class="form-control" type="text"
+												placeholder="Enter your Phone" required>
+										</div>
 										<div class="col-md-6 mb-3">
 											<label class="title-input">Phone</label>
 											<input th:name="phone" class="form-control" type="text"
@@ -494,12 +499,15 @@
 													</option>
 												</select> 
 											</div>
+											<div class="col-md-12 mt-3" style="font-weight: 400; text-transform: capitalize; margin-left: 5px; font-size: 24px; color: #1bbc9b;">
+												Tổng tiền: <span id="totalPriceDisplay" style="color:red;"></span>
+											</div>
 										</div>
-										<div class="row" id="totalPriceDisplay"></div>
+										
 									</div>
 									<div class="form-btn">
-										<button th:formaction="@{|/travelfpoly/bookNow/${variant.TourVariant.TourId}|}" class="submit-btn mb-3">Book Now</button>
-										<button th:formaction="@{|/travelfpoly/bookNow/${variant.TourVariant.TourId}|}" class="cart-btn" style="color:black;">Add to cart</button>
+										<button th:formaction="@{/travelfpoly/bookNow/{tourId}/{userId} (tourId=${variant.TourVariant.TourId}, userId=${session.account.UserId})}" class="submit-btn mb-3">Book Now</button>
+										<button th:formaction="@{/travelfpoly/addToCart/{tourId}/{userId}(tourId=${variant.TourVariant.TourId}, userId=${session.account.UserId})}" class="cart-btn" style="color:black;">Add to cart</button>
 									</div>
 									<!-- <div class="form-btn mt-2">
 										<button class="submit-btn bg-warning">Add to cart</button>
@@ -554,7 +562,7 @@
             const tourPrice = parseFloat(priceElement.getAttribute('data-price'));
 			console.log(tourPrice);
             const totalPrice = (adultsQuantity * tourPrice) + (childrenQuantity * (tourPrice / 2));
-            displayElement.textContent = 'Tổng tiền: ' + totalPrice;
+            displayElement.textContent =totalPrice + '$';
         }
     </script>
     <script>

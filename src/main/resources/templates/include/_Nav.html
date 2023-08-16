@@ -28,7 +28,7 @@
 					<li class="nav-item"><a href="/travelfpoly/hotel" class="nav-link">Hotels</a></li>
 					<li class="nav-item"><a href="/travelfpoly/blog" class="nav-link">Blog</a></li>
 					<li class="nav-item"><a href="/travelfpoly/contact" class="nav-link">Contact</a></li>
-					<li th:if="${session.account.Role==false}" class="nav-item"><a href="/travelfpoly/cart" class="nav-link d-flex"><i class="fas fa-shopping-cart fa-lg"></i>0</a></li>
+					<li class="nav-item"><a href="/travelfpoly/cart" class="nav-link d-flex"><i class="fas fa-shopping-cart fa-lg"></i>[[${session.amount}]]</a></li>
 					<li th:if="${session.account}" class="nav-item dropdown cta">
 			          <a class="nav-link dropdown-toggle d-flex" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 			            <i class="fas fa-user-tie"></i>
@@ -36,6 +36,7 @@
 			          <ul class="dropdown-menu">
 			            <li><a class="dropdown-item" href="#">[[${session.account.UserName}]]</a></li>
 			            <li th:if="${session.account.Role==true}"><a class="dropdown-item" href="/travelfpoly/admin/index">Admin</a></li>
+			            <li><a class="dropdown-item" href="/travelfpoly/order">My Tour</a></li>
 			            <li><a class="dropdown-item" href="#">Reset Password</a></li>
 			            <li><hr class="dropdown-divider"></li>
 			            <li><a class="dropdown-item" href="/travelfpoly/account/logout">Logout</a></li>
