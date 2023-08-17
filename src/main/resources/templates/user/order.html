@@ -195,37 +195,42 @@
                 	<a th:href="@{/travelfpoly/order(field=OrderDetailTour.Name,sort=asc)}"><i class="fas fa-arrow-up"></i></a>
 					<a th:href="@{/travelfpoly/order(field=OrderDetailTour.Name,sort=desc)}"><i class="fas fa-arrow-down"></i></a>
                 </th>
-                <th scope="col">
+                <th scope="col" >
                 	Start Date
                 	<a th:href="@{/travelfpoly/order(field=StarDate,sort=asc)}"><i class="fas fa-arrow-up"></i></a>
 					<a th:href="@{/travelfpoly/order(field=StarDate,sort=desc)}"><i class="fas fa-arrow-down"></i></a>
                	</th>
-                <th scope="col">
+                <th scope="col" >
                 	End Date
                 	<a th:href="@{/travelfpoly/order(field=EndDate,sort=asc)}"><i class="fas fa-arrow-up"></i></a>
 					<a th:href="@{/travelfpoly/order(field=EndDate,sort=desc)}"><i class="fas fa-arrow-down"></i></a>
                	</th>
-                <th scope="col">
-                	QuantityAdult
+                <th scope="col" >
+                	Adult
                 	<a th:href="@{/travelfpoly/order(field=Quantity,sort=asc)}"><i class="fas fa-arrow-up"></i></a>
 					<a th:href="@{/travelfpoly/order(field=Quantity,sort=desc)}"><i class="fas fa-arrow-down"></i></a>
                 </th>
-                <th scope="col">
-                	QuantityChildren
+                <th scope="col" >
+                	Children
                 	<a th:href="@{/travelfpoly/order(field=QuantityChidren,sort=asc)}"><i class="fas fa-arrow-up"></i></a>
 					<a th:href="@{/travelfpoly/order(field=QuantityChildren,sort=desc)}"><i class="fas fa-arrow-down"></i></a>
                 </th>
-                <th scope="col">
+                <th scope="col" >
                 	Price
                 	<a th:href="@{/travelfpoly/order(field=Price,sort=asc)}"><i class="fas fa-arrow-up"></i></a>
 					<a th:href="@{/travelfpoly/order(field=Price,sort=desc)}"><i class="fas fa-arrow-down"></i></a>
                 </th>
-                <th scope="col">
+                <th scope="col" >
+                	Total
+                	<a th:href="@{/travelfpoly/order(field=TotalPrice,sort=asc)}"><i class="fas fa-arrow-up"></i></a>
+					<a th:href="@{/travelfpoly/order(field=TotalPrice,sort=desc)}"><i class="fas fa-arrow-down"></i></a>
+                </th>
+                <th scope="col" >
                 	Book Date
                 	<a th:href="@{/travelfpoly/order(field=BookDate,sort=asc)}"><i class="fas fa-arrow-up"></i></a>
 					<a th:href="@{/travelfpoly/order(field=BookDate,sort=desc)}"><i class="fas fa-arrow-down"></i></a>
                 </th>
-                <th scope="col">
+                <th scope="col" >
                 	Delete Tour
                	</th>
               </tr>
@@ -244,6 +249,7 @@
 					</span>
                 
                 </td>
+                <td>[[${order.TotalPrice}]]$</td>
                 <td>[[${#dates.format(order.BookDate, 'dd-MM-yyyy')}]]</td>
               	<td style="text-align: center; vertical-align: middle;">
 					<a th:href="@{|/travelfpoly/order/delete/${order.OrderDetailTourId}|}">

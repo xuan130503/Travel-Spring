@@ -54,7 +54,9 @@ public class SecurityConfig {
 			ex.accessDeniedHandler((request,respone,asscessDeni) -> respone.sendRedirect("/travelfpoly/account/login"));
 		})
 		
-		.csrf(csrf -> csrf.disable());
+		.csrf(csrf -> csrf.disable())
+		.cors(cors ->cors.disable())
+		;
 		return http.build();
 	}
 }

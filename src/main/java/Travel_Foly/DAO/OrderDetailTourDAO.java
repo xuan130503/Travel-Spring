@@ -14,7 +14,9 @@ public interface OrderDetailTourDAO extends JpaRepository<OrderDetailTour,Intege
 			+ "Join OrderTour o On o.OrderTourId = de.OrderTour.OrderTourId "
 			+ "Join Tour t On t.TourId = de.OrderDetailTour.TourId "
 			+ "Join Account a On a.UserId = o.OrderTour.UserId "
-			+ "Where o.OrderTour.UserId =?1")
+			+ "Where o.OrderTour.UserId =?1 "
+			+ "And de.Status=true"
+			)
 	Page<OrderDetailTour> findOrderByUserId(Integer id,Pageable page);
 	
 	@Query("Select de From OrderDetailTour de "
@@ -22,7 +24,22 @@ public interface OrderDetailTourDAO extends JpaRepository<OrderDetailTour,Intege
 			+ "Join Tour t On t.TourId = de.OrderDetailTour.TourId "
 			+ "Join Account a On a.UserId = o.OrderTour.UserId "
 			+ "Where o.OrderTour.UserId =?1 "
+			+ "And de.Status=true "
 			+ "And Lower(t.Name) Like Lower(Concat('%', ?2 ,'%')) "
 			+ "Or t.Price Between ?3 and ?4 ")
 	Page<OrderDetailTour> findOrderByUserIdAndKeyword(Integer id,String keyword,Double minPrice, Double maxPrice,Pageable page);
+	
+	//admin
+	@Query("Select count(de) From OrderDetailTour de")
+	Integer reportOrder();
+	
+	@Query("Select de From OrderDetailTour de "
+			+ "Join OrderTour o On o.OrderTourId = de.OrderTour.OrderTourId ")
+	Page<OrderDetailTour> findOrder(Pageable page);
+	
+	@Query("Select Sum(de.TotalPrice) From OrderDetailTour de Where de.Status=true")
+	Double findTotalIncome();
+	
+	@Query("Select count(*) From OrderDetailTour de Where de.Status=false")
+	Integer findOrderCancel();
 }

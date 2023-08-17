@@ -47,7 +47,7 @@
         <div class="widget-small primary coloured-icon"><i class='icon bx bxs-user-account fa-3x'></i>
           <div class="info">
             <h4>Tổng khách hàng</h4>
-            <p><b>56 khách hàng</b></p>
+            <p><b>[[${user}]] khách hàng</b></p>
             <p class="info-tong">Tổng số khách hàng được quản lý.</p>
           </div>
         </div>
@@ -56,9 +56,9 @@
           <div class="col-md-6">
             <div class="widget-small info coloured-icon"><i class='icon bx bxs-data fa-3x'></i>
               <div class="info">
-                <h4>Tổng sản phẩm</h4>
-                <p><b>1850 sản phẩm</b></p>
-                <p class="info-tong">Tổng số sản phẩm được quản lý.</p>
+                <h4>Tổng Tour</h4>
+                <p><b>[[${tour}]] Tour</b></p>
+                <p class="info-tong">Tổng số Tour được quản lý.</p>
               </div>
             </div>
           </div>
@@ -67,7 +67,7 @@
             <div class="widget-small warning coloured-icon"><i class='icon bx bxs-shopping-bags fa-3x'></i>
               <div class="info">
                 <h4>Tổng đơn hàng</h4>
-                <p><b>247 đơn hàng</b></p>
+                <p><b>[[${order}]] đơn hàng</b></p>
                 <p class="info-tong">Tổng số hóa đơn bán hàng trong tháng.</p>
               </div>
             </div>
@@ -77,8 +77,8 @@
             <div class="widget-small danger coloured-icon"><i class='icon bx bxs-error-alt fa-3x'></i>
               <div class="info">
                 <h4>Sắp hết hàng</h4>
-                <p><b>4 sản phẩm</b></p>
-                <p class="info-tong">Số sản phẩm cảnh báo hết cần nhập thêm.</p>
+                <p><b>[[${tourQuantity}]] Tour</b></p>
+                <p class="info-tong">Số Tour cảnh báo hết cần nhập thêm.</p>
               </div>
             </div>
           </div>
@@ -97,15 +97,15 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>AL3947</td>
-                      <td>Phạm Thị Ngọc</td>
+                    <tr th:each="order : ${listOrder.content}">
+                      <td>[[${order.OrderDetailTourId}]]</td>
+                      <td>[[${order.OrderTour.Name}]]</td>
                       <td>
-                        19.770.000 đ
+                        [[${order.TotalPrice}]]
                       </td>
-                      <td><span class="badge bg-info">Chờ xử lý</span></td>
+                      <td><span class="badge bg-info">[[${order.status ? 'Đã hoàn thành':'Đã hủy'}]]</span></td>
                     </tr>
-                    <tr>
+                    <!-- <tr>
                       <td>ER3835</td>
                       <td>Nguyễn Thị Mỹ Yến</td>
                       <td>
@@ -128,10 +128,27 @@
                         40.650.000 đ	
                       </td>
                       <td><span class="badge bg-danger">Đã hủy	</span></td>
-                    </tr>
+                    </tr> -->
                   </tbody>
                 </table>
               </div>
+              <div class="row mt-5">
+					<div class="col" style="text-align:center;">
+						<div class="block-27">
+							<ul>
+								<li>
+									<a th:href="@{/travelfpoly/admin/index(page=${listOrder.number - 1})}">&lt;</a>
+								</li>
+								<li th:each="item : ${#numbers.sequence(0, listOrder.totalPages-1)}" th:class="${item} == ${listOrder.number} ? 'active' : ''">
+									<a th:href="@{/travelfpoly/admin/index(page=${item})}" th:text="${item+1}"></a>
+								</li>
+								<li>
+									<a th:href="@{/travelfpoly/admin/index(page=${listOrder.number + 1})}">&gt;</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
               <!-- / div trống-->
             </div>
            </div>
@@ -146,40 +163,42 @@
                       <tr>
                         <th>ID</th>
                         <th>Tên khách hàng</th>
-                        <th>Ngày sinh</th>
+                        <th>Địa chỉ</th>
+                        <th>Email</th>
                         <th>Số điện thoại</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>#183</td>
-                        <td>Hột vịt muối</td>
-                        <td>21/7/1992</td>
-                        <td><span class="tag tag-success">0921387221</span></td>
+                      <tr th:each="account:${listAccount.content}">
+                        <td>[[${account.UserId}]]</td>
+                        <td>[[${account.FullName}]]</td>
+                        <td>[[${account.Address}]]</td>
+                        <td>[[${account.Email}]]</td>
+                        <td><span class="tag tag-success">[[${account.Phone}]]</span></td>
                       </tr>
-                      <tr>
-                        <td>#219</td>
-                        <td>Bánh tráng trộn</td>
-                        <td>30/4/1975</td>
-                        <td><span class="tag tag-warning">0912376352</span></td>
-                      </tr>
-                      <tr>
-                        <td>#627</td>
-                        <td>Cút rang bơ</td>
-                        <td>12/3/1999</td>
-                        <td><span class="tag tag-primary">01287326654</span></td>
-                      </tr>
-                      <tr>
-                        <td>#175</td>
-                        <td>Hủ tiếu nam vang</td>
-                        <td>4/12/20000</td>
-                        <td><span class="tag tag-danger">0912376763</span></td>
-                      </tr>
+                     
                     </tbody>
                   </table>
                 </div>
-
+				<div class="row mt-5">
+					<div class="col" style="text-align:center;">
+						<div class="block-27">
+							<ul>
+								<li>
+									<a th:href="@{/travelfpoly/admin/index(pageUser=${listAccount.number - 1})}">&lt;</a>
+								</li>
+								<li th:each="item : ${#numbers.sequence(0, listAccount.totalPages-1)}" th:class="${item} == ${listAccount.number} ? 'active' : ''">
+									<a th:href="@{/travelfpoly/admin/index(pageUser=${item})}" th:text="${item+1}"></a>
+								</li>
+								<li>
+									<a th:href="@{/travelfpoly/admin/index(pageUser=${listAccount.number + 1})}">&gt;</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
               </div>
+              
             </div>
              <!-- / col-12 -->
         </div>
@@ -215,7 +234,7 @@
       <p><b>Copyright
           <script type="text/javascript">
             document.write(new Date().getFullYear());
-          </script> Phần mềm quản lý bán hàng | Dev By Trường
+          </script> Phần mềm quản lý Tour | Dev By Tân
         </b></p>
     </div>
   </main>

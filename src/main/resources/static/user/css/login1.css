@@ -250,7 +250,10 @@ footer {
     right: 0;
     text-align: center;
 }
-
+.error{
+	background-color:rgba(255, 255, 255, 0.75);
+    color: red;
+}
 footer p {
     margin: 10px 0;
 }

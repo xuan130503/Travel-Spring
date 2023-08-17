@@ -67,7 +67,7 @@ public class HomeController {
 	private CategoryTourDAO categoryTourDao;
 	
 	@Autowired
-	private TourVariantDAO tourVatiantDao;
+	private TourVariantDAO tourVariantDao;
 	
 	@Autowired 
 	private TourScheduleDAO tourScheduleDao;
@@ -238,7 +238,7 @@ public class HomeController {
 			order.setOrderTour(account);
 			orderTourDao.save(order);
 			//add list CartItem in order Detail tour
-			
+		
 			for (CartItem cartItem : listCart) {
 				OrderDetailTour detailOrder = new OrderDetailTour();
 				Tour tour = tourDao.findByTourId(cartItem.getTourId().getTourId());
@@ -249,12 +249,23 @@ public class HomeController {
 				detailOrder.setPrice(cartItem.getTourId().getPrice());
 				detailOrder.setQuantity(cartItem.getQuantityAdult());
 				detailOrder.setQuantityChildren(cartItem.getQuantityChildren());
+				detailOrder.setStatus(true);
+				detailOrder.setTotalPrice(cartItem.getTourId().getPrice()*cartItem.getQuantityAdult() + cartItem.getTourId().getPrice()*0.5*cartItem.getQuantityChildren());
 				detailOrder.setOrderDetailTour(tour);
+				
 				orderDetailTourDao.save(detailOrder);
 				cartItemDao.deleteById(cartItem.getCartItemId());
+				
+				//set quantity tour
+				
+				TourVariant tv = tourVariantDao.findAllByTourId(cartItem.getTourId().getTourId());
+				tv.setQuantity(tv.getQuantity()-cartItem.getQuantityAdult());
+				tv.setQuantityChildren(tv.getQuantityChildren()-cartItem.getQuantityChildren());
+				tourVariantDao.save(tv);
 			}
+			
 			session.setAttribute("amount", cartItemDao.getAmount(id));
-			return "redirect:/travelfpoly/cart";
+			return "redirect:/travelfpoly/order";
 		}
 		else {
 			model.addAttribute("message", "Không được bỏ trống các trường");
@@ -303,7 +314,15 @@ public class HomeController {
 	}
 	@GetMapping("order/delete/{id}")
 	public String deleteTour(@PathVariable("id") Integer id) {
-		orderDetailTourDao.deleteById(id);
+		OrderDetailTour order = orderDetailTourDao.findById(id).get();
+		order.setStatus(false);
+		orderDetailTourDao.save(order);
+		//set quantity tour
+		Integer tourId=order.getOrderDetailTour().getTourId();
+		TourVariant tv = tourVariantDao.findAllByTourId(tourId);
+		tv.setQuantity(tv.getQuantity()+order.getQuantity());
+		tv.setQuantityChildren(tv.getQuantityChildren()+order.getQuantityChildren());
+		tourVariantDao.save(tv);
 		return "redirect:/travelfpoly/order";
 	}
 	
@@ -322,17 +341,21 @@ public class HomeController {
 		try {
 			Account account = accountDao.findById(UserId).get();
 			Tour tour =tourDao.findById(TourId).get();
-			Integer duration = tourVatiantDao.findById(TourId).get().getDuration();
+			Integer duration = tourVariantDao.findById(TourId).get().getDuration();
 			Cart checkCart = cartDao.findByUserId(UserId);
+			
 			model.addAttribute("account", account);
 			if(fullname!=null && email!=null && startdate!=null && phone!=null && quantityAdult!=null && quantityChildren!=null) {
 				//add to cart
-				checkCart.setEmail(email);
-				checkCart.setName(fullname);
-				checkCart.setAddress(address);
-				checkCart.setPhone(phone);
-				checkCart.setCart(account);
-				cartDao.save(checkCart);
+				if(checkCart==null) {
+					checkCart = new Cart();
+					checkCart.setEmail(email);
+					checkCart.setName(fullname);
+					checkCart.setAddress(address);
+					checkCart.setPhone(phone);
+					checkCart.setCart(account);
+					cartDao.save(checkCart);
+				}
 //				//add to cart item
 				CartItem cartItem = new CartItem();
 				cartItem.setStartDate(DateHelper.converDateSql(startdate));
@@ -362,7 +385,7 @@ public class HomeController {
 	@GetMapping("tour-detail/{id}")
 	public String productDetail(@PathVariable("id") Integer id, Model model) {
 		TourImage image = tourImageDao.findByTourId(id);
-		TourVariant variant = tourVatiantDao.findAllByTourId(id);
+		TourVariant variant = tourVariantDao.findAllByTourId(id);
 		List<TourSchedule> schedules = tourScheduleDao.findByTourId(id);
 		model.addAttribute("image", image);
 		model.addAttribute("variant", variant);
@@ -379,12 +402,12 @@ public class HomeController {
 			,@RequestParam("phone") String phone
 			,@RequestParam("startdate") java.sql.Date date
 			,@RequestParam("quantityAdult") Integer quantityAdult
-			,@RequestParam("quantityAdult") Integer quantityChildren
+			,@RequestParam("quantityChildren") Integer quantityChildren
 			,TourVariant variant
 			) {
 		Account account = accountDao.findById(UserId).get();
 		Double price =(Double) tourDao.findPriceByTourId(TourId);
-		Integer duration = tourVatiantDao.findById(TourId).get().getDuration();
+		Integer duration = tourVariantDao.findById(TourId).get().getDuration();
 		Tour tour= tourDao.findById(TourId).get();
 		try {
 			if(fullname!=null && email!=null && date!=null && phone!=null && quantityAdult!=null && quantityChildren!=null) {
@@ -402,12 +425,18 @@ public class HomeController {
 				orderDetail.setEndDate(DateHelper.addDaysToDate(date, duration));
 				orderDetail.setBookDate(new Date());
 				orderDetail.setPrice(price);
+				orderDetail.setTotalPrice(price*quantityAdult+price*quantityChildren*0.5);
+				orderDetail.setStatus(true);
 				orderDetail.setQuantity(quantityAdult);
 				orderDetail.setQuantityChildren(quantityChildren);
 				orderDetail.setOrderDetailTour(tour);
 				orderDetail.setOrderTour(order);
 				orderDetailTourDao.save(orderDetail);
-				
+				//set quantity Tour Variant
+				TourVariant variant1= tourVariantDao.findById(TourId).get();
+				variant1.setQuantity(variant1.getQuantity()-quantityAdult);
+				variant1.setQuantityChildren(variant1.getQuantityChildren()-quantityChildren);
+				tourVariantDao.save(variant1);
 				return "redirect:/travelfpoly/order";
 			}
 			model.addAttribute("message", "Book tour is error please check your information!");

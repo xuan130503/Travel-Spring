@@ -187,15 +187,15 @@
 
 									<th class="so--luong">Tour Name</th>
 									<th class="so--luong">Star date - End date</th>
-									<th class="so--luong" width="10">Adult</th>
-									<th class="so--luong" width="10">Children</th>
+									<th class="so--luong" width="10">Quantity Adult</th>
+									<th class="so--luong" width="10">Quantity Children</th>
 									<th class="so--luong">Price</th>
 									<th class="so--luong text-center"
 										style="text-align: center; vertical-align: middle;">Action</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr th:if="${cartItems}" th:each="cartItem : ${cartItems}" class="cart-item">
+								<tr th:if="${cartItems}!=null" th:each="cartItem : ${cartItems}" class="cart-item">
 									<td>[[${cartItem.cartItem.TourId.Name}]]</td>
 									<td>[[${#dates.format(cartItem.cartItem.StartDate, 'dd-MM-yyyy')}]] - [[${#dates.format(cartItem.cartItem.EndDate, 'dd-MM-yyyy')}]]</td>
 									<td>
@@ -231,8 +231,8 @@
 										
 									</td>
 								</tr>
-								<tr th:unless="${cartItems}">
-									<td>Chưa có sản phẩm trong giỏ hàng</td>
+								<tr th:unless="${cartItems}==null">
+									<td colspan="6">Chưa có sản phẩm trong giỏ hàng</td>
 								</tr>
 								
 							</tbody>
@@ -251,22 +251,22 @@
 						<div class="row">
 							<div class="form-group  col-md-12">
 								<label class="control-label">Fullname</label> 
-								<input class="form-control" th:name="fullname" type="text" placeholder="Enter your fullname">
+								<input class="form-control" th:name="fullname" th:value="*{Name}" type="text" placeholder="Enter your fullname">
 							</div>
 							
 							<div class="form-group  col-md-12">
 								<label class="control-label">Phone</label> 
-								<input class="form-control" th:name="phone" type="text" placeholder="Enter your phone">
+								<input class="form-control" th:name="phone" th:value="*{Phone}" type="text" placeholder="Enter your phone">
 							</div>
 							
 							<div class="form-group  col-md-12">
 								<label class="control-label">Address</label> 
-								<input class="form-control" th:name="address" type="text" placeholder="Cách mạng tháng 8, Quận Tân Bình">
+								<input class="form-control" th:name="address" th:value="*{Address}" type="text" placeholder="Cách mạng tháng 8, Quận Tân Bình">
 							</div>
 							
 							<div class="form-group  col-md-12">
 								<label class="control-label">Email</label> 
-								<input class="form-control" th:name="email" type="text" placeholder="Enter your email">
+								<input class="form-control" th:name="email" th:value="*{Email}" type="text" placeholder="Enter your email">
 							</div>
 							<!-- <div class="form-group  col-md-12">
 								<label class="control-label">Nhân viên bán hàng</label> <select

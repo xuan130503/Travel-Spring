@@ -153,97 +153,114 @@
             <div class="row element-button">
               <div class="col-sm-2">
                 <a class="btn btn-add btn-sm" data-toggle="modal" data-target="#exampleModalCenter"><i
-                    class="fas fa-folder-plus"></i> Thêm nhà cung cấp</a>
-              </div>
-              <div class="col-sm-2">
-                <a class="btn btn-add btn-sm" data-toggle="modal" data-target="#adddanhmuc"><i
-                    class="fas fa-folder-plus"></i> Thêm danh mục</a>
-              </div>
-              <div class="col-sm-2">
-                <a class="btn btn-add btn-sm" data-toggle="modal" data-target="#addtinhtrang"><i
-                    class="fas fa-folder-plus"></i> Thêm tình trạng</a>
+                    class="fas fa-folder-plus"></i>Thêm loại Tour</a>
               </div>
             </div>
-            <form class="row">
-              <div class="form-group col-md-3">
-                <label class="control-label">Mã sản phẩm </label>
-                <input class="form-control" type="number" placeholder="">
+            <form method="post" class="row" th:object="${tour}">
+            <div class="form-group col-md-3">
+                <label class="control-label">Mã tour</label>
+                <input th:name="id" th:value="*{TourId}" class="form-control" type="text" required>
               </div>
               <div class="form-group col-md-3">
-                <label class="control-label">Tên sản phẩm</label>
-                <input class="form-control" type="text">
+                <label class="control-label">Tên tour</label>
+                <input th:name="name" th:value="*{Name}" class="form-control" type="text" required>
               </div>
-
-
-              <div class="form-group  col-md-3">
-                <label class="control-label">Số lượng</label>
-                <input class="form-control" type="number">
-              </div>
-              <div class="form-group col-md-3 ">
-                <label for="exampleSelect1" class="control-label">Tình trạng</label>
-                <select class="form-control" id="exampleSelect1">
-                  <option>-- Chọn tình trạng --</option>
-                  <option>Còn hàng</option>
-                  <option>Hết hàng</option>
-                </select>
-              </div>
-              <div class="form-group col-md-3">
-                <label for="exampleSelect1" class="control-label">Danh mục</label>
-                <select class="form-control" id="exampleSelect1">
+				<div class="form-group col-md-3">
+                <label for="exampleSelect1" class="control-label">Loại Tour</label>
+                <select th:name="category" class="form-control" id="exampleSelect1">
                   <option>-- Chọn danh mục --</option>
-                  <option>Bàn ăn</option>
-                  <option>Bàn thông minh</option>
-                  <option>Tủ</option>
-                  <option>Ghế gỗ</option>
-                  <option>Ghế sắt</option>
-                  <option>Giường người lớn</option>
-                  <option>Giường trẻ em</option>
-                  <option>Bàn trang điểm</option>
-                  <option>Giá đỡ</option>
+                  <option th:each="category : ${categories}" 
+	                  	th:value="${category.CategoryTourId}"  th:selected="${category.CategoryTourId != tour.Tour.CategoryTourId ? '' : selected}">
+	                  	[[${category.Name}]]
+               		</option>
                 </select>
               </div>
               <div class="form-group col-md-3 ">
-                <label for="exampleSelect1" class="control-label">Nhà cung cấp</label>
-                <select class="form-control" id="exampleSelect1">
-                  <option>-- Chọn nhà cung cấp --</option>
-                  <option>Phong vũ</option>
-                  <option>Thế giới di động</option>
-                  <option>FPT</option>
-                  <option>Võ Trường</option>
-                </select>
+                <div class="form-check">
+				  <input class="form-check-input" value="true" type="radio" th:name="available" id="flexRadioDefault1" checked>
+				  <label class="form-check-label" for="flexRadioDefault1">
+				   	Sẵn sàng
+				  </label>
+				</div>
+				<div class="form-check">
+				  <input class="form-check-input" value="false" type="radio" th:name="available" id="flexRadioDefault2">
+				  <label class="form-check-label" for="flexRadioDefault2">
+				   	Chưa sẵn sàng
+				  </label>
+				</div>
               </div>
+              
               <div class="form-group col-md-3">
                 <label class="control-label">Giá bán</label>
-                <input class="form-control" type="text">
+                <input th:name="price" th:value="*{Price}" class="form-control" type="text" required>
               </div>
-              <div class="form-group col-md-3">
+             <!--  <div class="form-group col-md-3">
                 <label class="control-label">Giá vốn</label>
                 <input class="form-control" type="text">
-              </div>
-              <div class="form-group col-md-12">
-                <label class="control-label">Ảnh sản phẩm</label>
-                <div id="myfileupload">
-                  <input type="file" id="uploadfile" name="ImageUpload" onchange="readURL(this);" />
-                </div>
-                <div id="thumbbox">
-                  <img height="450" width="400" alt="Thumb image" id="thumbimage" style="display: none" />
-                  <a class="removeimg" href="javascript:"></a>
-                </div>
-                <div id="boxchoice">
-                  <a href="javascript:" class="Choicefile"><i class="fas fa-cloud-upload-alt"></i> Chọn ảnh</a>
-                  <p style="clear:both"></p>
-                </div>
-
-              </div>
+              </div> -->
               <div class="form-group col-md-12">
                 <label class="control-label">Mô tả sản phẩm</label>
-                <textarea class="form-control" name="mota" id="mota"></textarea>
-                <script>CKEDITOR.replace('mota');</script>
-              </div>
+                <textarea th:name="description" class="form-control" required>[[${tour.Description}]]</textarea>
 
+              </div>
+				<button class="btn btn-save" th:formaction="@{/travelfpoly/admin/addproduct/create}" type="submit" style="margin-left: 15px; z-index:999;">Lưu</button>
+				<button class="btn btn-primary" th:formaction="@{/travelfpoly/admin/addproduct/create}" type="submit" style="margin-left: 15px; z-index:999;">Sửa</button>
+          	</form>
+          	<a href="/travelfpoly/admin/addproduct">
+				<button class="btn btn-cancel" type="submit" style="margin-left: 15px; z-index:999;">Làm mới</button>
+			</a>
+          	</div>
+          	</div>
           </div>
-          <button class="btn btn-save" type="button">Lưu lại</button>
-          <a class="btn btn-cancel" href="table-data-product.html">Hủy bỏ</a>
+          
+        	
+        	<table class="table mt-4">
+			  <thead>
+			    <tr>
+			      <th scope="col">Tên Tour</th>
+			      <th scope="col">Loại Tour</th>
+			      <th scope="col">Giá</th>
+			      <th scope="col">Tình trạng</th>
+			      <th scope="col">Mô tả</th>
+			       <th scope="col"></th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			    <tr th:each="tour : ${tours.content}">
+			      <th>[[${tour.Name}]]</th>
+			      <td>[[${tour.Tour.CategoryTourId}]]</td>
+			      <td>[[${tour.Price}]]</td>
+			      <td>[[${tour.Available}]]</td>
+			      <td>[[${tour.Description}]]</td>
+			      <td>
+			      	<a th:href="@{/travelfpoly/admin/addproduct/{tourId}/{categoryId}(tourId=${tour.TourId},categoryId=${tour.Tour.CategoryTourId})}">
+			      		<i class="fas fa-pen-square"></i>
+			      	</a>
+			      	<a th:href="@{|/travelfpoly/admin/addproduct/delete/${tour.TourId}|}">
+			      		<i class="fas fa-trash-alt"></i>
+			      	</a>
+			      </td>
+			    </tr>
+			    
+			  </tbody>
+			</table>
+			<div class="row mt-5">
+				<div class="col text-center">
+					<div class="block-27">
+						<ul>
+							<li>
+								<a th:href="@{/travelfpoly/admin/addproduct(page=${tours.number - 1})}">&lt;</a>
+							</li>
+							<li th:each="item : ${#numbers.sequence(0, tours.totalPages-1)}" th:class="${item} == ${tours.number} ? 'active' : ''">
+								<a th:href="@{/travelfpoly/admin/addproduct(page=${item})}" th:text="${item+1}"></a>
+							</li>
+							<li>
+								<a th:href="@{/travelfpoly/admin/addproduct(page=${tours.number + 1})}">&gt;</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
         </div>
   </main>
 
@@ -260,16 +277,16 @@
           <div class="row">
             <div class="form-group  col-md-12">
               <span class="thong-tin-thanh-toan">
-                <h5>Thêm mới nhà cung cấp</h5>
+                <h5>Thêm mới loại Tour</h5>
               </span>
             </div>
             <div class="form-group col-md-12">
-              <label class="control-label">Nhập tên nhà cung cấp mới</label>
-              <input class="form-control" type="text" required>
+              <label class="control-label">Nhập tên loại tour mới</label>
+              <input th:name="categoryName" class="form-control" type="text" required>
             </div>
           </div>
           <BR>
-          <button class="btn btn-save" type="button">Lưu lại</button>
+          <button class="btn btn-save" th:href="@{/travelfpoly/admin/addcategory}" type="button">Lưu lại</button>
           <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
           <BR>
         </div>

@@ -27,6 +27,8 @@ public class OrderDetailTour {
 	private Date StarDate;
 	private Date EndDate;
 	private Date BookDate;
+	private Boolean Status;
+	private Double TotalPrice;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "TourId")
 	private Tour OrderDetailTour;

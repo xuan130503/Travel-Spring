@@ -85,6 +85,27 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: 0;
   margin-bottom: 0.5rem;
 }
+/*Page  */
+.block-27 ul {
+  padding: 0;
+  margin: 0; }
+  .block-27 ul li {
+    display: inline-block;
+    margin-bottom: 4px;
+    font-weight: 400; }
+    .block-27 ul li a, .block-27 ul li span {
+      color: #f85959;
+      text-align: center;
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      border-radius: 50%;
+      border: 1px solid #fdd3d3; }
+    .block-27 ul li.active a, .block-27 ul li.active span {
+      background: #fdd3d3;
+      color: #f85959;
+      border: 1px solid transparent; }
 
 p {
   margin-top: 0;

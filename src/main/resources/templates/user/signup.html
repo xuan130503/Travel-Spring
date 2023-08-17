@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <link href="/user/images/bee.png" rel="icon">
@@ -11,14 +11,14 @@
   <body>
     <div class="container" id="container">
         <div class="form-container sign-in-container">
-            <form method="post">
+            <form method="post" th:object="${registerDTO}">
                 <h1 style="margin-bottom: 20px;">Create Account</h1>
-                <input type="text" th:name="registerUserName"  placeholder="UserName" />
-                <input type="email" th:name="registerEmail" placeholder="Email" />
-                <input type="password" th:name="registerPassword" placeholder="Password" />
-                <input type="password" th:name="registerPasswordConfirm" placeholder="Confirm Password" />
-                <p style="color:red;" th:text="${errorRegister}"></p>
-                <button formaction="/travelfpoly/account/signup">Sign Up</button>
+                <input type="text" th:field="*{username}"  placeholder="UserName" required/>
+                <input type="email"  th:field="*{email}" placeholder="Email" required/>
+                <input type="password" th:field="*{password}" placeholder="Password" required/>
+                <input type="password" th:name="passwordConfirm" placeholder="Confirm Password" required/>
+                <p class="error">[[${errorMessage}]]</p>
+                <button formaction="/travelfpoly/account/register">Sign Up</button>
             </form>
         </div>
         <div class="overlay-container">
