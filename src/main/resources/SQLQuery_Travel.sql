@@ -1,19 +1,27 @@
-use TravelFPoly;
+create database Travel
+use Travel;
 
-	 INSERT INTO accounts(user_name, pass_word, activated, address,age, email, full_name, phone, role)
+	INSERT INTO intimates(name)
+	values
+	('Copper'),
+	('Silver'),
+	('Golden'),
+	('Diamon')
+	select * from intimates
+	 INSERT INTO accounts(user_name, pass_word, activated, address,age, email, full_name, phone, role,intimate_id)
 	 VALUES
 	 --12345
-	('tanduong','$2a$12$.FGCfBI6l8LlZgtT3q6dF.N73YqUgvjXQfod1tmO7wRltIaAtvYt.', 1, N'168 Võ Văn Kiệt', 21, 'duongnhuttan@gmail.com', 'Duong nhut tan', '0785123655',0),
-	('vantu','$2a$12$9EOasLdiDY862Uk5O.yns.4q1F.16qER0yvSVGPAH23mKEFlN2N.a', 1, N'168 Võ Văn Kiệt', 21, 'duongnhuttan@gmail.com', 'Duong nhut tan', '0785123655',0),
-	('thanhtu','$2a$12$Cy.IYIO9L0AYlmQ/V702Wungm1RCkc2ha./94c3W2rYjKQALjPfGy', 1, N'168 Võ Văn Kiệt', 21, 'duongnhuttan@gmail.com', 'Duong nhut tan', '0785123655',0),
-	('thaitu','$2a$12$HoOJiQVGbO4QZv2q5gQRVeY2.P/.csyKJlE7tOhmVDPijID3OWafe', 1, N'168 Võ Văn Kiệt', 21, 'duongnhuttan@gmail.com', 'Duong nhut tan', '0785123655',0),
-	('vantien','$2a$12$LFUDKedfUtczXdjZLKjOcuGXmEnWMztOAn5l48YElQqfyvf7fN8Ty', 1, N'168 Võ Văn Kiệt', 21, 'duongnhuttan@gmail.com', 'Duong nhut tan', '0785123655',0),
-	('ngocdao','$2a$12$NwVtfl.g00dh6IzQqGpU8ualZEy6udx1ksKiLeysaIaiPzR/PghCG', 1, N'168 Võ Văn Kiệt', 21, 'duongnhuttan@gmail.com', 'Duong nhut tan', '0785123655',0),
+	('tanduong','$2a$12$.FGCfBI6l8LlZgtT3q6dF.N73YqUgvjXQfod1tmO7wRltIaAtvYt.', 1, N'168 Võ Văn Kiệt', 21, 'duongnhuttan@gmail.com', 'Duong nhut tan', '0785123655',0,1),
+	('vantu','$2a$12$9EOasLdiDY862Uk5O.yns.4q1F.16qER0yvSVGPAH23mKEFlN2N.a', 1, N'168 Võ Văn Kiệt', 21, 'duongnhuttan@gmail.com', 'Duong nhut tan', '0785123655',0,1),
+	('thanhtu','$2a$12$Cy.IYIO9L0AYlmQ/V702Wungm1RCkc2ha./94c3W2rYjKQALjPfGy', 1, N'168 Võ Văn Kiệt', 21, 'duongnhuttan@gmail.com', 'Duong nhut tan', '0785123655',0,1),
+	('thaitu','$2a$12$HoOJiQVGbO4QZv2q5gQRVeY2.P/.csyKJlE7tOhmVDPijID3OWafe', 1, N'168 Võ Văn Kiệt', 21, 'duongnhuttan@gmail.com', 'Duong nhut tan', '0785123655',0,1),
+	('vantien','$2a$12$LFUDKedfUtczXdjZLKjOcuGXmEnWMztOAn5l48YElQqfyvf7fN8Ty', 1, N'168 Võ Văn Kiệt', 21, 'duongnhuttan@gmail.com', 'Duong nhut tan', '0785123655',0,1),
+	('ngocdao','$2a$12$NwVtfl.g00dh6IzQqGpU8ualZEy6udx1ksKiLeysaIaiPzR/PghCG', 1, N'168 Võ Văn Kiệt', 21, 'duongnhuttan@gmail.com', 'Duong nhut tan', '0785123655',0,1),
 	--123
-	('tanduong001','$2a$12$dPw43chz4FBNO8zCrbQRFuYeS4UKUyqiayqF1PHhYgLHYh0FuTZ2S', 1, N'112 Trần Hưng Đạo',21, 'tanduong69@gmail.com', 'Dương Nhựt Tân', '0785123654',1),
-	 ('thanhtu002','$2a$12$DqHKOXHtBvJutoE6zB3dxumwcs5r.InlhKN0we06pLj5fMKSkhg02', 1, N'338 Nguyễn Văn Quá',12, 'tuthanh22012003@gmail.com', 'Ung Thanh Tú', '07541254',1),
+	('tanduong001','$2a$12$dPw43chz4FBNO8zCrbQRFuYeS4UKUyqiayqF1PHhYgLHYh0FuTZ2S', 1, N'112 Trần Hưng Đạo',21, 'tanduong69@gmail.com', 'Dương Nhựt Tân', '0785123654',1,null),
+	 ('thanhtu002','$2a$12$DqHKOXHtBvJutoE6zB3dxumwcs5r.InlhKN0we06pLj5fMKSkhg02', 1, N'338 Nguyễn Văn Quá',12, 'tuthanh22012003@gmail.com', 'Ung Thanh Tú', '07541254',1,null),
 	 --1234
-	 ('vantu003','$2a$12$a1rIDHNWRd/GhUCmOhJW6.0SrxFaF/gNSTESrULuey.ble4fCbSES', 1, N'168 Võ Văn Kiệt', 21, 'vantu@gmail.com', 'Tô Vân Tú', '0785123655',1)
+	 ('vantu003','$2a$12$a1rIDHNWRd/GhUCmOhJW6.0SrxFaF/gNSTESrULuey.ble4fCbSES', 1, N'168 Võ Văn Kiệt', 21, 'vantu@gmail.com', 'Tô Vân Tú', '0785123655',1,null)
 	-- Thêm loại tours
 	INSERT INTO category_tours (name) 
 	VALUES
@@ -21,130 +29,127 @@ use TravelFPoly;
     (N'Di tích lịch sử'),
     (N'Mạo hiểm'),
     (N'Nghỉ dưỡng');
-
+	select * from category_tours
+	select * from tours
 	--Thêm tour
-	INSERT INTO tours (category_tour_id, Name, Price, Available, Description)
+INSERT INTO tours (category_tour_id, Name, price_adult, price_children, quantity_adult, quantity_children, departure,
+						destination, available, duration, description, introduction, map)
 VALUES
-    (1, N'Đà Nẵng', 100, 1, N'Khám phá thiên nhiên tươi đẹp và hùng vĩ.'),
-    (2, N'Vịnh Hạ Long', 80, 1, N'Khám phá những di tích lịch sử và văn hóa độc đáo.'),
-    (3, N'Italy', 150, 1, N'Những trải nghiệm mạo hiểm đầy hấp dẫn.'),
-    (4, N'Phố cổ Hội An', 200, 1, N'Nghỉ dưỡng tuyệt vời tại các khu resort sang trọng.'),
-    (1, N'Vũng Tàu', 120, 1, N'Thư giãn và tận hưởng biển xanh, cát trắng.'),
-    (2, N'Tây Bắc', 180, 1, N'Hành trình chinh phục đỉnh núi cao.'),
-    (3, N'Paris', 90, 1, N'Khám phá các di sản văn hóa của nhân loại được UNESCO công nhận.'),
-	(1, N'Đà Nẵng', 120, 1, N'Khám phá vẻ đẹp thôn quê yên bình và hấp dẫn.'),
-    (1, N'Vũng Tàu', 250, 1, N'Trải nghiệm lặn biển và khám phá đại dương sinh sôi.'),
-    (2, N'Phố cổ Hội An', 70, 1, N'Thăm thú các chùa và đền đài tôn giáo độc đáo.'),
-    (3, N'Tây Bắc', 180, 1, N'Hành trình vượt qua đồi núi hiểm trở.'),
-    (1, N'Tây Bắc', 80, 1, N'Thưởng thức cảnh hoàng hôn đẹp nhất.'),
-    (2, N'Đà Nẵng', 100, 1, N'Đi dạo và khám phá các khu phố cổ truyền thống.'),
-    (1, N'Italy', 190, 1, N'Khám phá hang động bí ẩn với nhiều điều kỳ thú.'),
-    (4, N'Paris', 120, 1, N'Trải nghiệm du lịch bằng xe đạp qua các cảnh đẹp.'),
-    (3, N'Phố cổ Hội An', 90, 1, N'Thăm thú thung lũng hoa rực rỡ màu sắc.'),
-    (1, N'Đà Nẵng', 110,1, N'Khám phá kiến trúc đương đại độc đáo.'),
-    (2, N'Vịnh Hạ Long', 220, 1, N'Du ngoạn và khám phá đảo hoang sơ.'),
-    (4, N'Vũng Tàu', 150, 1, N'Tiếp cận văn hóa bộ lạc bản địa truyền thống.');
+    (1, N'Đà Nẵng', 100, 50, 10, 10, N'Hồ Chí Minh', N'Đà Nẵng', 1, 3, N'Mở cửa cửa sổ ra biển xanh'
+	,N'Chào mừng bạn đến với hành trình khám phá vẻ đẹp tươi mới và hấp dẫn tại thành phố Đà Nẵng! Với danh tiếng là một điểm đến du lịch hàng đầu tại Việt Nam
+	, Đà Nẵng hứa hẹn mang đến cho bạn những trải nghiệm đáng nhớ và phong cảnh thiên nhiên tuyệt đẹp.',''),
+    (1, N'Vịnh Hạ Long', 80, 50, 10, 10, N'Hồ Chí Minh', N'Đà Nẵng', 1, 3, N'Hành trình đến vùng đất thần tiên trên biển'
+	,N'Vịnh Hạ Long, vùng biển kỳ diệu nằm ở bắc Việt Nam, là một trong những kỳ quan thiên nhiên tuyệt đẹp của thế giới
+	. Với hàng nghìn đảo đá vôi đan xen trên biển xanh, Vịnh Hạ Long là biểu tượng của sự hùng vĩ và kỳ bí của thiên nhiên.',''),
+    (4, N'Italy', 150, 75, 10, 10, N'Hồ Chí Minh', N'Đà Nẵng', 1, 3, N'Khám phá vẻ đẹp văn hóa, lịch sử và nghệ thuật'
+	,N'Italy - đất nước của những kiệt tác nghệ thuật vĩ đại, nền văn hóa đậm đà và lịch sử phong phú
+	. Nằm ở Nam châu Âu, Italy có tầm ảnh hưởng lớn đến nền văn minh thế giới với những thành tựu vượt thời gian.',''),
+    (2, N'Phố cổ Hội An', 200, 100, 10, 10, N'Hồ Chí Minh', N'Đà Nẵng', 1, 3, N'Hành trình đi qua quá khứ và sắc màu văn hóa Việt Nam'
+	, N'Nằm ở miền Trung Việt Nam, Phố Cổ Hội An được coi là một trong những điểm đến du lịch phải đến ít nhất một lần trong đời
+	. Với kiến trúc cổ kính, đường phố mềm mại và vị trí ven biển, Hội An là một hội tụ của lịch sử, văn hóa và nét đẹp thiên nhiên.',''),
+    (1, N'Vũng Tàu', 120, 60, 10, 10, N'Hồ Chí Minh', N'Đà Nẵng', 1, 3, N'Nơi gặp gỡ biển xanh, lịch sử và hương vị hải sản'
+	, N'Nằm cách thành phố Hồ Chí Minh khoảng 125 km về phía Đông Nam, Vũng Tàu là một thành phố biển quyến rũ với bãi biển dài, phong cảnh đa dạng và lịch sử độc đáo. Được biết đến như một điểm nghỉ dưỡng yên bình và một cảng biển quan trọng
+	, Vũng Tàu là điểm đến lý tưởng cho những ai muốn tránh xa sự ồn ào của thành phố.',''),
+    (3, N'Tây Bắc', 180, 90, 10, 10, N'Hồ Chí Minh', N'Đà Nẵng', 1, 3, N'Hành trình khám phá vùng đất núi rừng hùng vĩ'
+	, N'Khu vực Tây Bắc Việt Nam là một bức tranh thiên nhiên tuyệt đẹp với những dãy núi cao, rừng rậm và vùng đất bản làng của các dân tộc thiểu số đa dạng về văn hóa và truyền thống
+	. Đây là nơi bạn có cơ hội tiếp xúc với thiên nhiên hoang sơ và tìm hiểu về cuộc sống bản địa độc đáo.',''),
+    (4, N'Paris', 90, 45, 10, 10, N'Hồ Chí Minh', N'Đà Nẵng', 1, 3, N'Thành phố ánh sáng và lãng mạn'
+	, N'Paris, thủ đô của nước Pháp, là một trong những thành phố nổi tiếng và lãng mạn nhất thế giới. Với kiến trúc đẹp mắt, nghệ thuật tuyệt vời, và phong cách sống đầy tinh tế
+	, Paris là nơi tập trung của văn hóa, thời trang và ẩm thực.', '');
 	--thêm lịch trình
 	INSERT INTO tour_schedules(tour_id, title, description, time)
 VALUES
     -- Lịch trình cho TourId = 1
-    (1, N'Lịch trình ngày 1', N'Lịch trình tham quan các điểm du lịch trong ngày đầu tiên.',  '09:00:00'),
-    (1, N'Lịch trình ngày 2', N'Lịch trình các hoạt động ngoài trời trong ngày thứ hai.',  '10:30:00'),
-    (1, N'Lịch trình ngày 3', N'Lịch trình tham quan các di tích lịch sử trong ngày thứ ba.', '08:45:00'),
-    (1, N'Lịch trình ngày 4', N'Lịch trình nghỉ ngơi và thưởng thức món ăn địa phương.',   '12:00:00'),
+    (1, N'Tham quan bãi biển Mỹ Khê'
+	, N'Được xem là một trong những bãi biển đẹp nhất thế giới, bãi biển Mỹ Khê sở hữu cát trắng mịn màng và nước biển trong xanh, tạo điều kiện lý tưởng cho những hoạt động thư giãn và tận hưởng biển.'
+	, '07:00:00'),
+    (1, N'Tham quan Ngũ Hành Sơn '
+	, N'Khu vực này nổi tiếng với những ngọn núi đá vôi hình thành nên những hình dáng độc đáo. Điểm đặc biệt là Tháp Bàn Thạch, nơi bạn có thể ngắm toàn cảnh vịnh Đà Nẵng từ trên cao.'
+	, '07:0:00'),
+    (1, N'Sông Hàn và Cầu Rồng'
+	, N'Sông Hàn chia thành phố thành hai bên, tạo điểm nhấn độc đáo cho Đà Nẵng. Cầu Rồng là một biểu tượng của thành phố với khả năng "thở lửa" vào buổi tối, tạo nên cảnh quan tuyệt đẹp.'
+	, '07:00:00'),
+    (1, N'Bán Đảo Sơn Trà'
+	, N'Nơi bạn có thể tìm thấy Linh Ứng Bảo Điển, tượng chúa Mẫu lớn thứ nhì thế giới. Từ đây, bạn có thể chiêm ngưỡng toàn cảnh Đà Nẵng và biển cả xanh biếc.'
+	, '07:00:00'),
 
     -- Lịch trình cho TourId = 2
-    (2, N'Lịch trình ngày 1', N'Lịch trình tham quan các chùa và đền đài trong ngày đầu tiên.',  '09:15:00'),
-    (2, N'Lịch trình ngày 2', N'Lịch trình tham quan các di tích lịch sử trong ngày thứ hai.',  '10:00:00'),
-    (2, N'Lịch trình ngày 3', N'Lịch trình các hoạt động ngoài trời và trải nghiệm độc đáo.',   '11:30:00'),
-    (2, N'Lịch trình ngày 4', N'Lịch trình thư giãn và tận hưởng phong cảnh đẹp.',  '09:45:00'),
+    (2, N'Đảo Sửng Sốt'
+	, N'Đỉnh núi ở đây cung cấp tầm nhìn toàn cảnh của Vịnh Hạ Long từ trên cao. Đây cũng là nơi có bức tượng của Chủ tịch Hồ Chí Minh, tượng Quốc Mẫu và các điểm tham quan khác.'
+	, '07:00:00'),
+    (2, N'Hang Sửng Sốt'
+	, N'Được coi là một kiệt tác tự nhiên, hang Sửng Sốt là nơi tụ họp của các hình thù đá vôi độc đáo, tạo nên không gian huyền bí và ma mị.'
+	, '07:00:00'),
+    (2, N'Đảo Yến'
+	, N' Nơi có những ngôi nhà được xây dựng từ lông yến, đảo Yến là nơi quan trọng trong ngành nuôi yến và sản xuất sữa yến nổi tiếng.'
+	, '07:00:00'),
+    (2, N'Bãi Cháy'
+	, N' Bãi biển cát trắng mịn màng và nước biển trong xanh là nơi thích hợp để tận hưởng ánh nắng mặt trời và thư giãn.'
+	, '07:00:00'),
 	
-	(3, N'Lịch trình ngày 1', N'Lịch trình tham quan các chùa và đền đài trong ngày đầu tiên.',  '09:15:00'),
-    (3, N'Lịch trình ngày 2', N'Lịch trình tham quan các di tích lịch sử trong ngày thứ hai.',    '10:00:00'),
-    (3, N'Lịch trình ngày 3', N'Lịch trình các hoạt động ngoài trời và trải nghiệm độc đáo.',   '11:30:00'),
-    (3, N'Lịch trình ngày 4', N'Lịch trình thư giãn và tận hưởng phong cảnh đẹp.',   '09:45:00'),
+	(3, N'Tham quan thủ đô Italy'
+	, N'Thủ đô Italy và một trong những thành phố cổ đại quan trọng nhất thế giới. Tại đây, bạn có thể thăm Colosseum, Di tích La Mã và Thánh địa Vatican với Nhà thờ Thánh Peter và Bảo tàng Thế giới Kitô giáo.'
+	, '07:00:00'),
+    (3, N'Firenze'
+	, N' Nơi ra đời của Phục hưng, Florence có nhiều bảo tàng nghệ thuật nổi tiếng như Uffizi và Galleria dell Accademia, nơi có tác phẩm David của Michelangelo.'
+	, '07:00:00'),
+    (3, N'Venice', N'Thành phố độc đáo nổi tiếng với các kênh nước và kiến trúc lâu đời. Điểm nhấn là Quảng trường Thánh Mark và Nhà thờ Thánh Mark, cũng như trải nghiệm du thuyền trên kênh Grand Canal.'
+	, '07:00:00'),
+    (3, N'Milano '
+	, N'Trung tâm thời trang và tài chính của Italy. Tại đây, bạn có thể thăm Cung điện Milan, Nhà thờ Milan và Bảo tàng La Scala.'
+	, '07:00:00'),
 
-	(4, N'Lịch trình ngày 1', N'Lịch trình tham quan các chùa và đền đài trong ngày đầu tiên.',  '09:15:00'),
-    (4, N'Lịch trình ngày 2', N'Lịch trình tham quan các di tích lịch sử trong ngày thứ hai.',  '10:00:00'),
-    (4, N'Lịch trình ngày 3', N'Lịch trình các hoạt động ngoài trời và trải nghiệm độc đáo.',  '11:30:00'),
-    (4, N'Lịch trình ngày 4', N'Lịch trình thư giãn và tận hưởng phong cảnh đẹp.',  '09:45:00'),
+	(4, N'Nhà Cổ Phùng Hưng'
+	, N'Một ngôi nhà cổ kính bậc nhất tại Hội An, nơi giữ gìn nét đẹp và kiến trúc của thời phong kiến.	'
+	, '07:00:00'),
+    (4, N'Chùa Cầu'
+	, N'Biểu tượng của Hội An, cây cầu cổ này kết hợp kiến trúc Nhật Bản và Trung Quốc, mang trong mình nét độc đáo.'
+	, '07:00:00'),
+    (4, N'Phố Hội'
+	, N'Đây là trung tâm sầm uất của Hội An với hàng loạt cửa hàng, chợ và nhà hàng. Đêm xuống, phố Hội sáng bừng với đèn lồng và hoạt động vui chơi, mua sắm.'
+	, '07:00:00'),
+    (4, N'Bảo Tàng Văn Hóa Sa Huỳnh'
+	, N'Bảo tàng này giúp bạn tìm hiểu về cuộc sống của người dân Sa Huỳnh cổ đại qua các hiện vật khảo cổ.'
+	, '07:00:00'),
 
-	(5, N'Lịch trình ngày 1', N'Lịch trình tham quan các chùa và đền đài trong ngày đầu tiên.',  '09:15:00'),
-    (5, N'Lịch trình ngày 2', N'Lịch trình tham quan các di tích lịch sử trong ngày thứ hai.',  '10:00:00'),
-    (5, N'Lịch trình ngày 3', N'Lịch trình các hoạt động ngoài trời và trải nghiệm độc đáo.',  '11:30:00'),
-    (5, N'Lịch trình ngày 4', N'Lịch trình thư giãn và tận hưởng phong cảnh đẹp.',  '09:45:00'),
+	(5, N'Bãi Trước và Bãi Dứa'
+	, N'Hai bãi biển nổi tiếng tại Vũng Tàu với cát trắng mịn và nước biển trong xanh. Đây là nơi tuyệt vời để tận hưởng ánh nắng mặt trời và biển xanh.'
+	, '07:00:00'),
+    (5, N'Núi Nhạn'
+	, N'Từ đỉnh núi Nhạn, bạn có thể chiêm ngưỡng toàn cảnh thành phố Vũng Tàu và biển cả rộng lớn.'
+	, '07:00:00'),
+    (5, N'Tượng Chúa Kitô Vua'
+	, N'Tượng Chúa Kitô toả sáng trên đỉnh đồi Nhạn, tạo nên một hình ảnh ấn tượng khi đêm xuống.'
+	, '07:00:00'),
+    (5, N'Hải Đăng Vũng Tàu'
+	, N'Hải đăng lịch sử này có tháp cao và cung cấp tầm nhìn tốt để ngắm cảnh biển rộng.'
+	, '07:00:00'),
 
-	(6, N'Lịch trình ngày 1', N'Lịch trình tham quan các chùa và đền đài trong ngày đầu tiên.',  '09:15:00'),
-    (6, N'Lịch trình ngày 2', N'Lịch trình tham quan các di tích lịch sử trong ngày thứ hai.',   '10:00:00'),
-    (6, N'Lịch trình ngày 3', N'Lịch trình các hoạt động ngoài trời và trải nghiệm độc đáo.',   '11:30:00'),
-    (6, N'Lịch trình ngày 4', N'Lịch trình thư giãn và tận hưởng phong cảnh đẹp.',  '09:45:00'),
+	(6, N'Sapa'
+	, N'Được biết đến với khí hậu mát mẻ, rừng sương mù và những cánh đồng lúa bậc thang tuyệt đẹp, Sapa là một điểm đến lý tưởng cho việc tham quan thiên nhiên và văn hóa bản địa.'
+	, '07:00:00'),
+    (6, N'Điện Biên'
+	, N'Là nơi diễn ra trận chiến Điện Biên Phủ quyết định, thành phố này mang trong mình lịch sử lớn về cuộc chiến tranh Việt Nam.'
+	, '07:00:00'),
+    (6, N'Mù Cang Chải'
+	, N'Vùng đồi núi bậc thang tại Mù Cang Chải là điểm đến tuyệt vời để ngắm cảnh và chứng kiến cuộc sống bản địa.'
+	, '07:00:00'),
+    (6, N'Tham Quan Bản Làng Bản Địa'
+	, N'Tây Bắc có nhiều bản làng của các dân tộc thiểu số như Hmong, Dao, Tày... Hãy thăm những bản làng này để tìm hiểu về văn hóa và phong tục truyền thống.'
+	, '07:00:00'),
 
-	(7, N'Lịch trình ngày 1', N'Lịch trình tham quan các chùa và đền đài trong ngày đầu tiên.',   '09:15:00'),
-    (7, N'Lịch trình ngày 2', N'Lịch trình tham quan các di tích lịch sử trong ngày thứ hai.',   '10:00:00'),
-    (7, N'Lịch trình ngày 3', N'Lịch trình các hoạt động ngoài trời và trải nghiệm độc đáo.',   '11:30:00'),
-    (7, N'Lịch trình ngày 4', N'Lịch trình thư giãn và tận hưởng phong cảnh đẹp.',  '09:45:00'),
-
-	(8, N'Lịch trình ngày 1', N'Lịch trình tham quan các chùa và đền đài trong ngày đầu tiên.',  '09:15:00'),
-    (8, N'Lịch trình ngày 2', N'Lịch trình tham quan các di tích lịch sử trong ngày thứ hai.',  '10:00:00'),
-    (8, N'Lịch trình ngày 3', N'Lịch trình các hoạt động ngoài trời và trải nghiệm độc đáo.',    '11:30:00'),
-    (8, N'Lịch trình ngày 4', N'Lịch trình thư giãn và tận hưởng phong cảnh đẹp.',   '09:45:00'),
-
-	(9, N'Lịch trình ngày 1', N'Lịch trình tham quan các chùa và đền đài trong ngày đầu tiên.',    '09:15:00'),
-    (9, N'Lịch trình ngày 2', N'Lịch trình tham quan các di tích lịch sử trong ngày thứ hai.',   '10:00:00'),
-    (9, N'Lịch trình ngày 3', N'Lịch trình các hoạt động ngoài trời và trải nghiệm độc đáo.',   '11:30:00'),
-    (9, N'Lịch trình ngày 4', N'Lịch trình thư giãn và tận hưởng phong cảnh đẹp.',   '09:45:00'),
-
-	(10, N'Lịch trình ngày 1', N'Lịch trình tham quan các chùa và đền đài trong ngày đầu tiên.',   '09:15:00'),
-    (10, N'Lịch trình ngày 2', N'Lịch trình tham quan các di tích lịch sử trong ngày thứ hai.',    '10:00:00'),
-    (10, N'Lịch trình ngày 3', N'Lịch trình các hoạt động ngoài trời và trải nghiệm độc đáo.',  '11:30:00'),
-    (10, N'Lịch trình ngày 4', N'Lịch trình thư giãn và tận hưởng phong cảnh đẹp.',   '09:45:00'),
-
-	(11, N'Lịch trình ngày 1', N'Lịch trình tham quan các chùa và đền đài trong ngày đầu tiên.',   '09:15:00'),
-    (11, N'Lịch trình ngày 2', N'Lịch trình tham quan các di tích lịch sử trong ngày thứ hai.',    '10:00:00'),
-    (11, N'Lịch trình ngày 3', N'Lịch trình các hoạt động ngoài trời và trải nghiệm độc đáo.',    '11:30:00'),
-    (11, N'Lịch trình ngày 4', N'Lịch trình thư giãn và tận hưởng phong cảnh đẹp.',  '09:45:00'),
-
-	(12, N'Lịch trình ngày 1', N'Lịch trình tham quan các chùa và đền đài trong ngày đầu tiên.',   '09:15:00'),
-    (12, N'Lịch trình ngày 2', N'Lịch trình tham quan các di tích lịch sử trong ngày thứ hai.',  '10:00:00'),
-    (12, N'Lịch trình ngày 3', N'Lịch trình các hoạt động ngoài trời và trải nghiệm độc đáo.',  '11:30:00'),
-    (12, N'Lịch trình ngày 4', N'Lịch trình thư giãn và tận hưởng phong cảnh đẹp.',  '09:45:00'),
-
-	(13, N'Lịch trình ngày 1', N'Lịch trình tham quan các chùa và đền đài trong ngày đầu tiên.',  '09:15:00'),
-    (13, N'Lịch trình ngày 2', N'Lịch trình tham quan các di tích lịch sử trong ngày thứ hai.',   '10:00:00'),
-    (13, N'Lịch trình ngày 3', N'Lịch trình các hoạt động ngoài trời và trải nghiệm độc đáo.',     '11:30:00'),
-    (13, N'Lịch trình ngày 4', N'Lịch trình thư giãn và tận hưởng phong cảnh đẹp.',   '09:45:00'),
-
-	(14, N'Lịch trình ngày 1', N'Lịch trình tham quan các chùa và đền đài trong ngày đầu tiên.',   '09:15:00'),
-    (14, N'Lịch trình ngày 2', N'Lịch trình tham quan các di tích lịch sử trong ngày thứ hai.',  '10:00:00'),
-    (14, N'Lịch trình ngày 3', N'Lịch trình các hoạt động ngoài trời và trải nghiệm độc đáo.',   '11:30:00'),
-    (14, N'Lịch trình ngày 4', N'Lịch trình thư giãn và tận hưởng phong cảnh đẹp.',  '09:45:00'),
-
-	(15, N'Lịch trình ngày 1', N'Lịch trình tham quan các chùa và đền đài trong ngày đầu tiên.',   '09:15:00'),
-    (15, N'Lịch trình ngày 2', N'Lịch trình tham quan các di tích lịch sử trong ngày thứ hai.',   '10:00:00'),
-    (15, N'Lịch trình ngày 3', N'Lịch trình các hoạt động ngoài trời và trải nghiệm độc đáo.', '11:30:00'),
-    (15, N'Lịch trình ngày 4', N'Lịch trình thư giãn và tận hưởng phong cảnh đẹp.',   '09:45:00'),
-
-	(16, N'Lịch trình ngày 1', N'Lịch trình tham quan các chùa và đền đài trong ngày đầu tiên.',   '09:15:00'),
-    (16, N'Lịch trình ngày 2', N'Lịch trình tham quan các di tích lịch sử trong ngày thứ hai.',  '10:00:00'),
-    (16, N'Lịch trình ngày 3', N'Lịch trình các hoạt động ngoài trời và trải nghiệm độc đáo.',  '11:30:00'),
-    (16, N'Lịch trình ngày 4', N'Lịch trình thư giãn và tận hưởng phong cảnh đẹp.',  '09:45:00'),
-
-	(17, N'Lịch trình ngày 1', N'Lịch trình tham quan các chùa và đền đài trong ngày đầu tiên.', '09:15:00'),
-    (17, N'Lịch trình ngày 2', N'Lịch trình tham quan các di tích lịch sử trong ngày thứ hai.',  '10:00:00'),
-    (17, N'Lịch trình ngày 3', N'Lịch trình các hoạt động ngoài trời và trải nghiệm độc đáo.', '11:30:00'),
-    (17, N'Lịch trình ngày 4', N'Lịch trình thư giãn và tận hưởng phong cảnh đẹp.',  '09:45:00'),
-
-	(18, N'Lịch trình ngày 1', N'Lịch trình tham quan các chùa và đền đài trong ngày đầu tiên.',  '09:15:00'),
-    (18, N'Lịch trình ngày 2', N'Lịch trình tham quan các di tích lịch sử trong ngày thứ hai.', '10:00:00'),
-    (18, N'Lịch trình ngày 3', N'Lịch trình các hoạt động ngoài trời và trải nghiệm độc đáo.', '11:30:00'),
-    (18, N'Lịch trình ngày 4', N'Lịch trình thư giãn và tận hưởng phong cảnh đẹp.',  '09:45:00'),
-
-	(19, N'Lịch trình ngày 1', N'Lịch trình tham quan các chùa và đền đài trong ngày đầu tiên.',   '09:15:00'),
-    (19, N'Lịch trình ngày 2', N'Lịch trình tham quan các di tích lịch sử trong ngày thứ hai.',  '10:00:00'),
-    (19, N'Lịch trình ngày 3', N'Lịch trình các hoạt động ngoài trời và trải nghiệm độc đáo.', '11:30:00'),
-    (19, N'Lịch trình ngày 4', N'Lịch trình thư giãn và tận hưởng phong cảnh đẹp.', '09:45:00')
-	;
-
+	(7, N'Tháp Eiffel'
+	, N'Biểu tượng vĩnh cửu của Paris, tháp Eiffel là nơi bạn có thể ngắm toàn cảnh thành phố từ trên cao.'
+	, '07:00:00'),
+    (7, N'Lăng Kính Đài'
+	, N'Nằm ở quảng trường Trocadéro, đây là nơi lý tưởng để có những bức ảnh đẹp về tháp Eiffel.'
+	, '07:00:00'),
+    (7, N'Louvre'
+	, N'Một trong những bảo tàng nghệ thuật lớn nhất thế giới, Louvre chứa hàng ngàn tác phẩm nghệ thuật quý giá.'
+	, '07:00:00'),
+    (7, N'Montmartre'
+	, N'Khu phố nghệ sĩ và lễ đài Basilique du Sacré-Cœur nằm ở đây, tạo nên một không gian văn hóa và tâm linh.'
+	, '07:00:00');
 	--thêm hình ảnh cho tour
 	 INSERT INTO tour_images(tour_id,avatar, image1, image2, image3, image4, image5 )
  VALUES
@@ -165,30 +170,6 @@ VALUES
  'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Tourism/Ha_Long_Bay/image5.jpg'
   ),
   (3,
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Tourism/VungTau/avatar.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Tourism/VungTau/image1.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Tourism/VungTau/image2.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Tourism/VungTau/image3.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Tourism/VungTau/image4.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Tourism/VungTau/image5.jpg'
-  ),
-  (4,
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Tourism/TayBac/avatar.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Tourism/TayBac/image1.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Tourism/TayBac/image2.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Tourism/TayBac/image3.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Tourism/TayBac/image4.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Tourism/TayBac/image5.jpg'
-  ),
-  (5,
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Tourism/Paris/avatar.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Tourism/Paris/image1.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Tourism/Paris/image2.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Tourism/Paris/image3.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Tourism/Paris/image4.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Tourism/Paris/image5.jpg'
-  ),
-  (6,
  'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Tourism/ITALY/avatar.jpg',
  'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Tourism/ITALY/image1.jpg',
  'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Tourism/ITALY/image2.jpg',
@@ -196,7 +177,7 @@ VALUES
  'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Tourism/ITALY/image4.jpg',
  'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Tourism/ITALY/image5.jpg'
   ),
-  (7,
+   (4,
  'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Tourism/Old_City_HoiAn/avatar.jpg',
  'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Tourism/Old_City_HoiAn/image1.jpg',
  'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Tourism/Old_City_HoiAn/image2.jpg',
@@ -204,128 +185,33 @@ VALUES
  'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Tourism/Old_City_HoiAn/image4.jpg',
  'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Tourism/Old_City_HoiAn/image5.jpg'
   ),
-  (8,
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Hotel/Hilton_Hotel/avatar1.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Hotel/Hilton_Hotel/image1.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Hotel/Hilton_Hotel/image2.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Hotel/Hilton_Hotel/image3.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Hotel/Hilton_Hotel/image4.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Hotel/Hilton_Hotel/image5.jpg'
+  (5,
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Tourism/VungTau/avatar.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Tourism/VungTau/image1.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Tourism/VungTau/image2.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Tourism/VungTau/image3.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Tourism/VungTau/image4.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Tourism/VungTau/image5.jpg'
   ),
-  (9,
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Hotel/Hilton_Hotel/avatar1.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Hotel/Hilton_Hotel/image1.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Hotel/Hilton_Hotel/image2.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Hotel/Hilton_Hotel/image3.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Hotel/Hilton_Hotel/image4.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Hotel/Hilton_Hotel/image5.jpg'
+  (6,
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Tourism/TayBac/avatar.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Tourism/TayBac/image1.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Tourism/TayBac/image2.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Tourism/TayBac/image3.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Tourism/TayBac/image4.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Tourism/TayBac/image5.jpg'
   ),
-  (10,
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Hotel/Hilton_Hotel/avatar1.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Hotel/Hilton_Hotel/image1.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Hotel/Hilton_Hotel/image2.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Hotel/Hilton_Hotel/image3.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Hotel/Hilton_Hotel/image4.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Hotel/Hilton_Hotel/image5.jpg'
-  ),
-  (11,
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Hotel/Hilton_Hotel/avatar1.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Hotel/Hilton_Hotel/image1.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Hotel/Hilton_Hotel/image2.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Hotel/Hilton_Hotel/image3.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Hotel/Hilton_Hotel/image4.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Hotel/Hilton_Hotel/image5.jpg'
-  ),
-  (12,
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Hotel/Hilton_Hotel/avatar1.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Hotel/Hilton_Hotel/image1.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Hotel/Hilton_Hotel/image2.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Hotel/Hilton_Hotel/image3.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Hotel/Hilton_Hotel/image4.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Hotel/Hilton_Hotel/image5.jpg'
-  ),
-  (13,
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Hotel/Hilton_Hotel/avatar1.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Hotel/Hilton_Hotel/image1.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Hotel/Hilton_Hotel/image2.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Hotel/Hilton_Hotel/image3.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Hotel/Hilton_Hotel/image4.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Hotel/Hilton_Hotel/image5.jpg'
-  ),
-  (14,
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Hotel/Hilton_Hotel/avatar1.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Hotel/Hilton_Hotel/image1.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Hotel/Hilton_Hotel/image2.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Hotel/Hilton_Hotel/image3.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Hotel/Hilton_Hotel/image4.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Hotel/Hilton_Hotel/image5.jpg'
-  ),
-  (15,
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Hotel/Hilton_Hotel/avatar1.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Hotel/Hilton_Hotel/image1.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Hotel/Hilton_Hotel/image2.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Hotel/Hilton_Hotel/image3.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Hotel/Hilton_Hotel/image4.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Hotel/Hilton_Hotel/image5.jpg'
-  ),
-  (16,
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Hotel/Hilton_Hotel/avatar1.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Hotel/Hilton_Hotel/image1.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Hotel/Hilton_Hotel/image2.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Hotel/Hilton_Hotel/image3.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Hotel/Hilton_Hotel/image4.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Hotel/Hilton_Hotel/image5.jpg'
-  ),
-  (17,
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Hotel/Hilton_Hotel/avatar1.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Hotel/Hilton_Hotel/image1.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Hotel/Hilton_Hotel/image2.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Hotel/Hilton_Hotel/image3.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Hotel/Hilton_Hotel/image4.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Hotel/Hilton_Hotel/image5.jpg'
-  ),
-  (18,
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Hotel/Hilton_Hotel/avatar1.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Hotel/Hilton_Hotel/image1.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Hotel/Hilton_Hotel/image2.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Hotel/Hilton_Hotel/image3.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Hotel/Hilton_Hotel/image4.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Hotel/Hilton_Hotel/image5.jpg'
-  ),
-  (19,
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Hotel/Hilton_Hotel/avatar1.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Hotel/Hilton_Hotel/image1.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Hotel/Hilton_Hotel/image2.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Hotel/Hilton_Hotel/image3.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Hotel/Hilton_Hotel/image4.jpg',
- 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Hotel/Hilton_Hotel/image5.jpg'
-  )
-
-  --Thêm bảng chi tiết tour
-  insert into tour_variants(tour_id,departure,quantity,quantity_children,destination,date,map,introduction,duration)
-  VALUES
-    (1, N'Hà Nội', 10,5, N'Hạ Long Bay', '2023-08-20', 'https://example.com/map_halong', N'Hành trình khám phá vịnh Hạ Long đẹp nhất Việt Nam.',3),
-    (2, N'Hà Nội', 10,5, N'Sapa', '2023-09-02', 'https://example.com/map_sapa', N'Khám phá vùng cao nguyên bí ẩn và thăm thú bản làng Sapa.',3),
-    (3, N'Hồ Chí Minh', 10, 5, N'Đà Lạt', '2023-08-25', N'https://example.com/map_dalat', N'Du ngoạn thành phố ngàn hoa và thưởng thức không khí trong lành.',3),
-    (4, N'Hồ Chí Minh', 10, 5, N'Cần Thơ', '2023-09-10', 'https://example.com/map_cantho', N'Khám phá vùng đồng bằng sông Cửu Long và trải nghiệm văn hóa miền Tây.',3),
-    (5, N'Đà Nẵng', 10, 5, N'Hội An', '2023-08-15', 'https://example.com/map_hoian', N'Tham quan các di sản văn hóa tại phố cổ Hội An.',3),
-    (6, N'Đà Nẵng', 10, 5, N'Huế', '2023-09-05', 'https://example.com/map_hue', N'Khám phá các di tích lịch sử và kiến trúc cổ đại của đô thành Huế.',3),
-	(7, N'Hà Nội', 10, 5, N'Tam Đảo', '2023-08-20', 'https://example.com/map_tamdao', N'Du ngoạn cao nguyên mát mẻ với Tam Đảo xinh đẹp.',3),
-    (8, N'Hà Nội', 10, 5, N'Mai Châu', '2023-09-02', 'https://example.com/map_maichau', N'Khám phá văn hóa dân tộc sắc sảo tại Mai Châu.',3),
-    (9, N'Hồ Chí Minh', 10, 5, N'Phú Quốc', '2023-08-25', 'https://example.com/map_phuquoc', N'Thư giãn và tận hưởng biển xanh tại đảo ngọc Phú Quốc.',3),
-    (10, N'Hồ Chí Minh', 10, 5, N'Côn Đảo', '2023-09-10', 'https://example.com/map_condao', N'Khám phá cảnh đẹp hoang sơ của quần đảo Côn Đảo.',3),
-    (11, N'Đà Nẵng', 10, 5, N'Bà Nà Hills', '2023-08-15', 'https://example.com/map_banahills', N'Trải nghiệm cảm giác mạnh tại khu du lịch Bà Nà Hills.',3),
-    (12, N'Đà Nẵng', 10, 5, N'Cù Lao Chàm', '2023-09-05', 'https://example.com/map_culaocham', N'Thư giãn và ngắm san hô tuyệt đẹp tại Cù Lao Chàm.',3),
-	(13, N'Hà Nội', 10, 5, N'Mộc Châu', '2023-08-20', 'https://example.com/map_mocchau', N'Khám phá vùng cao nguyên Mộc Châu tuyệt đẹp vào mùa hoa tam giác mạch.',3),
-    (14, N'Hà Nội', 10, 5, N'Điện Biên', '2023-09-02', 'https://example.com/map_dienbien', N'Thăm thú các di tích lịch sử và văn hóa độc đáo tại Điện Biên Phủ.',3),
-    (15, N'Hồ Chí Minh', 10, 5, N'Vũng Tàu', '2023-08-25', 'https://example.com/map_vungtau', N'Thưởng thức các món hải sản tươi ngon và tắm biển tại Vũng Tàu.',3),
-    (16, N'Hồ Chí Minh', 10, 5, N'Cần Giờ', '2023-09-10', 'https://example.com/map_cangio', N'Khám phá vùng đồng bằng sông Sài Gòn và hệ sinh thái đa dạng tại Cần Giờ.',3),
-    (17, N'Đà Nẵng', 10, 5, 'Bán đảo Sơn Trà', '2023-08-15', 'https://example.com/map_sontra', N'Tham quan cảnh đẹp hoang sơ của bán đảo Sơn Trà.',3),
-    (18, N'Đà Nẵng', 10, 5, N'Bà Nà Hills', '2023-09-05', 'https://example.com/map_banahills2', N'Tận hưởng không gian nghỉ dưỡng tại khu du lịch Bà Nà Hills.',3),
-	(19, N'Hồ Chí Minh', 10, 5, N'Vũng Tàu', '2023-08-25', 'https://example.com/map_vungtau', N'Thưởng thức các món hải sản tươi ngon và tắm biển tại Vũng Tàu.',3);
-   
-
- 
+  (7,
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Tourism/Paris/avatar.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Tourism/Paris/image1.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Tourism/Paris/image2.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Tourism/Paris/image3.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Tourism/Paris/image4.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Tourism/Paris/image5.jpg'
+  );
+  use Travel
+select * from category_hotels
+select * from category_rooms
 -- Insert CategoryHotel
 Insert into category_hotels (name)
 values

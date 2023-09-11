@@ -11,6 +11,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrimaryKeyJoinColumn;
@@ -50,7 +51,7 @@ public class Account  implements UserDetails{
 	private String Address;
 	private String Phone;
 	
-	@OneToOne @JoinColumn(name="IntimateId")
+	@ManyToOne @JoinColumn(name="IntimateId")
 	private Intimate Account;
 	
 	@OneToMany(mappedBy = "TourCommentUser")
@@ -61,6 +62,9 @@ public class Account  implements UserDetails{
 	
 	@OneToMany(mappedBy = "OrderTour")
 	private List<OrderTour> OrderTours;
+	
+	@OneToMany(mappedBy = "OrderHotel")
+	private List<OrderHotel> OrderHotels;
 	
 	//One to One Cart
 	@OneToOne(mappedBy = "Cart", cascade = CascadeType.ALL, orphanRemoval = true)

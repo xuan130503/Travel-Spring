@@ -1,6 +1,5 @@
 package Travel_Foly.Model;
 
-
 import java.util.Date;
 
 import jakarta.persistence.Entity;
@@ -19,21 +18,20 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="CartItems")
-public class CartItem {
+@Table(name="CartHotels")
+public class CartHotel {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer CartItemId;
+	private Integer CartHotelId;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="CartId")
-	private Cart CartItem;
+	private Cart CartHotel;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="TourId")
-	private Tour TourId;
+	@JoinColumn(name="HotelId")
+	private Hotel HotelId;
 	
-	private Integer QuantityChildren;
-	private Integer QuantityAdult;
-	private Date StartDate;
-	private Date EndDate;
+	private Integer Quantity;
+	private Date CheckIn;
+	private Date CheckOut;
 }

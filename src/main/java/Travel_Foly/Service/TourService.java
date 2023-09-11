@@ -10,20 +10,20 @@ import Travel_Foly.DAO.TourDAO;
 import Travel_Foly.Model.Tour;
 @Service
 public class TourService {
-	 	@Autowired
-	    private TourDAO tourDao;
-	
-	    public List<Tour> getBestSellingTours() {
-	        List<Object[]> result = tourDao.findBestSellingTours();
-	        
-	        List<Tour> bestSellingTours = new ArrayList<>();
-	        
-	        for (Object[] obj : result) {
-	            Tour tour = (Tour) obj[0];
-	            bestSellingTours.add(tour);
-	        }
-	        
-	        return bestSellingTours;
-	    }
+//	 	@Autowired
+//	    private TourDAO tourDao;
+//	
+//	    public List<Tour> getBestSellingTours() {
+//	        List<Object[]> result = tourDao.findBestSellingTours();
+//	        
+//	        List<Tour> bestSellingTours = new ArrayList<>();
+//	        
+//	        for (Object[] obj : result) {
+//	            Tour tour = (Tour) obj[0];
+//	            bestSellingTours.add(tour);
+//	        }
+//	        
+//	        return bestSellingTours;
+//	    }
 
 }

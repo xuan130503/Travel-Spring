@@ -10,7 +10,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TourWithImageDTO {
-	private Tour Tour;
-	private String Image;
-	private Integer Duration;
+	private Integer tourId;
+	private String name;
+	private Double priceAdult;
+	private Double priceChildren;
+	private String description;
+	private Integer duration;
+	private String avatar;
 }

@@ -234,18 +234,18 @@
 			<div class="swiper-scrollbar"></div>
 		</div>
 	</section>	
-	<section th:object="${variant}">
+	<section th:object="${tour}">
 		<div class="container mt-5 mb-5">
 			<div class="d-flex row">
 				<div class="col-3 d-flex flex-column">
-					<h2 class="title-h2">[[${variant.TourVariant.Name}]]</h2>
+					<h2 class="title-h2">[[${tour.Name}]]</h2>
 					<span class="text-hiden"> <svg
 							xmlns="http://www.w3.org/2000/svg" width="20" height="20"
 							fill="currentColor" class="bi bi-geo-alt-fill mb-2"
 							viewBox="0 0 16 16">
             <path
 								d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
-          </svg>[[${variant.Departure}]] - [[${variant.Destination}]]
+          </svg>[[${tour.Departure}]] - [[${tour.Destination}]]
 					</span>
 				</div>
 
@@ -256,7 +256,7 @@
 						</div>
 						<div class="d-flex flex-column text-hiden">
 							<h1 class="text-hiden">Durations</h1>
-							<span class="title-span">[[${variant.Duration}]] Day - [[${variant.Duration-1}]] Night</span>
+							<span class="title-span">[[${tour.Duration}]] Day - [[${tour.Duration-1}]] Night</span>
 						</div>
 					</div>
 					<div></div>
@@ -269,7 +269,7 @@
 						</div>
 						<div class="d-flex flex-column">
 							<h1 class="text-hiden">Price for adult:</h1>
-							<span id="price" th:data-price="${variant.TourVariant.Price}" class="title-span"  style="color: #FF4B2B;">[[${variant.TourVariant.Price}]] $</span>
+							<span id="priceAdult" th:data-price="${tour.PriceAdult}" class="title-span"  style="color: #FF4B2B;">[[${tour.PriceAdult}]] $</span>
 						</div>
 					</div>
 				</div>
@@ -280,7 +280,7 @@
 						</div>
 						<div class="d-flex flex-column">
 							<h1 class="text-hiden">Price for child:</h1>
-							<span class="title-span" style="color: #FF4B2B;"><del>[[${variant.TourVariant.Price}]]$</del> - [[${variant.TourVariant.Price*0.5}]]$</span>
+							<span id="priceChildren" th:data-price="${tour.PriceChildren}" class="title-span" style="color: #FF4B2B;"><del>[[${tour.PriceAdult}]]$</del> - [[${tour.PriceChildren}]]$</span>
 						</div>
 					</div>
 				</div>
@@ -485,7 +485,7 @@
 											<div class="col-md-6">
 												<label class="title-input">Quantity Adult</label>
 												<select th:name="quantityAdult" id="adult" class="form-control">
-													<option th:each="quantity : ${#numbers.sequence(0,variant.Quantity)}" th:value="${quantity}">
+													<option th:each="quantity : ${#numbers.sequence(0,tour.QuantityAdult)}" th:value="${quantity}">
 														[[${quantity}]]
 													</option>
 													
@@ -494,7 +494,7 @@
 											<div class="col-md-6">
 												<label class="title-input">Quantity Children</label>
 												<select th:name="quantityChildren" id="children" class="form-control">
-													<option th:each="quantityChildren : ${#numbers.sequence(0,variant.QuantityChildren)}" th:value="${quantityChildren}">
+													<option th:each="quantityChildren : ${#numbers.sequence(0,tour.QuantityChildren)}" th:value="${quantityChildren}">
 														[[${quantityChildren}]]
 													</option>
 												</select> 
@@ -506,12 +506,12 @@
 										
 									</div>
 									<div class="form-btn">
-										<button th:formaction="@{/travelfpoly/bookNow/{tourId}/{userId} (tourId=${variant.TourVariant.TourId}, userId=${session.account.UserId})}" class="submit-btn mb-3">Book Now</button>
-										<button th:formaction="@{/travelfpoly/addToCart/{tourId}/{userId}(tourId=${variant.TourVariant.TourId}, userId=${session.account.UserId})}" class="cart-btn" style="color:black;">Add to cart</button>
+										<button th:formaction="@{/travelfpoly/bookNow/{tourId}/{userId} (tourId=${tour.TourId}, userId=${session.account != null ? session.account.UserId : '' })}" class="submit-btn mb-3">Book Now</button>
+ 										<button th:formaction="@{/travelfpoly/addToCart/{tourId}/{userId}(tourId=${tour.TourId}, userId=${session.account != null ? session.account.UserId : '' })}" class="cart-btn" style="color:black;">Add to cart</button>
 									</div>
 									<!-- <div class="form-btn mt-2">
 										<button class="submit-btn bg-warning">Add to cart</button>
-										th:attr="ng-click=@{|cart.add(${variant.TourVariant.TourId})|}"
+										th:attr="ng-click=@{|cart.add(${variant.TourId})|}"
 									</div> -->
 								</form>
 							</div>
@@ -550,7 +550,8 @@
 	<script>
         const adultsSelect = document.getElementById('adult');
         const childrenSelect = document.getElementById('children');
-        const priceElement = document.getElementById('price');
+        const priceAdult = document.getElementById('priceAdult');
+        const priceChildren = document.getElementById('priceChildren');
         const displayElement = document.getElementById('totalPriceDisplay');
         
         adultsSelect.addEventListener('change', calculateTotalPrice);
@@ -559,9 +560,9 @@
         function calculateTotalPrice() {
             const adultsQuantity = parseInt(adultsSelect.value);
             const childrenQuantity = parseInt(childrenSelect.value);
-            const tourPrice = parseFloat(priceElement.getAttribute('data-price'));
-			console.log(tourPrice);
-            const totalPrice = (adultsQuantity * tourPrice) + (childrenQuantity * (tourPrice / 2));
+            const tourAdultPrice = parseFloat(priceAdult.getAttribute('data-price'));
+            const tourChildrenPrice = parseFloat(priceChildren.getAttribute('data-price'));
+			const totalPrice = (adultsQuantity * tourAdultPrice) + (childrenQuantity * tourChildrenPrice);
             displayElement.textContent =totalPrice + '$';
         }
     </script>

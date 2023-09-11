@@ -31,19 +31,24 @@ public class Hotel {
 	private String Map;
 	private Integer Start;
 	private Integer Quantity;
+	
 	@ManyToOne @JoinColumn(name="CategoryHotelId")
 	private CategoryHotel CategoryHotel;
+	
 	@ManyToOne @JoinColumn(name="CategoryRoomId")
 	private CategoryRoom CategoryRoom;
+	
 	@OneToMany(mappedBy = "HotelImage")
 	private List<HotelImage> HotelImages;
+	
 	@OneToMany(mappedBy = "HotelCommentId")
 	private List<HotelComment> HotelComments;
+	
 	@OneToMany(mappedBy = "OrderDetailHotel")
 	private List<OrderDetailHotel> OrderDetailHotels;
 	
 	//Cart
 	@OneToMany(mappedBy = "HotelId")
-	private List<CartItem> CartItems;
+	private List<CartHotel> CartHotels;
 	
 }

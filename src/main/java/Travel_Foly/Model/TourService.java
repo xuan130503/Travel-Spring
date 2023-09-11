@@ -1,10 +1,7 @@
 package Travel_Foly.Model;
 
-
-import java.util.Date;
-
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -19,21 +16,19 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="CartItems")
-public class CartItem {
+@Table(name="TourServices")
+public class TourService {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer CartItemId;
+	private Integer TourServiceId;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="CartId")
-	private Cart CartItem;
+	@Column(columnDefinition = "nvarchar(100)")
+	private String Name;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="TourId")
-	private Tour TourId;
+	@Column(columnDefinition = "nvarchar(200)")
+	private String Description;
 	
-	private Integer QuantityChildren;
-	private Integer QuantityAdult;
-	private Date StartDate;
-	private Date EndDate;
+	private Double Surcharge;
+	
+	@ManyToOne @JoinColumn(name="TourId")
+	private Tour TourService;
 }

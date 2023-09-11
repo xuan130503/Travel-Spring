@@ -19,14 +19,13 @@ public interface CartItemDAO  extends JpaRepository<CartItem, Integer>{
 	@Query("Select ci From CartItem ci Where ci.CartItem.CartId=?1")
 	List<CartItem> findByCartId(Integer cartId);
 	
-	@Query("Select new Travel_Foly.DTO.CartItemDTO(ci,v.Quantity,v.QuantityChildren) From CartItem ci "
-			+ "Join Tour t On t.TourId = ci.TourId.TourId "
-			+ "Join TourVariant v On v.TourVariant.TourId = t.TourId "
+	@Query("Select new Travel_Foly.DTO.CartItemDTO(t) From CartItem ci "
+			+ "Join Tour t On t.TourId = ci.TourId.TourId"
 			+ " Where ci.CartItem.CartId=?1")
 	List<CartItemDTO> findCartItemDTOById(Integer cartId);
 	
 	
-	@Query("Select sum(ci.QuantityChildren * 0.5 * ci.TourId.Price + ci.QuantityAdult * ci.TourId.Price)  From CartItem ci "
+	@Query("Select sum(ci.QuantityChildren * ci.TourId.PriceChildren + ci.QuantityAdult * ci.TourId.PriceAdult)  From CartItem ci "
 			+ "Join Cart c On c.CartId = ci.CartItem.CartId "
 			+ "Join Account a On a.UserId = c.Cart.UserId "
 			+ "Where c.Cart.UserId = ?1")

@@ -32,7 +32,6 @@ import Travel_Foly.DAO.OrderTourDAO;
 import Travel_Foly.DAO.TourDAO;
 import Travel_Foly.DAO.TourImageDAO;
 import Travel_Foly.DAO.TourScheduleDAO;
-import Travel_Foly.DAO.TourVariantDAO;
 import Travel_Foly.DTO.AccountDTO;
 import Travel_Foly.DTO.CartItemDTO;
 import Travel_Foly.DTO.HotelDTO;
@@ -46,7 +45,6 @@ import Travel_Foly.Model.OrderTour;
 import Travel_Foly.Model.Tour;
 import Travel_Foly.Model.TourImage;
 import Travel_Foly.Model.TourSchedule;
-import Travel_Foly.Model.TourVariant;
 import Travel_Foly.Service.SessionService;
 import Travel_Foly.Service.UserDetailServiceImpl;
 
@@ -66,8 +64,6 @@ public class HomeController {
 	@Autowired
 	private CategoryTourDAO categoryTourDao;
 	
-	@Autowired
-	private TourVariantDAO tourVariantDao;
 	
 	@Autowired 
 	private TourScheduleDAO tourScheduleDao;
@@ -83,6 +79,7 @@ public class HomeController {
 	
 	@Autowired
 	private OrderTourDAO orderTourDao;
+	
 	//get information after login successfully
 	public void getPricical(Principal principal) {
 		if (principal != null && principal instanceof Authentication) {
@@ -133,29 +130,29 @@ public class HomeController {
 			,@RequestParam("pageTour") Optional<Integer> pageTour
 			,@RequestParam("pageHotel") Optional<Integer> pageHotel
 		) {
-		//Set key
-		Double minPrice=null;
-		Double maxPrice=null;
-		String nameProduct=keyword.orElse(session.getAttribute("keyword"));
-		if(isStringNumeric(nameProduct)) {
-			minPrice=Double.parseDouble(nameProduct);
-			maxPrice=Double.parseDouble(nameProduct)+100000;
-		}
-		session.setAttribute("keyword", nameProduct);
-		// Tour 
-		Pageable pageableTour= PageRequest.of(pageTour.orElse(0), 8);
-		Page<TourWithImageDTO> tour = tourDao.searchByKeyWord(nameProduct,minPrice,maxPrice,pageableTour);
-		
-		//Category
-		List<Object[]> categories = categoryTourDao.findAllCategory();
-		
-		//Hotel
-		Pageable pageableHotel= PageRequest.of(pageHotel.orElse(0), 8);
-		Page<HotelDTO> hotel = hotelDao.findAllHotelWithImage(pageableHotel);
-		
-		model.addAttribute("productTour", tour);
-		model.addAttribute("categories", categories);
-		model.addAttribute("productHotel", hotel);
+//		//Set key
+//		Double minPrice=null;
+//		Double maxPrice=null;
+//		String nameProduct=keyword.orElse(session.getAttribute("keyword"));
+//		if(isStringNumeric(nameProduct)) {
+//			minPrice=Double.parseDouble(nameProduct);
+//			maxPrice=Double.parseDouble(nameProduct)+100000;
+//		}
+//		session.setAttribute("keyword", nameProduct);
+//		// Tour 
+//		Pageable pageableTour= PageRequest.of(pageTour.orElse(0), 8);
+//		Page<TourWithImageDTO> tour = tourDao.searchByKeyWord(nameProduct,minPrice,maxPrice,pageableTour);
+//		
+//		//Category
+//		List<Object[]> categories = categoryTourDao.findAllCategory();
+//		
+//		//Hotel
+//		Pageable pageableHotel= PageRequest.of(pageHotel.orElse(0), 8);
+//		Page<HotelDTO> hotel = hotelDao.findAllHotelWithImage(pageableHotel);
+//		
+//		model.addAttribute("productTour", tour);
+//		model.addAttribute("categories", categories);
+//		model.addAttribute("productHotel", hotel);
 		return "user/index-2";
 	}
 	@GetMapping("searchTour")
@@ -163,17 +160,17 @@ public class HomeController {
 			,@RequestParam("searchKey") Optional<String> keyword
 			,@RequestParam("pageTour") Optional<Integer> page
 		) {
-			Double minPrice=null;
-			Double maxPrice=null;
-			String nameProduct=keyword.orElse(session.getAttribute("keyword"));
-			if(isStringNumeric(nameProduct)) {
-				minPrice=Double.parseDouble(nameProduct)-1000;
-				maxPrice=Double.parseDouble(nameProduct);
-			}
-			Pageable pageable=PageRequest.of(page.orElse(0), 9);
-			Page<TourWithImageDTO> tours = tourDao.searchByKeyWord(nameProduct, minPrice, maxPrice, pageable);
-			model.addAttribute("tours", tours);
-		
+//			Double minPrice=null;
+//			Double maxPrice=null;
+//			String nameProduct=keyword.orElse(session.getAttribute("keyword"));
+//			if(isStringNumeric(nameProduct)) {
+//				minPrice=Double.parseDouble(nameProduct)-1000;
+//				maxPrice=Double.parseDouble(nameProduct);
+//			}
+//			Pageable pageable=PageRequest.of(page.orElse(0), 9);
+//			Page<TourWithImageDTO> tours = tourDao.searchByKeyWord(nameProduct, minPrice, maxPrice, pageable);
+//			model.addAttribute("tours", tours);
+//		
 		return "user/tour";
 	}
 	@GetMapping("cart")
@@ -212,8 +209,8 @@ public class HomeController {
 	}
 	@GetMapping("cart/delete/{id}")
 	public String deleteCartItem(@PathVariable("id") Integer id) {
-		cartItemDao.deleteById(id);
-		setAmount();
+//		cartItemDao.deleteById(id);
+//		setAmount();
 		return "redirect:/travelfpoly/cart";
 	}
 	@PostMapping("cart/book/{id}")
@@ -246,11 +243,11 @@ public class HomeController {
 				detailOrder.setBookDate(new Date());
 				detailOrder.setStarDate(cartItem.getStartDate());
 				detailOrder.setEndDate(cartItem.getEndDate());
-				detailOrder.setPrice(cartItem.getTourId().getPrice());
-				detailOrder.setQuantity(cartItem.getQuantityAdult());
+				detailOrder.setPriceAdult(cartItem.getTourId().getPriceAdult());
+				detailOrder.setPriceChildren(cartItem.getTourId().getPriceChildren());
+				detailOrder.setQuantityAdult(cartItem.getQuantityAdult());
 				detailOrder.setQuantityChildren(cartItem.getQuantityChildren());
-				detailOrder.setStatus(true);
-				detailOrder.setTotalPrice(cartItem.getTourId().getPrice()*cartItem.getQuantityAdult() + cartItem.getTourId().getPrice()*0.5*cartItem.getQuantityChildren());
+				detailOrder.setStatus(1);
 				detailOrder.setOrderDetailTour(tour);
 				
 				orderDetailTourDao.save(detailOrder);
@@ -258,10 +255,9 @@ public class HomeController {
 				
 				//set quantity tour
 				
-				TourVariant tv = tourVariantDao.findAllByTourId(cartItem.getTourId().getTourId());
-				tv.setQuantity(tv.getQuantity()-cartItem.getQuantityAdult());
-				tv.setQuantityChildren(tv.getQuantityChildren()-cartItem.getQuantityChildren());
-				tourVariantDao.save(tv);
+				tour.setQuantityAdult(tour.getQuantityAdult()-cartItem.getQuantityAdult());
+				tour.setQuantityChildren(tour.getQuantityChildren()-cartItem.getQuantityChildren());
+				tourDao.save(tour);
 			}
 			
 			session.setAttribute("amount", cartItemDao.getAmount(id));
@@ -296,33 +292,33 @@ public class HomeController {
 							,@RequestParam("searchKey") Optional<String> keyword
 					) {
 		
-		Double minPrice=null;
-		Double maxPrice=null;
-		String nameProduct=keyword.orElse(session.getAttribute("keyword"));
-		if(isStringNumeric(nameProduct)) {
-			minPrice=Double.parseDouble(nameProduct);
-			maxPrice=Double.parseDouble(nameProduct)+50;
-		}
-		AccountDTO account = (AccountDTO) session.getAttribute("account");
-		Sort.Direction sortDirection = sortOrder.map(value -> value.equals("asc") ? Sort.Direction.ASC : Sort.Direction.DESC)
-                .orElse(Sort.Direction.DESC);
-		Sort sort=Sort.by(sortDirection,field.orElse("StarDate"));
-		Pageable pageable = PageRequest.of(page.orElse(0), 3,sort);
-		Page<OrderDetailTour> orderDetails = orderDetailTourDao.findOrderByUserIdAndKeyword(account.getUserId(),nameProduct,minPrice,maxPrice,pageable);
-		model.addAttribute("list", orderDetails);
+//		Double minPrice=null;
+//		Double maxPrice=null;
+//		String nameProduct=keyword.orElse(session.getAttribute("keyword"));
+//		if(isStringNumeric(nameProduct)) {
+//			minPrice=Double.parseDouble(nameProduct);
+//			maxPrice=Double.parseDouble(nameProduct)+50;
+//		}
+//		AccountDTO account = (AccountDTO) session.getAttribute("account");
+//		Sort.Direction sortDirection = sortOrder.map(value -> value.equals("asc") ? Sort.Direction.ASC : Sort.Direction.DESC)
+//                .orElse(Sort.Direction.DESC);
+//		Sort sort=Sort.by(sortDirection,field.orElse("StarDate"));
+//		Pageable pageable = PageRequest.of(page.orElse(0), 3,sort);
+//		Page<OrderDetailTour> orderDetails = orderDetailTourDao.findOrderByUserIdAndKeyword(account.getUserId(),nameProduct,minPrice,maxPrice,pageable);
+//		model.addAttribute("list", orderDetails);
 		return "user/order";
 	}
 	@GetMapping("order/delete/{id}")
 	public String deleteTour(@PathVariable("id") Integer id) {
 		OrderDetailTour order = orderDetailTourDao.findById(id).get();
-		order.setStatus(false);
+		order.setStatus(0);
 		orderDetailTourDao.save(order);
 		//set quantity tour
 		Integer tourId=order.getOrderDetailTour().getTourId();
-		TourVariant tv = tourVariantDao.findAllByTourId(tourId);
-		tv.setQuantity(tv.getQuantity()+order.getQuantity());
-		tv.setQuantityChildren(tv.getQuantityChildren()+order.getQuantityChildren());
-		tourVariantDao.save(tv);
+		Tour tour = tourDao.findByTourId(tourId);
+		tour.setQuantityAdult(tour.getQuantityAdult()+order.getQuantityAdult());
+		tour.setQuantityChildren(tour.getQuantityChildren()+order.getQuantityChildren());
+		tourDao.save(tour);
 		return "redirect:/travelfpoly/order";
 	}
 	
@@ -341,7 +337,6 @@ public class HomeController {
 		try {
 			Account account = accountDao.findById(UserId).get();
 			Tour tour =tourDao.findById(TourId).get();
-			Integer duration = tourVariantDao.findById(TourId).get().getDuration();
 			Cart checkCart = cartDao.findByUserId(UserId);
 			
 			model.addAttribute("account", account);
@@ -359,7 +354,7 @@ public class HomeController {
 //				//add to cart item
 				CartItem cartItem = new CartItem();
 				cartItem.setStartDate(DateHelper.converDateSql(startdate));
-				cartItem.setEndDate(DateHelper.addDaysToDate(startdate, duration));
+				cartItem.setEndDate(DateHelper.addDaysToDate(startdate, tour.getDuration()));
 				cartItem.setQuantityAdult(quantityAdult);
 				cartItem.setQuantityChildren(quantityChildren);
 				cartItem.setTourId(tour);
@@ -379,16 +374,21 @@ public class HomeController {
 	}
 	@GetMapping("tour-detail")
 	public String tourdetail(Model model) {
-		
+		AccountDTO checkUser = (AccountDTO) session.getAttribute("account");
+		if(checkUser == null) {
+			checkUser = new AccountDTO();
+			session.setAttribute("account", checkUser);
+		}
 		return "user/productdetail";
 	}
 	@GetMapping("tour-detail/{id}")
 	public String productDetail(@PathVariable("id") Integer id, Model model) {
+		
 		TourImage image = tourImageDao.findByTourId(id);
-		TourVariant variant = tourVariantDao.findAllByTourId(id);
+		Tour tour = tourDao.findByTourId(id);
 		List<TourSchedule> schedules = tourScheduleDao.findByTourId(id);
 		model.addAttribute("image", image);
-		model.addAttribute("variant", variant);
+		model.addAttribute("tour", tour);
 		model.addAttribute("schedules", schedules);
 		return "user/productdetail";
 	}
@@ -403,11 +403,8 @@ public class HomeController {
 			,@RequestParam("startdate") java.sql.Date date
 			,@RequestParam("quantityAdult") Integer quantityAdult
 			,@RequestParam("quantityChildren") Integer quantityChildren
-			,TourVariant variant
 			) {
 		Account account = accountDao.findById(UserId).get();
-		Double price =(Double) tourDao.findPriceByTourId(TourId);
-		Integer duration = tourVariantDao.findById(TourId).get().getDuration();
 		Tour tour= tourDao.findById(TourId).get();
 		try {
 			if(fullname!=null && email!=null && date!=null && phone!=null && quantityAdult!=null && quantityChildren!=null) {
@@ -422,21 +419,20 @@ public class HomeController {
 				//Add to Order detail Tour
 				OrderDetailTour orderDetail= new OrderDetailTour();
 				orderDetail.setStarDate(DateHelper.converDateSql(date));
-				orderDetail.setEndDate(DateHelper.addDaysToDate(date, duration));
+				orderDetail.setEndDate(DateHelper.addDaysToDate(date, tour.getDuration()));
 				orderDetail.setBookDate(new Date());
-				orderDetail.setPrice(price);
-				orderDetail.setTotalPrice(price*quantityAdult+price*quantityChildren*0.5);
-				orderDetail.setStatus(true);
-				orderDetail.setQuantity(quantityAdult);
+				orderDetail.setPriceAdult(tour.getPriceAdult());
+				orderDetail.setPriceChildren(tour.getPriceChildren());
+				orderDetail.setStatus(1);
+				orderDetail.setQuantityAdult(quantityAdult);
 				orderDetail.setQuantityChildren(quantityChildren);
 				orderDetail.setOrderDetailTour(tour);
 				orderDetail.setOrderTour(order);
 				orderDetailTourDao.save(orderDetail);
-				//set quantity Tour Variant
-				TourVariant variant1= tourVariantDao.findById(TourId).get();
-				variant1.setQuantity(variant1.getQuantity()-quantityAdult);
-				variant1.setQuantityChildren(variant1.getQuantityChildren()-quantityChildren);
-				tourVariantDao.save(variant1);
+				//set quantity Tour
+				tour.setQuantityAdult(tour.getQuantityAdult() - quantityAdult);
+				tour.setQuantityChildren(tour.getQuantityChildren() - quantityChildren);
+				tourDao.save(tour);
 				return "redirect:/travelfpoly/order";
 			}
 			model.addAttribute("message", "Book tour is error please check your information!");

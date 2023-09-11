@@ -183,9 +183,9 @@
 			<div class="row">
 				<div th:each="tour : ${productTour.content}" class="col-sm-12 col-md-6 col-lg-3 col-3 ftco-animate">
 					<div class="destination">
-						<a th:href="@{/travelfpoly/tour-detail/{id} (id = ${tour.Tour.TourId})}"
+						<a th:href="@{/travelfpoly/tour-detail/{id} (id = ${tour.tourId})}"
 							class="img img-2 d-flex justify-content-center align-items-center"
-							th:style="'background-image: url('+ ${tour.image} +');'">
+							th:style="'background-image: url('+ ${tour.avatar} +');'">
 							<div
 								class="icon d-flex justify-content-center align-items-center">
 								<span class="icon-search2"></span>
@@ -195,7 +195,7 @@
 							<div class="d-flex">
 								<div class="one">
 									<h3>
-										<a href="#">[[${tour.Tour.name}]]</a>
+										<a href="#">[[${tour.name}]]</a>
 									</h3>
 									<p class="rate">
 										<i class="icon-star"></i> <i class="icon-star"></i> <i
@@ -204,10 +204,10 @@
 									</p>
 								</div>
 								<div class="two">
-									<span class="price">[[${tour.Tour.price}]] $</span>
+									<span class="price">[[${tour.priceAdult}]]$</span>
 								</div>
 							</div>
-							<p>[[${tour.Tour.description}]]</p>
+							<p>[[${tour.description}]]</p>
 							<p class="days">
 								<span>[[${tour.duration}]] Day - [[${tour.duration-1}]] Night</span>
 							</p>
@@ -305,7 +305,7 @@
 			<div class="row">
 				<div th:each="hotel:${productHotel.content}" class="col-sm-12 col-md-6 col-lg-3 col-3 ftco-animate">
 					<div class="destination">
-						<a href="#"
+						<a th:href="@{/travelfpoly/tour-detail/{id} (id = ${hotel.hotelId})}"
 							class="img img-2 d-flex justify-content-center align-items-center"
 							th:style="'background-image: url('+${hotel.avatar}+');'">
 							<div class="icon d-flex justify-content-center align-items-center">
@@ -316,7 +316,7 @@
 							<div class="d-flex">
 								<div class="one">
 									<h3>
-										<a href="#">[[${hotel.Hotel.name}]]</a>
+										<a href="#">[[${hotel.name}]]</a>
 									</h3>
 									<p class="rate">
 										<i class="icon-star"></i> <i class="icon-star"></i> <i
@@ -325,11 +325,11 @@
 									</p>
 								</div>
 								<div class="two">
-									<span class="price per-price">[[${hotel.Hotel.price}]]<br>
+									<span class="price per-price">[[${hotel.price}]]$<br>
 									<small>/night</small></span>
 								</div>
 							</div>
-							<p>[[${hotel.Hotel.description}]]</p>
+							<p>[[${hotel.description}]]</p>
 							<hr>
 							<p class="bottom-area d-flex">
 								<span><i class="icon-map-o"></i> Miami, Fl</span> <span

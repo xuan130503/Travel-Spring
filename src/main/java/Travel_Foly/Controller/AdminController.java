@@ -51,24 +51,24 @@ public class AdminController {
 				,@RequestParam("page") Optional<Integer> page
 				,@RequestParam("pageUser") Optional<Integer> pageUser
 			) {
-		Integer reportTour = tourDao.reportTour();
-		Integer reportTourQuantity = tourDao.reportTourQuantity(1);
-		Integer reportOrder = orderDetailTourDao.reportOrder();
-		Integer reportUser = accountDao.reportUser();
-		
-		model.addAttribute("tour", reportTour);
-		model.addAttribute("tourQuantity", reportTourQuantity);
-		model.addAttribute("order", reportOrder);
-		model.addAttribute("user", reportUser);
-		
-		//table order
-		Pageable pageableTour= PageRequest.of(page.orElse(0), 5);
-		Page<OrderDetailTour> orderDetail = orderDetailTourDao.findOrder(pageableTour);
-		model.addAttribute("listOrder", orderDetail);
-		
-		Pageable pageableUser= PageRequest.of(page.orElse(0), 5);
-		Page<Account> listAccount = accountDao.findUser(pageableUser);
-		model.addAttribute("listAccount", listAccount);
+//		Integer reportTour = tourDao.reportTour();
+//		Integer reportTourQuantity = tourDao.reportTourQuantity(1);
+//		Integer reportOrder = orderDetailTourDao.reportOrder();
+//		Integer reportUser = accountDao.reportUser();
+//		
+//		model.addAttribute("tour", reportTour);
+//		model.addAttribute("tourQuantity", reportTourQuantity);
+//		model.addAttribute("order", reportOrder);
+//		model.addAttribute("user", reportUser);
+//		
+//		//table order
+//		Pageable pageableTour= PageRequest.of(page.orElse(0), 5);
+//		Page<OrderDetailTour> orderDetail = orderDetailTourDao.findOrder(pageableTour);
+//		model.addAttribute("listOrder", orderDetail);
+//		
+//		Pageable pageableUser= PageRequest.of(page.orElse(0), 5);
+//		Page<Account> listAccount = accountDao.findUser(pageableUser);
+//		model.addAttribute("listAccount", listAccount);
 		
 		return "admin/index";
 	}
@@ -176,14 +176,14 @@ public class AdminController {
 	@GetMapping("addproduct")
 	public String addProduct(Model model
 			,@RequestParam("page") Optional<Integer> page) {
-		Tour tour = new Tour();
-		tour.setTour(categoryTourDao.findById(1).get());
-		Pageable pageable = PageRequest.of(page.orElse(0), 4);
-		Page<Tour> tours= tourDao.findAllTour(pageable);
-		List<CategoryTour> categories= categoryTourDao.findAll();
-		model.addAttribute("categories", categories);
-		model.addAttribute("tour", tour);
-		model.addAttribute("tours", tours);
+//		Tour tour = new Tour();
+//		tour.setTour(categoryTourDao.findById(1).get());
+//		Pageable pageable = PageRequest.of(page.orElse(0), 4);
+//		Page<Tour> tours= tourDao.findAllTour(pageable);
+//		List<CategoryTour> categories= categoryTourDao.findAll();
+//		model.addAttribute("categories", categories);
+//		model.addAttribute("tour", tour);
+//		model.addAttribute("tours", tours);
 		
 		return "admin/form-add-san-pham";
 	}
@@ -193,15 +193,15 @@ public class AdminController {
 				,@PathVariable("categoryId") Integer categoryid
 				,@RequestParam("page") Optional<Integer> page
 			) {
-		Tour tour = new Tour();
-		Pageable pageable= PageRequest.of(page.orElse(0), 4);
-		Page<Tour> tours = tourDao.findAllTour(pageable);
-		tour = tourDao.findById(id).get();
-		tour.setTour(categoryTourDao.findById(categoryid).get());
-		List<CategoryTour> categories= categoryTourDao.findAll();
-		model.addAttribute("categories", categories);
-		model.addAttribute("tour", tour);
-		model.addAttribute("tours", tours);
+//		Tour tour = new Tour();
+//		Pageable pageable= PageRequest.of(page.orElse(0), 4);
+//		Page<Tour> tours = tourDao.findAllTour(pageable);
+//		tour = tourDao.findById(id).get();
+//		tour.setTour(categoryTourDao.findById(categoryid).get());
+//		List<CategoryTour> categories= categoryTourDao.findAll();
+//		model.addAttribute("categories", categories);
+//		model.addAttribute("tour", tour);
+//		model.addAttribute("tours", tours);
 		return "admin/form-add-san-pham";
 	}
 	@PostMapping("addproduct/create")
@@ -214,24 +214,24 @@ public class AdminController {
 				,@RequestParam("description") String description
 			) {
 			
-		Tour checkTour = tourDao.findByTourId(id);
-		CategoryTour categorys = categoryTourDao.findById(category).get();
-		if(checkTour !=null) {
-			checkTour.setName(name);
-			checkTour.setTour(categorys);
-			checkTour.setAvailable(available);
-			checkTour.setDescription(description);
-			checkTour.setPrice(price);
-			tourDao.save(checkTour);
-		}else {
-			Tour tour = new Tour();
-			tour.setName(name);
-			tour.setTour(categorys);
-			tour.setAvailable(available);
-			tour.setDescription(description);
-			tour.setPrice(price);
-			tourDao.save(tour);
-		}
+//		Tour checkTour = tourDao.findByTourId(id);
+//		CategoryTour categorys = categoryTourDao.findById(category).get();
+//		if(checkTour !=null) {
+//			checkTour.setName(name);
+//			checkTour.setTour(categorys);
+//			checkTour.setAvailable(available);
+//			checkTour.setDescription(description);
+//			checkTour.setPrice(price);
+//			tourDao.save(checkTour);
+//		}else {
+//			Tour tour = new Tour();
+//			tour.setName(name);
+//			tour.setTour(categorys);
+//			tour.setAvailable(available);
+//			tour.setDescription(description);
+//			tour.setPrice(price);
+//			tourDao.save(tour);
+//		}
 		
 		return "redirect:/travelfpoly/admin/addproduct";
 	}
@@ -256,24 +256,24 @@ public class AdminController {
 	}
 	@GetMapping("report")
 	public String report(Model model) {
-		Integer staff=accountDao.reportStaff();
-		model.addAttribute("staff", staff);
-		Integer staffIsBaned=accountDao.reportStaffisBaned();
-		model.addAttribute("staffIsBaned", staffIsBaned);
-		Integer reportTour = tourDao.reportTour();
-		model.addAttribute("tour", reportTour);
-		Integer reportTourQuantity = tourDao.reportTourQuantity(0);
-		model.addAttribute("tourQuantity", reportTourQuantity);
-		Integer reportOrder = orderDetailTourDao.reportOrder();
-		model.addAttribute("order", reportOrder);
-		Integer reportUser = accountDao.reportUser();
-		model.addAttribute("user", reportUser);
-		Double totalIncome = orderDetailTourDao.findTotalIncome();
-		model.addAttribute("total", totalIncome);
-		Integer orderCancel = orderDetailTourDao.findOrderCancel();
-		model.addAttribute("orderCancel", orderCancel);
-		List<Tour> bestSellingTours = tourService.getBestSellingTours();
-        model.addAttribute("bestSellingTours", bestSellingTours);
+//		Integer staff=accountDao.reportStaff();
+//		model.addAttribute("staff", staff);
+//		Integer staffIsBaned=accountDao.reportStaffisBaned();
+//		model.addAttribute("staffIsBaned", staffIsBaned);
+//		Integer reportTour = tourDao.reportTour();
+//		model.addAttribute("tour", reportTour);
+//		Integer reportTourQuantity = tourDao.reportTourQuantity(0);
+//		model.addAttribute("tourQuantity", reportTourQuantity);
+//		Integer reportOrder = orderDetailTourDao.reportOrder();
+//		model.addAttribute("order", reportOrder);
+//		Integer reportUser = accountDao.reportUser();
+//		model.addAttribute("user", reportUser);
+//		Double totalIncome = orderDetailTourDao.findTotalIncome();
+//		model.addAttribute("total", totalIncome);
+//		Integer orderCancel = orderDetailTourDao.findOrderCancel();
+//		model.addAttribute("orderCancel", orderCancel);
+//		List<Tour> bestSellingTours = tourService.getBestSellingTours();
+//        model.addAttribute("bestSellingTours", bestSellingTours);
         
 		return "admin/quan-ly-bao-cao";
 		

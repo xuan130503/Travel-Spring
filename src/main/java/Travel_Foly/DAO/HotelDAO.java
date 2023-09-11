@@ -10,7 +10,7 @@ import Travel_Foly.DTO.HotelDTO;
 import Travel_Foly.Model.Hotel;
 @Repository
 public interface HotelDAO extends JpaRepository<Hotel,Integer>{
-	@Query("Select new Travel_Foly.DTO.HotelDTO(t,img.Avatar) from Hotel t "
-			+ "Join HotelImage img On img.HotelImage.HotelId = t.HotelId")
+	@Query("Select new Travel_Foly.DTO.HotelDTO(h.HotelId, h.Name, h.Price, h.Description, img.Avatar) from Hotel h "
+			+ "Join HotelImage img On img.HotelImage.HotelId = h.HotelId")
 	Page<HotelDTO> findAllHotelWithImage(Pageable page);
 }

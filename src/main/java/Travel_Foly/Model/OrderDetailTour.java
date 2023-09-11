@@ -21,17 +21,19 @@ public class OrderDetailTour {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer OrderDetailTourId;
-	private Integer Quantity;
+	private Integer QuantityAdult;
 	private Integer QuantityChildren;
-	private Double Price;
+	private Double PriceAdult;
+	private Double PriceChildren;
 	private Date StarDate;
 	private Date EndDate;
 	private Date BookDate;
-	private Boolean Status;
-	private Double TotalPrice;
+	private Integer Status;
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "TourId")
 	private Tour OrderDetailTour;
+	
 	@ManyToOne(fetch = FetchType.LAZY) 
 	@JoinColumn(name = "OrderTourId")
 	private OrderTour OrderTour;

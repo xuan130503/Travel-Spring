@@ -34,7 +34,7 @@ public class SecurityConfig {
 		http.authorizeHttpRequests(auth ->{
 			auth.requestMatchers("/travelfpoly/account/login","/travelfpoly/account/logout","/travelfpoly/home","/travelfpoly/tour-detail","/travelfpoly/tour-detail/**").permitAll()
 			.requestMatchers("/travelfpoly/admin","/travelfpoly/admin/**").hasAnyRole("ADMIN")
-			.requestMatchers("/travelfpoly/cart","/travelfpoly/cart/**","/travelfpoly/order","/travelfpoly/order/**").hasAnyRole("USER")
+			.requestMatchers("/travelfpoly/cart","/travelfpoly/cart/**","/travelfpoly/order","/travelfpoly/order/**","/travelfpoly/addToCart/**","/travelfpoly/bookNow/**").hasAnyRole("USER")
 			.anyRequest().permitAll();
 		})
 		.formLogin(login ->{

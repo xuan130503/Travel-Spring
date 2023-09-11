@@ -37,4 +37,7 @@ public class Cart {
 	
 	@OneToMany(mappedBy = "CartItem")
 	private List<CartItem> CartItems;
+	
+	@OneToMany(mappedBy = "CartHotel")
+	private List<CartHotel> CartHotels;
 }

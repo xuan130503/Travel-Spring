@@ -21,14 +21,19 @@ public class OrderDetailHotel {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer OrderDetailHotelId;
-	private Date CheckInDate;
-	private Date CheckOutDate;
+	private Date CheckIn;
+	private Date CheckOut;
 	private Integer Quantity;
 	private Double Price;
-	private Date Date;
+	
+	// for 4 states: Booked, unpaid, paid, remove
+	private Integer Status;
+	private Date BookDate;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "HotelId")
 	private Hotel OrderDetailHotel;
-	@OneToMany(mappedBy = "OrderDetailHotel")
-	private List<OrderHotel> OrderHotels;
+	
+	@ManyToOne(fetch = FetchType.LAZY) 
+	@JoinColumn(name = "OrderHotelId")
+	private OrderHotel OrderHotel;
 }
