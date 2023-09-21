@@ -49,8 +49,19 @@ public class AccountController {
 		return "user/signin";
 	}
 	@PostMapping("login")
-	public void loginUser(Principal principal) {
-		getPricipal(principal);
+	public void loginUser(
+				Model model,
+				Principal principal,
+				@RequestParam("username") String username,
+				@RequestParam("password") String password
+				) {
+		String checkAccount = accountDao.checkLogin(username);
+		if(checkAccount==null)  model.addAttribute("message", "Tài khoản không tồn tại");
+		
+		else {
+			if(password.equals(checkAccount)) model.addAttribute("message", "Tài khoản không tồn tại");
+			else getPricipal(principal);
+		}
 	}
 	@GetMapping("signup")
 	public String signup(Model model) {

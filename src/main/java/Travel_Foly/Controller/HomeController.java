@@ -131,28 +131,28 @@ public class HomeController {
 			,@RequestParam("pageHotel") Optional<Integer> pageHotel
 		) {
 //		//Set key
-//		Double minPrice=null;
-//		Double maxPrice=null;
-//		String nameProduct=keyword.orElse(session.getAttribute("keyword"));
-//		if(isStringNumeric(nameProduct)) {
-//			minPrice=Double.parseDouble(nameProduct);
-//			maxPrice=Double.parseDouble(nameProduct)+100000;
-//		}
-//		session.setAttribute("keyword", nameProduct);
+		Double minPrice=null;
+		Double maxPrice=null;
+		String nameProduct=keyword.orElse(session.getAttribute("keyword"));
+		if(isStringNumeric(nameProduct)) {
+			minPrice=Double.parseDouble(nameProduct);
+			maxPrice=Double.parseDouble(nameProduct)+100000;
+		}
+		session.setAttribute("keyword", nameProduct);
 //		// Tour 
-//		Pageable pageableTour= PageRequest.of(pageTour.orElse(0), 8);
-//		Page<TourWithImageDTO> tour = tourDao.searchByKeyWord(nameProduct,minPrice,maxPrice,pageableTour);
-//		
+		Pageable pageableTour= PageRequest.of(pageTour.orElse(0), 8);
+		Page<TourWithImageDTO> tour = tourDao.searchByKeyWord(nameProduct,minPrice,maxPrice,pageableTour);
+		
 //		//Category
-//		List<Object[]> categories = categoryTourDao.findAllCategory();
+		List<Object[]> categories = categoryTourDao.findAllCategory();
 //		
 //		//Hotel
-//		Pageable pageableHotel= PageRequest.of(pageHotel.orElse(0), 8);
-//		Page<HotelDTO> hotel = hotelDao.findAllHotelWithImage(pageableHotel);
-//		
-//		model.addAttribute("productTour", tour);
-//		model.addAttribute("categories", categories);
-//		model.addAttribute("productHotel", hotel);
+		Pageable pageableHotel= PageRequest.of(pageHotel.orElse(0), 8);
+		Page<HotelDTO> hotel = hotelDao.findAllHotelWithImage(pageableHotel);
+		
+		model.addAttribute("productTour", tour);
+		model.addAttribute("categories", categories);
+		model.addAttribute("productHotel", hotel);
 		return "user/index-2";
 	}
 	@GetMapping("searchTour")
@@ -160,16 +160,16 @@ public class HomeController {
 			,@RequestParam("searchKey") Optional<String> keyword
 			,@RequestParam("pageTour") Optional<Integer> page
 		) {
-//			Double minPrice=null;
-//			Double maxPrice=null;
-//			String nameProduct=keyword.orElse(session.getAttribute("keyword"));
-//			if(isStringNumeric(nameProduct)) {
-//				minPrice=Double.parseDouble(nameProduct)-1000;
-//				maxPrice=Double.parseDouble(nameProduct);
-//			}
-//			Pageable pageable=PageRequest.of(page.orElse(0), 9);
-//			Page<TourWithImageDTO> tours = tourDao.searchByKeyWord(nameProduct, minPrice, maxPrice, pageable);
-//			model.addAttribute("tours", tours);
+			Double minPrice=null;
+			Double maxPrice=null;
+			String nameProduct=keyword.orElse(session.getAttribute("keyword"));
+			if(isStringNumeric(nameProduct)) {
+				minPrice=Double.parseDouble(nameProduct)-1000;
+				maxPrice=Double.parseDouble(nameProduct);
+			}
+			Pageable pageable=PageRequest.of(page.orElse(0), 9);
+			Page<TourWithImageDTO> tours = tourDao.searchByKeyWord(nameProduct, minPrice, maxPrice, pageable);
+			model.addAttribute("tours", tours);
 //		
 		return "user/tour";
 	}

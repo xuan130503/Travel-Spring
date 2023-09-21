@@ -21,6 +21,9 @@ public interface AccountDAO extends JpaRepository<Account,Integer>{
 	@Query("Select a From Account a Where a.UserName=?1")
 	Optional<Account> findByUsername(String Username);
 	
+	@Query("Select a.PassWord From Account a Where a.UserName=?1")
+	String checkLogin(String UserName);
+	
 	@Query("Select new Travel_Foly.DTO.AccountDTO(a.UserId, a.UserName, a.Role)  From Account a Where a.UserName=?1")
 	AccountDTO findOneUsername(String Username);
 	
