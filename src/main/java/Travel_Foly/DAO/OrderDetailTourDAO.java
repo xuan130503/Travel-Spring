@@ -30,12 +30,12 @@ public interface OrderDetailTourDAO extends JpaRepository<OrderDetailTour,Intege
 //	Page<OrderDetailTour> findOrderByUserIdAndKeyword(Integer id,String keyword,Double minPrice, Double maxPrice,Pageable page);
 //	
 //	//admin
-//	@Query("Select count(de) From OrderDetailTour de")
-//	Integer reportOrder();
-//	
-//	@Query("Select de From OrderDetailTour de "
-//			+ "Join OrderTour o On o.OrderTourId = de.OrderTour.OrderTourId ")
-//	Page<OrderDetailTour> findOrder(Pageable page);
+	@Query("Select count(de) From OrderDetailTour de")
+	Integer reportOrder();
+	
+	@Query("Select de From OrderDetailTour de "
+			+ "Join OrderTour o On o.OrderTourId = de.OrderTour.OrderTourId ")
+	Page<OrderDetailTour> findOrder(Pageable page);
 //	
 //	@Query("Select Sum(de.TotalPrice) From OrderDetailTour de Where de.Status=true")
 //	Double findTotalIncome();

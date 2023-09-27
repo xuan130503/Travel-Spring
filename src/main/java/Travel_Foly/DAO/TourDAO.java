@@ -1,6 +1,8 @@
 package Travel_Foly.DAO;
 
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -36,22 +38,20 @@ public interface TourDAO extends JpaRepository<Tour,Integer>{
 			)
 	Page<TourWithImageDTO> searchByKeyWord(String keyword, Double minPrice, Double maxPrice, Pageable pageable);
 	
-//	@Query("Select count(t) From Tour t")
-//	Integer reportTour();
-//	
-//	@Query("Select count(t) From Tour t "
-//			+ "Join TourVariant tv On tv.TourVariant.TourId=t.TourId "
-//			+ "Where tv.Quantity <= ?1 Or tv.QuantityChildren <= ?1")
-//	Integer reportTourQuantity(Integer quantity);
-//	
-//	@Query("Select t From Tour t")
-//	Page<Tour> findAllTour(Pageable page);
-//	
+	@Query("Select count(t) From Tour t")
+	Integer reportTour();
+	
+	@Query("Select count(t) From Tour t "
+			+ "Where t.QuantityAdult <= ?1 Or t.QuantityChildren <= ?1")
+	Integer reportTourQuantity(Integer quantity);
+	
+	@Query("Select t From Tour t")
+	Page<Tour> findAllTour(Pageable page);
+	
 //	 @Query("SELECT t, SUM(odt.Quantity) AS totalQuantity FROM Tour t JOIN t.OrderDetailTours odt GROUP BY t ORDER BY totalQuantity DESC")
 //	 List<Object[]> findBestSellingTours();
 //	
-//	@Query("Select new Travel_Foly.DTO.TourAndVariantDTO(t,tv) Tour t "
-//			+ "Join TourVariant tv On tv.TourVariant.TourId=t.TourId")
-//	Page<TourAndVariantDTO> findAllTourAndVariant(Pageable page);
+//	@Query("Select t Tour t")
+//	Page<Tour> findAllTour(Pageable page);
 	
 }

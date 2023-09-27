@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>DirEngine - Free Bootstrap 4 Template by Colorlib</title>
+<title>Hotel</title>
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -177,7 +177,7 @@
 									<div class="d-flex">
 										<div class="one">
 											<h3>
-												<a href="hotel-single.html">[[${hotel.hotel.Name}]]</a>
+												<a href="hotel-single.html">[[${hotel.name}]]</a>
 											</h3>
 											<p class="rate">
 												<i class="icon-star"></i> <i class="icon-star"></i> <i
@@ -186,11 +186,11 @@
 											</p>
 										</div>
 										<div class="two">
-											<span class="price per-price">$[[${hotel.hotel.Price}]]<br>
+											<span class="price per-price">$[[${hotel.price}]]<br>
 											<small>/night</small></span>
 										</div>
 									</div>
-									<p>[[${hotel.hotel.Description}]]</p>
+									<p>[[${hotel.description}]]</p>
 									<hr>
 									<p class="bottom-area d-flex">
 										<span><i class="icon-map-o"></i> Miami, Fl</span> <span

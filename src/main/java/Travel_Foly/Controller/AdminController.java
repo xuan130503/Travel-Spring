@@ -51,24 +51,24 @@ public class AdminController {
 				,@RequestParam("page") Optional<Integer> page
 				,@RequestParam("pageUser") Optional<Integer> pageUser
 			) {
-//		Integer reportTour = tourDao.reportTour();
-//		Integer reportTourQuantity = tourDao.reportTourQuantity(1);
-//		Integer reportOrder = orderDetailTourDao.reportOrder();
-//		Integer reportUser = accountDao.reportUser();
-//		
-//		model.addAttribute("tour", reportTour);
-//		model.addAttribute("tourQuantity", reportTourQuantity);
-//		model.addAttribute("order", reportOrder);
-//		model.addAttribute("user", reportUser);
-//		
-//		//table order
-//		Pageable pageableTour= PageRequest.of(page.orElse(0), 5);
-//		Page<OrderDetailTour> orderDetail = orderDetailTourDao.findOrder(pageableTour);
-//		model.addAttribute("listOrder", orderDetail);
-//		
-//		Pageable pageableUser= PageRequest.of(page.orElse(0), 5);
-//		Page<Account> listAccount = accountDao.findUser(pageableUser);
-//		model.addAttribute("listAccount", listAccount);
+		Integer reportTour = tourDao.reportTour();
+		Integer reportTourQuantity = tourDao.reportTourQuantity(1);
+		Integer reportOrder = orderDetailTourDao.reportOrder();
+		Integer reportUser = accountDao.reportUser();
+		
+		model.addAttribute("tour", reportTour);
+		model.addAttribute("tourQuantity", reportTourQuantity);
+		model.addAttribute("order", reportOrder);
+		model.addAttribute("user", reportUser);
+		
+		//table order
+		Pageable pageableTour= PageRequest.of(page.orElse(0), 5);
+		Page<OrderDetailTour> orderDetail = orderDetailTourDao.findOrder(pageableTour);
+		model.addAttribute("listOrder", orderDetail);
+		
+		Pageable pageableUser= PageRequest.of(page.orElse(0), 5);
+		Page<Account> listAccount = accountDao.findUser(pageableUser);
+		model.addAttribute("listAccount", listAccount);
 		
 		return "admin/index";
 	}
@@ -176,14 +176,14 @@ public class AdminController {
 	@GetMapping("addproduct")
 	public String addProduct(Model model
 			,@RequestParam("page") Optional<Integer> page) {
-//		Tour tour = new Tour();
-//		tour.setTour(categoryTourDao.findById(1).get());
-//		Pageable pageable = PageRequest.of(page.orElse(0), 4);
-//		Page<Tour> tours= tourDao.findAllTour(pageable);
-//		List<CategoryTour> categories= categoryTourDao.findAll();
-//		model.addAttribute("categories", categories);
-//		model.addAttribute("tour", tour);
-//		model.addAttribute("tours", tours);
+		Tour tour = new Tour();
+		tour.setTour(categoryTourDao.findById(1).get());
+		Pageable pageable = PageRequest.of(page.orElse(0), 4);
+		Page<Tour> tours= tourDao.findAllTour(pageable);
+		List<CategoryTour> categories= categoryTourDao.findAll();
+		model.addAttribute("categories", categories);
+		model.addAttribute("tour", tour);
+		model.addAttribute("tours", tours);
 		
 		return "admin/form-add-san-pham";
 	}
