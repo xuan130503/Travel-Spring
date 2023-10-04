@@ -1,7 +1,6 @@
 package Travel_Foly.DTO;
 
 
-import Travel_Foly.Model.Tour;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

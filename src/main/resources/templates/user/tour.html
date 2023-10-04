@@ -41,7 +41,7 @@
 					data-scrollax=" properties: { translateY: '70%' }">
 					<p class="breadcrumbs"
 						data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">
-						<span class="mr-2"><a href="index-2.html">Home</a></span> <span>Tour</span>
+						<span class="mr-2"><a href="home">Home</a></span> <span>Tour</span>
 					</p>
 					<h1 class="mb-3 bread"
 						data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Destination</h1>
@@ -133,9 +133,9 @@
 					<div class="row">
 						<div th:each="tour : ${tours.content}" class="col-md-4 ftco-animate">
 							<div class="destination">
-								<a th:href="@{|/travelfpoly/tour-detail/${tour.Tour.TourId}|}"
+								<a th:href="@{|/travelfpoly/tour-detail/${tour.tourId}|}"
 									class="img img-2 d-flex justify-content-center align-items-center"
-									th:style="'background-image: url('+ ${tour.Image} +');'">
+									th:style="'background-image: url('+ ${tour.avatar} +');'">
 									<div
 										class="icon d-flex justify-content-center align-items-center">
 										<span class="icon-search2"></span>
@@ -145,7 +145,7 @@
 									<div class="d-flex">
 										<div class="one">
 											<h3>
-												<a href="#">[[${tour.Tour.name}]]</a>
+												<a href="#">[[${tour.name}]]</a>
 											</h3>
 											<p class="rate">
 												<i class="icon-star"></i> <i class="icon-star"></i> <i
@@ -154,10 +154,10 @@
 											</p>
 										</div>
 										<div class="two">
-											<span class="price">[[${tour.Tour.price}]] $</span>
+											<span class="price">[[${tour.priceAdult}]] $</span>
 										</div>
 									</div>
-									<p>[[${tour.Tour.description}]]</p>
+									<p>[[${tour.description}]]</p>
 									<p class="days">
 										<span>[[${tour.duration}]] Day - [[${tour.duration-1}]] Night</span>
 									</p>

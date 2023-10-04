@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import Travel_Foly.DAO.AccountDAO;
 import Travel_Foly.DAO.CartDAO;
@@ -33,7 +32,6 @@ import Travel_Foly.DAO.TourDAO;
 import Travel_Foly.DAO.TourImageDAO;
 import Travel_Foly.DAO.TourScheduleDAO;
 import Travel_Foly.DTO.AccountDTO;
-import Travel_Foly.DTO.CartItemDTO;
 import Travel_Foly.DTO.HotelDTO;
 import Travel_Foly.DTO.TourWithImageDTO;
 import Travel_Foly.Helper.DateHelper;
@@ -46,7 +44,6 @@ import Travel_Foly.Model.Tour;
 import Travel_Foly.Model.TourImage;
 import Travel_Foly.Model.TourSchedule;
 import Travel_Foly.Service.SessionService;
-import Travel_Foly.Service.UserDetailServiceImpl;
 
 @Controller
 @RequestMapping("/travelfpoly/")
@@ -121,6 +118,8 @@ public class HomeController {
 		model.addAttribute("categories", categories);
 		model.addAttribute("productHotel", hotel);
 		getPricical(princical);
+		AccountDTO account = (AccountDTO) session.getAttribute("account");
+		session.setAttribute("account", account);
 		return "user/index-2";
 		
 	}
@@ -176,36 +175,37 @@ public class HomeController {
 	@GetMapping("cart")
 	public String cart(Model model) {
 		AccountDTO account = (AccountDTO)session.getAttribute("account");
-		
-		Integer userId = account.getUserId();
-		Account user = accountDao.findById(userId).get();
-		Cart cart = cartDao.findByUserId(userId);
-		if(cart ==null) {
-			Cart cart1 = new Cart();
-			cart1.setAddress(user.getAddress());
-			cart1.setCart(user);
-			cart1.setName(user.getFullName());
-			cart1.setPhone(user.getPhone());
-			cart1.setEmail(user.getEmail());
-			cartDao.save(cart1);
-			
-			//
-			Double totalPrice = cartItemDao.getTotal(userId);
-	//		List<CartItem> cartItems = cartItemDao.findByCartId(cart.getCartId());
-			List<CartItemDTO> cartItems = cartItemDao.findCartItemDTOById(cart1.getCartId());
-			model.addAttribute("cart", cart);
-			model.addAttribute("cartItems", cartItems);
-			model.addAttribute("totalPrice", totalPrice);
-		}
-		else {
-			Double totalPrice = cartItemDao.getTotal(userId);
-	//		List<CartItem> cartItems = cartItemDao.findByCartId(cart.getCartId());
-			List<CartItemDTO> cartItems = cartItemDao.findCartItemDTOById(cart.getCartId());
-			model.addAttribute("cart", cart);
-			model.addAttribute("cartItems", cartItems);
-			model.addAttribute("totalPrice", totalPrice);
-		}
-		return "user/cart1";
+		System.out.println(account.getUserName());
+//		System.out.println(account.getUserName());
+//		Integer userId = account.getUserId();
+//		Account user = accountDao.findById(userId).get();
+//		Cart cart = cartDao.findByUserId(userId);
+//		if(cart ==null) {
+//			Cart cart1 = new Cart();
+//			cart1.setAddress(user.getAddress());
+//			cart1.setCart(user);
+//			cart1.setName(user.getFullName());
+//			cart1.setPhone(user.getPhone());
+//			cart1.setEmail(user.getEmail());
+//			cartDao.save(cart1);
+//			
+//			//
+//			Double totalPrice = cartItemDao.getTotal(userId);
+//	//		List<CartItem> cartItems = cartItemDao.findByCartId(cart.getCartId());
+//			List<CartItemDTO> cartItems = cartItemDao.findCartItemDTOById(cart1.getCartId());
+//			model.addAttribute("cart", cart);
+//			model.addAttribute("cartItems", cartItems);
+//			model.addAttribute("totalPrice", totalPrice);
+//		}
+//		else {
+//			Double totalPrice = cartItemDao.getTotal(userId);
+//	//		List<CartItem> cartItems = cartItemDao.findByCartId(cart.getCartId());
+//			List<CartItemDTO> cartItems = cartItemDao.findCartItemDTOById(cart.getCartId());
+//			model.addAttribute("cart", cart);
+//			model.addAttribute("cartItems", cartItems);
+//			model.addAttribute("totalPrice", totalPrice);
+//		}
+		return "redirect:/travelfpoly/home";
 	}
 	@GetMapping("cart/delete/{id}")
 	public String deleteCartItem(@PathVariable("id") Integer id) {
