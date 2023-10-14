@@ -25,6 +25,8 @@ public class TourSchedule{
 	@Column(columnDefinition = "nvarchar(500)")
 	private String Description;
 	private Time Time;
+	private String Date;
+	private String Image;
 	@ManyToOne(fetch = FetchType.LAZY) 
 	@JoinColumn(name="TourId")
 	private Tour TourSchedule;

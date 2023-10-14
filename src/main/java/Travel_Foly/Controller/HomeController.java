@@ -372,15 +372,16 @@ public class HomeController {
 
 		}
 	}
-	@GetMapping("tour-detail")
-	public String tourdetail(Model model) {
-		AccountDTO checkUser = (AccountDTO) session.getAttribute("account");
-		if(checkUser == null) {
-			checkUser = new AccountDTO();
-			session.setAttribute("account", checkUser);
-		}
-		return "user/productdetail";
-	}
+//	@GetMapping("tour-detail")
+//	public String tourdetail(Model model) {
+//		AccountDTO checkUser = (AccountDTO) session.getAttribute("account");
+//		if(checkUser == null) {
+//			checkUser = new AccountDTO();
+//			session.setAttribute("account", checkUser);
+//		}
+//		return "user/productdetail";
+//	}
+	
 	@GetMapping("tour-detail/{id}")
 	public String productDetail(@PathVariable("id") Integer id, Model model) {
 		

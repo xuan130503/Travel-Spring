@@ -13,22 +13,19 @@
 	rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Alex+Brush"
 	rel="stylesheet">
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
-	crossorigin="anonymous">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
-	crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+<script src="/node_modules/swiper/swiper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 <link rel="stylesheet" href="/user/css/open-iconic-bootstrap.min.css">
 <link rel="stylesheet" href="/user/css/animate.css">
-<link rel="stylesheet" href="/user/css/owl.carousel.min.css">
-<link rel="stylesheet" href="/user/css/owl.theme.default.min.css">
 <link rel="stylesheet" href="/user/css/magnific-popup.css">
 <link rel="stylesheet" href="/user/css/aos.css">
 <link rel="stylesheet" href="/user/css/ionicons.min.css">
@@ -37,215 +34,147 @@
 <link rel="stylesheet" href="/user/css/flaticon.css">
 <link rel="stylesheet" href="/user/css/icomoon.css">
 <link rel="stylesheet" href="/user/css/style.css">
+<link rel="stylesheet" href="/node_modules/swiper/swiper.min.css">
 <link rel="stylesheet" href="/user/css/tour-detail.css">
 <script nonce="6d052e1f-c170-4fc3-9b38-e3eeb83f439d">(function(w,d){!function(dK,dL,dM,dN){dK[dM]=dK[dM]||{};dK[dM].executed=[];dK.zaraz={deferred:[],listeners:[]};dK.zaraz.q=[];dK.zaraz._f=function(dO){return function(){var dP=Array.prototype.slice.call(arguments);dK.zaraz.q.push({m:dO,a:dP})}};for(const dQ of["track","set","debug"])dK.zaraz[dQ]=dK.zaraz._f(dQ);dK.zaraz.init=()=>{var dR=dL.getElementsByTagName(dN)[0],dS=dL.createElement(dN),dT=dL.getElementsByTagName("title")[0];dT&&(dK[dM].t=dL.getElementsByTagName("title")[0].text);dK[dM].x=Math.random();dK[dM].w=dK.screen.width;dK[dM].h=dK.screen.height;dK[dM].j=dK.innerHeight;dK[dM].e=dK.innerWidth;dK[dM].l=dK.location.href;dK[dM].r=dL.referrer;dK[dM].k=dK.screen.colorDepth;dK[dM].n=dL.characterSet;dK[dM].o=(new Date).getTimezoneOffset();if(dK.dataLayer)for(const dX of Object.entries(Object.entries(dataLayer).reduce(((dY,dZ)=>({...dY[1],...dZ[1]})),{})))zaraz.set(dX[0],dX[1],{scope:"page"});dK[dM].q=[];for(;dK.zaraz.q.length;){const d_=dK.zaraz.q.shift();dK[dM].q.push(d_)}dS.defer=!0;for(const ea of[localStorage,sessionStorage])Object.keys(ea||{}).filter((ec=>ec.startsWith("_zaraz_"))).forEach((eb=>{try{dK[dM]["z_"+eb.slice(7)]=JSON.parse(ea.getItem(eb))}catch{dK[dM]["z_"+eb.slice(7)]=ea.getItem(eb)}}));dS.referrerPolicy="origin";dS.src="../../cdn-cgi/zaraz/sd0d9.js?z="+btoa(encodeURIComponent(JSON.stringify(dK[dM])));dR.parentNode.insertBefore(dS,dR)};["complete","interactive"].includes(dL.readyState)?zaraz.init():dK.addEventListener("DOMContentLoaded",zaraz.init)}(w,d,"zarazData","script");})(window,document);</script>
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
-<script
-	src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-<script type="module">
-  const swiper = new Swiper(".swiper", {
-    // Optional parameters
-    slidesPerView: 3,
-    loop: true,
-    spaceBetween: 30,
-
-    // If we need pagination
-    pagination: {
-      el: ".swiper-pagination",
-    },
-
-    // Navigation arrows
-    navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev",
-    },
-
-    // And if we need scrollbar
-    scrollbar: {
-      el: ".swiper-scrollbar",
-    },
-  });
-</script>
-
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body>
 	<div th:insert="~{include/_Nav}"></div>
+	<section>
+		<div id="slider-container" class="slider-container container-fluid m-0 p-0 row justify-content-lg-between p_header" style="background: url(''); background-size: cover; background-repeat: no-repeat;">
+	        <div class="overlay"></div>
+	        <div class="col-12 col-lg-4 col-md-4 col-sm-12" style="z-index: 1;">
+	            <div th:each="schedule, start:${schedules}" class="slide-content" style="color:white"
+	            th:attr="data-title=${schedule.title}, data-description=${schedule.description}">
+	                <h1 class="slide-title" th:if="${start.index == 0}">[[${schedule.title}]]</h1>
+	                <p class="slide-description" th:if="${start.index == 0}">[[${schedule.description}]]</p>
+	                <button type="button" class="btn btn-info" th:if="${start.index == 0}">Order Now</button>
+	            </div>
+	        </div>
+	        <div class="mt-5 col-12 col-lg-7 col-md-7 col-sm-12">
+	            <section id="tranding">
+	                <div class="container">
+	                <div class="swiper tranding-slider">
+	                    <div class="swiper-wrapper">
+	                        <!-- Slide-start -->
+	                        <div th:each="schedule:${schedules}" class="swiper-slide tranding-slide">
+	                            <div class="tranding-slide-img">
+	                            	<img th:src="${schedule.Image}" alt="Tranding">
+	                            </div>
+	                            <div class="tranding-slide-content">
+		                            <div class="tranding-slide-content-bottom">
+		                                
+		                            </div>
+	                            </div>
+	                        </div>
+	                    </div>
+	        
+	                    <div class="tranding-slider-control">
+	                        <div class="swiper-button-prev slider-arrow">
+	                            <ion-icon name="arrow-back-outline"></ion-icon>
+	                        </div>
+	                        <div class="swiper-button-next slider-arrow">
+	                            <ion-icon name="arrow-forward-outline"></ion-icon>
+	                        </div>
+	                        <!-- <div class="swiper-pagination"></div> -->
+	                    </div>
+	        
+	                </div>
+	                </div>
+	            </section>
+	        </div>
+	    </div>
+	    <script th:inline="javascript">
 
-	<div class="hero-wrap js-fullheight"
-		style="background-image: url('/user/images/bg_1.jpg');">
-		<div class="overlay"></div>
-		<div class="container">
-			<div
-				class="row no-gutters slider-text js-fullheight align-items-center justify-content-start"
-				data-scrollax-parent="true">
-				<div class="col-md-9 ftco-animate"
-					data-scrollax=" properties: { translateY: '70%' }">
-					<h1 class="mb-4"
-						data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">
-						<strong>Explore <br></strong> your amazing city
-					</h1>
-					<p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Find
-						great places to stay, eat, shop, or visit from local experts</p>
-					<div class="block-17 my-4">
-						<form action="#" method="post" class="d-block d-flex">
-							<div class="fields d-block d-flex">
-								<div class="textfield-search one-third">
-									<input type="text" class="form-control"
-										placeholder="Ex: food, service, hotel">
-								</div>
-								<div class="select-wrap one-third">
-									<div class="icon">
-										<span class="ion-ios-arrow-down"></span>
-									</div>
-									<select name="" id="" class="form-control"
-										placeholder="Keyword search">
-										<option value="">Where</option>
-										<option value="">San Francisco USA</option>
-										<option value="">Berlin Germany</option>
-										<option value="">Lodon United Kingdom</option>
-										<option value="">Paris Italy</option>
-									</select>
-								</div>
-							</div>
-							<input type="submit" class="search-submit btn btn-primary"
-								value="Search">
-						</form>
-					</div>
-					<p>Or browse the highlights</p>
-					<p class="browse d-md-flex">
-						<span
-							class="d-flex justify-content-md-center align-items-md-center"><a
-							href="#"><i class="flaticon-fork"></i>Restaurant</a></span> <span
-							class="d-flex justify-content-md-center align-items-md-center"><a
-							href="#"><i class="flaticon-hotel"></i>Hotel</a></span> <span
-							class="d-flex justify-content-md-center align-items-md-center"><a
-							href="#"><i class="flaticon-meeting-point"></i>Places</a></span> <span
-							class="d-flex justify-content-md-center align-items-md-	center"><a
-							href="#"><i class="flaticon-shopping-bag"></i>Shopping</a></span>
-					</p>
-				</div>
-			</div>
-		</div>
-	</div>
-	<section class="ftco-section services-section bg-light">
-		<div class="container">
-			<div class="row d-flex">
-				<div class="col-md-3 d-flex align-self-stretch ftco-animate">
-					<div class="media block-6 services d-block text-center">
-						<div class="d-flex justify-content-center">
-							<div class="icon">
-								<span class="flaticon-guarantee"></span>
-							</div>
-						</div>
-						<div class="media-body p-2 mt-2">
-							<h3 class="heading mb-3">Best Price Guarantee</h3>
-							<p>A small river named Duden flows by their place and
-								supplies.</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-3 d-flex align-self-stretch ftco-animate">
-					<div class="media block-6 services d-block text-center">
-						<div class="d-flex justify-content-center">
-							<div class="icon">
-								<span class="flaticon-like"></span>
-							</div>
-						</div>
-						<div class="media-body p-2 mt-2">
-							<h3 class="heading mb-3">Travellers Love Us</h3>
-							<p>A small river named Duden flows by their place and
-								supplies.</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-3 d-flex align-self-stretch ftco-animate">
-					<div class="media block-6 services d-block text-center">
-						<div class="d-flex justify-content-center">
-							<div class="icon">
-								<span class="flaticon-detective"></span>
-							</div>
-						</div>
-						<div class="media-body p-2 mt-2">
-							<h3 class="heading mb-3">Best Travel Agent</h3>
-							<p>A small river named Duden flows by their place and
-								supplies.</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-3 d-flex align-self-stretch ftco-animate">
-					<div class="media block-6 services d-block text-center">
-						<div class="d-flex justify-content-center">
-							<div class="icon">
-								<span class="flaticon-support"></span>
-							</div>
-						</div>
-						<div class="media-body p-2 mt-2">
-							<h3 class="heading mb-3">Our Dedicated Support</h3>
-							<p>A small river named Duden flows by their place and
-								supplies.</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+	    var TrandingSlider = new Swiper('.tranding-slider', {
+	        effect: 'coverflow',
+	        grabCursor: true,
+	        centeredSlides: true,
+	        loop: false,
+	        slidesPerView: "auto",
+	        coverflowEffect: {
+	          rotate: 0,
+	          stretch: 0,
+	          depth: 100,
+	          modifier: 2.5,
+	        },
+	        pagination: {
+	          el: '.swiper-pagination',
+	          clickable: true,
+	        },
+	        navigation: {
+	          nextEl: '.swiper-button-next',
+	          prevEl: '.swiper-button-prev',
+	        }
+	      });
+	    function changeBackground(imageUrl) {
+	        var sliderContainer = document.getElementById('slider-container');
+	        sliderContainer.style.opacity = 0; // Đặt opacity thành 0
+	        setTimeout(function () {
+	            sliderContainer.style.backgroundImage = 'url(' + imageUrl + ')';
+	            sliderContainer.style.opacity = 1; // Đặt opacity thành 1
+	        }, 10); 
+	    }
+	    document.querySelector('.swiper-button-next').addEventListener('click', function () {
+	        var activeSlide = TrandingSlider.slides[TrandingSlider.activeIndex];
+	        var imageUrl = activeSlide.querySelector('img').getAttribute('src');
+	        var sliderContainer = document.getElementById('slider-container');
+	        sliderContainer.style.backgroundImage = 'url(' + imageUrl + ')';
+	        changeBackground(imageUrl);
+	        var activeSlideContent = document.querySelector('.slide-content');
+	        var title = activeSlideContent.getAttribute('data-title');
+	        var description = activeSlideContent.getAttribute('data-description');
+	        console.log(title);
+	        console.log(description);
+	        updateContent(title, description);
+	    });
+
+	    document.querySelector('.swiper-button-prev').addEventListener('click', function () {
+	        var activeSlide = TrandingSlider.slides[TrandingSlider.activeIndex];
+	        var imageUrl = activeSlide.querySelector('img').getAttribute('src');
+	        var sliderContainer = document.getElementById('slider-container');
+	        sliderContainer.style.backgroundImage = 'url(' + imageUrl + ')';
+	        changeBackground(imageUrl);
+	        var activeSlideContent = document.querySelector('.slide-content');
+	        var title = activeSlideContent.getAttribute('data-title');
+	        var description = activeSlideContent.getAttribute('data-description');
+	        console.log(title);
+	        console.log(description);
+	        updateContent(title, description);
+	    });
+
+	    TrandingSlider.on('transitionEnd', function () {
+	        var activeSlide = TrandingSlider.slides[TrandingSlider.activeIndex];
+	        var imageUrl = activeSlide.querySelector('img').getAttribute('src');
+	        var sliderContainer = document.getElementById('slider-container');
+	        sliderContainer.style.backgroundImage = 'url(' + imageUrl + ')';
+	        changeBackground(imageUrl);
+	        var activeSlideContent = document.querySelector('.slide-content');
+	        var title = activeSlideContent.getAttribute('data-title');
+	        var description = activeSlideContent.getAttribute('data-description');
+	        console.log(title);
+	        console.log(description);
+	        updateContent(title, description);
+	    });
+
+	    function updateContent(title, description) {
+	    	 var slideContent = document.querySelector('.slide-content');
+    	    slideContent.querySelector('.slide-title').textContent = title;
+    	    slideContent.querySelector('.slide-description').textContent = description;
+	    }
+	    </script>
 	</section>
-	<section class="ftco-section ftco-destination">
-		<div class="swiper">
-			<!-- Additional required wrapper -->
-			<div th:object="${image}" class="swiper-wrapper">
-				<!-- Slides -->
-				<div class="swiper-slide">
-					<img th:src="@{{image} (image=${image.Image1})}" alt=""
-						width="100%" height="100%" />
-				</div>
-				<div class="swiper-slide">
-					<img th:src="@{{image} (image=${image.Image2})}" alt=""
-						width="100%" height="100%" />
-				</div>
-				<div class="swiper-slide">
-					<img th:src="@{{image} (image=${image.Image3})}" alt=""
-						width="100%" height="100%" />
-				</div>
-				<div class="swiper-slide">
-					<img th:src="@{{image} (image=${image.Image4})}" alt=""
-						width="100%" height="100%" />
-				</div>
-				<div class="swiper-slide">
-					<img th:src="@{{image} (image=${image.Image5})}" alt=""
-						width="100%" height="100%" />
-				</div>
-				<div class="swiper-slide">
-					<img th:src="@{{image} (image=${image.Image1})}" alt=""
-						width="100%" height="100%" />
-				</div>
-				...
-			</div>
-			<!-- If we need pagination -->
-			<div class="swiper-pagination"></div>
 
-			<!-- If we need navigation buttons -->
-			<div class="swiper-button-prev"></div>
-			<div class="swiper-button-next"></div>
-
-			<!-- If we need scrollbar -->
-			<div class="swiper-scrollbar"></div>
-		</div>
-	</section>	
-	<section th:object="${tour}">
+    <section th:object="${tour}" class="mb-5">
 		<div class="container mt-5 mb-5">
 			<div class="d-flex row">
 				<div class="col-3 d-flex flex-column">
-					<h2 class="title-h2">[[${tour.Name}]]</h2>
-					<span class="text-hiden"> <svg
-							xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-							fill="currentColor" class="bi bi-geo-alt-fill mb-2"
-							viewBox="0 0 16 16">
-            <path
-								d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
-          </svg>[[${tour.Departure}]] - [[${tour.Destination}]]
+					<h2 class="title-h2">[[#{Departure}]]</h2>
+					<span class="text-hiden"> 
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-geo-alt-fill mb-2" viewBox="0 0 16 16">
+                     <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
+          </svg>[[#{Destination}]]
 					</span>
 				</div>
 
@@ -256,7 +185,7 @@
 						</div>
 						<div class="d-flex flex-column text-hiden">
 							<h1 class="text-hiden">Durations</h1>
-							<span class="title-span">[[${tour.Duration}]] Day - [[${tour.Duration-1}]] Night</span>
+							<span class="title-span text-uppercase">[[#{duration}]] Day</span>
 						</div>
 					</div>
 					<div></div>
@@ -269,7 +198,7 @@
 						</div>
 						<div class="d-flex flex-column">
 							<h1 class="text-hiden">Price for adult:</h1>
-							<span id="priceAdult" th:data-price="${tour.PriceAdult}" class="title-span"  style="color: #FF4B2B;">[[${tour.PriceAdult}]] $</span>
+							<span id="priceAdult" th:data-price="${tour.PriceAdult}" class="title-span"  style="color: #FF4B2B;">[[#{PriceAdult}]] $</span>
 						</div>
 					</div>
 				</div>
@@ -280,7 +209,7 @@
 						</div>
 						<div class="d-flex flex-column">
 							<h1 class="text-hiden">Price for child:</h1>
-							<span id="priceChildren" th:data-price="${tour.PriceChildren}" class="title-span" style="color: #FF4B2B;"><del>[[${tour.PriceAdult}]]$</del> - [[${tour.PriceChildren}]]$</span>
+							<span id="priceChildren" th:data-price="${tour.PriceChildren}" class="title-span" style="color: #FF4B2B;"><del>[[#{PriceAdult}]]$</del> - [[#{PriceAdult}]]$</span>
 						</div>
 					</div>
 				</div>
@@ -288,8 +217,8 @@
 
 		</div>
 		<hr class="new1">
-		<div class="container">
-			<div class="row justify-content-between">
+		<div class="container-fluid">
+			<div class="row justify-content-between m-5 p-5">
 				<div class="col-7 col-lg-7 col-sm-12 col-md-7 row title">
 					<div class="col-12 title">
 						<h3>Enjoy the Adventure</h3>
@@ -373,17 +302,17 @@
 								</p>
 							</div>
 							<div  class="accordion" id="accordionExample">
-								<div th:each="schedule:${schedules}" class="accordion-item">
+								<div th:each="schedule, index : ${schedules}" class="accordion-item">
 									<h2 class="accordion-header">
 										<button class="accordion-button" type="button"
-											data-bs-toggle="collapse" data-bs-target="#collapseOne"
-											aria-expanded="false" aria-controls="collapseOne">
+											data-bs-toggle="collapse" th:data-bs-target="'#collapse' + ${index.index}"
+											aria-expanded="false" th:aria-controls="'collapse' + ${index.index}">
 											<a class="text-decoration-none" href=""> 
-											<span>DAY 1</span> - [[${schedule.title}]] ([[${schedule.Time}]])
+											<span>DAY [[${index.index+1}]]</span> - [[${schedule.title}]] ([[${schedule.Time}]])
 											</a>
 										</button>
 									</h2>
-									<div id="collapseOne" class="accordion-collapse collapse show"
+									<div th:id="'collapse' + ${index.index}" th:class="${index.index == 0 ? 'ccordion-collapse collapse show':'ccordion-collapse collapse'}"
 										data-bs-parent="#accordionExample">
 										<div class="accordion-body">
 											[[${schedule.description}]]
@@ -527,7 +456,7 @@
 								help you make any necessary arrangements before your journey
 								begins.</p>
 							<div id="map" class="w-100">
-								<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d125418.05621372208!2d106.65328639999998!3d10.7872256!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1svi!2s!4v1691645572040!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+								<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d125418.05621372208!2d106.65328639999998!3d10.7872256!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1svi!2s!4v1691645572040!5m2!1svi!2s" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
 								</iframe>
 							</div>
 						</div>
@@ -537,16 +466,7 @@
 			</div>
 		</div>
 	</section>
-
 	<div th:insert="~{include/_Footer}"></div>
-
-	<div id="ftco-loader" class="show fullscreen">
-		<svg class="circular" width="48px" height="48px">
-			<circle class="path-bg" cx="24" cy="24" r="22" fill="none"
-				stroke-width="4" stroke="#eeeeee" />
-			<circle class="path" cx="24" cy="24" r="22" fill="none"
-				stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg>
-	</div>
 	<script>
         const adultsSelect = document.getElementById('adult');
         const childrenSelect = document.getElementById('children');
@@ -566,15 +486,7 @@
             displayElement.textContent =totalPrice + '$';
         }
     </script>
-    <script>
-	    $.ajax({
-	        success: function(response) {
-	            const successMessage = response.message;
-	            // Hiển thị thông báo
-	            alert(successMessage);
-	        }
-	    });
-    </script>
+    <!-- <script src="/user/js/productdetail.js"></script> -->
 	<script src="/user/js/jquery.min.js"></script>
 	<script src="/user/js/jquery-migrate-3.0.1.min.js"></script>
 	<script src="/user/js/popper.min.js"></script>
@@ -582,18 +494,13 @@
 	<script src="/user/js/jquery.easing.1.3.js"></script>
 	<script src="/user/js/jquery.waypoints.min.js"></script>
 	<script src="/user/js/jquery.stellar.min.js"></script>
-	<script src="/user/js/owl.carousel.min.js"></script>
+	<!-- <script src="/user/js/owl.carousel.min.js"></script> -->
 	<script src="/user/js/jquery.magnific-popup.min.js"></script>
 	<script src="/user/js/aos.js"></script>
 	<script src="/user/js/jquery.animateNumber.min.js"></script>
 	<script src="/user/js/bootstrap-datepicker.js"></script>
-	<script src="/user/js/jquery.timepicker.min.html"></script>
+	<!-- <script src="/user/js/jquery.timepicker.min.html"></script> -->
 	<script src="/user/js/scrollax.min.js"></script>
-	<script
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&amp;sensor=false"></script>
-	<script src="/user/js/google-map.js"></script>
-	<script src="/user/js/main.js"></script>
-
 	<script async
 		src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
 	<script>
