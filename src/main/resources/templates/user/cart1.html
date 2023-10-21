@@ -180,7 +180,7 @@
 					<h3 class="tile-title">Cart Detail</h3>
 					<input type="text" id="myInput" onkeyup="myFunction()"
 						placeholder="Nhập mã sản phẩm hoặc tên sản phẩm để tìm kiếm...">
-					<div class="du--lieu-san-pham">
+						<div class="du--lieu-san-pham">
 						<table class="table table-hover table-bordered">
 							<thead>
 								<tr>
@@ -189,40 +189,42 @@
 									<th class="so--luong">Star date - End date</th>
 									<th class="so--luong" width="10">Quantity Adult</th>
 									<th class="so--luong" width="10">Quantity Children</th>
-									<th class="so--luong">Price</th>
+									<th class="so--luong">PriceAdult</th>
+									<th class="so--luong">PriceChildren</th>
 									<th class="so--luong text-center"
 										style="text-align: center; vertical-align: middle;">Action</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr th:if="${cartItems}!=null" th:each="cartItem : ${cartItems}" class="cart-item">
-									<td>[[${cartItem.cartItem.TourId.Name}]]</td>
-									<td>[[${#dates.format(cartItem.cartItem.StartDate, 'dd-MM-yyyy')}]] - [[${#dates.format(cartItem.cartItem.EndDate, 'dd-MM-yyyy')}]]</td>
+									<td>[[${cartItem.TourId.Name}]]</td>
+									<td>[[${#dates.format(cartItem.StartDate, 'dd-MM-yyyy')}]] - [[${#dates.format(cartItem.EndDate, 'dd-MM-yyyy')}]]</td>
 									<td>
 										<select th:name="quantityChildren" id="adult" class="quantityAdult form-control">
-											<option th:value="${cartItem.cartItem.QuantityAdult}">[[${cartItem.cartItem.QuantityAdult}]]</option>
-											<option th:each="quantityAdult : ${#numbers.sequence(0,cartItem.quantityTotalAdult)}" th:value="${quantityAdult}">
+											<option th:value="${cartItem.QuantityAdult}">[[${cartItem.QuantityAdult}]]</option>
+											<option th:each="quantityAdult : ${#numbers.sequence(0,cartItem.TourId.quantityAdult)}" th:value="${quantityAdult}">
 												[[${quantityAdult}]]
 											</option>
 										</select>
 									</td>
 									<td>
 										<select th:name="quantityChildren" id="children" class="quantityChildren form-control">
-											<option th:value="${cartItem.cartItem.QuantityChildren}">[[${cartItem.cartItem.QuantityChildren}]]</option>
-											<option th:each="quantityChildren : ${#numbers.sequence(0,cartItem.quantityTotalChildren)}" th:value="${quantityChildren}">
+											<option th:value="${cartItem.QuantityChildren}">[[${cartItem.QuantityChildren}]]</option>
+											<option th:each="quantityChildren : ${#numbers.sequence(0,cartItem.TourId.quantityChildren)}" th:value="${quantityChildren}">
 												[[${quantityChildren}]]
 											</option>
 										</select>	
 									</td>
-									<td class="pricePerAdult" data-price="[[${cartItem.cartItem.TourId.Price}]]">
-										[[${cartItem.cartItem.TourId.Price}]]$ 
-										<span style="color:red;">
-											(Child:[[${cartItem.cartItem.TourId.Price*0.5}]]$)
-										</span>
+									<td class="pricePerAdult" data-price="[[${cartItem.PriceAdult]]">
+										[[${cartItem.PriceAdult}]]$ 
+										
+									 </td>
+									 <td class="pricePerChildren" data-price="[[${cartItem.PriceChildren}]]">
+									 	[[${cartItem.PriceChildren}]]$
 									 </td>
 
 									<td style="text-align: center; vertical-align: middle;">
-										<a th:href="@{|/travelfpoly/cart/delete/${cartItem.cartItem.CartItemId}|}">
+										<a th:href="@{|/travelfpoly/cart/delete/${cartItem.CartItemId}|}">
 											<button class="btn btn-primary btn-sm trash" type="button"
 												title="Xóa">
 												<i class="fas fa-trash-alt"></i>
@@ -334,8 +336,8 @@
 	            var quantityAdult = parseInt(row.querySelector(".quantityAdult").value);
 	            var quantityChildren = parseInt(row.querySelector(".quantityChildren").value);
 	            var pricePerAdult = parseFloat(row.querySelector(".pricePerAdult").textContent.replace('$', ''));
-	
-	            totalAmount += (quantityAdult * pricePerAdult) + (0.5 * pricePerAdult * quantityChildren);
+	            var pricePerAdult = parseFloat(row.querySelector(".pricePerChildren").textContent.replace('$', ''));
+	            totalAmount += (quantityAdult * pricePerAdult) + (pricePerChildren * quantityChildren);
 	        });
 	
 	        // Cập nhật giá trị tổng tiền trên giao diện

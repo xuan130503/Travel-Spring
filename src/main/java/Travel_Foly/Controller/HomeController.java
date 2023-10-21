@@ -16,6 +16,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +33,7 @@ import Travel_Foly.DAO.TourDAO;
 import Travel_Foly.DAO.TourImageDAO;
 import Travel_Foly.DAO.TourScheduleDAO;
 import Travel_Foly.DTO.AccountDTO;
+import Travel_Foly.DTO.CartItemDTO;
 import Travel_Foly.DTO.HotelDTO;
 import Travel_Foly.DTO.TourWithImageDTO;
 import Travel_Foly.Helper.DateHelper;
@@ -177,40 +179,40 @@ public class HomeController {
 		AccountDTO account = (AccountDTO)session.getAttribute("account");
 		System.out.println(account.getUserName());
 //		System.out.println(account.getUserName());
-//		Integer userId = account.getUserId();
-//		Account user = accountDao.findById(userId).get();
-//		Cart cart = cartDao.findByUserId(userId);
-//		if(cart ==null) {
-//			Cart cart1 = new Cart();
-//			cart1.setAddress(user.getAddress());
-//			cart1.setCart(user);
-//			cart1.setName(user.getFullName());
-//			cart1.setPhone(user.getPhone());
-//			cart1.setEmail(user.getEmail());
-//			cartDao.save(cart1);
-//			
-//			//
-//			Double totalPrice = cartItemDao.getTotal(userId);
-//	//		List<CartItem> cartItems = cartItemDao.findByCartId(cart.getCartId());
+		Integer userId = account.getUserId();
+		Account user = accountDao.findById(userId).get();
+		Cart cart = cartDao.findByUserId(userId);
+		if(cart == null) {
+			Cart cart1 = new Cart();
+			cart1.setAddress(user.getAddress());
+			cart1.setCart(user);
+			cart1.setName(user.getFullName());
+			cart1.setPhone(user.getPhone());
+			cart1.setEmail(user.getEmail());
+			cartDao.save(cart1);
+			
+			//
+			Double totalPrice = cartItemDao.getTotal(userId);
+			List<CartItem> cartItems = cartItemDao.findByCartId(cart1.getCartId());
 //			List<CartItemDTO> cartItems = cartItemDao.findCartItemDTOById(cart1.getCartId());
-//			model.addAttribute("cart", cart);
-//			model.addAttribute("cartItems", cartItems);
-//			model.addAttribute("totalPrice", totalPrice);
-//		}
-//		else {
-//			Double totalPrice = cartItemDao.getTotal(userId);
-//	//		List<CartItem> cartItems = cartItemDao.findByCartId(cart.getCartId());
+			model.addAttribute("cart", cart);
+			model.addAttribute("cartItems", cartItems);
+			model.addAttribute("totalPrice", totalPrice);
+		}
+		else {
+			Double totalPrice = cartItemDao.getTotal(userId);
+			List<CartItem> cartItems = cartItemDao.findByCartId(cart.getCartId());
 //			List<CartItemDTO> cartItems = cartItemDao.findCartItemDTOById(cart.getCartId());
-//			model.addAttribute("cart", cart);
-//			model.addAttribute("cartItems", cartItems);
-//			model.addAttribute("totalPrice", totalPrice);
-//		}
-		return "redirect:/travelfpoly/home";
+			model.addAttribute("cart", cart);
+			model.addAttribute("cartItems", cartItems);
+			model.addAttribute("totalPrice", totalPrice);
+		}
+		return "user/cart1";
 	}
 	@GetMapping("cart/delete/{id}")
 	public String deleteCartItem(@PathVariable("id") Integer id) {
-//		cartItemDao.deleteById(id);
-//		setAmount();
+		cartItemDao.deleteById(id);
+		setAmount();
 		return "redirect:/travelfpoly/cart";
 	}
 	@PostMapping("cart/book/{id}")
@@ -281,6 +283,8 @@ public class HomeController {
 		Sort sort=Sort.by(sortDirection,field.orElse("StarDate"));
 		Pageable pageable = PageRequest.of(page.orElse(0), 3,sort);
 		Page<OrderDetailTour> orderDetails = orderDetailTourDao.findOrderByUserId(account.getUserId(),pageable);
+		OrderDetailTour orderDetailTour = new OrderDetailTour();
+		model.addAttribute("orderDetailTour", orderDetailTour);
 		model.addAttribute("list", orderDetails);
 		return "user/order";
 	}
@@ -321,7 +325,42 @@ public class HomeController {
 		tourDao.save(tour);
 		return "redirect:/travelfpoly/order";
 	}
-	
+	@GetMapping("order/fill/{id}")
+	public String fillTour(@PathVariable("id") Integer id,Model model
+								,@RequestParam("field") Optional<String> field
+								,@RequestParam("sort") Optional<String> sortOrder
+								,@RequestParam("page") Optional<Integer> page
+							) {
+		AccountDTO account = (AccountDTO) session.getAttribute("account");
+		Sort.Direction sortDirection = sortOrder.map(value -> value.equals("asc") ? Sort.Direction.ASC : Sort.Direction.DESC)
+		.orElse(Sort.Direction.DESC);
+		Sort sort=Sort.by(sortDirection,field.orElse("StarDate"));
+		Pageable pageable = PageRequest.of(page.orElse(0), 3,sort);
+		Page<OrderDetailTour> orderDetails = orderDetailTourDao.findOrderByUserId(account.getUserId(),pageable);
+		
+		model.addAttribute("list", orderDetails);
+		OrderDetailTour order = orderDetailTourDao.findById(id).get();
+		model.addAttribute("orderDetailTour", order);
+		return "/user/order";
+	}
+	@PostMapping("order/update")
+	public String updateTour(
+					Model model,
+					@RequestParam("hiddenTourId") Integer id,
+					@RequestParam("quantityAdult") Integer qtyAdult,
+					@RequestParam("quantityChildren") Integer qtyChildren,
+					@RequestParam("starDate") java.sql.Date startdate
+			
+			) {
+		
+		OrderDetailTour order = orderDetailTourDao.findByOrderDetailTourId(id);
+		order.setStarDate(DateHelper.converDateSql(startdate));
+		order.setQuantityAdult(qtyAdult);
+		order.setQuantityChildren(qtyChildren);
+		order.setBookDate(new Date());
+		orderDetailTourDao.save(order);
+		return "redirect:/travelfpoly/order";
+	}
 	@PostMapping("addToCart/{tourId}/{userId}")
 	public String addToCart(Model model
 			,@PathVariable("tourId") Integer TourId

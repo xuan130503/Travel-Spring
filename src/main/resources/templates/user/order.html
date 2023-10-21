@@ -50,6 +50,15 @@
 <script nonce="6d052e1f-c170-4fc3-9b38-e3eeb83f439d">(function(w,d){!function(dK,dL,dM,dN){dK[dM]=dK[dM]||{};dK[dM].executed=[];dK.zaraz={deferred:[],listeners:[]};dK.zaraz.q=[];dK.zaraz._f=function(dO){return function(){var dP=Array.prototype.slice.call(arguments);dK.zaraz.q.push({m:dO,a:dP})}};for(const dQ of["track","set","debug"])dK.zaraz[dQ]=dK.zaraz._f(dQ);dK.zaraz.init=()=>{var dR=dL.getElementsByTagName(dN)[0],dS=dL.createElement(dN),dT=dL.getElementsByTagName("title")[0];dT&&(dK[dM].t=dL.getElementsByTagName("title")[0].text);dK[dM].x=Math.random();dK[dM].w=dK.screen.width;dK[dM].h=dK.screen.height;dK[dM].j=dK.innerHeight;dK[dM].e=dK.innerWidth;dK[dM].l=dK.location.href;dK[dM].r=dL.referrer;dK[dM].k=dK.screen.colorDepth;dK[dM].n=dL.characterSet;dK[dM].o=(new Date).getTimezoneOffset();if(dK.dataLayer)for(const dX of Object.entries(Object.entries(dataLayer).reduce(((dY,dZ)=>({...dY[1],...dZ[1]})),{})))zaraz.set(dX[0],dX[1],{scope:"page"});dK[dM].q=[];for(;dK.zaraz.q.length;){const d_=dK.zaraz.q.shift();dK[dM].q.push(d_)}dS.defer=!0;for(const ea of[localStorage,sessionStorage])Object.keys(ea||{}).filter((ec=>ec.startsWith("_zaraz_"))).forEach((eb=>{try{dK[dM]["z_"+eb.slice(7)]=JSON.parse(ea.getItem(eb))}catch{dK[dM]["z_"+eb.slice(7)]=ea.getItem(eb)}}));dS.referrerPolicy="origin";dS.src="../../cdn-cgi/zaraz/sd0d9.js?z="+btoa(encodeURIComponent(JSON.stringify(dK[dM])));dR.parentNode.insertBefore(dS,dR)};["complete","interactive"].includes(dL.readyState)?zaraz.init():dK.addEventListener("DOMContentLoaded",zaraz.init)}(w,d,"zarazData","script");})(window,document);</script>
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<style>
+	.form{
+		background-color: gray;
+	}
+	.form title{
+		font-size: 50px;
+		font-weight: bolder;
+	}
+</style>
 </head>
 <body>
 	<div th:insert="~{include/_Nav}"></div>
@@ -174,8 +183,49 @@
 	</section>
 	
 	<div class="container mt-5">
-        <h2 class="text-center">Order Tour</h2>
-    	<div class="block-17 my-4" style="border: 1px solid black;">
+		<div class="row formOrder">
+          <h3 class="tile">Order Tour</h3>
+            <form class="row" th:object="${orderDetailTour}" th:method="post" enctype="multipart/form-data">
+              <div class="form-group  col-md-4">
+                <label class="control-label">Tour Id</label>
+                <input th:name="tourId" th:value="${orderDetailTour.OrderDetailTourId}" class="form-control" type="text" disabled>
+                 <input type="hidden" th:name="hiddenTourId" th:value="${orderDetailTour.OrderDetailTourId}">
+              </div>
+              <div class="form-group  col-md-4">
+                <label class="control-label">Quantity Adult</label>
+                <input  th:name="quantityAdult" th:value="${orderDetailTour.QuantityAdult}" class="form-control" type="text" required>
+              </div>
+              <div class="form-group col-md-4">
+                <label class="control-label">Quantity Children</label>
+                <input  th:name="quantityChildren" th:value="${orderDetailTour.QuantityChildren}" class="form-control" type="text" required>
+              </div>
+              <div class="form-group col-md-4">
+                <label class="control-label">Price Adult</label>
+                <input  th:name="priceAdult" th:value="${orderDetailTour.PriceAdult}" class="form-control unable"  type="text" disabled>
+              </div>
+              <div class="form-group col-md-4">
+                <label class="control-label">Price Child</label>
+                <input  th:name="priceChildren" th:value="${orderDetailTour.PriceChildren}" class="form-control" type="text" disabled>
+              </div>
+              <div class="form-group col-md-4">
+                <label class="control-label">Start Date</label>
+                <input th:name="starDate" th:value="${#dates.format(orderDetailTour.StarDate, 'yyyy-MM-dd')}" class="form-control" type="date" required>
+              </div>
+              <div class="form-group col-md-4">
+                <label class="control-label">Book Date</label>
+                <input  th:name="bookDate" th:value="${#dates.format(orderDetailTour.BookDate, 'yyyy-MM-dd')}" class="form-control" type="date" disabled>
+              </div>
+			<div class="d-flex m-0">
+				<button class="btn btn-primary" th:formaction="@{/travelfpoly/order/update}" type="submit" style="margin-left: 15px; z-index:999; padding:0 2%;">Update</button>
+				<button class="btn btn-cancel" th:formaction="@{/travelfpoly/order/reset}" type="submit" style="margin-left: 15px; z-index:999;">Reset</button>
+			</div>
+			
+			
+		</form>
+			
+          </div>
+      <!--  <h2 class="text-center">Order Tour</h2>
+     	<div class="block-17 my-4" style="border: 1px solid black;">
 			<form th:action="@{/travelfpoly/order/search}" method="get" class="d-block d-flex">
 				<div class="fields d-block d-flex">
 					<div class="textfield-search one-third">
@@ -186,8 +236,8 @@
 				<input type="submit" class="search-submit btn btn-primary"
 					value="Search">
 			</form>
-		</div>    
-        <table class="table table-bordered border-info table-info">
+		</div>     -->
+        <table class="table table-bordered border-info table-info mt-5">
             <thead>
               <tr>
                 <th scope="col">
@@ -196,34 +246,19 @@
 					<a th:href="@{/travelfpoly/order(field=OrderDetailTour.Name,sort=desc)}"><i class="fas fa-arrow-down"></i></a>
                 </th>
                 <th scope="col" >
-                	Start Date
-                	<a th:href="@{/travelfpoly/order(field=StarDate,sort=asc)}"><i class="fas fa-arrow-up"></i></a>
-					<a th:href="@{/travelfpoly/order(field=StarDate,sort=desc)}"><i class="fas fa-arrow-down"></i></a>
-               	</th>
-                <th scope="col" >
-                	End Date
-                	<a th:href="@{/travelfpoly/order(field=EndDate,sort=asc)}"><i class="fas fa-arrow-up"></i></a>
-					<a th:href="@{/travelfpoly/order(field=EndDate,sort=desc)}"><i class="fas fa-arrow-down"></i></a>
-               	</th>
-                <th scope="col" >
-                	Adult
-                	<a th:href="@{/travelfpoly/order(field=Quantity,sort=asc)}"><i class="fas fa-arrow-up"></i></a>
-					<a th:href="@{/travelfpoly/order(field=Quantity,sort=desc)}"><i class="fas fa-arrow-down"></i></a>
+                	Quantity Adult
+                	<a th:href="@{/travelfpoly/order(field=QuantityAdult,sort=asc)}"><i class="fas fa-arrow-up"></i></a>
+					<a th:href="@{/travelfpoly/order(field=QuantityAdult,sort=desc)}"><i class="fas fa-arrow-down"></i></a>
                 </th>
                 <th scope="col" >
-                	Children
+                	Quantity Children
                 	<a th:href="@{/travelfpoly/order(field=QuantityChildren,sort=asc)}"><i class="fas fa-arrow-up"></i></a>
 					<a th:href="@{/travelfpoly/order(field=QuantityChildren,sort=desc)}"><i class="fas fa-arrow-down"></i></a>
                 </th>
                 <th scope="col" >
                 	Price
-                	<a th:href="@{/travelfpoly/order(field=Price,sort=asc)}"><i class="fas fa-arrow-up"></i></a>
-					<a th:href="@{/travelfpoly/order(field=Price,sort=desc)}"><i class="fas fa-arrow-down"></i></a>
-                </th>
-                <th scope="col" >
-                	Total
-                	<a th:href="@{/travelfpoly/order(field=TotalPrice,sort=asc)}"><i class="fas fa-arrow-up"></i></a>
-					<a th:href="@{/travelfpoly/order(field=TotalPrice,sort=desc)}"><i class="fas fa-arrow-down"></i></a>
+                	<a th:href="@{/travelfpoly/order(field=PriceAdult,sort=asc)}"><i class="fas fa-arrow-up"></i></a>
+					<a th:href="@{/travelfpoly/order(field=PriceAdult,sort=desc)}"><i class="fas fa-arrow-down"></i></a>
                 </th>
                 <th scope="col" >
                 	Book Date
@@ -231,30 +266,39 @@
 					<a th:href="@{/travelfpoly/order(field=BookDate,sort=desc)}"><i class="fas fa-arrow-down"></i></a>
                 </th>
                 <th scope="col" >
-                	Delete Tour
+                	Duration
+                	<a th:href="@{/travelfpoly/order(field=StarDate,sort=asc)}"><i class="fas fa-arrow-up"></i></a>
+					<a th:href="@{/travelfpoly/order(field=StarDate,sort=desc)}"><i class="fas fa-arrow-down"></i></a>
+                </th>
+                <th scope="col" >
+                	Setting
                	</th>
               </tr>
             </thead>
             <tbody>
               <tr th:each="order : ${list.content}">
                 <td>[[${order.OrderDetailTour.Name}]]</td>
-                <td>[[${#dates.format(order.StarDate, 'dd-MM-yyyy')}]]</td>
-                <td>[[${#dates.format(order.EndDate, 'dd-MM-yyyy')}]]</td>
-                <td>[[${order.Quantity}]]</td>
+                <td>[[${order.QuantityAdult}]]</td>
                 <td>[[${order.QuantityChildren}]]</td>
                 <td>
-                	[[${order.Price}]]$ 
+                	[[${order.PriceAdult}]]$ 
                 	<span style="color:red;">
-						(Child:[[${order.Price*0.5}]]$)
+						(Child:[[${order.PriceChildren}]]$)
 					</span>
                 
                 </td>
-                <td>[[${order.TotalPrice}]]$</td>
-                <td>[[${#dates.format(order.BookDate, 'dd-MM-yyyy')}]]</td>
+                <td>[[${#dates.format(order.BookDate, 'MM-dd-yyyy')}]]</td>
+                <td>[[${#dates.format(order.StarDate, 'MM-dd-yyyy')}]] &#10149; [[${#dates.format(order.EndDate, 'MM-dd-yyyy')}]]</td>
               	<td style="text-align: center; vertical-align: middle;">
+              		<a th:href="@{|/travelfpoly/order/fill/${order.OrderDetailTourId}|}">
+						<button class="btn btn-primary btn-sm trash" type="button"
+							title="Update">
+							<i class="fas fa-pen-square"></i>
+						</button>
+					</a>
 					<a th:href="@{|/travelfpoly/order/delete/${order.OrderDetailTourId}|}">
 						<button class="btn btn-primary btn-sm trash" type="button"
-							title="Xóa">
+							title="Delete">
 							<i class="fas fa-trash-alt"></i>
 						</button>
 					</a>

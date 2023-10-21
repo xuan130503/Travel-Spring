@@ -18,7 +18,10 @@ public interface OrderDetailTourDAO extends JpaRepository<OrderDetailTour,Intege
 			+ "And de.Status=1"
 			)
 	Page<OrderDetailTour> findOrderByUserId(Integer id,Pageable page);
-//	
+
+	@Query("Select de From OrderDetailTour de Where de.OrderDetailTourId = ?1")
+	OrderDetailTour findByOrderDetailTourId(Integer Id);
+	
 //	@Query("Select de From OrderDetailTour de "
 //			+ "Join OrderTour o On o.OrderTourId = de.OrderTour.OrderTourId "
 //			+ "Join Tour t On t.TourId = de.OrderDetailTour.TourId "

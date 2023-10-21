@@ -100,10 +100,8 @@
                     <tr th:each="order : ${listOrder.content}">
                       <td>[[${order.OrderDetailTourId}]]</td>
                       <td>[[${order.OrderTour.Name}]]</td>
-                      <td>
-                        [[${order.TotalPrice}]]
+                      <td th:text="${order.PriceAdult * order.QuantityAdult + order.PriceChildren * order.QuantityChildren}">
                       </td>
-                      <td><span class="badge bg-info">[[${order.status ? 'Đã hoàn thành':'Đã hủy'}]]</span></td>
                     </tr>
                     <!-- <tr>
                       <td>ER3835</td>
