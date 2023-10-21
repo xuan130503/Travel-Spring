@@ -403,11 +403,11 @@ public class HomeController {
 				return "redirect:/travelfpoly/cart";
 			}
 			model.addAttribute("message", "Insert cart is error please check your information!");
-			return "user/productdetail";
+			return "user/productDetail";
 		} catch (Exception e) {
 			model.addAttribute("message", "Insert cart tour");
 			e.printStackTrace();
-			return "user/productdetail";
+			return "user/productDetail";
 
 		}
 	}
@@ -418,7 +418,7 @@ public class HomeController {
 //			checkUser = new AccountDTO();
 //			session.setAttribute("account", checkUser);
 //		}
-//		return "user/productdetail";
+//		return "user/productDetail";
 //	}
 	
 	@GetMapping("tour-detail/{id}")
@@ -430,7 +430,7 @@ public class HomeController {
 		model.addAttribute("image", image);
 		model.addAttribute("tour", tour);
 		model.addAttribute("schedules", schedules);
-		return "user/productdetail";
+		return "user/productDetail";
 	}
 	@PostMapping("bookNow/{tourId}/{userId}")
 	public String booknow(Model model
@@ -476,11 +476,11 @@ public class HomeController {
 				return "redirect:/travelfpoly/order";
 			}
 			model.addAttribute("message", "Book tour is error please check your information!");
-			return "user/productdetail";
+			return "user/productDetail";
 		} catch (Exception e) {
 			model.addAttribute("message", "Can't book tour");
 			e.printStackTrace();
-			return "user/productdetail";
+			return "user/productDetail";
 
 		}
 		
