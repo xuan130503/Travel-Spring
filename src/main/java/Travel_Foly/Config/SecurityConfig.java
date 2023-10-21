@@ -19,44 +19,48 @@ import Travel_Foly.Service.UserDetailServiceImpl;
 public class SecurityConfig {
 	@Autowired
 	AccountDAO accountDao;
-		
+
 	@Bean
 	public DaoAuthenticationProvider getDaoAuthenticationProvider() {
-		DaoAuthenticationProvider daoAuthenticationProvider =  new DaoAuthenticationProvider();
+		DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
 		daoAuthenticationProvider.setUserDetailsService(new UserDetailServiceImpl(accountDao));
 		daoAuthenticationProvider.setPasswordEncoder(new BCryptPasswordEncoder());
-		
+
 		return daoAuthenticationProvider;
 	}
-	
+
 	@Bean
-	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
-		http.authorizeHttpRequests(auth ->{
-			auth.requestMatchers("/travelfpoly/account/login","/travelfpoly/account/logout","/travelfpoly/home","/travelfpoly/tour-detail","/travelfpoly/tour-detail/**").permitAll()
-			.requestMatchers("/travelfpoly/admin","/travelfpoly/admin/**").hasAnyRole("ADMIN")
-			.requestMatchers("/travelfpoly/cart","/travelfpoly/cart/**","/travelfpoly/order","/travelfpoly/order/**","/travelfpoly/addToCart/**","/travelfpoly/bookNow/**").hasAnyRole("USER")
-			.anyRequest().permitAll();
+	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+		http.authorizeHttpRequests(auth -> {
+			auth.requestMatchers("/travelfpoly/account/login", "/travelfpoly/account/logout", "/travelfpoly/home",
+					"/travelfpoly/tour-detail", "/travelfpoly/tour-detail/**").permitAll()
+					.requestMatchers("/travelfpoly/admin", "/travelfpoly/admin/**")
+					.hasAnyRole("ADMIN")
+					.requestMatchers("/travelfpoly/cart", "/travelfpoly/cart/**", "/travelfpoly/order",
+							"/travelfpoly/order/**", "/travelfpoly/addToCart/**", "/travelfpoly/bookNow/**")
+					.hasAnyRole("USER")
+					.anyRequest().permitAll();
 		})
-		.formLogin(login ->{
-			login.loginPage("/travelfpoly/account/login")
-			.loginProcessingUrl("/travelfpoly/account/login")
-			.defaultSuccessUrl("/travelfpoly/home",true);
-			
-		})
-		.logout(logout ->{
-			logout.logoutUrl("/travelfpoly/account/logout")
-			.logoutSuccessUrl("/travelfpoly/account/login");
-		})
-		.oauth2Login(auth ->{
-			auth.defaultSuccessUrl("/travelfpoly/home",true);
-		})
-		.exceptionHandling(ex ->{
-			ex.accessDeniedHandler((request,respone,asscessDeni) -> respone.sendRedirect("/travelfpoly/account/login"));
-		})
-		
-		.csrf(csrf -> csrf.disable())
-		.cors(cors ->cors.disable())
-		;
+				.formLogin(login -> {
+					login.loginPage("/travelfpoly/account/login")
+							.loginProcessingUrl("/travelfpoly/account/login")
+							.defaultSuccessUrl("/travelfpoly/home", true);
+
+				})
+				.logout(logout -> {
+					logout.logoutUrl("/travelfpoly/account/logout")
+							.logoutSuccessUrl("/travelfpoly/account/login");
+				})
+				.oauth2Login(auth -> {
+					auth.defaultSuccessUrl("/travelfpoly/home", true);
+				})
+				.exceptionHandling(ex -> {
+					ex.accessDeniedHandler(
+							(request, respone, asscessDeni) -> respone.sendRedirect("/travelfpoly/account/login"));
+				})
+
+				.csrf(csrf -> csrf.disable())
+				.cors(cors -> cors.disable());
 		return http.build();
 	}
 }
