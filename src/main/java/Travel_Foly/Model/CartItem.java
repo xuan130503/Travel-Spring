@@ -31,9 +31,10 @@ public class CartItem {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="TourId")
 	private Tour TourId;
-	
 	private Integer QuantityChildren;
 	private Integer QuantityAdult;
+	private Double PriceAdult;
+	private Double PriceChildren;
 	private Date StartDate;
 	private Date EndDate;
 }

@@ -44,12 +44,11 @@
 	<section>
 		<div id="slider-container" class="slider-container container-fluid m-0 p-0 row justify-content-lg-between p_header" style="background: url(''); background-size: cover; background-repeat: no-repeat;">
 	        <div class="overlay"></div>
-	        <div class="col-12 col-lg-4 col-md-4 col-sm-12" style="z-index: 1;">
-	            <div th:each="schedule, start:${schedules}" class="slide-content" style="color:white"
-	            th:attr="data-title=${schedule.title}, data-description=${schedule.description}">
-	                <h1 class="slide-title" th:if="${start.index == 0}">[[${schedule.title}]]</h1>
-	                <p class="slide-description" th:if="${start.index == 0}">[[${schedule.description}]]</p>
-	                <button type="button" class="btn btn-info" th:if="${start.index == 0}">Order Now</button>
+	        <div class="col-12 col-lg-5 col-md-5 col-sm-12 content" style="z-index: 1;">
+	            <div th:each="schedule, start:${schedules}" th:class="${start.index == 0 ? 'slide-content active':'slide-content'}" style="color:white">
+	                <h1 class="slide-title" >[[${schedule.title}]]</h1>
+	                <p class="slide-description">[[${schedule.description}]]</p>
+	                <button type="button" class="btn btn-info">Order Now</button>
 	            </div>
 	        </div>
 	        <div class="mt-5 col-12 col-lg-7 col-md-7 col-sm-12">
@@ -110,10 +109,10 @@
 	      });
 	    function changeBackground(imageUrl) {
 	        var sliderContainer = document.getElementById('slider-container');
-	        sliderContainer.style.opacity = 0; // Đặt opacity thành 0
+	        sliderContainer.style.opacity = 0;
 	        setTimeout(function () {
 	            sliderContainer.style.backgroundImage = 'url(' + imageUrl + ')';
-	            sliderContainer.style.opacity = 1; // Đặt opacity thành 1
+	            sliderContainer.style.opacity = 1;
 	        }, 10); 
 	    }
 	    document.querySelector('.swiper-button-next').addEventListener('click', function () {
@@ -122,12 +121,7 @@
 	        var sliderContainer = document.getElementById('slider-container');
 	        sliderContainer.style.backgroundImage = 'url(' + imageUrl + ')';
 	        changeBackground(imageUrl);
-	        var activeSlideContent = document.querySelector('.slide-content');
-	        var title = activeSlideContent.getAttribute('data-title');
-	        var description = activeSlideContent.getAttribute('data-description');
-	        console.log(title);
-	        console.log(description);
-	        updateContent(title, description);
+	        
 	    });
 
 	    document.querySelector('.swiper-button-prev').addEventListener('click', function () {
@@ -136,33 +130,26 @@
 	        var sliderContainer = document.getElementById('slider-container');
 	        sliderContainer.style.backgroundImage = 'url(' + imageUrl + ')';
 	        changeBackground(imageUrl);
-	        var activeSlideContent = document.querySelector('.slide-content');
-	        var title = activeSlideContent.getAttribute('data-title');
-	        var description = activeSlideContent.getAttribute('data-description');
-	        console.log(title);
-	        console.log(description);
-	        updateContent(title, description);
+	       
 	    });
-
 	    TrandingSlider.on('transitionEnd', function () {
 	        var activeSlide = TrandingSlider.slides[TrandingSlider.activeIndex];
 	        var imageUrl = activeSlide.querySelector('img').getAttribute('src');
 	        var sliderContainer = document.getElementById('slider-container');
 	        sliderContainer.style.backgroundImage = 'url(' + imageUrl + ')';
 	        changeBackground(imageUrl);
-	        var activeSlideContent = document.querySelector('.slide-content');
-	        var title = activeSlideContent.getAttribute('data-title');
-	        var description = activeSlideContent.getAttribute('data-description');
-	        console.log(title);
-	        console.log(description);
-	        updateContent(title, description);
+	        
 	    });
-
-	    function updateContent(title, description) {
-	    	 var slideContent = document.querySelector('.slide-content');
-    	    slideContent.querySelector('.slide-title').textContent = title;
-    	    slideContent.querySelector('.slide-description').textContent = description;
-	    }
+	    var slideContents = document.querySelectorAll('.slide-content');
+	    
+	    TrandingSlider.on('slideChange', function () {
+	        var activeIndex = TrandingSlider.activeIndex;
+	        slideContents.forEach(function (content) {
+	            content.classList.remove('active');
+	        });
+	        slideContents[activeIndex].classList.add('active');
+	    });
+	   
 	    </script>
 	</section>
 
@@ -170,11 +157,11 @@
 		<div class="container mt-5 mb-5">
 			<div class="d-flex row">
 				<div class="col-3 d-flex flex-column">
-					<h2 class="title-h2">[[#{Departure}]]</h2>
+					<h2 class="title-h2">[[${tour.Departure}]]</h2>
 					<span class="text-hiden"> 
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-geo-alt-fill mb-2" viewBox="0 0 16 16">
                      <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
-          </svg>[[#{Destination}]]
+          </svg>[[${tour.Destination}]]
 					</span>
 				</div>
 
@@ -185,7 +172,7 @@
 						</div>
 						<div class="d-flex flex-column text-hiden">
 							<h1 class="text-hiden">Durations</h1>
-							<span class="title-span text-uppercase">[[#{duration}]] Day</span>
+							<span class="title-span text-uppercase">[[${tour.duration}]] Day</span>
 						</div>
 					</div>
 					<div></div>
@@ -198,7 +185,7 @@
 						</div>
 						<div class="d-flex flex-column">
 							<h1 class="text-hiden">Price for adult:</h1>
-							<span id="priceAdult" th:data-price="${tour.PriceAdult}" class="title-span"  style="color: #FF4B2B;">[[#{PriceAdult}]] $</span>
+							<span id="priceAdult" th:data-price="${tour.PriceAdult}" class="title-span"  style="color: #FF4B2B;">[[${tour.PriceAdult}]] $</span>
 						</div>
 					</div>
 				</div>
@@ -209,7 +196,7 @@
 						</div>
 						<div class="d-flex flex-column">
 							<h1 class="text-hiden">Price for child:</h1>
-							<span id="priceChildren" th:data-price="${tour.PriceChildren}" class="title-span" style="color: #FF4B2B;"><del>[[#{PriceAdult}]]$</del> - [[#{PriceAdult}]]$</span>
+							<span id="priceChildren" th:data-price="${tour.PriceChildren}" class="title-span" style="color: #FF4B2B;"><del>[[${tour.PriceAdult}]]$</del> - [[${tour.PriceChildren}]]$</span>
 						</div>
 					</div>
 				</div>
@@ -308,7 +295,7 @@
 											data-bs-toggle="collapse" th:data-bs-target="'#collapse' + ${index.index}"
 											aria-expanded="false" th:aria-controls="'collapse' + ${index.index}">
 											<a class="text-decoration-none" href=""> 
-											<span>DAY [[${index.index+1}]]</span> - [[${schedule.title}]] ([[${schedule.Time}]])
+											<span>DAY [[${schedule.date}]] </span> - [[${schedule.title}]] ([[${schedule.Time}]])
 											</a>
 										</button>
 									</h2>

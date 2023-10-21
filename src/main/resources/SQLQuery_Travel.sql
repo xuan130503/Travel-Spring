@@ -51,6 +51,7 @@ VALUES
     (3, N'Tour Victoria Falls, Zambia', 280, 140, 10, 10, N'Hồ Chí Minh', N'Victoria Falls, Zambia', 1, 6, N'Khám phá thác nước Victoria Falls', N'Tour Victoria Falls sẽ đưa bạn đến một trong những thác nước mạnh nhất thế giới', ''),
     (4, N'Tour Petra, Jordan', 220, 110, 10, 10, N'Hồ Chí Minh', N'Petra, Jordan', 1, 4, N'Khám phá thành phố cổ Petra', N'Tour Petra sẽ đưa bạn đến một thành phố cổ độc đáo được khắc vào đá', '');
 	--thêm lịch trình
+	select * from tour_schedules
 	INSERT INTO tour_schedules(tour_id, title, description, date, time, image)
 VALUES
     -- Đà Nẵng
@@ -71,143 +72,142 @@ VALUES
     (2, N'Vườn quốc gia Cát Bà', N'Khám phá vườn quốc gia Cát Bà', '2', '15:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1689940609/Travel_FPoly/Image_Tourism/Ha_Long_Bay/image4.jpg'),
     (2, N'Bãi biển Tiên Ông', N'Tắm biển tại bãi biển Tiên Ông', '3', '13:30:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1689940609/Travel_FPoly/Image_Tourism/Ha_Long_Bay/image5.jpg'),
     (2, N'Thám thị trấn Tuần Châu', N'Đi thăm thị trấn Tuần Châu', '3', '07:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1689940609/Travel_FPoly/Image_Tourism/Ha_Long_Bay/image6.jpg'),
-    (2, N'Đêm trên tàu thuyền', N'Trải nghiệm đêm trên tàu thuyền ở vịnh Hạ Long', '07:00:00', '3', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1689940609/Travel_FPoly/Image_Tourism/Ha_Long_Bay/image7.jpg'),
+    (2, N'Đêm trên tàu thuyền', N'Trải nghiệm đêm trên tàu thuyền ở vịnh Hạ Long','3', '07:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1689940609/Travel_FPoly/Image_Tourism/Ha_Long_Bay/image7.jpg'),
 
 -- Italy
 
-    (4, N'Đấng Michelangelo', N'Khám phá Đấng Michelangelo', '1', '09:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018682/Travel_FPoly/Image_Tourism/ITALY/image1.jpg'),
-    (4, N'La Scala', N'Thăm nhà hát La Scala', '1', '10:30:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018682/Travel_FPoly/Image_Tourism/ITALY/image2.jpg'),
-    (4, N'Công viên Colosseum', N'Dạo chơi tại công viên Colosseum', '2', '11:30:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018682/Travel_FPoly/Image_Tourism/ITALY/image3.jpg'),
-    (4, N'Quảng trường St. Peter', N'Thăm quảng trường St. Peter', '2', '15:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018682/Travel_FPoly/Image_Tourism/ITALY/image4.jpg'),
-    (4, N'Milan Fashion District', N'Khám phá Milan Fashion District', '3', '13:30:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018682/Travel_FPoly/Image_Tourism/ITALY/image5.jpg'),
-    (4, N'Núi Vesuvius', N'Thăm núi lửa Vesuvius', '3', '07:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018682/Travel_FPoly/Image_Tourism/ITALY/image6.jpg'),
-    (4, N'Đêm tại Venice', N'Trải nghiệm đêm tại Venice', '3', '07:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018682/Travel_FPoly/Image_Tourism/ITALY/image7.jpg'),
+    (3, N'Đấng Michelangelo', N'Khám phá Đấng Michelangelo', '1', '09:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018682/Travel_FPoly/Image_Tourism/ITALY/image1.jpg'),
+    (3, N'La Scala', N'Thăm nhà hát La Scala', '1', '10:30:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018682/Travel_FPoly/Image_Tourism/ITALY/image2.jpg'),
+    (3, N'Công viên Colosseum', N'Dạo chơi tại công viên Colosseum', '2', '11:30:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018682/Travel_FPoly/Image_Tourism/ITALY/image3.jpg'),
+    (3, N'Quảng trường St. Peter', N'Thăm quảng trường St. Peter', '2', '15:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018682/Travel_FPoly/Image_Tourism/ITALY/image4.jpg'),
+    (3, N'Milan Fashion District', N'Khám phá Milan Fashion District', '3', '13:30:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018682/Travel_FPoly/Image_Tourism/ITALY/image5.jpg'),
+    (3, N'Núi Vesuvius', N'Thăm núi lửa Vesuvius', '3', '07:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018682/Travel_FPoly/Image_Tourism/ITALY/image6.jpg'),
+    (3, N'Đêm tại Venice', N'Trải nghiệm đêm tại Venice', '3', '07:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018682/Travel_FPoly/Image_Tourism/ITALY/image7.jpg'),
 
 -- Phố cổ Hội An
 
-    (5, N'Cầu An Hội', N'Thăm cầu An Hội', '1', '09:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018363/Travel_FPoly/Image_Tourism/Old_City_HoiAn/image1.jpg'),
-    (5, N'Chùa Cầu', N'Thăm chùa Cầu', '1', '10:30:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018363/Travel_FPoly/Image_Tourism/Old_City_HoiAn/image2.jpg'),
-    (5, N'Bãi biển Cửa Đại', N'Tắm biển tại bãi biển Cửa Đại', '2', '11:30:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018363/Travel_FPoly/Image_Tourism/Old_City_HoiAn/image3.jpg'),
-    (5, N'Phố cổ Hội An', N'Dạo chơi tại phố cổ Hội An', '2', '15:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018363/Travel_FPoly/Image_Tourism/Old_City_HoiAn/image4.jpg'),
-    (5, N'Quảng trường Sông Hoài', N'Thăm quảng trường Sông Hoài', '3', '13:30:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018363/Travel_FPoly/Image_Tourism/Old_City_HoiAn/image5.jpg'),
-    (5, N'Nhà cổ Đức An', N'Khám phá nhà cổ Đức An', '3', '07:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018363/Travel_FPoly/Image_Tourism/Old_City_HoiAn/image6.jpg'),
-    (5, N'Đêm tại biển An Bàng', N'Trải nghiệm đêm tại biển An Bàng', '3', '07:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018363/Travel_FPoly/Image_Tourism/Old_City_HoiAn/image7.jpg'),
+    (4, N'Cầu An Hội', N'Thăm cầu An Hội', '1', '09:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018363/Travel_FPoly/Image_Tourism/Old_City_HoiAn/image1.jpg'),
+    (4, N'Chùa Cầu', N'Thăm chùa Cầu', '1', '10:30:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018363/Travel_FPoly/Image_Tourism/Old_City_HoiAn/image2.jpg'),
+    (4, N'Bãi biển Cửa Đại', N'Tắm biển tại bãi biển Cửa Đại', '2', '11:30:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018363/Travel_FPoly/Image_Tourism/Old_City_HoiAn/image3.jpg'),
+    (4, N'Phố cổ Hội An', N'Dạo chơi tại phố cổ Hội An', '2', '15:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018363/Travel_FPoly/Image_Tourism/Old_City_HoiAn/image4.jpg'),
+    (4, N'Quảng trường Sông Hoài', N'Thăm quảng trường Sông Hoài', '3', '13:30:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018363/Travel_FPoly/Image_Tourism/Old_City_HoiAn/image5.jpg'),
+    (4, N'Nhà cổ Đức An', N'Khám phá nhà cổ Đức An', '3', '07:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018363/Travel_FPoly/Image_Tourism/Old_City_HoiAn/image6.jpg'),
+    (4, N'Đêm tại biển An Bàng', N'Trải nghiệm đêm tại biển An Bàng', '3', '07:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018363/Travel_FPoly/Image_Tourism/Old_City_HoiAn/image7.jpg'),
 
 -- Vũng Tàu
-    (6, N'Bãi Trước', N'Tắm biển tại bãi biển Trước', '1', '09:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018942/Travel_FPoly/Image_Tourism/VungTau/image1.jpg'),
-    (6, N'Tượng Chúa Kitô Vũng Tàu', N'Thăm tượng Chúa Kitô Vũng Tàu', '1', '10:30:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018942/Travel_FPoly/Image_Tourism/VungTau/image2.jpg'),
-    (6, N'Bãi Sau', N'Tắm biển tại bãi biển Sau', '2', '11:30:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018942/Travel_FPoly/Image_Tourism/VungTau/image3.jpg'),
-    (6, N'Dinh Cô', N'Thăm Dinh Cô', '2', '15:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018942/Travel_FPoly/Image_Tourism/VungTau/image4.jpg'),
-    (6, N'Chợ Cây Dừa', N'Khám phá Chợ Cây Dừa', '3', '13:30:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018942/Travel_FPoly/Image_Tourism/VungTau/image5.jpg'),
-    (6, N'Nhà hải sản Gành Rái', N'Thử các món hải sản tại Gành Rái', '3', '07:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018942/Travel_FPoly/Image_Tourism/VungTau/image6.jpg'),
-    (6, N'Đêm tại Bãi Dứa', N'Trải nghiệm đêm tại Bãi Dứa', '3', '07:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018942/Travel_FPoly/Image_Tourism/VungTau/image7.jpg'),
+    (5, N'Bãi Trước', N'Tắm biển tại bãi biển Trước', '1', '09:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018942/Travel_FPoly/Image_Tourism/VungTau/image1.jpg'),
+    (5, N'Tượng Chúa Kitô Vũng Tàu', N'Thăm tượng Chúa Kitô Vũng Tàu', '1', '10:30:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018942/Travel_FPoly/Image_Tourism/VungTau/image2.jpg'),
+    (5, N'Bãi Sau', N'Tắm biển tại bãi biển Sau', '2', '11:30:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018942/Travel_FPoly/Image_Tourism/VungTau/image3.jpg'),
+    (5, N'Dinh Cô', N'Thăm Dinh Cô', '2', '15:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018942/Travel_FPoly/Image_Tourism/VungTau/image4.jpg'),
+    (5, N'Chợ Cây Dừa', N'Khám phá Chợ Cây Dừa', '3', '13:30:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018942/Travel_FPoly/Image_Tourism/VungTau/image5.jpg'),
+    (5, N'Nhà hải sản Gành Rái', N'Thử các món hải sản tại Gành Rái', '3', '07:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018942/Travel_FPoly/Image_Tourism/VungTau/image6.jpg'),
+    (5, N'Đêm tại Bãi Dứa', N'Trải nghiệm đêm tại Bãi Dứa', '3', '07:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018942/Travel_FPoly/Image_Tourism/VungTau/image7.jpg'),
 
 -- Tây Bắc
 
-    (3, N'Đèo Ô Quy Hồ', N'Đi qua Đèo Ô Quy Hồ', '1', '09:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1691214398/Travel_FPoly/Image_Tourism/TayBac/image1.jpg'),
-    (3, N'Hang Động Sơn Đoòng', N'Khám phá Hang Động Sơn Đoòng', '1', '10:30:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1691214398/Travel_FPoly/Image_Tourism/TayBac/image2.jpg'),
-    (3, N'Mường Hoa Valley', N'Dạo chơi tại Mường Hoa Valley', '2', '11:30:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1691214398/Travel_FPoly/Image_Tourism/TayBac/image3.jpg'),
-    (3, N'Khu du lịch Fansipan', N'Thăm khu du lịch Fansipan', '2', '15:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1691214398/Travel_FPoly/Image_Tourism/TayBac/image4.jpg'),
-    (3, N'Bản Tả Phìn', N'Khám phá Bản Tả Phìn', '3', '13:30:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1691214398/Travel_FPoly/Image_Tourism/TayBac/image5.jpg'),
-    (3, N'Cơ sở sản xuất bát Tràng', N'Xem cách làm bát Tràng thủ công', '3', '07:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1691214398/Travel_FPoly/Image_Tourism/TayBac/image6jpg'),
-    (3, N'Đêm tại Sapa', N'Trải nghiệm đêm tại Sapa', '3', '07:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1691214398/Travel_FPoly/Image_Tourism/TayBac/image7.jpg'),
+    (6, N'Đèo Ô Quy Hồ', N'Đi qua Đèo Ô Quy Hồ', '1', '09:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1691214398/Travel_FPoly/Image_Tourism/TayBac/image1.jpg'),
+    (6, N'Hang Động Sơn Đoòng', N'Khám phá Hang Động Sơn Đoòng', '1', '10:30:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1691214398/Travel_FPoly/Image_Tourism/TayBac/image2.jpg'),
+    (6, N'Mường Hoa Valley', N'Dạo chơi tại Mường Hoa Valley', '2', '11:30:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1691214398/Travel_FPoly/Image_Tourism/TayBac/image3.jpg'),
+    (6, N'Khu du lịch Fansipan', N'Thăm khu du lịch Fansipan', '2', '15:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1691214398/Travel_FPoly/Image_Tourism/TayBac/image4.jpg'),
+    (6, N'Bản Tả Phìn', N'Khám phá Bản Tả Phìn', '3', '13:30:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1691214398/Travel_FPoly/Image_Tourism/TayBac/image5.jpg'),
+    (6, N'Cơ sở sản xuất bát Tràng', N'Xem cách làm bát Tràng thủ công', '3', '07:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1691214398/Travel_FPoly/Image_Tourism/TayBac/image6jpg'),
+    (6, N'Đêm tại Sapa', N'Trải nghiệm đêm tại Sapa', '3', '07:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1691214398/Travel_FPoly/Image_Tourism/TayBac/image7.jpg'),
 
 -- Paris
 
-    (4, N'Tháp Eiffel', N'Thăm Tháp Eiffel', '1', '09:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Paris/image1.jpg'),
-    (4, N'Bảo tàng Louvre', N'Thăm Bảo tàng Louvre', '1', '10:30:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Paris/image2.jpg'),
-    (4, N'Catedrala Notre-Dame', N'Thăm Nhà thờ Đức Bà', '2', '11:30:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Paris/image3.jpg'),
-    (4, N'Quảng trường Concorde', N'Thăm Quảng trường Concorde', '2', '15:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Paris/image4.jpg'),
-    (4, N'Khu phố Pigalle', N'Khám phá khu phố Pigalle', '3', '13:30:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Paris/image5.jpg'),
-    (4, N'Château de Versailles', N'Thăm Château de Versailles', '3', '07:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Paris/image6.jpg'),
-    (4, N'Đêm tại Montmartre', N'Trải nghiệm đêm tại Montmartre', '3', '07:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Paris/image7.jpg'),
-
+    (7, N'Tháp Eiffel', N'Thăm Tháp Eiffel', '1', '09:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Paris/image1.jpg'),
+    (7, N'Bảo tàng Louvre', N'Thăm Bảo tàng Louvre', '1', '10:30:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Paris/image2.jpg'),
+    (7, N'Catedrala Notre-Dame', N'Thăm Nhà thờ Đức Bà', '2', '11:30:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Paris/image3.jpg'),
+    (7, N'Quảng trường Concorde', N'Thăm Quảng trường Concorde', '2', '15:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Paris/image4.jpg'),
+    (7, N'Khu phố Pigalle', N'Khám phá khu phố Pigalle', '3', '13:30:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Paris/image5.jpg'),
+    (7, N'Château de Versailles', N'Thăm Château de Versailles', '3', '07:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Paris/image6.jpg'),
+    (7, N'Đêm tại Montmartre', N'Trải nghiệm đêm tại Montmartre', '3', '07:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Paris/image7.jpg'),
 	-- Tour 1: Sài Gòn - Mekong
-
-    (1, N'Tham quan Cần Giờ', N'Mới trải nghiệm vùng sông nước hùng vĩ', '1', '08:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Paris/image1.jpg'),
-    (1, N'Cây cầu tre Cần Giờ', N'Tham quan cây cầu tre truyền thống', '1', '10:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Paris/image1.jpg'),
-    (1, N'Bình minh trên sông Cửu Long', N'Đón bình minh trên sông Cửu Long', '2', '05:30:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Paris/image1.jpg'),
-    (1, N'Cồn Phụng', N'Đặt chân lên Cồn Phụng', '2', '09:30:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Paris/image1.jpg'),
-    (1, N'Làng nghề Trà Vinh', N'Tham quan làng nghề Trà Vinh', '3', '11:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Paris/image1.jpg'),
-    (1, N'Vườn hoa tím Cái Bè', N'Chiêm ngưỡng vườn hoa tím Cái Bè', '3', '14:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Paris/image1.jpg'),
-    (1, N'Câu cá truyền thống', N'Trải nghiệm cảm giác câu cá truyền thống', '3', '06:30:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Paris/image1.jpgg'),
+    (8, N'Tham quan Cần Giờ', N'Mới trải nghiệm vùng sông nước hùng vĩ', '1', '08:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/SaiGon-Mekong/image1.jpg'),
+    (8, N'Cây cầu tre Cần Giờ', N'Tham quan cây cầu tre truyền thống', '1', '10:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/SaiGon-Mekong/image2.jpg'),
+    (8, N'Bình minh trên sông Cửu Long', N'Đón bình minh trên sông Cửu Long', '2', '05:30:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/SaiGon-Mekong/image3.jpg'),
+    (8, N'Cồn Phụng', N'Đặt chân lên Cồn Phụng', '2', '09:30:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/SaiGon-Mekong/image4.jpg'),
+    (8, N'Làng nghề Trà Vinh', N'Tham quan làng nghề Trà Vinh', '3', '11:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/SaiGon-Mekong/image5.jpg'),
+    (8, N'Vườn hoa tím Cái Bè', N'Chiêm ngưỡng vườn hoa tím Cái Bè', '3', '14:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/SaiGon-Mekong/image6.jpg'),
+    (8, N'Câu cá truyền thống', N'Trải nghiệm cảm giác câu cá truyền thống', '3', '06:30:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/SaiGon-Mekong/image7.jpgg'),
 
 -- Bali, Indonesia
 
-    (2, N'Bãi biển Seminyak', N'Khám phá bãi biển Seminyak', '1', '09:00:00', 'image1.jpg'),
-    (2, N'Đảo Ubud và các ngôi đền', N'Thăm đảo Ubud và các ngôi đền', '1', '10:30:00', 'image2.jpg'),
-    (2, N'Tour núi lửa Kintamani và hồ Batur', N'Tour núi lửa Kintamani và hồ Batur', '2', '08:00:00', 'image3.jpg'),
-    (2, N'Lễ hội truyền thống Bali', N'Trải nghiệm lễ hội truyền thống Bali', '2', '17:00:00', 'image4.jpg'),
-    (2, N'Vườn bướm Taman Kupu-Kupu', N'Tham quan vườn bướm Taman Kupu-Kupu', '3', '13:00:00', 'image5.jpg'),
-    (2, N'Công viên nước Waterbom', N'Dạo chơi tại công viên nước Waterbom', '3', '11:30:00', 'image6.jpg'),
-    (2, N'Tắm biển tại Nusa Dua', N'Tắm biển và thư giãn tại Nusa Dua', '3', '10:00:00', 'image7.jpg'),
+    (9, N'Bãi biển Seminyak', N'Khám phá bãi biển Seminyak', '1', '09:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Indonesia/image1.jpg'),
+    (9, N'Đảo Ubud và các ngôi đền', N'Thăm đảo Ubud và các ngôi đền', '1', '10:30:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Indonesia/image2.jpg'),
+    (9, N'Tour núi lửa Kintamani và hồ Batur', N'Tour núi lửa Kintamani và hồ Batur', '2', '08:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Indonesia/image3.jpg'),
+    (9, N'Lễ hội truyền thống Bali', N'Trải nghiệm lễ hội truyền thống Bali', '2', '17:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Indonesia/image4.jpg'),
+    (9, N'Vườn bướm Taman Kupu-Kupu', N'Tham quan vườn bướm Taman Kupu-Kupu', '3', '13:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Indonesia/image5.jpg'),
+    (9, N'Công viên nước Waterbom', N'Dạo chơi tại công viên nước Waterbom', '3', '11:30:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Indonesia/image6.jpg'),
+    (9, N'Tắm biển tại Nusa Dua', N'Tắm biển và thư giãn tại Nusa Dua', '3', '10:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Indonesia/image7.jpg'),
 -- Kyoto, Japan
 
-    (3, N'Vườn hoa Kinkaku-ji', N'Tham quan vườn hoa Kinkaku-ji', '1', '09:30:00', 'image1.jpg'),
-    (3, N'Đền Kiyomizu-dera', N'Thăm đền Kiyomizu-dera và ngắm cảnh', '1', '10:00:00', 'image2.jpg'),
-    (3, N'Chợ Nishiki', N'Khám phá chợ Nishiki và thử đặc sản', '2', '11:00:00', 'image3.jpg'),
-    (3, N'Khu phố Gion', N'Dạo chơi tại khu phố Gion', '2', '15:00:00', 'image4.jpg'),
-    (3, N'Tour Kyoto Imperial Palace', N'Tour hoàng cung Kyoto', '3', '13:30:00', 'image5.jpg'),
-    (3, N'Vườn hoa Arashiyama', N'Chiêm ngưỡng vườn hoa Arashiyama', '3', '10:30:00', 'image6.jpg'),
-    (3, N'Khu phố Ponto-cho', N'Khám phá khu phố Ponto-cho vào ban đêm', '3', '18:00:00', 'image7.jpg'),
+    (10, N'Vườn hoa Kinkaku-ji', N'Tham quan vườn hoa Kinkaku-ji', '1', '09:30:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Japan/image1.jpg'),
+    (10, N'Đền Kiyomizu-dera', N'Thăm đền Kiyomizu-dera và ngắm cảnh', '1', '10:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Japan/image2.jpg'),
+    (10, N'Chợ Nishiki', N'Khám phá chợ Nishiki và thử đặc sản', '2', '11:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Japan/image3.jpg'),
+    (10, N'Khu phố Gion', N'Dạo chơi tại khu phố Gion', '2', '15:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Japan/image4.jpg'),
+    (10, N'Tour Kyoto Imperial Palace', N'Tour hoàng cung Kyoto', '3', '13:30:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Japan/image5.jpg'),
+    (10, N'Vườn hoa Arashiyama', N'Chiêm ngưỡng vườn hoa Arashiyama', '3', '10:30:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Japan/image6.jpg'),
+    (10, N'Khu phố Ponto-cho', N'Khám phá khu phố Ponto-cho vào ban đêm', '3', '18:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Japan/image7.jpg'),
 
 -- New York City, USA
 
-    (4, N'Thành phố New York', N'Tham quan trung tâm thành phố New York', '1', '09:00:00', 'image1.jpg'),
-    (4, N'Central Park', N'Dạo chơi tại Central Park', '1', '10:30:00', 'image2.jpg'),
-    (4, N'Bảo tàng nghệ thuật Metropolitan', N'Thăm bảo tàng nghệ thuật Metropolitan', '2', '11:30:00', 'image3.jpg'),
-    (4, N'Khu phố Chinatown', N'Khám phá khu phố Chinatown', '2', '15:00:00', 'image4.jpg'),
-    (4, N'Tour tòa nhà Empire State', N'Tour tòa nhà Empire State', '3', '13:30:00', 'image5.jpg'),
-    (4, N'Sông Hudson', N'Dạo chơi trên sông Hudson', '3', '10:30:00', 'image6.jpg'),
-    (4, N'Máng trượt trên tầng thượng', N'Trải nghiệm máng trượt trên tầng thượng', '3', '18:00:00', 'image7.jpg'),
+    (11, N'Thành phố New York', N'Tham quan trung tâm thành phố New York', '1', '09:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/NewYork/image1.jpg'),
+    (11, N'Central Park', N'Dạo chơi tại Central Park', '1', '10:30:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/NewYork/image2.jpg'),
+    (11, N'Bảo tàng nghệ thuật Metropolitan', N'Thăm bảo tàng nghệ thuật Metropolitan', '2', '11:30:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/NewYork/image3.jpg'),
+    (11, N'Khu phố Chinatown', N'Khám phá khu phố Chinatown', '2', '15:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/NewYork/image4.jpg'),
+    (11, N'Tour tòa nhà Empire State', N'Tour tòa nhà Empire State', '3', '13:30:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/NewYork/image5.jpg'),
+    (11, N'Sông Hudson', N'Dạo chơi trên sông Hudson', '3', '10:30:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/NewYork/image6.jpg'),
+    (11, N'Máng trượt trên tầng thượng', N'Trải nghiệm máng trượt trên tầng thượng', '3', '18:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/NewYork/image7.jpg'),
 
 -- Chichen Itza, Mexico
 
-    (5, N'Chichen Itza', N'Thăm di tích lịch sử Chichen Itza', '1', '09:30:00', 'image1.jpg'),
-    (5, N'Cenote Ik Kil', N'Trải nghiệm bơi tại cenote Ik Kil', '1', '11:00:00', 'image2.jpg'),
-    (5, N'Khu phố Valladolid', N'Khám phá khu phố Valladolid', '2', '12:30:00', 'image3.jpg'),
-    (5, N'Hacienda Sotuta de Peón', N'Thăm Hacienda Sotuta de Peón', '2', '14:00:00', 'image4.jpg'),
-    (5, N'Uxmal', N'Thăm di tích Uxmal', '3', '10:30:00', 'image5.jpg'),
-    (5, N'Chợ thủ công Mérida', N'Khám phá chợ thủ công Mérida', '3', '09:00:00', 'image6.jpg'),
-    (5, N'Tour biển họa tích Celestún', N'Trải nghiệm biển họa tích Celestún', '3', '07:30:00', 'image7.jpg'),
+    (12, N'Chichen Itza', N'Thăm di tích lịch sử Chichen Itza', '1', '09:30:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Mexico/image1.jpg'),
+    (12, N'Cenote Ik Kil', N'Trải nghiệm bơi tại cenote Ik Kil', '1', '11:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Mexico/image2.jpg'),
+    (12, N'Khu phố Valladolid', N'Khám phá khu phố Valladolid', '2', '12:30:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Mexico/image3.jpg'),
+    (12, N'Hacienda Sotuta de Peón', N'Thăm Hacienda Sotuta de Peón', '2', '14:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Mexico/image4.jpg'),
+    (12, N'Uxmal', N'Thăm di tích Uxmal', '3', '10:30:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Mexico/image5.jpg'),
+    (12, N'Chợ thủ công Mérida', N'Khám phá chợ thủ công Mérida', '3', '09:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Mexico/image6.jpg'),
+    (12, N'Tour biển họa tích Celestún', N'Trải nghiệm biển họa tích Celestún', '3', '07:30:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Mexico/image7.jpg'),
 -- Sydney, Australia
 
-    (6, N'Opera House Sydney', N'Thăm Nhà hát Opera Sydney', '1', '09:00:00', 'image1.jpg'),
-    (6, N'Circular Quay', N'Thăm bến tàu Circular Quay', '1', '10:30:00', 'image2.jpg'),
-    (6, N'Đảo Bondi', N'Thăm đảo Bondi và bãi biển', '2', '11:30:00', 'image3.jpg'),
-    (6, N'Royal Botanic Garden', N'Thăm Vườn hoàng gia Botanic', '2', '15:00:00', 'image4.jpg'),
-    (6, N'Tour Taronga Zoo', N'Tour thú vật Taronga Zoo', '3', '13:30:00', 'image5.jpg'),
-    (6, N'Màn trình diễn đêm Vivid Sydney', N'Trải nghiệm màn trình diễn đêm Vivid Sydney', '4', '20:00:00', 'image6.jpg'),
-    (6, N'Máng trượt đồi núi lớn', N'Trải nghiệm máng trượt đồi núi lớn', '3', '19:00:00', 'image7.jpg'),
+    (13, N'Opera House Sydney', N'Thăm Nhà hát Opera Sydney', '1', '09:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Australia/image1.jpg'),
+    (13, N'Circular Quay', N'Thăm bến tàu Circular Quay', '1', '10:30:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Australia/image2.jpg'),
+    (13, N'Đảo Bondi', N'Thăm đảo Bondi và bãi biển', '2', '11:30:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Australia/image3.jpg'),
+    (13, N'Royal Botanic Garden', N'Thăm Vườn hoàng gia Botanic', '2', '15:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Australia/image4.jpg'),
+    (13, N'Tour Taronga Zoo', N'Tour thú vật Taronga Zoo', '3', '13:30:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Australia/image5.jpg'),
+    (13, N'Màn trình diễn đêm Vivid Sydney', N'Trải nghiệm màn trình diễn đêm Vivid Sydney', '4', '20:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Australia/image6.jpg'),
+    (13, N'Máng trượt đồi núi lớn', N'Trải nghiệm máng trượt đồi núi lớn', '3', '19:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Australia/image7.jpg'),
 
 -- Cappadocia, Turkey
 
-    (7, N'Đảo bên cầu Cappadocia', N'Thăm đảo bên cầu Cappadocia', '1', '09:30:00', 'image1.jpg'),
-    (7, N'Ngôi làng Goreme', N'Thăm ngôi làng Goreme và các động', '1', '10:00:00', 'image2.jpg'),
-    (7, N'Khu phố thổ dân Avanos', N'Khám phá khu phố thổ dân Avanos', '2', '11:00:00', 'image3.jpg'),
-    (7, N'Khu vực thảo nguyên Uchisar', N'Thăm khu vực thảo nguyên Uchisar', '2', '15:30:00', 'image4.jpg'),
-    (7, N'Chợ người thợ làm đá', N'Thăm chợ người thợ làm đá', '3', '14:00:00', 'image5.jpg'),
-    (7, N'Tour bằng khinh khí cầu', N'Trải nghiệm tour bằng khinh khí cầu', '3', '06:00:00', 'image6.jpg'),
-    (7, N'Đêm trên thảo nguyên', N'Trải nghiệm đêm trên thảo nguyên', '3', '20:00:00', 'image7.jpg'),
+    (14, N'Đảo bên cầu Cappadocia', N'Thăm đảo bên cầu Cappadocia', '1', '09:30:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Turkey/image1.jpg'),
+    (14, N'Ngôi làng Goreme', N'Thăm ngôi làng Goreme và các động', '1', '10:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Turkey/image2.jpg'),
+    (14, N'Khu phố thổ dân Avanos', N'Khám phá khu phố thổ dân Avanos', '2', '11:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Turkey/image3.jpg'),
+    (14, N'Khu vực thảo nguyên Uchisar', N'Thăm khu vực thảo nguyên Uchisar', '2', '15:30:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Turkey/image4.jpg'),
+    (14, N'Chợ người thợ làm đá', N'Thăm chợ người thợ làm đá', '3', '14:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Turkey/image5.jpg'),
+    (14, N'Tour bằng khinh khí cầu', N'Trải nghiệm tour bằng khinh khí cầu', '3', '06:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Turkey/image6.jpg'),
+    (14, N'Đêm trên thảo nguyên', N'Trải nghiệm đêm trên thảo nguyên', '3', '20:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Turkey/image7.jpg'),
 
 --  Dubai, United Arab Emirates
-    (8, N'Tòa nhà Burj Khalifa', N'Thăm tòa nhà Burj Khalifa', '1', '10:00:00', 'image1.jpg'),
-    (8, N'Chợ vàng Dubai', N'Thăm chợ vàng Dubai', '1', '11:30:00', 'image2.jpg'),
-    (8, N'Khu phố cổ Al Fahidi', N'Khám phá khu phố cổ Al Fahidi', '2', '13:00:00', 'image3.jpg'),
-    (8, N'Khu vực thủy cung Atlantis', N'Thăm khu vực thủy cung Atlantis', '2', '14:00:30', 'image4.jpg'),
-    (8, N'Tour trên sa mạc', N'Trải nghiệm tour trên sa mạc', '3', '16:00:00', 'image5.jpg'),
-    (8, N'Khu phố Sheikh Zayed Road', N'Khám phá khu phố Sheikh Zayed Road', '3', '18:00:00', 'image6.jpg'),
-    (8, N'Dịch vụ sang trọng', N'Trải nghiệm dịch vụ sang trọng', '3', '20:00:00', 'image7.jpg'),
+    (15, N'Tòa nhà Burj Khalifa', N'Thăm tòa nhà Burj Khalifa', '1', '10:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Dubai/image1.jpg'),
+    (15, N'Chợ vàng Dubai', N'Thăm chợ vàng Dubai', '1', '11:30:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Dubai/image2.jpg'),
+    (15, N'Khu phố cổ Al Fahidi', N'Khám phá khu phố cổ Al Fahidi', '2', '13:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Dubai/image3.jpg'),
+    (15, N'Khu vực thủy cung Atlantis', N'Thăm khu vực thủy cung Atlantis', '2', '14:30:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Dubai/image4.jpg'),
+    (15, N'Tour trên sa mạc', N'Trải nghiệm tour trên sa mạc', '3', '16:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Dubai/image5.jpg'),
+    (15, N'Khu phố Sheikh Zayed Road', N'Khám phá khu phố Sheikh Zayed Road', '3', '18:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Dubai/image6.jpg'),
+    (15, N'Dịch vụ sang trọng', N'Trải nghiệm dịch vụ sang trọng', '3', '20:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Dubai/image7.jpg'),
 
 --  Santorini, Greece
-    (9, N'Fira', N'Thăm thị trấn Fira', '1', '10:00:00', 'image1.jpg'),
-    (9, N'Oia', N'Thăm làng Oia và ngắm hoàng hôn', '1', '11:30:00', 'image2.jpg'),
-    (9, N'Amoudi Bay', N'Thăm vịnh Amoudi Bay', '2', '13:00:00', 'image3.jpg'),
-    (9, N'Khu vườn nho Megalochori', N'Chiêm ngưỡng khu vườn nho Megalochori', '2', '15:00:00', 'image4.jpg'),
-    (9, N'Perivolos Beach', N'Tắm biển tại Perivolos Beach', '3', '16:30:00', 'image5.jpg'),
-    (9, N'Đảo Nea Kameni', N'Thăm đảo Nea Kameni và núi lửa', '4', '10:00:00', 'image6.jpg'),
-    (9, N'Nắng hoàng hôn tại Skaros', N'Trải nghiệm nắng hoàng hôn tại Skaros', '3', '18:00:00', 'image7.jpg');
-
+    (16, N'Fira', N'Thăm thị trấn Fira', '1', '10:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Greece/image1.jpg'),
+    (16, N'Oia', N'Thăm làng Oia và ngắm hoàng hôn', '1', '11:30:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Greece/image2.jpg'),
+    (16, N'Amoudi Bay', N'Thăm vịnh Amoudi Bay', '2', '13:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Greece/image3.jpg'),
+    (16, N'Khu vườn nho Megalochori', N'Chiêm ngưỡng khu vườn nho Megalochori', '2', '15:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Greece/image4.jpg'),
+    (16, N'Perivolos Beach', N'Tắm biển tại Perivolos Beach', '3', '16:30:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Greece/image5.jpg'),
+    (16, N'Đảo Nea Kameni', N'Thăm đảo Nea Kameni và núi lửa', '4', '10:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Greece/image6.jpg'),
+    (16, N'Nắng hoàng hôn tại Skaros', N'Trải nghiệm nắng hoàng hôn tại Skaros', '3', '18:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018511/Travel_FPoly/Image_Tourism/Greece/image7.jpg');
+	
+	select * from tour_images
 	--thêm hình ảnh cho tour
 	 INSERT INTO tour_images(tour_id,avatar, image1, image2, image3, image4, image5 )
  VALUES
@@ -266,7 +266,104 @@ VALUES
  'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Tourism/Paris/image3.jpg',
  'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Tourism/Paris/image4.jpg',
  'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Tourism/Paris/image5.jpg'
-  );
+  ),
+  (8,
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Tourism/SaiGon-MeKong/avatar.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Tourism/SaiGon-MeKong/image1.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Tourism/SaiGon-MeKong/image2.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Tourism/SaiGon-MeKong/image3.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Tourism/SaiGon-MeKong/image4.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Tourism/SaiGon-MeKong/image5.jpg'
+  ),
+  (9,
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Tourism/Indonesia/avatar.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Tourism/Indonesia/image1.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Tourism/Indonesia/image2.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Tourism/Indonesia/image3.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Tourism/Indonesia/image4.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Tourism/Indonesia/image5.jpg'
+  ),
+  (10,
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Tourism/Japan/avatar.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Tourism/Japan/image1.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Tourism/Japan/image2.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Tourism/Japan/image3.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Tourism/Japan/image4.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Tourism/Japan/image5.jpg'
+  ),
+  (11,
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Tourism/NewYork/avatar.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Tourism/NewYork/image1.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Tourism/NewYork/image2.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Tourism/NewYork/image3.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Tourism/NewYork/image4.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Tourism/NewYork/image5.jpg'
+  ),
+  (12,
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Tourism/Mexico/avatar.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Tourism/Mexico/image1.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Tourism/Mexico/image2.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Tourism/Mexico/image3.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Tourism/Mexico/image4.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Tourism/Mexico/image5.jpg'
+  ),
+  (13,
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Tourism/Australia/avatar.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Tourism/Australia/image1.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Tourism/Australia/image2.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Tourism/Australia/image3.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Tourism/Australia/image4.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Tourism/Australia/image5.jpg'
+  ),
+  (14,
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Tourism/Turkey/avatar.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Tourism/Turkey/image1.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Tourism/Turkey/image2.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Tourism/Turkey/image3.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Tourism/Turkey/image4.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Tourism/Turkey/image5.jpg'
+  ),
+  (15,
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Tourism/Dubai/avatar.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Tourism/Dubai/image1.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Tourism/Dubai/image2.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Tourism/Dubai/image3.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Tourism/Dubai/image4.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Tourism/Dubai/image5.jpg'
+  ),
+  (16,
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Tourism/Greece/avatar.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Tourism/Greece/image1.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Tourism/Greece/image2.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Tourism/Greece/image3.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Tourism/Greece/image4.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Tourism/Greece/image5.jpg'
+ ),
+ (17,
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Tourism/Peru/avatar.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Tourism/Peru/image1.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Tourism/Peru/image2.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Tourism/Peru/image3.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Tourism/Peru/image4.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Tourism/Peru/image5.jpg'
+ ),
+ (18,
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Tourism/Zambia/avatar.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Tourism/Zambia/image1.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Tourism/Zambia/image2.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Tourism/Zambia/image3.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Tourism/Zambia/image4.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Tourism/Zambia/image5.jpg'
+  ),
+  (19,
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Tourism/Jordan/avatar.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Tourism/Jordan/image1.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014981/Travel_FPoly/Image_Tourism/Jordan/image2.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Tourism/Jordan/image3.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Tourism/Jordan/image4.jpg',
+ 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Tourism/Jordan/image5.jpg'
+ );
+ 
 -- Insert CategoryHotel
 Insert into category_hotels (name)
 values

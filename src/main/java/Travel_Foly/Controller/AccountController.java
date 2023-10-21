@@ -47,6 +47,11 @@ public class AccountController {
 	public String login(Principal principal) {
 		getPricipal(principal);
 		return "user/signin";
+	}@GetMapping("login?error")
+	public String loginError(Principal principal, Model model) {
+		model.addAttribute("message", "Login is Error");
+		getPricipal(principal);
+		return "user/signin";
 	}
 	@PostMapping("login")
 	public void loginUser(
