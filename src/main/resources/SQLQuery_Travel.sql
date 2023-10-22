@@ -56,13 +56,13 @@ VALUES
 VALUES
     -- Đà Nẵng
 
-    /*(1, N'Biển Mỹ Khê', N'Thưởng thức biển Mỹ Khê', '1', '09:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018091/Travel_FPoly/Image_Tourism/Da_Nang/image1.jpg'),
+    (1, N'Biển Mỹ Khê', N'Thưởng thức biển Mỹ Khê', '1', '09:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018091/Travel_FPoly/Image_Tourism/Da_Nang/image1.jpg'),
     (1, N'Bà Nà Hills', N'Thăm khu du lịch Bà Nà Hills', '1', '10:30:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018091/Travel_FPoly/Image_Tourism/Da_Nang/image2.jpg'),
     (1, N'Ngũ Hành Sơn', N'Khám phá núi Ngũ Hành Sơn', '2', '11:30:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018091/Travel_FPoly/Image_Tourism/Da_Nang/image3.jpg'),
     (1, N'Phố cổ Hội An', N'Dạo chơi tại phố cổ Hội An', '2', '15:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018091/Travel_FPoly/Image_Tourism/Da_Nang/image4.jpg'),
     (1, N'Chùa Linh Ứng', N'Thăm chùa Linh Ứng', '2', '13:30:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018091/Travel_FPoly/Image_Tourism/Da_Nang/image5.jpg'),
     (1, N'Bãi biển Non Nước', N'Tắm biển tại bãi biển Non Nước', '3', '07:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018091/Travel_FPoly/Image_Tourism/Da_Nang/image6.jpg'),
-    (1, N'Đêm trên bán đảo Sơn Trà', N'Trải nghiệm đêm trên bán đảo Sơn Trà', '3', '07:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018091/Travel_FPoly/Image_Tourism/Da_Nang/image7.jpg'),*/
+    (1, N'Đêm trên bán đảo Sơn Trà', N'Trải nghiệm đêm trên bán đảo Sơn Trà', '3', '07:00:00', 'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018091/Travel_FPoly/Image_Tourism/Da_Nang/image7.jpg'),
 
 -- Vịnh Hạ Long
 
@@ -490,8 +490,10 @@ INSERT INTO hotel_images(hotel_id,avatar, image1, image2, image3, image4, image5
  'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014980/Travel_FPoly/Image_Hotel/Starwood_Hotel/image4.jpg',
  'https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690014979/Travel_FPoly/Image_Hotel/Starwood_Hotel/image5.jpg'
   );
-
+  use travel
   select *from order_detail_tours
   select * from category_tours
   select * from tours
   select * from accounts
+	select * from tour_images
+	select * from tour_schedules
