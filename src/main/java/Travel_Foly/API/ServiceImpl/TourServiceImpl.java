@@ -31,10 +31,9 @@ public class TourServiceImpl implements TourService {
         Tour tour = null;
         if (optional.isPresent()) {
             tour = optional.get();
-        } else {
-            throw new RuntimeException(" Employee not 	found for id :: " + TourId);
         }
         return tour;
+
     }
 
     @Override

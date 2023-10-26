@@ -13,7 +13,7 @@ import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
 @Configuration
-public class I18NConfig implements WebMvcConfigurer{
+public class I18NConfig implements WebMvcConfigurer {
 	@Bean("messageSource")
 	public MessageSource getMessageSource() {
 		ReloadableResourceBundleMessageSource ms = new ReloadableResourceBundleMessageSource();
@@ -21,20 +21,22 @@ public class I18NConfig implements WebMvcConfigurer{
 		ms.setBasenames("classpath:i18n/language");
 		return ms;
 	}
+
 	@Bean("localeResolver")
 	public LocaleResolver getLocalResolver() {
 		CookieLocaleResolver resolver = new CookieLocaleResolver();
 		resolver.setCookiePath("/");
-		resolver.setCookieMaxAge(10*24*60*60);
+		resolver.setCookieMaxAge(10 * 24 * 60 * 60);
 		resolver.setDefaultLocale(new Locale("en"));
 		return resolver;
 	}
+
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		LocaleChangeInterceptor locale = new LocaleChangeInterceptor();
 		locale.setParamName("lang");
 		registry.addInterceptor(locale)
-		.addPathPatterns("/**")
-		.excludePathPatterns("/images/**");
+				.addPathPatterns("/**")
+				.excludePathPatterns("/images/**");
 	}
 }
