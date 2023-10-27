@@ -21,13 +21,13 @@
 
 </head>
 
-<body onload="time()" class="app sidebar-mini rtl">
+<body onload="time()" class="app sidebar-mini rtl" style="margin-top: 0px;">
   <!-- Navbar-->
   <div th:insert="~{include/_HeaderAdmin}"></div>
   <!-- Sidebar menu-->
   <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
   <div th:insert="~{include/_AsideAdmin}"></div>
-  <main class="app-content">
+  <main class="app-content" style="margin-left: 50px;  ">
     <div class="row">
       <div class="col-md-12">
         <div class="app-title">
@@ -40,7 +40,7 @@
     </div>
     <div class="row">
       <!--Left-->
-      <div class="col-md-12 col-lg-6">
+      <div class="col-md-12 ">
         <div class="row">
           <!-- col-6 -->
           <div class="col-md-6">
@@ -100,10 +100,8 @@
                     <tr th:each="order : ${listOrder.content}">
                       <td>[[${order.OrderDetailTourId}]]</td>
                       <td>[[${order.OrderTour.Name}]]</td>
-                      <td>
-                        [[${order.TotalPrice}]]
-                      </td>
-                      <td><span class="badge bg-info">[[${order.status ? 'Đã hoàn thành':'Đã hủy'}]]</span></td>
+
+
                     </tr>
 
                   </tbody>
@@ -183,27 +181,6 @@
         </div>
       </div>
 
-      <div class="col-md-12 col-lg-6">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="tile">
-              <h3 class="tile-title">Dữ liệu 6 tháng đầu vào</h3>
-              <div class="embed-responsive embed-responsive-16by9">
-                <canvas class="embed-responsive-item" id="lineChartDemo"></canvas>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-12">
-            <div class="tile">
-              <h3 class="tile-title">Thống kê 6 tháng doanh thu</h3>
-              <div class="embed-responsive embed-responsive-16by9">
-                <canvas class="embed-responsive-item" id="barChartDemo"></canvas>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
 
     </div>
 

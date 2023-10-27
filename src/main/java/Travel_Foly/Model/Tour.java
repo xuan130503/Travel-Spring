@@ -12,6 +12,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
@@ -22,6 +23,7 @@ public class Tour {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer TourId;
 	@Column(columnDefinition = "nvarchar(100)")
+
 	private String Name;
 
 	private Boolean Available;
