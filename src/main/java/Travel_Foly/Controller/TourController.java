@@ -22,8 +22,9 @@ public class TourController {
     private TourService tourService;
 
     @GetMapping("tour")
-    public String index(Model model) {
+    public String index(Model model, String keyword) {
         model.addAttribute("getListTour", tourService.getListTour());
+
         return "admin/form-add-san-pham";
     }
 
@@ -40,16 +41,26 @@ public class TourController {
         return "redirect:/travelfpoly/admin/tour";
     }
 
-    @GetMapping("updateTour/{TourId}")
-    public String updateTour(@PathVariable("TourId") Integer TourId, Model model) {
-        Tour tour = tourService.updateTour(TourId);
+    @GetMapping("fillToTable/{TourId}")
+    public String fillToTable(@PathVariable("TourId") Integer TourId, Model model) {
+        Tour tour = tourService.findByTourId(TourId);
         model.addAttribute("tour", tour);
+
         return "admin/tour/form-add-tour";
+    }
+
+    @GetMapping("updateTour")
+    public String updateTour(Model model, @ModelAttribute(value = "tour") Tour tour) {
+        this.tourService.createTour(tour);
+        return null;
     }
 
     @GetMapping("deleteTour/{TourId}")
     public String deleteTour(@PathVariable("TourId") Integer TourId) {
         this.tourService.deleteTour(TourId);
+        // Tour tour = tourService.findByTourId(TourId);
+        // this.tourService.deleteTour(tour);
+        // System.out.println(tour);
         return "redirect:/travelfpoly/admin/tour";
     }
 
