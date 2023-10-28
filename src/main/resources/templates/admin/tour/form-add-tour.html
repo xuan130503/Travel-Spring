@@ -63,7 +63,7 @@
                                 <label class="control-label">Trạng thái</label>
                                 <div class="form-check">
                                     <input class="form-check-input" value="true" type="radio" id="flexRadioDefault1"
-                                        th:value="*{Available}" name="Available" checked>
+                                        th:value="*{Available}" name="Available">
                                     <label class="form-check-label" for="flexRadioDefault1">
                                         Sẵn sàng
                                     </label>
@@ -75,6 +75,11 @@
                                         Chưa sẵn sàng
                                     </label>
                                 </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="control-label">Mô tả</label>
+                                <textarea class="form-control" name="Description" th:field="*{Description}" cols="30"
+                                    rows="10"></textarea>
                             </div>
                             <div class="form-group col-md-6">
                                 <label class="control-label">Địa điểm đi</label>
