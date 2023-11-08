@@ -114,7 +114,14 @@
                 <button class="btn btn-save" type="submit" style="margin-left: 15px;">Lưu</button>
                 <button class="btn btn-primary" type="submit" style="margin-left: 15px;">Sửa</button>
                 <button class="btn btn-cancel" type="submit" style="margin-left: 15px;">Làm mới</button> -->
-
+              <div class="input-group">
+                <input type="text" name="keyword" class="form-control" placeholder="Search">
+                <div class="input-group-btn">
+                  <button class="btn btn-default" type="submit">
+                    <i class="glyphicon glyphicon-search"></i>
+                  </button>
+                </div>
+              </div>
             </form>
 
 
@@ -138,7 +145,7 @@
               </thead>
               <tbody>
                 <tr th:each="tour : ${getListTour}">
-                  <td th:text="${tour.TourId}"></td>
+                  <!-- <td th:text="${tour.TourId}"></td> -->
                   <td th:text="${tour.Name}"></td>
                   <td th:text="${tour.Available}"></td>
                   <td th:text="${tour.Description}"></td>
@@ -153,7 +160,7 @@
 
 
                   <td>
-                    <a th:href="@{/travelfpoly/admin/updateTour/{TourId}(TourId=${tour.TourId})}">
+                    <a th:href="@{/travelfpoly/admin/fillToTable/{TourId}(TourId=${tour.TourId})}">
                       <i class="fas fa-pen-square"></i>
                     </a>
                     <a th:href="@{/travelfpoly/admin/deleteTour/{TourId}(TourId=${tour.TourId})}">

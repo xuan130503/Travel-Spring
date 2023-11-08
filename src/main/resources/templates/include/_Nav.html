@@ -6,7 +6,84 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+	
 </head>
+<!-- <style>
+    body {
+      top: 0 !important;
+    }
+    iframe#\:1\.container, #google_translate_element {
+      display: none;
+    }
+  </style>
+  <script>
+    var listLanguage = ['undo,vi', 'en', 'cn,zh-CN', 'km'];
+    function googleTranslateElementInit() {
+      var arrValueItem = [];
+      $.each(listLanguage, function (index, item) {
+        var arrItem = item.split(',');
+        if (arrItem[1]) {
+          arrValueItem.push(arrItem[1]);
+        } else {
+          arrValueItem.push(arrItem[0]);
+        }
+      });
+      var stringValueItem = arrValueItem.join(',');
+      var translator = new google.translate.TranslateElement(
+        {
+          pageLanguage: arrValueItem[0],
+          includedLanguages: stringValueItem,
+          layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL,
+          autoDisplay: false,
+        }
+        , 'google_translate_element');
+    }
+    // Define a function to retrieve the currently selected language from storage
+    function getSelectedLanguageFromStorage() {
+      return localStorage.getItem('selectedLanguage');
+    }
+
+    // Define a function to store the selected language in storage
+    function setSelectedLanguageInStorage(selectedLanguage) {
+      localStorage.setItem('selectedLanguage', selectedLanguage);
+    }
+
+    function setLanguage(code, value) {
+      var googleTranslateElement = document.getElementById('google_translate_element').firstChild;
+      googleTranslateElement.querySelector('.goog-te-combo').value = value;
+      googleTranslateElement.querySelector('.goog-te-combo').dispatchEvent(new Event('change'));
+      $('.flag_language').attr('src', '/assets/flags/' + code + '.svg');
+      setSelectedLanguageInStorage(code);
+    }
+
+    $(document).ready(function() {
+      var currentLanguage = getSelectedLanguageFromStorage();
+      if (currentLanguage) {
+        $('.flag_language').attr('src', '/assets/flags/' + currentLanguage + '.svg');
+      }
+
+      $.each(listLanguage, function (index, item) {
+        var arrItem = item.split(',');
+        var code, value;
+        if (arrItem[1]) {
+          code = arrItem[0];
+          value = arrItem[1];
+        } else {
+          code = value = arrItem[0];
+        }
+        $('.language-select-' + code).click(function () {
+          $('[class*="language-select-"]').removeClass('font-weight-bold');
+          $(this).addClass('font-weight-bold');
+          if (code == 'undo') {
+            code = value;
+          }
+          setLanguage(code, value);
+        });
+      });
+    })
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <div id="google_translate_element"></div> -->
 <body>
 	<nav
 		class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
@@ -47,11 +124,14 @@
 			        	<a href="?lang=vi" class="m-1">
 				      		<img alt="" src="/user/images/coVietNam.png" width="30px">
 				      	</a>
+				      	<!-- <a href="javascript:{}" class="language-select-undo notranslate">Viet</a> -->
 			        </li>
+			        <span>|</span>
 			        <li class="nav-item mt-2">
 			        	<a href="?lang=en" class="m-1">
 							<img alt="" src="/user/images/coNuocAnh.png" width="30px">
 						</a>
+						<!-- <a href="javascript:{}" class="language-select-en notranslate">English</a> -->
 			        </li>
 				      	
 					
