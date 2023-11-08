@@ -36,4 +36,15 @@ public class TourServiceImpl implements TourService {
         this.tourDAO.deleteById(TourId);
     }
 
+    @Override
+    public Tour findByTourId(Integer TourId) {
+        return this.tourDAO.findByTourId(TourId);
+    }
+
+    // @Override
+    // public List<Tour> searchTour(String keyword) {
+
+    // return this.tourDAO.searchTour(keyword);
+    // }
+
 }

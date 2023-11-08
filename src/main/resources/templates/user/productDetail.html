@@ -415,11 +415,16 @@
 													</option>
 												</select> 
 											</div>
-											<div class="col-md-12 mt-3" style="font-weight: 400; text-transform: capitalize; margin-left: 5px; font-size: 24px; color: #1bbc9b;">
+											<div class="col-md-6 mt-5">
+												<select class="form-select" th:name="paymentMethod" aria-label="Default select example" style="height:36px; border-radius:10px; font-size:18px;">
+												  <option selected>Payment Methods</option>
+												  <option th:each="payment : ${paymentMethods}" th:value="${payment.key}">[[${payment.value}]]</option>
+												</select>
+											</div>
+											<div class="col-md-12 mt-2" style="font-weight: 400; text-transform: capitalize; margin-left: 5px; font-size: 24px; color: #1bbc9b;">
 												Tổng tiền: <span id="totalPriceDisplay" style="color:red;"></span>
 											</div>
 										</div>
-										
 									</div>
 									<div class="form-btn">
 										<button th:formaction="@{/travelfpoly/bookNow/{tourId}/{userId} (tourId=${tour.TourId}, userId=${session.account != null ? session.account.UserId : '' })}" class="submit-btn mb-3">Book Now</button>

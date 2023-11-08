@@ -3,6 +3,7 @@ package Travel_Foly.Model;
 import java.util.Date;
 import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -29,6 +30,8 @@ public class OrderDetailTour {
 	private Date EndDate;
 	private Date BookDate;
 	private Integer Status;
+	@Column(columnDefinition = "nvarchar(max)")
+	private String Base64;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "TourId")

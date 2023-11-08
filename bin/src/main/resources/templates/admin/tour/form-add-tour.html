@@ -48,8 +48,7 @@
                         </div>
 
 
-                        <form th:action="@{/travelfpoly/admin/createTour}" th:object="${tour}" method="post"
-                            class="row">
+                        <form th:object="${tour}" method="post" class="row">
                             <div class="form-group col-md-6">
                                 <label class="control-label">Mã tour</label>
                                 <input class="form-control" th:value="*{TourId}" name="TourId" type="text">
@@ -63,14 +62,14 @@
                                 <label class="control-label">Trạng thái</label>
                                 <div class="form-check">
                                     <input class="form-check-input" value="true" type="radio" id="flexRadioDefault1"
-                                        th:value="*{Available}" name="Available">
+                                           th:field="*{Available}" name="Available" *{Available==true ? 'active' : '' }>
                                     <label class="form-check-label" for="flexRadioDefault1">
                                         Sẵn sàng
                                     </label>
                                 </div>
                                 <div class="form-check">
                                     <input class="form-check-input" value="false" type="radio" id="flexRadioDefault2"
-                                        th:value="*{Available}" name="Available">
+                                        th:field="*{Available}" name="Available" *{Available==false ? 'active' : '' }>
                                     <label class="form-check-label" for="flexRadioDefault2">
                                         Chưa sẵn sàng
                                     </label>
@@ -122,8 +121,11 @@
                                 <input class="form-control" type="text" th:value="*{Duration}" name="Duration">
                             </div>
 
-                            <button class="btn btn-save" type="submit" style="margin-left: 15px;">Lưu</button>
-                            <button class="btn btn-primary" type="submit" style="margin-left: 15px;">Sửa</button>
+                            <button th:formaction="@{|/travelfpoly/admin/createTour|}" class="btn btn-save"
+                                type="submit" style="margin-left: 15px;">Lưu</button>
+
+                            <button th:formaction="@{|/travelfpoly/admin/createTour|}" class="btn btn-primary"
+                                type="submit" style="margin-left: 15px;">Sửa</button>
                         </form>
 
                         </form>
