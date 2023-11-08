@@ -7,12 +7,13 @@ use Travel;
 	('Silver'),
 	('Golden'),
 	('Diamon')
-	select * from intimates
+
 	 INSERT INTO accounts(user_name, pass_word, activated, address,age, email, full_name, phone, role,intimate_id)
 	 VALUES
 	 --12345
 	('tanduong','$2a$12$.FGCfBI6l8LlZgtT3q6dF.N73YqUgvjXQfod1tmO7wRltIaAtvYt.', 1, N'168 Võ Văn Kiệt', 21, 'duongnhuttan@gmail.com', 'Duong nhut tan', '0785123655',0,1),
 	('vantien','$2a$12$LFUDKedfUtczXdjZLKjOcuGXmEnWMztOAn5l48YElQqfyvf7fN8Ty', 1, N'168 Võ Văn Kiệt', 21, 'duongnhuttan@gmail.com', 'Duong nhut tan', '0785123655',0,1),
+	
 	--123
 	('tanduong001','$2a$12$dPw43chz4FBNO8zCrbQRFuYeS4UKUyqiayqF1PHhYgLHYh0FuTZ2S', 1, N'112 Trần Hưng Đạo',21, 'tanduong69@gmail.com', 'Dương Nhựt Tân', '0785123654',1,null),
 	 ('thanhtu002','$2a$12$DqHKOXHtBvJutoE6zB3dxumwcs5r.InlhKN0we06pLj5fMKSkhg02', 1, N'338 Nguyễn Văn Quá',12, 'tuthanh22012003@gmail.com', 'Ung Thanh Tú', '07541254',1,null),
@@ -31,7 +32,7 @@ use Travel;
 INSERT INTO tours (category_tour_id, Name, price_adult, price_children, quantity_adult, quantity_children, departure,
 						destination, available, duration, description, introduction, map)
 VALUES
-	(1, N'Đà Nẵng', 100, 50, 10, 10, N'Hồ Chí Minh', N'Đà Nẵng', 1, 3, N'Mở cửa cửa sổ ra biển xanh',N'Chào mừng bạn đến với hành trình khám phá vẻ đẹp tươi mới và hấp dẫn tại thành phố Đà Nẵng! Với danh tiếng là một điểm đến du lịch hàng đầu tại Việt Nam, Đà Nẵng hứa hẹn mang đến cho bạn những trải nghiệm đáng nhớ và phong cảnh thiên nhiên tuyệt đẹp.',''),
+	(1, N'Đà Nẵng', 0.1, 0.05, 10, 10, N'Hồ Chí Minh', N'Đà Nẵng', 1, 3, N'Mở cửa cửa sổ ra biển xanh',N'Chào mừng bạn đến với hành trình khám phá vẻ đẹp tươi mới và hấp dẫn tại thành phố Đà Nẵng! Với danh tiếng là một điểm đến du lịch hàng đầu tại Việt Nam, Đà Nẵng hứa hẹn mang đến cho bạn những trải nghiệm đáng nhớ và phong cảnh thiên nhiên tuyệt đẹp.',''),
     (1, N'Vịnh Hạ Long', 80, 50, 10, 10, N'Hồ Chí Minh', N'Đà Nẵng', 1, 3, N'Hành trình đến vùng đất thần tiên trên biển',N'Vịnh Hạ Long, vùng biển kỳ diệu nằm ở bắc Việt Nam, là một trong những kỳ quan thiên nhiên tuyệt đẹp của thế giới. Với hàng nghìn đảo đá vôi đan xen trên biển xanh, Vịnh Hạ Long là biểu tượng của sự hùng vĩ và kỳ bí của thiên nhiên.',''),
     (4, N'Italy', 150, 75, 10, 10, N'Hồ Chí Minh', N'Đà Nẵng', 1, 3, N'Khám phá vẻ đẹp văn hóa, lịch sử và nghệ thuật',N'Italy - đất nước của những kiệt tác nghệ thuật vĩ đại, nền văn hóa đậm đà và lịch sử phong phú. Nằm ở Nam châu Âu, Italy có tầm ảnh hưởng lớn đến nền văn minh thế giới với những thành tựu vượt thời gian.',''),
     (2, N'Phố cổ Hội An', 200, 100, 10, 10, N'Hồ Chí Minh', N'Đà Nẵng', 1, 3, N'Hành trình đi qua quá khứ và sắc màu văn hóa Việt Nam', N'Nằm ở miền Trung Việt Nam, Phố Cổ Hội An được coi là một trong những điểm đến du lịch phải đến ít nhất một lần trong đời. Với kiến trúc cổ kính, đường phố mềm mại và vị trí ven biển, Hội An là một hội tụ của lịch sử, văn hóa và nét đẹp thiên nhiên.',''),
