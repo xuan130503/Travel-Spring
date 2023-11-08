@@ -16,23 +16,18 @@ public class TourServiceImpl implements TourService {
     private TourDAO tourDAO;
 
     @Override
-    public List<Tour> getListTour() {
+    public List<Tour> getAllTours() {
         return this.tourDAO.findAll();
     }
 
     @Override
-    public void createTour(Tour tour) {
+    public void saveTour(Tour tour) {
         this.tourDAO.save(tour);
     }
 
     @Override
-    public Tour updateTour(Integer TourId) {
-        Optional<Tour> optional = tourDAO.findById(TourId);
-        Tour tour = null;
-        if (optional.isPresent()) {
-            tour = optional.get();
-        }
-        return tour;
+    public Tour getTourById(Integer TourId) {
+        return tourDAO.findById(TourId).orElse(null);
 
     }
 
