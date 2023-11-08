@@ -33,22 +33,12 @@
               <span class="nav__name">Home</span>
             </a>
 
-            <div class="nav__dropdown">
-              <a href="#" class="nav__link">
-                <i class='bx bx-user nav__icon'></i>
-                <span class="nav__name">Profile</span>
-                <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
-              </a>
 
-              <div class="nav__dropdown-collapse">
-                <div class="nav__dropdown-content">
-                  <a th:href="@{/travelfpoly/admin/tour}" class="nav__dropdown-item">Show tour</a>
-                  <a th:href="@{/travelfpoly/admin/show}" class="nav__dropdown-item">create tour</a>
+            <a th:href="@{/travelfpoly/admin/tour}" class="nav__link">
+              <i class='bx bx-user nav__icon'></i>
+              <span class="nav__name">Tour</span>
 
-                </div>
-              </div>
-            </div>
-
+            </a>
 
             <a href="/travelfpoly/admin/addstaff" class="nav__link">
               <i class='app-menu__icon bx bx-id-card'></i>

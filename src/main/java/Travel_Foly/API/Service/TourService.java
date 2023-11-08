@@ -9,13 +9,12 @@ import Travel_Foly.Model.Tour;
 @Component
 public interface TourService {
 
+    List<Tour> getAllTours();
     Tour findByTourId(Integer TourId);
 
-    List<Tour> getListTour();
+    void saveTour(Tour tour);
 
-    void createTour(Tour tour);
-
-    Tour updateTour(Integer TourId);
+    Tour getTourById(Integer TourId);
 
     void deleteTour(Integer tour);
 

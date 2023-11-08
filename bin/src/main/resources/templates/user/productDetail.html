@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Travel-FPoly</title>
+<meta charset="utf-8">
+<link href="/user/images/bee.png" rel="icon">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="/user/images/bee.png" rel="icon">
+<link
+	href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700"
+	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Alex+Brush"
+	rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+<script src="/node_modules/swiper/swiper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+<link rel="stylesheet" href="/user/css/open-iconic-bootstrap.min.css">
+<link rel="stylesheet" href="/user/css/animate.css">
+<link rel="stylesheet" href="/user/css/magnific-popup.css">
+<link rel="stylesheet" href="/user/css/aos.css">
+<link rel="stylesheet" href="/user/css/ionicons.min.css">
+<link rel="stylesheet" href="/user/css/bootstrap-datepicker.css">
+<link rel="stylesheet" href="/user/css/jquery.timepicker.css">
+<link rel="stylesheet" href="/user/css/flaticon.css">
+<link rel="stylesheet" href="/user/css/icomoon.css">
+<link rel="stylesheet" href="/user/css/style.css">
+<link rel="stylesheet" href="/node_modules/swiper/swiper.min.css">
+<link rel="stylesheet" href="/user/css/tour-detail.css">
+<script nonce="6d052e1f-c170-4fc3-9b38-e3eeb83f439d">(function(w,d){!function(dK,dL,dM,dN){dK[dM]=dK[dM]||{};dK[dM].executed=[];dK.zaraz={deferred:[],listeners:[]};dK.zaraz.q=[];dK.zaraz._f=function(dO){return function(){var dP=Array.prototype.slice.call(arguments);dK.zaraz.q.push({m:dO,a:dP})}};for(const dQ of["track","set","debug"])dK.zaraz[dQ]=dK.zaraz._f(dQ);dK.zaraz.init=()=>{var dR=dL.getElementsByTagName(dN)[0],dS=dL.createElement(dN),dT=dL.getElementsByTagName("title")[0];dT&&(dK[dM].t=dL.getElementsByTagName("title")[0].text);dK[dM].x=Math.random();dK[dM].w=dK.screen.width;dK[dM].h=dK.screen.height;dK[dM].j=dK.innerHeight;dK[dM].e=dK.innerWidth;dK[dM].l=dK.location.href;dK[dM].r=dL.referrer;dK[dM].k=dK.screen.colorDepth;dK[dM].n=dL.characterSet;dK[dM].o=(new Date).getTimezoneOffset();if(dK.dataLayer)for(const dX of Object.entries(Object.entries(dataLayer).reduce(((dY,dZ)=>({...dY[1],...dZ[1]})),{})))zaraz.set(dX[0],dX[1],{scope:"page"});dK[dM].q=[];for(;dK.zaraz.q.length;){const d_=dK.zaraz.q.shift();dK[dM].q.push(d_)}dS.defer=!0;for(const ea of[localStorage,sessionStorage])Object.keys(ea||{}).filter((ec=>ec.startsWith("_zaraz_"))).forEach((eb=>{try{dK[dM]["z_"+eb.slice(7)]=JSON.parse(ea.getItem(eb))}catch{dK[dM]["z_"+eb.slice(7)]=ea.getItem(eb)}}));dS.referrerPolicy="origin";dS.src="../../cdn-cgi/zaraz/sd0d9.js?z="+btoa(encodeURIComponent(JSON.stringify(dK[dM])));dR.parentNode.insertBefore(dS,dR)};["complete","interactive"].includes(dL.readyState)?zaraz.init():dK.addEventListener("DOMContentLoaded",zaraz.init)}(w,d,"zarazData","script");})(window,document);</script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+<body>
+	<div th:insert="~{include/_Nav}"></div>
+	<section>
+		<div id="slider-container" class="slider-container container-fluid m-0 p-0 row justify-content-lg-between p_header" style="background: url(''); background-size: cover; background-repeat: no-repeat;">
+	        <div class="overlay"></div>
+	        <div class="col-12 col-lg-5 col-md-5 col-sm-12 content" style="z-index: 1;">
+	            <div th:each="schedule, start:${schedules}" th:class="${start.index == 0 ? 'slide-content active':'slide-content'}" style="color:white">
+	                <h1 class="slide-title" >[[${schedule.title}]]</h1>
+	                <p class="slide-description">[[${schedule.description}]]</p>
+	                <button type="button" class="btn btn-info">Order Now</button>
+	            </div>
+	        </div>
+	        <div class="mt-5 col-12 col-lg-7 col-md-7 col-sm-12">
+	            <section id="tranding">
+	                <div class="container">
+	                <div class="swiper tranding-slider">
+	                    <div class="swiper-wrapper">
+	                        <!-- Slide-start -->
+	                        <div th:each="schedule:${schedules}" class="swiper-slide tranding-slide">
+	                            <div class="tranding-slide-img">
+	                            	<img th:src="${schedule.Image}" alt="Tranding">
+	                            </div>
+	                            <div class="tranding-slide-content">
+		                            <div class="tranding-slide-content-bottom">
+		                                
+		                            </div>
+	                            </div>
+	                        </div>
+	                    </div>
+	        
+	                    <div class="tranding-slider-control">
+	                        <div class="swiper-button-prev slider-arrow">
+	                            <ion-icon name="arrow-back-outline"></ion-icon>
+	                        </div>
+	                        <div class="swiper-button-next slider-arrow">
+	                            <ion-icon name="arrow-forward-outline"></ion-icon>
+	                        </div>
+	                        <!-- <div class="swiper-pagination"></div> -->
+	                    </div>
+	        
+	                </div>
+	                </div>
+	            </section>
+	        </div>
+	    </div>
+	    <script th:inline="javascript">
+
+	    var TrandingSlider = new Swiper('.tranding-slider', {
+	        effect: 'coverflow',
+	        grabCursor: true,
+	        centeredSlides: true,
+	        loop: false,
+	        slidesPerView: "auto",
+	        coverflowEffect: {
+	          rotate: 0,
+	          stretch: 0,
+	          depth: 100,
+	          modifier: 2.5,
+	        },
+	        pagination: {
+	          el: '.swiper-pagination',
+	          clickable: true,
+	        },
+	        navigation: {
+	          nextEl: '.swiper-button-next',
+	          prevEl: '.swiper-button-prev',
+	        }
+	      });
+	    function changeBackground(imageUrl) {
+	        var sliderContainer = document.getElementById('slider-container');
+	        sliderContainer.style.opacity = 0;
+	        setTimeout(function () {
+	            sliderContainer.style.backgroundImage = 'url(' + imageUrl + ')';
+	            sliderContainer.style.opacity = 1;
+	        }, 10); 
+	    }
+	    document.querySelector('.swiper-button-next').addEventListener('click', function () {
+	        var activeSlide = TrandingSlider.slides[TrandingSlider.activeIndex];
+	        var imageUrl = activeSlide.querySelector('img').getAttribute('src');
+	        var sliderContainer = document.getElementById('slider-container');
+	        sliderContainer.style.backgroundImage = 'url(' + imageUrl + ')';
+	        changeBackground(imageUrl);
+	        
+	    });
+
+	    document.querySelector('.swiper-button-prev').addEventListener('click', function () {
+	        var activeSlide = TrandingSlider.slides[TrandingSlider.activeIndex];
+	        var imageUrl = activeSlide.querySelector('img').getAttribute('src');
+	        var sliderContainer = document.getElementById('slider-container');
+	        sliderContainer.style.backgroundImage = 'url(' + imageUrl + ')';
+	        changeBackground(imageUrl);
+	       
+	    });
+	    TrandingSlider.on('transitionEnd', function () {
+	        var activeSlide = TrandingSlider.slides[TrandingSlider.activeIndex];
+	        var imageUrl = activeSlide.querySelector('img').getAttribute('src');
+	        var sliderContainer = document.getElementById('slider-container');
+	        sliderContainer.style.backgroundImage = 'url(' + imageUrl + ')';
+	        changeBackground(imageUrl);
+	        
+	    });
+	    var slideContents = document.querySelectorAll('.slide-content');
+	    
+	    TrandingSlider.on('slideChange', function () {
+	        var activeIndex = TrandingSlider.activeIndex;
+	        slideContents.forEach(function (content) {
+	            content.classList.remove('active');
+	        });
+	        slideContents[activeIndex].classList.add('active');
+	    });
+	   
+	    </script>
+	</section>
+
+    <section th:object="${tour}" class="mb-5">
+		<div class="container mt-5 mb-5">
+			<div class="d-flex row">
+				<div class="col-3 d-flex flex-column">
+					<h2 class="title-h2">[[${tour.Departure}]]</h2>
+					<span class="text-hiden"> 
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-geo-alt-fill mb-2" viewBox="0 0 16 16">
+                     <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
+          </svg>[[${tour.Destination}]]
+					</span>
+				</div>
+
+				<div class="col-3 d-flex">
+					<div class="d-flex gap-3 align-items-center">
+						<div class="icon-navbar">
+							<i class="fas fa-clock"></i>
+						</div>
+						<div class="d-flex flex-column text-hiden">
+							<h1 class="text-hiden">Durations</h1>
+							<span class="title-span text-uppercase">[[${tour.duration}]] Day</span>
+						</div>
+					</div>
+					<div></div>
+				</div>
+
+				<div class="col-3 d-flex">
+					<div class="d-flex gap-3 align-items-center">
+						<div class="icon-navbar">
+							<i class="fas fa-money-bill-wave"></i>
+						</div>
+						<div class="d-flex flex-column">
+							<h1 class="text-hiden">Price for adult:</h1>
+							<span id="priceAdult" th:data-price="${tour.PriceAdult}" class="title-span"  style="color: #FF4B2B;">[[${tour.PriceAdult}]] $</span>
+						</div>
+					</div>
+				</div>
+				<div class="col-3 d-flex">
+					<div class="d-flex gap-3 align-items-center">
+						<div class="icon-navbar">
+							<i class="fas fa-money-bill-wave"></i>
+						</div>
+						<div class="d-flex flex-column">
+							<h1 class="text-hiden">Price for child:</h1>
+							<span id="priceChildren" th:data-price="${tour.PriceChildren}" class="title-span" style="color: #FF4B2B;"><del>[[${tour.PriceAdult}]]$</del> - [[${tour.PriceChildren}]]$</span>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<hr class="new1">
+		<div class="container-fluid">
+			<div class="row justify-content-between m-5 p-5">
+				<div class="col-7 col-lg-7 col-sm-12 col-md-7 row title">
+					<div class="col-12 title">
+						<h3>Enjoy the Adventure</h3>
+						<p>
+							Are you looking for an adventure of a lifetime? Join us on
+							an unforgettable journey through some of the world's most
+							stunning landscapes and cultural destinations. Our expertly
+							curated tours take you to incredible destinations, from the
+							rugged mountains of Patagonia to the vibrant cities of Asia. Our
+							itineraries are designed to immerse you in the local culture,
+							with opportunities to meet locals, try new foods, and learn about
+							the history and traditions of each destination. Our experienced
+							guides will lead you through each destination, sharing their
+							knowledge and passion for travel. We offer a range of activities
+							to suit every traveler, from hiking and kayaking to cultural
+							tours and culinary experiences.
+						</p>
+					</div>
+					<div class="col-12">
+						<section class="mt-5 title">
+							<div class="col-12">
+								<h3>Gallery</h3>
+								<p>Each image tells a unique story, inviting us into a world
+									of emotion, beauty, and complexity. Get ready to be moved,
+									inspired, and challenged as we journey through this captivating
+									collection of images.</p>
+							</div>
+							<div th:object="${image}" class="m-0 p-0 row d-flex justify-content-between">
+								<div class="col-md-4 col-sm-5 col-4 col-lg-4 gy-4">
+									<div class="row">
+										<div class="col-11 col-sm-12 col-lg-11 col-md-11"
+											th:style="'background-image: url('+ ${image.Image1} +'); background-repeat: no-repeat; background-size: cover; height: 160px; border: 1px solid white; border-radius: 10%;'">
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4 col-sm-5 col-4 col-lg-4 gy-4">
+									<div class="row">
+										<div class="col-11 col-sm-12 col-lg-11 col-md-11"
+											th:style="'background-image: url('+ ${image.Image5} +'); background-repeat: no-repeat; background-size: cover; height: 160px; border: 1px solid white; border-radius: 10%;'">
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4 col-sm-5 col-4 col-lg-4 gy-4">
+									<div class="row">
+										<div class="col-11 col-sm-12 col-lg-11 col-md-11"
+											th:style="'background-image: url('+ ${image.Image2} +'); background-repeat: no-repeat; background-size: cover; height: 160px; border: 1px solid white; border-radius: 10%;'">
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4 col-sm-5 col-4 col-lg-4 gy-4">
+									<div class="row">
+										<div class="col-11 col-sm-12 col-lg-11 col-md-11"
+											th:style="'background-image: url('+ ${image.Image3} +'); background-repeat: no-repeat; background-size: cover; height: 160px; border: 1px solid white; border-radius: 10%;'">
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4 col-sm-5 col-4 col-lg-4 gy-4">
+									<div class="row">
+										<div class="col-11 col-sm-12 col-lg-11 col-md-11"
+											th:style="'background-image: url('+ ${image.Image4} +'); background-repeat: no-repeat; background-size: cover; height: 160px; border: 1px solid white; border-radius: 10%;'">
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4 col-sm-5 col-4 col-lg-4 gy-4">
+									<div class="row">
+										<div class="col-11 col-sm-12 col-lg-11 col-md-11"
+											th:style="'background-image: url('+ ${image.Image5} +'); background-repeat: no-repeat; background-size: cover; height: 160px; border: 1px solid white; border-radius: 10%;'">
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>
+						<section class="mt-5 title">
+							<div class="col-12">
+								<h3>Itinerary</h3>
+								<p>We have carefully planned out each day to give you the
+									best possible experience. From exploring historic landmarks to
+									tasting delicious local cuisine, each day is packed with
+									adventure and excitement. Join us as we take you on a journey
+									through some of the most fascinating destinations in the world.
+								</p>
+							</div>
+							<div  class="accordion" id="accordionExample">
+								<div th:each="schedule, index : ${schedules}" class="accordion-item">
+									<h2 class="accordion-header">
+										<button class="accordion-button" type="button"
+											data-bs-toggle="collapse" th:data-bs-target="'#collapse' + ${index.index}"
+											aria-expanded="false" th:aria-controls="'collapse' + ${index.index}">
+											<a class="text-decoration-none" href=""> 
+											<span>DAY [[${schedule.date}]] </span> - [[${schedule.title}]] ([[${schedule.Time}]])
+											</a>
+										</button>
+									</h2>
+									<div th:id="'collapse' + ${index.index}" th:class="${index.index == 0 ? 'ccordion-collapse collapse show':'ccordion-collapse collapse'}"
+										data-bs-parent="#accordionExample">
+										<div class="accordion-body">
+											[[${schedule.description}]]
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>
+						<hr class="new1">
+						<div class="">
+							<h3>Included / Excluded</h3>
+							<p>To help you plan your trip, we have put together a list of
+								what's included and what's not included in your tour package.
+								This will give you a clear understanding of what to expect and
+								help you make any necessary arrangements before your journey
+								begins.</p>
+
+							<div class="d-flex">
+								<div>
+									<div>
+										<span> <i class="fas fa-check" style="color: #1bbc9b;"></i>
+										</span> <span> Train tickets and Bus transportation </span>
+									</div>
+									<div>
+										<span> <i class="fas fa-check" style="color: #1bbc9b;"></i>
+										</span> <span> Train tickets and Bus transportation </span>
+									</div>
+									<div>
+										<span> <i class="fas fa-check" style="color: #1bbc9b;"></i>
+										</span> <span> Train tickets and Bus transportation </span>
+									</div>
+									<div>
+										<span> <i class="fas fa-check" style="color: #1bbc9b;"></i>
+										</span> <span> Train tickets and Bus transportation </span>
+									</div>
+								</div>
+								&emsp;&emsp;
+								<div>
+									<div>
+										<span> <i class="fas fa-check" style="color: #1bbc9b;"></i>
+										</span> <span> Train tickets and Bus transportation </span>
+									</div>
+									<div>
+										<span> <i class="fas fa-check" style="color: #1bbc9b;"></i>
+										</span> <span> Train tickets and Bus transportation </span>
+									</div>
+									<div>
+										<span> <i class="fas fa-check" style="color: #1bbc9b;"></i>
+										</span> <span> Train tickets and Bus transportation </span>
+									</div>
+									<div>
+										<span> <i class="fas fa-check" style="color: #1bbc9b;"></i>
+										</span> <span> Train tickets and Bus transportation </span>
+									</div>
+								</div>
+							</div>
+							<hr class="new1">
+						</div>
+					</div>
+				</div>
+
+				<!-- Form booking -->
+				<div class="col-5 col-lg-5 col-sm-6 col-md-5" style="z-index:0;">
+					<div class="col-12">
+						<div class="row">
+							<div class="booking-form">
+								<div class="form-header mb-3">
+									<h3>Make your adventure</h3>
+								</div>
+								<form method="post">
+									<div class="row mb-3">
+										<div class="col-md-12 mb-3">
+											<label class="title-input">FullName</label>
+											<input th:name="fullname" class="form-control" type="text"
+											placeholder="Enter your Name..." required>
+										</div>
+										<div class="col-md-12 mb-3">
+											<label class="title-input">Email</label>
+											<input th:name="email" class="form-control" type="email"
+												placeholder="Enter your Email" required>
+										</div>
+										<div class="col-md-12 mb-3">
+											<label class="title-input">Address</label>
+											<input th:name="address" class="form-control" type="text"
+												placeholder="Enter your Phone" required>
+										</div>
+										<div class="col-md-6 mb-3">
+											<label class="title-input">Phone</label>
+											<input th:name="phone" class="form-control" type="text"
+												placeholder="Enter your Phone" required>
+										</div>
+										<div class="col-md-6">
+											<label class="title-input">StartDate</label>
+											<div class="form-group">
+												<input th:name="startdate" class="form-control" type="date" required>
+											</div>
+										</div>
+										<div class="col-md-12 m-0 p-0 row mb-3">
+											<div class="col-md-6">
+												<label class="title-input">Quantity Adult</label>
+												<select th:name="quantityAdult" id="adult" class="form-control">
+													<option th:each="quantity : ${#numbers.sequence(0,tour.QuantityAdult)}" th:value="${quantity}">
+														[[${quantity}]]
+													</option>
+													
+												</select>
+											</div>
+											<div class="col-md-6">
+												<label class="title-input">Quantity Children</label>
+												<select th:name="quantityChildren" id="children" class="form-control">
+													<option th:each="quantityChildren : ${#numbers.sequence(0,tour.QuantityChildren)}" th:value="${quantityChildren}">
+														[[${quantityChildren}]]
+													</option>
+												</select> 
+											</div>
+											<div class="col-md-12 mt-3" style="font-weight: 400; text-transform: capitalize; margin-left: 5px; font-size: 24px; color: #1bbc9b;">
+												Tổng tiền: <span id="totalPriceDisplay" style="color:red;"></span>
+											</div>
+										</div>
+										
+									</div>
+									<div class="form-btn">
+										<button th:formaction="@{/travelfpoly/bookNow/{tourId}/{userId} (tourId=${tour.TourId}, userId=${session.account != null ? session.account.UserId : '' })}" class="submit-btn mb-3">Book Now</button>
+ 										<button th:formaction="@{/travelfpoly/addToCart/{tourId}/{userId}(tourId=${tour.TourId}, userId=${session.account != null ? session.account.UserId : '' })}" class="cart-btn" style="color:black;">Add to cart</button>
+									</div>
+									<!-- <div class="form-btn mt-2">
+										<button class="submit-btn bg-warning">Add to cart</button>
+										th:attr="ng-click=@{|cart.add(${variant.TourId})|}"
+									</div> -->
+								</form>
+							</div>
+						</div>
+					</div>
+					<hr class="new1">
+					<div class="col-12">
+						<div class="mt-5 title">
+							<h3>Tour Map</h3>
+							<p>To help you plan your trip, we have put together a list of
+								what's included and what's not included in your tour package.
+								This will give you a clear understanding of what to expect and
+								help you make any necessary arrangements before your journey
+								begins.</p>
+							<div id="map" class="w-100">
+								<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d125418.05621372208!2d106.65328639999998!3d10.7872256!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1svi!2s!4v1691645572040!5m2!1svi!2s" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+								</iframe>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</section>
+	<div th:insert="~{include/_Footer}"></div>
+	<script>
+        const adultsSelect = document.getElementById('adult');
+        const childrenSelect = document.getElementById('children');
+        const priceAdult = document.getElementById('priceAdult');
+        const priceChildren = document.getElementById('priceChildren');
+        const displayElement = document.getElementById('totalPriceDisplay');
+        
+        adultsSelect.addEventListener('change', calculateTotalPrice);
+        childrenSelect.addEventListener('change', calculateTotalPrice);
+        
+        function calculateTotalPrice() {
+            const adultsQuantity = parseInt(adultsSelect.value);
+            const childrenQuantity = parseInt(childrenSelect.value);
+            const tourAdultPrice = parseFloat(priceAdult.getAttribute('data-price'));
+            const tourChildrenPrice = parseFloat(priceChildren.getAttribute('data-price'));
+			const totalPrice = (adultsQuantity * tourAdultPrice) + (childrenQuantity * tourChildrenPrice);
+            displayElement.textContent =totalPrice + '$';
+        }
+    </script>
+    <!-- <script src="/user/js/productdetail.js"></script> -->
+	<script src="/user/js/jquery.min.js"></script>
+	<script src="/user/js/jquery-migrate-3.0.1.min.js"></script>
+	<script src="/user/js/popper.min.js"></script>
+	<script src="/user/js/bootstrap.min.js"></script>
+	<script src="/user/js/jquery.easing.1.3.js"></script>
+	<script src="/user/js/jquery.waypoints.min.js"></script>
+	<script src="/user/js/jquery.stellar.min.js"></script>
+	<!-- <script src="/user/js/owl.carousel.min.js"></script> -->
+	<script src="/user/js/jquery.magnific-popup.min.js"></script>
+	<script src="/user/js/aos.js"></script>
+	<script src="/user/js/jquery.animateNumber.min.js"></script>
+	<script src="/user/js/bootstrap-datepicker.js"></script>
+	<!-- <script src="/user/js/jquery.timepicker.min.html"></script> -->
+	<script src="/user/js/scrollax.min.js"></script>
+	<script async
+		src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+	
+	  gtag('config', 'UA-23581568-13');
+	</script>
+	<script defer
+		src="https://static.cloudflareinsights.com/beacon.min.js/v52afc6f149f6479b8c77fa569edb01181681764108816"
+		integrity="sha512-jGCTpDpBAYDGNYR5ztKt4BQPGef1P0giN6ZGVUi835kFF88FOmmn8jBQWNgrNd8g/Yu421NdgWhwQoaOPFflDw=="
+		data-cf-beacon='{"rayId":"7de3eacc580c0ebc","version":"2023.4.0","b":1,"token":"cd0b4b3a733644fc843ef0b185f98241","si":100}'
+		crossorigin="anonymous">
+	</script>
+</body>
+
+<!-- Mirrored from preview.colorlib.com/theme/direngine/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 28 Jun 2023 06:37:10 GMT -->
+</html>

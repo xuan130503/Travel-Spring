@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Insert title here</title>
+  <link rel="stylesheet" href="/admin/css/styles.css">
+</head>
+
+<body>
+  <!-- <header class="app-header">
+    <a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
+    Navbar Right Menu
+    <ul class="app-nav">
+      <li><a class="app-nav__item" href="/travelfpoly/account/logout"><i class='bx bx-log-out bx-rotate-180'></i> </a>
+      </li>
+    </ul>
+  </header> -->
+  <div class="nav" id="navbar">
+    <nav class="nav__container">
+      <div>
+        <a href="/travelfpoly/home" class="nav__link nav__logo">
+          <i class='bx bxs-disc nav__icon'></i>
+          <span class="nav__logo-name">Travel fpoly</span>
+        </a>
+
+        <div class="nav__list">
+          <div class="nav__items">
+            <h3 class="nav__subtitle">Profile</h3>
+
+            <a href="/travelfpoly/admin/index" class="nav__link active">
+              <i class='bx bx-home nav__icon'></i>
+              <span class="nav__name">Home</span>
+            </a>
+
+            <div class="nav__dropdown">
+              <a href="#" class="nav__link">
+                <i class='bx bx-user nav__icon'></i>
+                <span class="nav__name">Profile</span>
+                <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
+              </a>
+
+              <div class="nav__dropdown-collapse">
+                <div class="nav__dropdown-content">
+                  <a th:href="@{/travelfpoly/admin/tour}" class="nav__dropdown-item">Show tour</a>
+                  <a th:href="@{/travelfpoly/admin/show}" class="nav__dropdown-item">create tour</a>
+
+                </div>
+              </div>
+            </div>
+
+
+            <a href="/travelfpoly/admin/addstaff" class="nav__link">
+              <i class='app-menu__icon bx bx-id-card'></i>
+              <span class="nav__name">Quan ly nhan vien</span>
+            </a>
+            <a href="/travelfpoly/admin/addorder" class="nav__link">
+              <i class='app-menu__icon bx bx-task'></i>
+              <span class="nav__name">Quan ly don hang</span>
+
+            </a>
+            <a href="/travelfpoly/admin/addinternal" class="nav__link">
+              <i class='app-menu__icon bx bx-run'></i>
+              <span class="nav__name">Quan ly noi bo</span>
+            </a>
+
+            <a href="/travelfpoly/admin/addsalary" class="nav__link">
+              <i class='app-menu__icon bx bx-dollar'></i>
+              <span class="nav__name">thong ke luong</span>
+            </a>
+
+            <a href="/travelfpoly/admin/report" class="nav__link">
+              <i class='app-menu__icon bx bx-pie-chart-alt-2'></i>
+              <span class="nav__name">doanh thu</span>
+            </a>
+
+            <a href="/travelfpoly/admin/calendar" class="nav__link">
+              <i class='app-menu__icon bx bx-calendar-check'></i>
+              <span class="nav__name">lich cong tac</span>
+            </a>
+            <a href="#" class="nav__link">
+              <i class='app-menu__icon bx bx-cog'></i>
+              <span class="nav__name">cai dat</span>
+            </a>
+
+          </div>
+        </div>
+      </div>
+
+      <a href="/travelfpoly/account/logout" class="nav__link nav__logout">
+        <i class='bx bx-log-out nav__icon'></i>
+        <span class="nav__name">Log Out</span>
+      </a>
+
+    </nav>
+  </div>
+
+
+  <main>
+
+  </main>
+</body>
+
+</html>
