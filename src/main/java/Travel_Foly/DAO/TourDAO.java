@@ -59,4 +59,6 @@ public interface TourDAO extends JpaRepository<Tour, Integer> {
 
 	// @Query("select t from Tour where t.Name like %?1%")
 	// List<Tour> searchTour(String keyword);
+	// @Query("Select t from Tour t Where t.Name = %?1%")
+	// List<Tour> getSearchTours(String keyword);
 }

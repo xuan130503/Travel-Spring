@@ -3,6 +3,7 @@ package Travel_Foly.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +24,8 @@ public class TourController {
 
     @GetMapping("tour")
     public String index(Model model) {
-        model.addAttribute("getListTour", tourService.getListTour());
+        model.addAttribute("tours", tourService.getAllTours());
+        model.addAttribute("tour", new Tour());
         return "admin/form-add-san-pham";
     }
 
@@ -36,23 +38,16 @@ public class TourController {
 
     @GetMapping("updateTour/{TourId}")
     public String updateTour(@PathVariable("TourId") Integer TourId, Model model) {
-        Tour tour = tourService.updateTour(TourId);
+        Tour tour = tourService.getTourById(TourId);
         model.addAttribute("tour", tour);
-        return "admin/tour/form-add-tour";
-    }
-
-    @GetMapping("updateTour")
-    public String updateTour(Model model, @ModelAttribute(value = "tour") Tour tour) {
-        this.tourService.createTour(tour);
-        return null;
+        List<Tour> tours = tourService.getAllTours();
+        model.addAttribute("tours", tours);
+        return "admin/form-add-san-pham";
     }
 
     @GetMapping("deleteTour/{TourId}")
     public String deleteTour(@PathVariable("TourId") Integer TourId) {
         this.tourService.deleteTour(TourId);
-        // Tour tour = tourService.findByTourId(TourId);
-        // this.tourService.deleteTour(tour);
-        // System.out.println(tour);
         return "redirect:/travelfpoly/admin/tour";
 
     }
