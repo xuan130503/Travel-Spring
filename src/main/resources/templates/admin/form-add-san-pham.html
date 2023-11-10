@@ -40,14 +40,18 @@
         <div class="tile">
           <h3 class="tile-title">Tạo mới sản phẩm</h3>
           <div class="tile-body">
-            <div class="row element-button">
-              <div class="col-sm-2">
-                <a th:href="@{/travelfpoly/admin/show}" class="btn btn-add btn-sm"><i
-                    class="fas fa-folder-plus"></i>Thêm
-                  loại Tour</a>
-              </div>
-            </div>
             <form th:action="@{/travelfpoly/admin/save}" th:object="${tour}" method="post" class="row">
+
+
+              <div class="input-group">
+                <div class="form-outline">
+                  <input type="search" name="keyword" class="form-control" />
+                  <label class="form-label" for="form1">Search</label>
+                </div>
+                <button type="button" class="btn btn-primary">
+                  <i class="fas fa-search"></i>
+                </button>
+              </div>
 
               <div class="form-group col-md-6">
                 <label for="email" class="control-label">Tên tour</label>
@@ -72,8 +76,12 @@
                 </div>
               </div>
               <div class="form-group col-md-6">
-                <label class="control-label">Địa điểm đi</label>
-                <input class="form-control" type="text" th:field="*{Departure}" name="Departure">
+                <label class="control-label">Mô tả </label>
+                <input class="form-control" type="text" th:field="*{Description}" name="Description">
+              </div>
+              <div class="form-group col-md-6">
+                <label class="control-label">địa điểm đi</label>
+                <input class="form-control" type="text" th:field="*{Departure}" name="Description">
               </div>
               <div class="form-group col-md-6">
                 <label class="control-label">Địa điểm đến</label>
@@ -105,58 +113,62 @@
                 <label class="control-label">Duration</label>
                 <input class="form-control" type="text" th:field="*{Duration}" name="Duration">
               </div>
-
+              <br>
+              <div class="col-sm-12">
                 <button class="btn btn-save" type="submit" style="margin-left: 15px;">Lưu</button>
                 <button class="btn btn-primary" type="submit" style="margin-left: 15px;">Sửa</button>
-                <button class="btn btn-cancel" type="submit" style="margin-left: 15px;">Làm mới</button> -->
+                <button class="btn btn-cancel" type="submit" style="margin-left: 15px;">Làm mới</button>
+
+              </div>
+
 
             </form>
 
 
           </div>
 
-            <table class="table mt-4">
-              <thead>
-                <tr>
-                  <th scope="col">Loại Tour</th>
-                  <th scope="col">Tình trạng</th>
-                  <th scope="col">Mô tả</th>
-                  <th scope="col">Nơi đi</th>
-                  <th scope="col">Nơi đến</th>
-                  <th scope="col">Giá người lớn</th>
-                  <th scope="col">Giá trẻ em</th>
-                  <th scope="col">Số lượng người lớn</th>
-                  <th scope="col">số lượng trẻ em</th>
-                  <th scope="col">giới thiệu</th>
-                  <th scope="col">thời gian</th>
-                  <th scope="col"></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr th:each="tour : ${getListTour}">
-                  <td th:text="${tour.TourId}"></td>
-                  <td th:text="${tour.Name}"></td>
-                  <td th:text="${tour.Available}"></td>
-                  <td th:text="${tour.Description}"></td>
-                  <td th:text="${tour.Departure}"></td>
-                  <td th:text="${tour.Destination}"></td>
-                  <td th:text="${tour.PriceAdult}"></td>
-                  <td th:text="${tour.PriceChildren}"></td>
-                  <td th:text="${tour.QuantityAdult}"></td>
-                  <td th:text="${tour.QuantityChildren}"></td>
-                  <td th:text="${tour.Introduction}"></td>
-                  <td th:text="${tour.Duration}"></td>
+          <table class="table mt-4">
+            <thead>
+              <tr>
+                <th scope="col">Loại Tour</th>
+                <th scope="col">Tình trạng</th>
+                <th scope="col">Mô tả</th>
+                <th scope="col">Nơi đi</th>
+                <th scope="col">Nơi đến</th>
+                <th scope="col">Giá người lớn</th>
+                <th scope="col">Giá trẻ em</th>
+                <th scope="col">Số lượng người lớn</th>
+                <th scope="col">số lượng trẻ em</th>
+                <th scope="col">giới thiệu</th>
+                <th scope="col">thời gian</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="tour : ${tours}">
+                <!-- <td th:text="${tour.TourId}"></td> -->
+                <td th:text="${tour.Name}"></td>
+                <td th:text="${tour.Available}"></td>
+                <td th:text="${tour.Description}"></td>
+                <td th:text="${tour.Departure}"></td>
+                <td th:text="${tour.Destination}"></td>
+                <td th:text="${tour.PriceAdult}"></td>
+                <td th:text="${tour.PriceChildren}"></td>
+                <td th:text="${tour.QuantityAdult}"></td>
+                <td th:text="${tour.QuantityChildren}"></td>
+                <td th:text="${tour.Introduction}"></td>
+                <td th:text="${tour.Duration}"></td>
 
 
-                  <td>
-                    <a th:href="@{/travelfpoly/admin/updateTour/{TourId}(TourId=${tour.TourId})}">
-                      <i class="fas fa-pen-square"></i>
-                    </a>
-                    <a th:href="@{/travelfpoly/admin/deleteTour/{TourId}(TourId=${tour.TourId})}">
-                      <i class="fas fa-trash-alt"></i>
-                    </a>
-                  </td>
-                </tr>
+                <td>
+                  <a th:href="@{/travelfpoly/admin/updateTour/{TourId}(TourId=${tour.TourId})}">
+                    <i class="fas fa-pen-square"></i>
+                  </a>
+                  <a th:href="@{/travelfpoly/admin/deleteTour/{TourId}(TourId=${tour.TourId})}">
+                    <i class="fas fa-trash-alt"></i>
+                  </a>
+                </td>
+              </tr>
 
             </tbody>
           </table>

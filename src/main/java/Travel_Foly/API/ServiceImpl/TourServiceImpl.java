@@ -1,11 +1,8 @@
 package Travel_Foly.API.ServiceImpl;
 
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import Travel_Foly.API.Service.TourService;
 import Travel_Foly.DAO.TourDAO;
 import Travel_Foly.Model.Tour;
@@ -42,9 +39,9 @@ public class TourServiceImpl implements TourService {
     }
 
     // @Override
-    // public List<Tour> searchTour(String keyword) {
+    // public List<Tour> searchTours(String keyword) {
+    // return this.tourDAO.getSearchTours(keyword);
 
-    // return this.tourDAO.searchTour(keyword);
     // }
 
 }

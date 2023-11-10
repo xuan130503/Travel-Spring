@@ -10,6 +10,7 @@ import Travel_Foly.Model.Tour;
 public interface TourService {
 
     List<Tour> getAllTours();
+
     Tour findByTourId(Integer TourId);
 
     void saveTour(Tour tour);
@@ -18,6 +19,6 @@ public interface TourService {
 
     void deleteTour(Integer tour);
 
-    // List<Tour> searchTour(String keyword);
+    // List<Tour> searchTours(String keyword);
 
 }
