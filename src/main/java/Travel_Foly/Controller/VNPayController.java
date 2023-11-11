@@ -15,6 +15,7 @@ import java.util.TimeZone;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import Travel_Foly.Config.VNPayConfig;
@@ -25,12 +26,14 @@ import Travel_Foly.Config.VNPayConfig;
 public class VNPayController {
 	
 	@GetMapping("/pay")
-	public void getPay(HttpServletResponse response) throws IOException{
+	public void getPay(@RequestParam("id") Integer id, HttpServletResponse response) throws IOException{
+		System.out.println(id);
         long amount = 10000;
         String bankCode = "NCB";
         String vnp_TxnRef = VNPayConfig.getRandomNumber(8);
         String vnp_IpAddr = "127.0.0.1";
         String vnp_TmnCode = VNPayConfig.vnp_TmnCode;
+        
         Map<String, String> vnp_Params = new HashMap<>();
         vnp_Params.put("vnp_Version", VNPayConfig.vnp_Version);
         vnp_Params.put("vnp_Command", VNPayConfig.vnp_Command);

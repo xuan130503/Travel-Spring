@@ -16,10 +16,12 @@ import com.paypal.api.payments.ShippingAddress;
 import com.paypal.api.payments.Transaction;
 import com.paypal.base.rest.PayPalRESTException;
 
+import Travel_Foly.API.Service.MailService;
 import Travel_Foly.API.Service.paymentService;
 import Travel_Foly.DAO.OrderDetailTourDAO;
 import Travel_Foly.DTO.InvoiceDTO;
 import Travel_Foly.DTO.OrderDetailTourDTO;
+import Travel_Foly.Model.OrderDetailTour;
 import Travel_Foly.Service.SessionService;
 
 @Controller
@@ -35,6 +37,9 @@ public class PaymentController {
 	@Autowired
 	private OrderDetailTourDAO orderDetailTourDao;
 	
+	@Autowired
+	private MailService mailService;
+	
 	@GetMapping("index")
 	public String index(@RequestParam("id") Integer id, Model model) {
 		InvoiceDTO invoice = orderDetailTourDao.detailInvoice(id);
@@ -42,6 +47,7 @@ public class PaymentController {
 		Double total = (invoice.getPriceAdult()*invoice.getQuantityAdult())+(invoice.getPriceChildren()*invoice.getQuantityChildren());
 		model.addAttribute("name", invoice.getDestination());
 		model.addAttribute("total", total);
+		session.setAttribute("tourId", invoice.getOrderDetailTourId());
 		return "user/payment";
 	}
 	@GetMapping("review_payment")
@@ -105,6 +111,14 @@ public class PaymentController {
 		
 		System.out.println("PaymentId:"+paymentId);
 		System.out.println("PayerId:"+payerId);
+		//send mail
+		Integer id =session.getAttribute("tourId");
+		OrderDetailTour order = orderDetailTourDao.findByOrderDetailTourId(id);
+		order.setStatus(2);
+		orderDetailTourDao.save(order);
+		InvoiceDTO invoice = orderDetailTourDao.detailInvoice(id);
+		mailService.sendMailWithCustomer(invoice);
+		
         try {
             Payment payment = paymentService.executePayment(paymentId, payerId);
              
