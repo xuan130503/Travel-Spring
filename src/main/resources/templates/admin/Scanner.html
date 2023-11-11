@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<form action="/travelfpoly/admin/scanner/processBarcode" method="post">
+        <label for="barcodeData">Barcode Data:</label>
+        <input type="text" id="barcodeData" name="barcodeData" required>
+        <button type="submit">Submit</button>
+    </form>
+    <script>
+        document.getElementById("barcodeForm").onsubmit = function() {
+            console.log("Submitting form...");
+
+            return true;
+        };
+    </script>
+</body>
+</html>
