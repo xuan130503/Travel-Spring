@@ -481,13 +481,13 @@ public class HomeController {
 				orderDetail.setBookDate(new Date());
 				orderDetail.setPriceAdult(tour.getPriceAdult());
 				orderDetail.setPriceChildren(tour.getPriceChildren());
-				orderDetail.setStatus(1);
+				orderDetail.setStatus(0);
 				orderDetail.setQuantityAdult(quantityAdult);
 				orderDetail.setQuantityChildren(quantityChildren);
 				orderDetail.setOrderDetailTour(tour);
 				orderDetail.setOrderTour(order);
 				orderDetail = orderDetailTourDao.saveAndFlush(orderDetail);
-				orderDetail.setBase64(base64Service.generateQRCodeWithIconAndEncodeToBase64(orderDetail.getOrderDetailTourId()));
+				orderDetail.setBase64(base64Service.generateQRCodeAndEncodeToBase64(orderDetail.getOrderDetailTourId()));
 				orderDetailTourDao.save(orderDetail);
 				
 				if (paymentMethod.equals("paypal")) {
