@@ -134,10 +134,18 @@ public class Base64ServiceImpl implements Base64Service{
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             MatrixToImageWriter.writeToStream(bitMatrix, "PNG", outputStream);
             byte[] imageBytes = outputStream.toByteArray();
-
-            // Mã hóa mảng byte thành chuỗi Base64
+            
+            //push image to cloudinary
+            Map<String, String> options = new HashMap<>();
+            options.put("public_id", "Travel_FPoly/QrTour/" + data);
+            cloudinary.uploader().upload(imageBytes, options);
+            
+            
+            // decoder byte[] to base64
             String base64Image = Base64.getEncoder().encodeToString(imageBytes);
-
+            
+            
+            
             return base64Image;
         } catch (Exception e) {
             e.printStackTrace();

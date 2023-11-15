@@ -96,7 +96,7 @@
 	                        
 	                        <div class="col-md-12 col-lg-12 col-xl-12 btn_groupAction mt-3">
 	                            <div class="borderButton_top mb-3"></div>
-	                            <button type="button" class="btn btn-save">IN THỬ</button>
+	                            <button type="button" id="btnPrint" class="btn btn-save">IN HÓA ĐƠN</button>
 	                            <button type="button" class="btn btn-cancel">XÓA MẪU</button>
 	                            <button type="button" class="btn btn-primary">SỬA MẪU</button>
 	                            <button type="button" class="btn btn-info">LƯU THIẾT BỊ</button>
@@ -202,7 +202,12 @@
   <!--
   MODAL
 -->
-
+	<script type="text/javascript">
+		const $btnPrint = document.querySelector("#btnPrint");
+		$btnPrint.addEventListener("click", () => {
+		    window.print();
+		});
+	</script>
   <script>
     document.getElementById('imageFile').addEventListener('change', function (event) {
       var file = event.target.files[0];

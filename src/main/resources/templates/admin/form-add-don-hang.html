@@ -54,54 +54,58 @@
 					</div>
               	</form>
               </div>
+              <div class="col-sm-4">
+	               	<button class="btn btn-info" type="submit" onclick="printContent()"
+	                style="margin-left: 10px; height :46px;"><i class="fas fa-print" style="padding-right:5px;"></i>IN HÓA ĐƠN</button>
+              </div>
             </div>
             <form class="row" th:object="${invoice}" th:method="post">
               <div class="form-group  col-md-4">
-                <label class="control-label">Mã tour</label>
+                <label class="control-label">Mã tour</label><p id="id" style="display:none;" th:utext="*{orderDetailTourId}"></p>
                 <input th:name="orderDetailTourId" th:value="*{orderDetailTourId}" class="form-control" type="text" required>
               </div>
               <div class="form-group  col-md-4"> 
-                <label class="control-label">Điểm xuất phát</label>
+                <label class="control-label">Điểm xuất phát</label><p id="departure" style="display:none;" th:utext="*{Departure}"></p>
                 <input th:name="Departure" th:value="*{Departure}" class="form-control" type="text" required>
               </div>
               <div class="form-group col-md-4">
-                <label class="control-label">Điểm đến</label>
+                <label class="control-label">Điểm đến</label><p id="destination" style="display:none;" th:utext="*{Destination}"></p>
                 <input th:name="Destination" th:value="*{Destination}" class="form-control" type="text" required>
               </div>
               <div class="form-group col-md-4">
-                <label class="control-label">Ngày khởi hành</label>
+                <label class="control-label">Ngày khởi hành</label><p id="startDate" style="display:none;" th:utext="*{StartDate}"></p>
                 <input th:name="StartDate" th:value="*{StartDate}" class="form-control" type="text" required>
               </div>
               <div class="form-group col-md-4">
-                <label class="control-label">Ngày kết thúc</label>
+                <label class="control-label">Ngày kết thúc</label><p id="endDate" style="display:none;" th:utext="*{EndDate}"></p>
                 <input th:name="EndDate" th:value="*{EndDate}" class="form-control" type="text" required>
               </div>
               <div class="form-group  col-md-4">
-                <label class="control-label">Thời gian</label>
+                <label class="control-label">Thời gian</label><p id="duration" style="display:none;" th:utext="*{Duration}"></p>
                 <input th:name="Duration" th:value="*{Duration}" class="form-control" type="number" required>
               </div>
               <div class="form-group col-md-4">
-                <label class="control-label">Tên Khách Hàng</label>
+                <label class="control-label">Tên Khách Hàng</label><p id="cusName" style="display:none;" th:utext="*{CustomerName}"></p>
                 <input th:name="CustomerName" th:value="*{CustomerName}" class="form-control" type="text">
               </div>
               <div class="form-group  col-md-4">
-                <label class="control-label">Số vé người lớn</label>
+                <label class="control-label">Số vé người lớn</label><p id="quantityAdult" style="display:none;" th:utext="*{QuantityAdult}"></p>
                 <input th:name="QuantityAdult" th:value="*{QuantityAdult}" class="form-control" type="number" required>
               </div>
               <div class="form-group  col-md-4">
-                <label class="control-label">Giá vé người lớn</label>
+                <label class="control-label">Giá vé người lớn</label><p id="priceAdult" style="display:none;" th:utext="*{PriceAdult}"></p>
                 <input th:name="PriceAdult" th:value="*{PriceAdult}" class="form-control" type="number" required>
               </div>
               <div class="form-group  col-md-4">
-                <label class="control-label">Số vé trẻ em</label>
+                <label class="control-label">Số vé trẻ em</label><p id="quantityChildren" style="display:none;" th:utext="*{QuantityChildren}"></p>
                 <input th:name="QuantityChildren" th:value="*{QuantityChildren}" class="form-control" type="number" required>
               </div>
               <div class="form-group  col-md-4">
-                <label class="control-label">Giá vé trẻ em</label>
+                <label class="control-label">Giá vé trẻ em</label><p id="priceChildren" style="display:none;" th:utext="*{PriceChildren}"></p>
                 <input th:name="PriceChildren" th:value="*{PriceChildren}" class="form-control" type="number" required>
               </div>
               <div class="form-group  col-md-4">
-                	<h2>Tổng tiền: [[${total}]]</h2>
+                	<h2>Tổng tiền: [[${total}]]</h2><p id="total" style="display:none;" th:utext="${total}"></p>
                 	<span style="color: #e03e2d; line-height: 22.4px;">
 	                  	<span style="color: #000000; line-height: 22.4px;">Status:</span> 
 	                  	<span th:if="${invoice.Status == 0}" style="color: #e03e2d; line-height: 22.4px;">Unpaid !</span>
@@ -115,11 +119,10 @@
                 style="margin-left: 15px;">Sửa</button>
               <button class="btn btn-cancel" th:formaction="@{/travelfpoly/admin/addorder}" type="submit"
                 style="margin-left: 15px;">Làm mới</button>
-               <a th:href="@{|/travelfpoly/admin/addorder/print/*{orderDetailTourId}|}">
-	               	<button class="btn btn-info" type="submit"
-	                style="margin-left: 15px;"><i class="fas fa-print" style="padding-right:5px;"></i>IN HÓA ĐƠN</button>
-               </a> 
                 
+                
+                <p id="phone" style="display:none;" th:utext="*{Phone}"></p>
+                <p id="base64" style="display:none;" th:utext="*{Base64}"></p>
             </form>
 
           </div>
@@ -216,7 +219,134 @@
   <!--
   MODAL
 -->
-
+	<script type="text/javascript">
+	function printContent() {
+		const id = document.getElementById("id").textContent.trim();
+		const departure = document.getElementById("departure").textContent.trim();
+		const destination = document.getElementById("destination").textContent.trim();
+		const startDate = document.getElementById("startDate").textContent.trim();
+		const endDate = document.getElementById("endDate").textContent.trim();
+		const duration = document.getElementById("duration").textContent.trim();
+		const cusName = document.getElementById("cusName").textContent.trim();
+		const phone = document.getElementById("phone").textContent.trim();
+		const quantityAdult = document.getElementById("quantityAdult").textContent.trim();
+		const priceAdult = document.getElementById("priceAdult").textContent.trim();
+		const quantityChildren = document.getElementById("quantityChildren").textContent.trim();
+		const priceChildren = document.getElementById("priceChildren").textContent.trim();
+		const total = document.getElementById("total").textContent.trim();
+		const date = new Date();
+		const datePrint = date.toLocaleDateString('vi-VN');
+		const timePrint = date.toLocaleTimeString('vi-VN');
+		const img = document.getElementById("base64").textContent.trim();
+        const printWindow = window.open('', '_blank');
+        printWindow.document.write(`
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Print Example</title>
+                <style>
+                * ::before ::after{
+                    margin: 0;
+                    padding: 0;
+                    box-sizing: border-box;
+                }
+                body{
+                    font-size: 15px;
+                    line-height: normal;
+                    letter-spacing: 0;
+                }
+                </style>
+            </head>
+            <body>
+	           <div style="font-size: 13px; background-color: #FFFFFF;width: 300px; height:500px; padding: 0 10px; margin: auto;">
+		           <div style="background-color: #f8f8f8; text-align: center;">
+		               <h2 style="font-size: 18px; font-weight: bold;">Travel Fpoly</h2>
+		           </div>
+		
+		           <div style="text-align: center;">
+		               <h6 style="font-size: 12px; margin-bottom: 0 !important; padding: 0;">Tân Hưng Thuận, Quận 12, TP.HCM</h6>
+		           </div>
+		           
+		           <div style="text-align: center; background-color: #f8f8f8;">
+		               <h6 style="font-size: 15px; font-weight: normal; margin-bottom: 0 !important; padding: 0;">0977487714</h6>
+		           </div>
+		           
+		           <div style="text-align: center;">
+		               <h2 style="padding: 0; margin-bottom: 0 !important; font-size: 18px; font-weight: bold;">
+		                   HÓA ĐƠN
+		               </h2>
+		           </div>
+		
+		           <div style="display:flex;">
+		               <h5 style="font-size: 13px; margin-bottom: 0 !important; padding: 5px 0; font-weight: bold;">Ngày:&#160;${datePrint} &#160; ${timePrint}</h5>
+		           		<div>
+		           			<img src="data:image/png;base64,${img}" width="150" height="150">
+		           		</div>
+		           </div>
+		
+		           <div style=" background-color: #f8f8f8;">
+		               <h5 style="font-size: 13px; margin-bottom: 0 !important; padding: 5px 0; font-weight: bold;">NVBH:&#160;tanduong</h5>
+		           </div>
+		
+		           <div style="">
+		               <h5 style="font-size: 13px; margin-bottom: 0 !important; padding: 5px 0; font-weight: bold;">KH:&#160;${cusName}</h5>
+		           </div>
+		
+		           <div style=" background-color: #f8f8f8;">
+		               <h5 style="font-size: 13px; margin-bottom: 0 !important; padding: 5px 0; font-weight: bold;">SĐT:&#160;${phone}</h5>
+		           </div>
+		
+		           <div style=" background-color: #f8f8f8;">
+		               <h6 style="font-size: 13px; margin-bottom: 0 !important; padding: 5px 0;">Ngày đi:&#160; ${startDate}</h6>
+		           </div>
+		           <div style=" background-color: #f8f8f8;">
+		               <h6 style="font-size: 13px; margin-bottom: 0 !important; padding: 5px 0;">Ngày về:&#160;${endDate}</h6>
+		           </div>
+		           <div style="font-size: 13px;">
+		               <table style="border: 1px solid black;">
+		                   <thead>
+		                       <tr>
+		                           <th style="border: 1px solid black; border-collapse: collapse;">Tên Tour</th>
+		                           <th style="border: 1px solid black; border-collapse: collapse;">Số vé</th>
+		                           <th style="border: 1px solid black; border-collapse: collapse;">Giá tiền</th>
+		                           <th style="border: 1px solid black; border-collapse: collapse;">Thành tiền</th>
+		                       </tr>
+		                   </thead>
+		                   <tbody>
+		                       <tr style="background-color: #f8f8f8;">
+		                           <td style="border: 1px solid black; border-collapse: collapse; text-align: left;">${destination}</td>
+		                           <td style="border: 1px solid black; border-collapse: collapse;">${quantityAdult} &#160; (${quantityChildren})</td>
+		                           <td style="border: 1px solid black; border-collapse: collapse;">${priceAdult} &#160;(${priceChildren})</td>
+		                           <td style="border: 1px solid black; border-collapse: collapse;">${total}</td>
+		                       </tr>
+		                       
+		                   </tbody>
+		               </table>
+		           </div>
+		           <div>
+		               <div style="display: flex; justify-content: space-between; background-color: #f8f8f8;">
+		                   <h6 style="font-size: 13px; margin-bottom: 0 !important; padding: 5px 0;">Trạng thái</h6>
+		                   <h6 style="font-size: 13px; margin-bottom: 0 !important; padding: 5px 0;">Đã thanh toán</h6>
+		               </div>
+		
+		               <div style="background-color: #f8f8f8;">
+		                   <h6 style="font-size: 13px; margin-bottom: 0 !important; padding: 5px 0;">Tổng tiền thanh toán:</h6>
+		                   <h6 style="font-size: 13px; margin-bottom: 0 !important; padding: 5px 0;">${total}(Không tính thuế)</h6>
+		               </div>
+		           </div>
+		       </div>
+            </body>
+            </html>
+        `);
+        printWindow.document.close();
+        setTimeout(() => {
+            printWindow.print();
+        }, 500);
+    }
+	</script>
   <script>
     document.getElementById('imageFile').addEventListener('change', function (event) {
       var file = event.target.files[0];

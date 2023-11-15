@@ -123,10 +123,10 @@ public class AdminController {
 		model.addAttribute("listInvoice", invoices);
 		return "admin/form-add-don-hang";
 	}
-	@GetMapping("addorder/print")
-	public String printInvoice(Model model) {
+	@GetMapping("addorder/print/{id}")
+	public String printInvoice(Model model, @PathVariable("id") Integer id) {
 		
-//		OrderDetailTour order = orderDetailTourDao.findByOrderDetailTourId(id);
+		OrderDetailTour order = orderDetailTourDao.findByOrderDetailTourId(id);
 		
 		return "admin/printer";
 	}
