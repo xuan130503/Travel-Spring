@@ -75,10 +75,10 @@ public class AdminController {
 		return "admin/form-add-bi-cam";
 	}
 
-	@GetMapping("addorder")
-	public String addOrder() {
-		return "admin/form-add-don-hang";
-	}
+	// @GetMapping("addorder")
+	// public String addOrder() {
+	// return "admin/form-add-don-hang";
+	// }
 
 	@GetMapping("addstaff")
 	public String staff(Model model, @RequestParam("page") Optional<Integer> page) {
