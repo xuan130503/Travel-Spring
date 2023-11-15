@@ -135,6 +135,13 @@
 			<version>3.4.1</version>
 		</dependency>
 		
+		<!--Printer-->
+		<dependency>
+            <groupId>com.github.anastaciocintra</groupId>
+            <artifactId>escpos-coffee</artifactId>
+            <version>4.1.0</version>
+        </dependency>
+        
 	</dependencies>
 
 	<build>

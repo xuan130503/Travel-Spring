@@ -55,4 +55,20 @@ public interface OrderDetailTourDAO extends JpaRepository<OrderDetailTour,Intege
 			+ "Join OrderTour o On o.OrderTourId = de.OrderTour.OrderTourId "
 			+ "where de.OrderDetailTourId = ?1")
 	InvoiceDTO detailInvoice(Integer orderDetailId);
+	
+	@Query("Select new Travel_Foly.DTO.InvoiceDTO("
+			+ "de.OrderDetailTourId, de.OrderTour.Name, de.OrderTour.Email, de.OrderTour.Phone, t.Departure, t.Destination, t.Duration, de.PriceAdult, de.PriceChildren, de.QuantityAdult, de.QuantityChildren, de.StarDate, de.EndDate, de.Base64, de.Status) "
+			+ "from OrderDetailTour de "
+			+ "Join Tour t On t.TourId = de.OrderDetailTour.TourId "
+			+ "Join OrderTour o On o.OrderTourId = de.OrderTour.OrderTourId ")
+	Page<InvoiceDTO> findAlldetailInvoice(Pageable page);
+	@Query("Select new Travel_Foly.DTO.InvoiceDTO("
+			+ "de.OrderDetailTourId, de.OrderTour.Name, de.OrderTour.Email, de.OrderTour.Phone, t.Departure, t.Destination, t.Duration, de.PriceAdult, de.PriceChildren, de.QuantityAdult, de.QuantityChildren, de.StarDate, de.EndDate, de.Base64, de.Status) "
+			+ "from OrderDetailTour de "
+			+ "Join Tour t On t.TourId = de.OrderDetailTour.TourId "
+			+ "Join OrderTour o On o.OrderTourId = de.OrderTour.OrderTourId "
+			+ "Where de.OrderDetailTourId =?1 "
+			+ "Or Lower(t.Name) Like Lower(Concat('%', ?2 ,'%')) "
+			+ "Or Lower(de.OrderTour.Name) Like Lower(Concat('%', ?2 ,'%')) ")
+	Page<InvoiceDTO> searchInvoice(Pageable page, Integer tourId, String tourName, String userName);
 }

@@ -1,6 +1,7 @@
 package Travel_Foly.Controller;
 
 import java.io.File;
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,12 +23,13 @@ import Travel_Foly.DAO.AccountDAO;
 import Travel_Foly.DAO.CategoryTourDAO;
 import Travel_Foly.DAO.OrderDetailTourDAO;
 import Travel_Foly.DAO.TourDAO;
-
+import Travel_Foly.DTO.InvoiceDTO;
+import Travel_Foly.Helper.DateHelper;
 import Travel_Foly.Model.Account;
 import Travel_Foly.Model.CategoryTour;
 import Travel_Foly.Model.OrderDetailTour;
 import Travel_Foly.Model.Tour;
-
+import Travel_Foly.Service.SessionService;
 import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
@@ -43,6 +45,10 @@ public class AdminController {
 	private AccountDAO accountDao;
 	@Autowired
 	private CategoryTourDAO categoryTourDao;
+	
+	@Autowired
+	private SessionService session;
+	
 	private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
 	@GetMapping("index")
@@ -75,11 +81,55 @@ public class AdminController {
 		return "admin/form-add-bi-cam";
 	}
 
-	// @GetMapping("addorder")
-	// public String addOrder() {
-	// return "admin/form-add-don-hang";
-	// }
-
+	@GetMapping("addorder")
+	public String addOrder(Model model, @RequestParam("page") Optional<Integer> page) {
+		Pageable pageable = PageRequest.of(page.orElse(0), 4);
+		Page<InvoiceDTO> invoices = orderDetailTourDao.findAlldetailInvoice(pageable);
+		InvoiceDTO invoice = new InvoiceDTO();
+		Double total = 0.0;
+		model.addAttribute("total", total == null ? 0 : total);
+		model.addAttribute("invoice", invoice);
+		model.addAttribute("listInvoice", invoices);
+		return "admin/form-add-don-hang";
+	}
+	@GetMapping("addorder/search")
+	public String searchInvoice(Model model,@RequestParam("searchKey") String keyword,@RequestParam("page") Optional<Integer> page) {
+		System.out.println(keyword);
+		Pageable pageable = PageRequest.of(page.orElse(0), 4);
+		
+		Integer id = null;
+		InvoiceDTO invoice = new InvoiceDTO();
+		Double total = 0.0;
+		if(isStringNumeric(keyword)) {
+			id = Integer.parseInt(keyword);
+			invoice = orderDetailTourDao.detailInvoice(id);		
+			total = (invoice.getPriceAdult() * invoice.getQuantityAdult()) + (invoice.getPriceChildren() * invoice.getQuantityChildren()); 
+		}
+		
+		Page<InvoiceDTO> invoices = orderDetailTourDao.searchInvoice(pageable,id,keyword,keyword);
+		model.addAttribute("total", total == null ? 0 : total);
+		model.addAttribute("invoice", invoice);
+		model.addAttribute("listInvoice", invoices);
+		return "admin/form-add-don-hang";
+	}
+	@GetMapping("addorder/{id}")
+	public String updateOrder(Model model,@PathVariable("id") Integer id, @RequestParam("page") Optional<Integer> page) {
+		Pageable pageable = PageRequest.of(page.orElse(0), 4);
+		Page<InvoiceDTO> invoices = orderDetailTourDao.findAlldetailInvoice(pageable);
+		InvoiceDTO invoice = orderDetailTourDao.detailInvoice(id);
+		Double total = invoice.getPriceAdult()*invoice.getQuantityAdult() + invoice.getPriceChildren()*invoice.getQuantityChildren();
+		model.addAttribute("total", total == null ? 0 : total);
+		model.addAttribute("invoice", invoice);
+		model.addAttribute("listInvoice", invoices);
+		return "admin/form-add-don-hang";
+	}
+	@GetMapping("addorder/print/{id}")
+	public String printInvoice(Model model, @PathVariable("id") Integer id) {
+		
+		OrderDetailTour order = orderDetailTourDao.findByOrderDetailTourId(id);
+		
+		return "admin/printer";
+	}
 	@GetMapping("addstaff")
 	public String staff(Model model, @RequestParam("page") Optional<Integer> page) {
 		Pageable pageable = PageRequest.of(page.orElse(0), 4);
@@ -295,4 +345,8 @@ public class AdminController {
 		}
 		return null;
 	}
+	public boolean isStringNumeric(String input) {
+        String regex = "^[-+]?\\d+(\\.\\d+)?$";
+        return input.matches(regex);
+    }
 }

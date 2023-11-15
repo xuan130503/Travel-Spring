@@ -32,15 +32,21 @@
       flex: 0 0 33.33%;
       max-width: 20%;
     }
-    
+    .u-row .u-col.u-col-40 {
+      flex: 0 0 40%;
+      max-width: 40%;
+    }
     .u-row .u-col.u-col-50 {
       flex: 0 0 50%;
       max-width: 50%;
     }
-    
-    .u-row .u-col.u-col-66p67 {
+    .u-row .u-col.u-col-60 {
       flex: 0 0 66.67%;
       max-width: 66.67%;
+    }
+    .u-row .u-col.u-col-66p67 {
+      flex: 0 0 60%;
+      max-width: 60%;
     }
     
     .u-row .u-col.u-col-100 {
@@ -213,7 +219,7 @@
             <div style="max-width: 600px;margin: 0 auto;background-color: #ffffff;">
               <div class="u-row">
 
-                <div class="u-col u-col-33p33" style="display:flex;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;">
+                <div class="u-col u-col-40" style="display:flex;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;">
                   <div style="width: 100%;padding:0px;">
 
                     <table style="font-family:'Cabin',sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
@@ -224,7 +230,7 @@
                             <table width="100%" cellpadding="0" cellspacing="0" border="0">
                               <tr>
                                 <td>
-                                	<img alt="" th:src="@{'https://res.cloudinary.com/dpyp2vvdm/image/upload/Travel_FPoly/QrTour/' + ${base64} + '.png'}" width="100" height="100" layout="intrinsic" style="width: 100%;max-width: 100px;"/>
+                                	<img alt="" th:src="@{'https://res.cloudinary.com/dpyp2vvdm/image/upload/Travel_FPoly/QrTour/' + ${base64} + '.png'}" style="width: 100%; height: 100%;max-width: 200px; max-height: 200px;"/>
                                 </td>
                               </tr>
                             </table>
@@ -237,7 +243,7 @@
                   </div>
                 </div>
 
-                <div class="u-col u-col-66p67" style="display:flex;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;border-radius: 0px;">
+                <div class="u-col u-col-60" style="display:flex;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;border-radius: 0px;">
                   <div style="width: 100%;padding:0px;">
 
                     <table style="font-family:'Cabin',sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
@@ -245,7 +251,7 @@
                         <tr>
                           <td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:'Cabin',sans-serif;" align="left">
 
-                            <div style="font-size: 14px; line-height: 140%; text-align: left; word-wrap: break-word;">
+                            <div style="font-size: 14px; line-height: 140%; text-align: left; word-wrap: break-word; margin-top: 20px; ">
                               <p style="line-height: 140%;">Contact Info:</p>
                               <p style="line-height: 140%;"><span style="color: #e03e2d; line-height: 19.6px;">[[${fullname}]]</span></p>
                               <p style="line-height: 140%;">Email: <a target="_blank" href="mailto:tanduong969@gmail.com" rel="noopener">[[${email}]]</a></p>
@@ -303,6 +309,7 @@
                           <td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:'Cabin',sans-serif;" align="left">
 
                             <div style="font-size: 14px; line-height: 160%; text-align: left; word-wrap: break-word;">
+                              <p style="line-height: 160%;">Tour ID: <span style="line-height: 22.4px;"></span><span style="color: #e03e2d; line-height: 22.4px;">[[${orderDetailTourId}]]</span></p>
                               <p style="line-height: 160%;"><span style="color: #e03e2d; line-height: 22.4px;">[[${departure}]] =&gt; [[${destination}]]</span></p>
                               <p style="line-height: 160%;">Departure day: <span style="color: #e03e2d; line-height: 22.4px;"></span><span style="color: #e03e2d; line-height: 22.4px;">[[${startDate}]] 7:00</span></p>
                               <p style="line-height: 160%;">End day: <span style="color: #e03e2d; line-height: 22.4px;"></span><span style="color: #e03e2d; line-height: 22.4px;">[[${endDate}]]</span></p>

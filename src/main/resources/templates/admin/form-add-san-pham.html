@@ -40,145 +40,137 @@
         <div class="tile">
           <h3 class="tile-title">Tạo mới sản phẩm</h3>
           <div class="tile-body">
-            <form th:action="@{/travelfpoly/admin/save}" th:object="${tour}" method="post" class="row">
+            <div class="row element-button">
+              <div class="col-sm-2">
+                <a th:href="@{/travelfpoly/admin/show}" class="btn btn-add btn-sm"><i
+                    class="fas fa-folder-plus"></i>Thêm
+                  loại Tour</a>
+              </div>
+            </div>
 
-
-              <!-- <div class="input-group">
-                <div class="form-outline">
-                  <input type="search" name="keyword" class="form-control" />
-                  <label class="form-label" for="form1">Search</label>
+            <form method="post" class="row">
+              <!-- <form th:action="@{/travelfpoly/admin/createTour}" th:object="${tour}" method="post" class="row">
+                <div class="form-group col-md-6">
+                  <label class="control-label">Mã tour</label>
+                  <input class="form-control" field="*{TourId}" name="TourId" type="text">
                 </div>
-                <button type="button" class="btn btn-primary">
-                  <i class="fas fa-search"></i>
-                </button>
-              </div> -->
-
-              <div class="form-group col-md-6">
-                <label for="email" class="control-label">Tên tour</label>
-                <input class="form-control" id="Name" name="Name" th:field="*{Name}" type="text">
-              </div>
-
-              <div class="form-group col-md-6">
-                <label class="control-label">Trạng thái</label>
-                <div class="form-check">
-                  <input class="form-check-input" value="true" type="radio" id="flexRadioDefault1"
-                    th:field="*{Available}" name="Available" checked>
-                  <label class="form-check-label" for="flexRadioDefault1">
-                    Sẵn sàng
-                  </label>
+                <div class="form-group col-md-6">
+                  <label for="email" class="control-label">Tên tour</label>
+                  <input class="form-control" field="*{Name}" name="Name" type="text">
                 </div>
-                <div class="form-check">
-                  <input class="form-check-input" value="false" type="radio" id="flexRadioDefault2"
-                    th:field="*{Available}" name="Available">
-                  <label class="form-check-label" for="flexRadioDefault2">
-                    Chưa sẵn sàng
-                  </label>
+
+                <div class="form-group col-md-6">
+                  <label class="control-label">Trạng thái</label>
+                  <div class="form-check">
+                    <input class="form-check-input" value="true" type="radio" id="flexRadioDefault1" field="Available"
+                      name="Available" checked>
+                    <label class="form-check-label" for="flexRadioDefault1">
+                      Sẵn sàng
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" value="false" type="radio" id="flexRadioDefault2" field="Available"
+                      name="Available">
+                    <label class="form-check-label" for="flexRadioDefault2">
+                      Chưa sẵn sàng
+                    </label>
+                  </div>
                 </div>
-              </div>
-              <div class="form-group col-md-6">
-                <label class="control-label">Mô tả </label>
-                <input class="form-control" type="text" th:field="*{Description}" name="Description">
-              </div>
-              <div class="form-group col-md-6">
-                <label class="control-label">địa điểm đi</label>
-                <input class="form-control" type="text" th:field="*{Departure}" name="Description">
-              </div>
-              <div class="form-group col-md-6">
-                <label class="control-label">Địa điểm đến</label>
-                <input class="form-control" type="text" th:field="*{Destination}" name="Destination">
-              </div>
+                <div class="form-group col-md-6">
+                  <label class="control-label">Địa điểm đi</label>
+                  <input class="form-control" type="text" field="Departure" name="Departure">
+                </div>
+                <div class="form-group col-md-6">
+                  <label class="control-label">Địa điểm đến</label>
+                  <input class="form-control" type="text" field="Destination" name="Destination">
+                </div>
 
-              <div class="form-group col-md-6">
-                <label class="control-label">giá người lớn</label>
-                <input class="form-control" type="text" th:field="*{PriceAdult}" name="PriceAdult">
-              </div>
+                <div class="form-group col-md-6">
+                  <label class="control-label">giá người lớn</label>
+                  <input class="form-control" type="text" field="PriceAdult" name="PriceAdult">
+                </div>
 
-              <div class="form-group col-md-6">
-                <label class="control-label">giá người trẻ em </label>
-                <input class="form-control" type="text" th:field="*{PriceChildren}" name="PriceChildren">
-              </div>
-              <div class="form-group col-md-6">
-                <label class="control-label">số lượng người lớn</label>
-                <input class="form-control" type="text" th:field="*{QuantityAdult}" name="QuantityAdult">
-              </div>
-              <div class="form-group col-md-6">
-                <label class="control-label">Số lượng trẻ em</label>
-                <input class="form-control" type="text" th:field="*{QuantityChildren}" name="QuantityChildren">
-              </div>
-              <div class="form-group col-md-6">
-                <label class="control-label">Introduction</label>
-                <input class="form-control" type="text" th:field="*{Introduction}" name="Introduction">
-              </div>
-              <div class="form-group col-md-6">
-                <label class="control-label">Duration</label>
-                <input class="form-control" type="text" th:field="*{Duration}" name="Duration">
-              </div>
-              <br>
-              <div class="col-sm-12">
+                <div class="form-group col-md-6">
+                  <label class="control-label">giá người trẻ em </label>
+                  <input class="form-control" type="text" field="PriceChildren" name="PriceChildren">
+                </div>
+                <div class="form-group col-md-6">
+                  <label class="control-label">số lượng người lớn</label>
+                  <input class="form-control" type="text" field="QuantityAdult" name="QuantityAdult">
+                </div>
+                <div class="form-group col-md-6">
+                  <label class="control-label">Số lượng trẻ em</label>
+                  <input class="form-control" type="text" field="QuantityChildren" name="QuantityChildren">
+                </div>
+                <div class="form-group col-md-6">
+                  <label class="control-label">Introduction</label>
+                  <input class="form-control" type="text" field="Introduction" name="Introduction">
+                </div>
+                <div class="form-group col-md-6">
+                  <label class="control-label">Duration</label>
+                  <input class="form-control" type="text" field="Duration" name="Duration">
+                </div>
+
                 <button class="btn btn-save" type="submit" style="margin-left: 15px;">Lưu</button>
                 <button class="btn btn-primary" type="submit" style="margin-left: 15px;">Sửa</button>
-                <button class="btn btn-cancel" type="submit" style="margin-left: 15px;">Làm mới</button>
-
-              </div>
-
+                <button class="btn btn-cancel" type="submit" style="margin-left: 15px;">Làm mới</button> -->
 
             </form>
 
 
+
+            <table class="table mt-4">
+              <thead>
+                <tr>
+                  <th scope="col">Loại Tour</th>
+                  <th scope="col">Tình trạng</th>
+                  <th scope="col">Mô tả</th>
+                  <th scope="col">Nơi đi</th>
+                  <th scope="col">Nơi đến</th>
+                  <th scope="col">Giá người lớn</th>
+                  <th scope="col">Giá trẻ em</th>
+                  <th scope="col">Số lượng người lớn</th>
+                  <th scope="col">số lượng trẻ em</th>
+                  <th scope="col">giới thiệu</th>
+                  <th scope="col">thời gian</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr th:each="tour : ${getListTour}">
+                  <td th:text="${tour.TourId}"></td>
+                  <td th:text="${tour.Name}"></td>
+                  <td th:text="${tour.Available}"></td>
+                  <td th:text="${tour.Description}"></td>
+                  <td th:text="${tour.Departure}"></td>
+                  <td th:text="${tour.Destination}"></td>
+                  <td th:text="${tour.PriceAdult}"></td>
+                  <td th:text="${tour.PriceChildren}"></td>
+                  <td th:text="${tour.QuantityAdult}"></td>
+                  <td th:text="${tour.QuantityChildren}"></td>
+                  <td th:text="${tour.Introduction}"></td>
+                  <td th:text="${tour.Duration}"></td>
+
+
+                  <td>
+                    <a th:href="@{/travelfpoly/admin/updateTour/{TourId}(TourId=${tour.TourId})}">
+                      <i class="fas fa-pen-square"></i>
+                    </a>
+                    <a th:href="@{/travelfpoly/admin/deleteTour/{TourId}(TourId=${tour.TourId})}">
+                      <i class="fas fa-trash-alt"></i>
+                    </a>
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
           </div>
-
-          <table class="table mt-4">
-            <thead>
-              <tr>
-                <th scope="col">Loại Tour</th>
-                <th scope="col">Tình trạng</th>
-                <th scope="col">Mô tả</th>
-                <th scope="col">Nơi đi</th>
-                <th scope="col">Nơi đến</th>
-                <th scope="col">Giá người lớn</th>
-                <th scope="col">Giá trẻ em</th>
-                <th scope="col">Số lượng người lớn</th>
-                <th scope="col">số lượng trẻ em</th>
-                <th scope="col">giới thiệu</th>
-                <th scope="col">thời gian</th>
-                <th scope="col"></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr th:each="tour : ${tours}">
-                <!-- <td th:text="${tour.TourId}"></td> -->
-                <td th:text="${tour.Name}"></td>
-                <td th:text="${tour.Available}"></td>
-                <td th:text="${tour.Description}"></td>
-                <td th:text="${tour.Departure}"></td>
-                <td th:text="${tour.Destination}"></td>
-                <td th:text="${tour.PriceAdult}"></td>
-                <td th:text="${tour.PriceChildren}"></td>
-                <td th:text="${tour.QuantityAdult}"></td>
-                <td th:text="${tour.QuantityChildren}"></td>
-                <td th:text="${tour.Introduction}"></td>
-                <td th:text="${tour.Duration}"></td>
-
-
-                <td>
-                  <a th:href="@{/travelfpoly/admin/updateTour/{TourId}(TourId=${tour.TourId})}">
-                    <i class="fas fa-pen-square"></i>
-                  </a>
-                  <a th:href="@{/travelfpoly/admin/deleteTour/{TourId}(TourId=${tour.TourId})}">
-                    <i class="fas fa-trash-alt"></i>
-                  </a>
-                </td>
-              </tr>
-
-            </tbody>
-          </table>
         </div>
       </div>
-    </div>
-    <div class="row mt-5">
-      <div class="col text-center">
-        <div class="block-27">
-          <!-- <ul>
+      <div class="row mt-5">
+        <div class="col text-center">
+          <div class="block-27">
+            <!-- <ul>
               <li>
                 <a th:href="@{/travelfpoly/admin/addproduct(page=${tours.number - 1})}">&lt;</a>
               </li>
@@ -190,12 +182,17 @@
                 <a th:href="@{/travelfpoly/admin/addproduct(page=${tours.number + 1})}">&gt;</a>
               </li>
             </ul> -->
+          </div>
         </div>
       </div>
     </div>
-    </div>
   </main>
 
+  <script src="/admin/js/jquery-3.2.1.min.js"></script>
+  <script src="/admin/js/popper.min.js"></script>
+  <script src="/admin/js/bootstrap.min.js"></script>
+  <script src="/admin/js/main.js"></script>
+  <script src="/admin/js/plugins/pace.min.js"></script>
 
 </body>
 

@@ -21,7 +21,7 @@ public class VNPayConfig {
 	public static String vnp_Command = "pay";
 	public static String orderType = "other";
 	public static String vnp_PayUrl = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-    public static String vnp_ReturnUrl = "/payment";
+    public static String vnp_ReturnUrl = "http://localhost:8080/travelfpoly/payment/vnpay/return";
     public static String vnp_TmnCode = "4LG073UH";
     public static String secretKey = "IFIHAJVIATHDEKYDWOLXIQAGNTKJLPCX";
     public static String vnp_ApiUrl = "https://sandbox.vnpayment.vn/merchant_webapi/api/transaction";
