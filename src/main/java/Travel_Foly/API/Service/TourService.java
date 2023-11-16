@@ -2,6 +2,7 @@ package Travel_Foly.API.Service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import Travel_Foly.Model.Tour;
@@ -9,16 +10,13 @@ import Travel_Foly.Model.Tour;
 @Component
 public interface TourService {
 
-    List<Tour> getAllTours();
-
-    Tour findByTourId(Integer TourId);
-
-    void saveTour(Tour tour);
+    List<Tour> getAllTour();
 
     Tour getTourById(Integer TourId);
 
-    void deleteTour(Integer tour);
+    void addTour(Tour tour);
 
-    // List<Tour> searchTours(String keyword);
+    void deleteTour(Integer TourId);
 
+    Page<Tour> getAll(Integer pageNo);
 }
