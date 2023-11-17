@@ -2,9 +2,6 @@ package Travel_Foly.API.ServiceImpl;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import Travel_Foly.API.Service.TourService;
 import Travel_Foly.DAO.TourDAO;
@@ -16,29 +13,35 @@ public class TourServiceImpl implements TourService {
     private TourDAO tourDAO;
 
     @Override
-    public List<Tour> getAllTour() {
-        return tourDAO.findAll();
+    public List<Tour> getAllTours() {
+        return this.tourDAO.findAll();
+    }
+
+    @Override
+    public void saveTour(Tour tour) {
+        this.tourDAO.save(tour);
     }
 
     @Override
     public Tour getTourById(Integer TourId) {
         return tourDAO.findById(TourId).orElse(null);
-    }
 
-    @Override
-    public void addTour(Tour tour) {
-        tourDAO.save(tour);
     }
 
     @Override
     public void deleteTour(Integer TourId) {
-        tourDAO.deleteById(TourId);
+        this.tourDAO.deleteById(TourId);
     }
 
     @Override
-    public Page<Tour> getAll(Integer pageNo) {
-        Pageable pageable = PageRequest.of(pageNo - 1, 3);
-        return this.tourDAO.findAll(pageable);
+    public Tour findByTourId(Integer TourId) {
+        return this.tourDAO.findByTourId(TourId);
     }
+
+    // @Override
+    // public List<Tour> searchTours(String keyword) {
+    // return this.tourDAO.getSearchTours(keyword);
+
+    // }
 
 }
