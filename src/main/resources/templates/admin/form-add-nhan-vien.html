@@ -61,83 +61,13 @@
   </script>
 </head>
 
-<body class="app sidebar-mini rtl">
-  <style>
-    .Choicefile {
-      display: block;
-      background: #14142B;
-      border: 1px solid #fff;
-      color: #fff;
-      width: 150px;
-      text-align: center;
-      text-decoration: none;
-      cursor: pointer;
-      padding: 5px 0px;
-      border-radius: 5px;
-      font-weight: 500;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .Choicefile:hover {
-      text-decoration: none;
-      color: white;
-    }
-
-    #uploadfile,
-    .removeimg {
-      display: none;
-    }
-
-    #thumbbox {
-      position: relative;
-      width: 100%;
-      margin-bottom: 20px;
-    }
-
-    .removeimg {
-      height: 25px;
-      position: absolute;
-      background-repeat: no-repeat;
-      top: 5px;
-      left: 5px;
-      background-size: 25px;
-      width: 25px;
-      /* border: 3px solid red; */
-      border-radius: 50%;
-
-    }
-
-    .removeimg::before {
-      -webkit-box-sizing: border-box;
-      box-sizing: border-box;
-      content: '';
-      border: 1px solid red;
-      background: red;
-      text-align: center;
-      display: block;
-      margin-top: 11px;
-      transform: rotate(45deg);
-    }
-
-    .removeimg::after {
-      /* color: #FFF; */
-      /* background-color: #DC403B; */
-      content: '';
-      background: red;
-      border: 1px solid red;
-      text-align: center;
-      display: block;
-      transform: rotate(-45deg);
-      margin-top: -2px;
-    }
-  </style>
+<body class="app sidebar-mini rtl" style="margin-top: 0px; ">
   <!-- Navbar-->
   <div th:insert="~{include/_HeaderAdmin}"></div>
   <!-- Sidebar menu-->
   <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
   <div th:insert="~{include/_AsideAdmin}"></div>
-  <main class="app-content">
+  <main class="app-content" style="margin-left: 50px;">
     <div class="app-title">
       <ul class="app-breadcrumb breadcrumb">
         <li class="breadcrumb-item">Danh sách nhân viên</li>
@@ -187,70 +117,13 @@
                 <label class="control-label">Tuổi</label>
                 <input th:name="age" th:value="*{Age}" class="form-control" type="text">
               </div>
-              <!-- <div class="form-group col-md-3">
-                <label class="control-label">Số CMND</label>
-                <input class="form-control" type="number" required>
-              </div>
-              <div class="form-group col-md-3">
-                <label class="control-label">Ngày cấp</label>
-                <input class="form-control" type="date" required>
-              </div>
-              <div class="form-group col-md-3">
-                <label class="control-label">Nơi cấp</label>
-                <input class="form-control" type="text" required>
-              </div>
-              <div class="form-group col-md-3">
-                <label class="control-label">Giới tính</label>
-                <select class="form-control" id="exampleSelect2" required>
-                  <option>-- Chọn giới tính --</option>
-                  <option>Nam</option>
-                  <option>Nữ</option>
-                </select>
-              </div> -->
-
-              <!-- <div class="form-group  col-md-3">
-                <label for="exampleSelect1" class="control-label">Chức vụ</label>
-                <select class="form-control" id="exampleSelect1">
-                  <option>-- Chọn chức vụ --</option>
-                  <option>Bán hàng</option>
-                  <option>Tư vấn</option>
-                  <option>Dịch vụ</option>
-                  <option>Thu Ngân</option>
-                  <option>Quản kho</option>
-                  <option>Bảo trì</option>
-                  <option>Kiểm hàng</option>
-                  <option>Bảo vệ</option>
-                  <option>Tạp vụ</option>
-                </select>
-              </div>
-              <div class="form-group col-md-3">
-                <label class="control-label">Bằng cấp</label>
-                <select class="form-control" id="exampleSelect3">
-                  <option>-- Chọn bằng cấp --</option>
-                  <option>Tốt nghiệp Đại Học</option>
-                  <option>Tốt nghiệp Cao Đẳng</option>
-                  <option>Tốt nghiệp Phổ Thông</option>
-                  <option>Chưa tốt nghiệp</option>
-                  <option>Không bằng cấp</option>
-                </select>
-              </div>
-              <div class="form-group col-md-3">
-                <label class="control-label">Tình trạng hôn nhân</label>
-                <select class="form-control" id="exampleSelect2">
-                  <option>-- Chọn tình trạng hôn nhân --</option>
-                  <option>Độc thân</option>
-                  <option>Đã kết hôn</option>
-                  <option>Góa</option>
-                  <option>Khác</option>
-                </select>
-              </div> -->
-			<div class="form-group col-md-12">
+              <div class="form-group col-md-12">
                 <label class="control-label">Ảnh sản phẩm</label>
                 <div id="myfileupload">
                   <input type="file" id="uploadfile" th:name="image" onchange="readURL(this);" />
                 </div>
                 <div id="thumbbox">
-                  <img height="150" width="100" th:src="@{/images/{img}# (img=*{Image})}" alt="Thumb image"/>
+                  <img height="150" width="100" th:src="@{/images/{img}# (img=*{Image})}" alt="Thumb image" />
                 </div>
                 <div id="boxchoice">
                   <a href="javascript:" class="Choicefile"><i class="fas fa-cloud-upload-alt"></i> Chọn ảnh</a>
@@ -259,147 +132,68 @@
 
               </div>
 
-				<button class="btn btn-save" th:formaction="@{/travelfpoly/admin/addstaff/create}" type="submit" style="margin-left: 15px; z-index:999;">Lưu</button>
-				<button class="btn btn-primary" th:formaction="@{/travelfpoly/admin/addstaff/create}" type="submit" style="margin-left: 15px; z-index:999;">Sửa</button>
-				<button class="btn btn-cancel" th:formaction="@{/travelfpoly/admin/addstaff}" type="submit" style="margin-left: 15px; z-index:999;">Làm mới</button>
-			</form>
-		
+              <button class="btn btn-save" th:formaction="@{/travelfpoly/admin/addstaff/create}" type="submit"
+                style="margin-left: 15px;">Lưu</button>
+              <button class="btn btn-primary" th:formaction="@{/travelfpoly/admin/addstaff/create}" type="submit"
+                style="margin-left: 15px;">Sửa</button>
+              <button class="btn btn-cancel" th:formaction="@{/travelfpoly/admin/addstaff}" type="submit"
+                style="margin-left: 15px;">Làm mới</button>
+            </form>
+
           </div>
-          
+
           <table class="table mt-4">
-			  <thead>
-			    <tr>
-			      <th scope="col">Họ Tên</th>
-			      <th scope="col">Email</th>
-			      <th scope="col">Địa chỉ</th>
-			      <th scope="col">Điện thoại</th>
-			      <th scope="col">Hình ảnh</th>
-			      <th scope="col">Tuổi</th>
-			       <th scope="col"></th>
-			    </tr>
-			  </thead>
-			  <tbody>
-			    <tr th:each="account : ${listAccount.content}">
-			      <th>[[${account.FullName}]]</th>
-			      <td>[[${account.Email}]]</td>
-			      <td>[[${account.Address}]]</td>
-			      <td>[[${account.Phone}]]</td>
-			      <td>[[${account.Image}]]</td>
-			      <td>[[${account.Age}]]</td>
-			      <td>
-			      	<a th:href="@{|/travelfpoly/admin/addstaff/${account.UserId}|}">
-			      		<i class="fas fa-pen-square"></i>
-			      	</a>
-			      	<a th:href="@{|/travelfpoly/admin/addstaff/delete/${account.UserId}|}">
-			      		<i class="fas fa-trash-alt"></i>
-			      	</a>
-			      </td>
-			    </tr>
-			    
-			  </tbody>
-			</table>
-			<div class="row mt-5">
-				<div class="col text-center">
-					<div class="block-27">
-						<ul>
-							<li>
-								<a th:href="@{/travelfpoly/admin/addstaff(page=${listAccount.number - 1})}">&lt;</a>
-							</li>
-							<li th:each="item : ${#numbers.sequence(0, listAccount.totalPages-1)}" th:class="${item} == ${listAccount.number} ? 'active' : ''">
-								<a th:href="@{/travelfpoly/admin/addstaff(page=${item})}" th:text="${item+1}"></a>
-							</li>
-							<li>
-								<a th:href="@{/travelfpoly/admin/addstaff(page=${listAccount.number + 1})}">&gt;</a>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</div>
+            <thead>
+              <tr>
+                <th scope="col">Họ Tên</th>
+                <th scope="col">Email</th>
+                <th scope="col">Địa chỉ</th>
+                <th scope="col">Điện thoại</th>
+                <th scope="col">Hình ảnh</th>
+                <th scope="col">Tuổi</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="account : ${listAccount.content}">
+                <th>[[${account.FullName}]]</th>
+                <td>[[${account.Email}]]</td>
+                <td>[[${account.Address}]]</td>
+                <td>[[${account.Phone}]]</td>
+                <td>[[${account.Image}]]</td>
+                <td>[[${account.Age}]]</td>
+                <td>
+                  <a th:href="@{|/travelfpoly/admin/addstaff/${account.UserId}|}">
+                    <i class="fas fa-pen-square"></i>
+                  </a>
+                  <a th:href="@{|/travelfpoly/admin/addstaff/delete/${account.UserId}|}">
+                    <i class="fas fa-trash-alt"></i>
+                  </a>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+          <div class="row mt-5">
+            <div class="col text-center">
+              <div class="block-27">
+                <ul>
+                  <li>
+                    <a th:href="@{/travelfpoly/admin/addstaff(page=${listAccount.number - 1})}">&lt;</a>
+                  </li>
+                  <li th:each="item : ${#numbers.sequence(0, listAccount.totalPages-1)}"
+                    th:class="${item} == ${listAccount.number} ? 'active' : ''">
+                    <a th:href="@{/travelfpoly/admin/addstaff(page=${item})}" th:text="${item+1}"></a>
+                  </li>
+                  <li>
+                    <a th:href="@{/travelfpoly/admin/addstaff(page=${listAccount.number + 1})}">&gt;</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
-
   </main>
-
-<!-- <div class="form-group col-md-2">
-                <label class="control-label">Ảnh đại diện</label>
-                <div id="myfileupload">
-                  <input type="file" id="uploadfile" th:name="image" onchange="readURL(this);" />
-                </div>
-                <div id="thumbbox">
-                  <img height="150" width="100" th:src="@{/images/{img}# (img=*{Image})}" alt="Thumb image"/>
-                </div>
-                <div id="boxchoice">
-                  <a href="javascript:" class="Choicefile"><i class="fas fa-cloud-upload-alt"></i> Chọn ảnh</a>
-                  <p style="clear:both"></p>
-                </div>
-              </div>
-              <div class="form-group col-md-2">
-                <label class="control-label">Ảnh Tour 1</label>
-                <div id="myfileupload">
-                  <input type="file" id="uploadfile" th:name="image" onchange="readURL(this);" />
-                </div>
-                <div id="thumbbox">
-                  <img height="150" width="100" th:src="@{/images/{img}# (img=*{Image})}" alt="Thumb image"/>
-                </div>
-                <div id="boxchoice">
-                  <a href="javascript:" class="Choicefile"><i class="fas fa-cloud-upload-alt"></i> Chọn ảnh</a>
-                  <p style="clear:both"></p>
-                </div>
-              </div>
-              <div class="form-group col-md-2">
-                <label class="control-label">Ảnh Tour 2</label>
-                <div id="myfileupload">
-                  <input type="file" id="uploadfile" th:name="image" onchange="readURL(this);" />
-                </div>
-                <div id="thumbbox">
-                  <img height="150" width="100" th:src="@{/images/{img}# (img=*{Image})}" alt="Thumb image"/>
-                </div>
-                <div id="boxchoice">
-                  <a href="javascript:" class="Choicefile"><i class="fas fa-cloud-upload-alt"></i> Chọn ảnh</a>
-                  <p style="clear:both"></p>
-                </div>
-              </div>
-              <div class="form-group col-md-2">
-                <label class="control-label">Ảnh Tour 3</label>
-                <div id="myfileupload">
-                  <input type="file" id="uploadfile" th:name="image" onchange="readURL(this);" />
-                </div>
-                <div id="thumbbox">
-                  <img height="150" width="100" th:src="@{/images/{img}# (img=*{Image})}" alt="Thumb image"/>
-                </div>
-                <div id="boxchoice">
-                  <a href="javascript:" class="Choicefile"><i class="fas fa-cloud-upload-alt"></i> Chọn ảnh</a>
-                  <p style="clear:both"></p>
-                </div>
-              </div>
-              <div class="form-group col-md-2">
-                <label class="control-label">Ảnh Tour 4</label>
-                <div id="myfileupload">
-                  <input type="file" id="uploadfile" th:name="image" onchange="readURL(this);" />
-                </div>
-                <div id="thumbbox">
-                  <img height="150" width="100" th:src="@{/images/{img}# (img=*{Image})}" alt="Thumb image"/>
-                </div>
-                <div id="boxchoice">
-                  <a href="javascript:" class="Choicefile"><i class="fas fa-cloud-upload-alt"></i> Chọn ảnh</a>
-                  <p style="clear:both"></p>
-                </div>
-              </div>
-              <div class="form-group col-md-2">
-                <label class="control-label">Ảnh Tour 5</label>
-                <div id="myfileupload">
-                  <input type="file" id="uploadfile" th:name="image" onchange="readURL(this);" />
-                </div>
-                <div id="thumbbox">
-                  <img height="150" width="100" th:src="@{/images/{img}# (img=*{Image})}" alt="Thumb image"/>
-                </div>
-                <div id="boxchoice">
-                  <a href="javascript:" class="Choicefile"><i class="fas fa-cloud-upload-alt"></i> Chọn ảnh</a>
-                  <p style="clear:both"></p>
-                </div>
-              </div> -->
-  <!--
-  MODAL
--->
   <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
     data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -431,18 +225,18 @@
   MODAL
 -->
 
-	<script>
-	    document.getElementById('imageFile').addEventListener('change', function (event) {
-	        var file = event.target.files[0];
-	        var reader = new FileReader();
-	
-	        reader.onload = function (e) {
-	            document.getElementById('previewImage').setAttribute('src', e.target.result);
-	        };
-	
-	        reader.readAsDataURL(file);
-	    });
-	</script>
+  <script>
+    document.getElementById('imageFile').addEventListener('change', function (event) {
+      var file = event.target.files[0];
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        document.getElementById('previewImage').setAttribute('src', e.target.result);
+      };
+
+      reader.readAsDataURL(file);
+    });
+  </script>
   <!-- Essential javascripts for application to work-->
   <script src="/admin/js/jquery-3.2.1.min.js"></script>
   <script src="/admin/js/popper.min.js"></script>

@@ -22,13 +22,13 @@
 
 </head>
 
-<body onload="time()" class="app sidebar-mini rtl">
+<body onload="time()" class="app sidebar-mini rtl" style="margin-top: 0;">
   <!-- Navbar-->
   <div th:insert="~{include/_HeaderAdmin}"></div>
   <!-- Sidebar menu-->
   <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
   <div th:insert="~{include/_AsideAdmin}"></div>
-  <main class="app-content">
+  <main class="app-content" style="margin-left: 50px;">
     <div class="app-title">
       <ul class="app-breadcrumb breadcrumb side">
         <li class="breadcrumb-item active"><a href="#"><b>Danh sách nhân viên</b></a></li>
@@ -320,14 +320,14 @@
       jQuery(".trash").click(function () {
         swal({
           title: "Cảnh báo",
-         
+
           text: "Bạn có chắc chắn là muốn xóa nhân viên này?",
           buttons: ["Hủy bỏ", "Đồng ý"],
         })
           .then((willDelete) => {
             if (willDelete) {
               swal("Đã xóa thành công.!", {
-                
+
               });
             }
           });

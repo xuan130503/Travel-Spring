@@ -1,5 +1,7 @@
 package Travel_Foly.Controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,29 +23,31 @@ public class TourController {
 
     @GetMapping("tour")
     public String index(Model model) {
-        model.addAttribute("getListTour", tourService.getListTour());
-        Tour tour = new Tour();
-        model.addAttribute("tour", tour);
+        model.addAttribute("tours", tourService.getAllTours());
+        model.addAttribute("tour", new Tour());
         return "admin/form-add-san-pham";
     }
 
-    @PostMapping("createTour")
-    public String createTour(@ModelAttribute("tour") Tour tour) {
-        this.tourService.createTour(tour);
+    @PostMapping("/save")
+    public String saveTour(@ModelAttribute(value = "tour") Tour tour) {
+        this.tourService.saveTour(tour);
         return "redirect:/travelfpoly/admin/tour";
+
     }
 
     @GetMapping("updateTour/{TourId}")
     public String updateTour(@PathVariable("TourId") Integer TourId, Model model) {
-        Tour tour = tourService.updateTour(TourId);
+        Tour tour = tourService.getTourById(TourId);
         model.addAttribute("tour", tour);
-        return "redirect:/travelfpoly/admin/tour";
+        List<Tour> tours = tourService.getAllTours();
+        model.addAttribute("tours", tours);
+        return "admin/form-add-san-pham";
     }
 
     @GetMapping("deleteTour/{TourId}")
     public String deleteTour(@PathVariable("TourId") Integer TourId) {
         this.tourService.deleteTour(TourId);
         return "redirect:/travelfpoly/admin/tour";
-    }
 
+    }
 }

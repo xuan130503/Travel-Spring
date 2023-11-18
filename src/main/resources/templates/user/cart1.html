@@ -53,6 +53,7 @@
 	href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body>
+	<div th:insert="~{include/_loading.html}"></div>
 	<div th:insert="~{include/_Nav}"></div>
 
 	<div class="hero-wrap js-fullheight"
@@ -191,39 +192,51 @@
 									<th class="so--luong" width="10">Quantity Children</th>
 									<th class="so--luong">PriceAdult</th>
 									<th class="so--luong">PriceChildren</th>
+									<th>Total Price</th>
 									<th class="so--luong text-center"
-										style="text-align: center; vertical-align: middle;">Action</th>
+										style="text-align: center; vertical-align: middle;"></th>
+									<th></th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr th:if="${cartItems}!=null" th:each="cartItem : ${cartItems}" class="cart-item">
+								<tr th:if="${cartItems}!=null" th:each="cartItem, cartItemStart  : ${cartItems}" class="cart-item">
 									<td>[[${cartItem.TourId.Name}]]</td>
 									<td>[[${#dates.format(cartItem.StartDate, 'dd-MM-yyyy')}]] - [[${#dates.format(cartItem.EndDate, 'dd-MM-yyyy')}]]</td>
 									<td>
-										<select th:name="quantityChildren" id="adult" class="quantityAdult form-control">
-											<option th:value="${cartItem.QuantityAdult}">[[${cartItem.QuantityAdult}]]</option>
-											<option th:each="quantityAdult : ${#numbers.sequence(0,cartItem.TourId.quantityAdult)}" th:value="${quantityAdult}">
-												[[${quantityAdult}]]
-											</option>
-										</select>
+										<select th:name="quantityAdult" class="form-control" id="adult">
+									        <option>[[${cartItem.QuantityAdult}]]</option>
+									        <option th:each="quantityAdult : ${#numbers.sequence(0,cartItem.TourId.quantityAdult)}" th:value="${quantityAdult}">
+									            [[${quantityAdult}]]
+									        </option>
+									    </select>
 									</td>
 									<td>
-										<select th:name="quantityChildren" id="children" class="quantityChildren form-control">
-											<option th:value="${cartItem.QuantityChildren}">[[${cartItem.QuantityChildren}]]</option>
-											<option th:each="quantityChildren : ${#numbers.sequence(0,cartItem.TourId.quantityChildren)}" th:value="${quantityChildren}">
-												[[${quantityChildren}]]
-											</option>
-										</select>	
+										<select th:name="quantityChildren" class="form-control" id="children">
+									        <option>[[${cartItem.QuantityChildren}]]</option>
+									        <option th:each="quantityChildren : ${#numbers.sequence(0,cartItem.TourId.quantityChildren)}" th:value="${quantityChildren}">
+									            [[${quantityChildren}]]
+									        </option>
+									    </select>
 									</td>
-									<td class="pricePerAdult" data-price="[[${cartItem.TourId.PriceAdult]]">
+									<td id="priceAdult" th:data-price="${cartItem.TourId.PriceAdult}">
 										[[${cartItem.TourId.PriceAdult}]]$ 
 										
 									 </td>
-									 <td class="pricePerChildren" data-price="[[${cartItem.TourId.PriceChildren}]]">
+									 <td id="priceChildren" th:data-price="${cartItem.TourId.PriceChildren}">
 									 	[[${cartItem.TourId.PriceChildren}]]$
 									 </td>
-
+									 
+									<td>
+										<span id="totalPriceDisplay" style="color:red;" th:text="${(cartItem.TourId.PriceAdult * cartItem.quantityAdult) + (cartItem.TourId.PriceChildren * cartItem.quantityChildren)}"></span>
+									</td>
+									
 									<td style="text-align: center; vertical-align: middle;">
+										<a th:href="@{|/travelfpoly/cart/delete/${cartItem.CartItemId}|}">
+											<button class="btn btn-primary btn-sm trash" type="button"
+												title="Xóa">
+												<i class="fas fa-trash-alt"></i>
+											</button>
+										</a>
 										<a th:href="@{|/travelfpoly/cart/delete/${cartItem.CartItemId}|}">
 											<button class="btn btn-primary btn-sm trash" type="button"
 												title="Xóa">
@@ -232,8 +245,11 @@
 										</a>
 										
 									</td>
+									<td>
+										<input type="checkbox" class="option-input checkbox"/>
+									</td>
 								</tr>
-								<tr th:unless="${cartItems}==null">
+								<tr th:unless="${cartItems}!=null">
 									<td colspan="6">Chưa có sản phẩm trong giỏ hàng</td>
 								</tr>
 								
@@ -249,7 +265,7 @@
 			<div class="col-md-4">
 				<div th:object="${cart}" class="tile">
 					<h3 class="tile-title">Order notification</h3>
-					<form method="post">
+					<form method="post" th:action="@{|/travelfpoly/cart/book/*{Cart.UserId}|}">
 						<div class="row">
 							<div class="form-group  col-md-12">
 								<label class="control-label">Fullname</label> 
@@ -287,14 +303,15 @@
 							</div>
 	
 						</div>
-						<div class="row">
-							<div class="form-group  col-md-6">
-								<label class="control-label">Total Price: </label>
-								<p class="control-all-money-tamtinh"><span id="totalAmount" th:text="${totalPrice}"></span> $</p>
-							</div>
-							<div class="tile-footer col-md-12">
-								<button th:formaction="@{|/travelfpoly/cart/book/*{Cart.UserId}|}" class="btn btn-primary luu-san-pham">
+						<div class="row justify-content-between px-3 tile-footer">
+							<div class="col-md-5">
+								<button class="btn btn-primary luu-san-pham" th:formaction="@{|/travelfpoly/cart/book/*{Cart.UserId}|}">
 									Book Tour
+								</button>
+							</div>
+							<div class="col-md-5">
+								<button th:formaction="@{|/travelfpoly/cart/book/*{Cart.UserId}|}" class="btn btn-success luu-san-pham">
+									Pay Online
 								</button>
 							</div>
 						</div>
@@ -318,6 +335,25 @@
 				stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg>
 	</div>
 	<script>
+        const adultsSelect = document.getElementById('adult');
+        const childrenSelect = document.getElementById('children');
+        const priceAdult = document.getElementById('priceAdult');
+        const priceChildren = document.getElementById('priceChildren');
+        const displayElement = document.getElementById('totalPriceDisplay');
+        
+        adultsSelect.addEventListener('change', calculateTotalPrice);
+        childrenSelect.addEventListener('change', calculateTotalPrice);
+        
+        function calculateTotalPrice() {
+            const adultsQuantity = parseInt(adultsSelect.value);
+            const childrenQuantity = parseInt(childrenSelect.value);
+            const tourAdultPrice = parseFloat(priceAdult.getAttribute('data-price'));
+            const tourChildrenPrice = parseFloat(priceChildren.getAttribute('data-price'));
+			const totalPrice = (adultsQuantity * tourAdultPrice) + (childrenQuantity * tourChildrenPrice);
+            displayElement.textContent =totalPrice + '$';
+        }
+    </script>
+	<!-- <script>
 	    // Bắt sự kiện khi giá trị thay đổi trong bất kỳ thẻ <select> nào trong class "cart-item"
 	    
 	    var selectElements = document.querySelectorAll(".cart-item select");
@@ -343,7 +379,7 @@
 	        // Cập nhật giá trị tổng tiền trên giao diện
 	        document.getElementById("totalAmount").textContent = totalAmount.toFixed(2); // Làm tròn đến 2 chữ số thập phân
 	    }
-	</script>
+	</script> -->
 	<script src="/user/js/jquery.min.js"></script>
 	<script src="/user/js/jquery-migrate-3.0.1.min.js"></script>
 	<script src="/user/js/popper.min.js"></script>

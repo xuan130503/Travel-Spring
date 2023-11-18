@@ -1,11 +1,8 @@
 package Travel_Foly.API.ServiceImpl;
 
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import Travel_Foly.API.Service.TourService;
 import Travel_Foly.DAO.TourDAO;
 import Travel_Foly.Model.Tour;
@@ -16,30 +13,35 @@ public class TourServiceImpl implements TourService {
     private TourDAO tourDAO;
 
     @Override
-    public List<Tour> getListTour() {
+    public List<Tour> getAllTours() {
         return this.tourDAO.findAll();
     }
 
     @Override
-    public void createTour(Tour tour) {
+    public void saveTour(Tour tour) {
         this.tourDAO.save(tour);
     }
 
     @Override
-    public Tour updateTour(Integer TourId) {
-        Optional<Tour> optional = tourDAO.findById(TourId);
-        Tour tour = null;
-        if (optional.isPresent()) {
-            tour = optional.get();
-        } else {
-            throw new RuntimeException(" Employee not 	found for id :: " + TourId);
-        }
-        return tour;
+    public Tour getTourById(Integer TourId) {
+        return tourDAO.findById(TourId).orElse(null);
+
     }
 
     @Override
     public void deleteTour(Integer TourId) {
         this.tourDAO.deleteById(TourId);
     }
+
+    @Override
+    public Tour findByTourId(Integer TourId) {
+        return this.tourDAO.findByTourId(TourId);
+    }
+
+    // @Override
+    // public List<Tour> searchTours(String keyword) {
+    // return this.tourDAO.getSearchTours(keyword);
+
+    // }
 
 }

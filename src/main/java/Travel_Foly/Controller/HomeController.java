@@ -1,8 +1,11 @@
 package Travel_Foly.Controller;
 
 import java.security.Principal;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +22,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import Travel_Foly.Service.FileUpload;
+
+import Travel_Foly.API.Service.Base64Service;
+import Travel_Foly.API.Service.QRCodeService;
 import Travel_Foly.DAO.AccountDAO;
 import Travel_Foly.DAO.CartDAO;
 import Travel_Foly.DAO.CartItemDAO;
@@ -35,6 +43,7 @@ import Travel_Foly.DAO.TourScheduleDAO;
 import Travel_Foly.DTO.AccountDTO;
 import Travel_Foly.DTO.CartItemDTO;
 import Travel_Foly.DTO.HotelDTO;
+import Travel_Foly.DTO.InvoiceDTO;
 import Travel_Foly.DTO.TourWithImageDTO;
 import Travel_Foly.Helper.DateHelper;
 import Travel_Foly.Model.Account;
@@ -45,6 +54,7 @@ import Travel_Foly.Model.OrderTour;
 import Travel_Foly.Model.Tour;
 import Travel_Foly.Model.TourImage;
 import Travel_Foly.Model.TourSchedule;
+import Travel_Foly.API.Service.MailService;
 import Travel_Foly.Service.SessionService;
 
 @Controller
@@ -70,6 +80,7 @@ public class HomeController {
 	private AccountDAO accountDao;
 	@Autowired
 	private CartDAO cartDao;
+	
 	@Autowired
 	private OrderDetailTourDAO orderDetailTourDao;
 	
@@ -78,6 +89,14 @@ public class HomeController {
 	
 	@Autowired
 	private OrderTourDAO orderTourDao;
+	
+	@Autowired
+	private MailService mailService;
+	
+	@Autowired
+	private QRCodeService qrCodeService;
+	@Autowired
+	private Base64Service base64Service;
 	
 	//get information after login successfully
 	public void getPricical(Principal principal) {
@@ -177,36 +196,28 @@ public class HomeController {
 	@GetMapping("cart")
 	public String cart(Model model) {
 		AccountDTO account = (AccountDTO)session.getAttribute("account");
-		System.out.println(account.getUserName());
-//		System.out.println(account.getUserName());
 		Integer userId = account.getUserId();
 		Account user = accountDao.findById(userId).get();
 		Cart cart = cartDao.findByUserId(userId);
 		if(cart == null) {
-			Cart cart1 = new Cart();
-			cart1.setAddress(user.getAddress());
-			cart1.setCart(user);
-			cart1.setName(user.getFullName());
-			cart1.setPhone(user.getPhone());
-			cart1.setEmail(user.getEmail());
-			cartDao.save(cart1);
-			
-			//
-			Double totalPrice = cartItemDao.getTotal(userId);
-			List<CartItem> cartItems = cartItemDao.findByCartId(cart1.getCartId());
-//			List<CartItemDTO> cartItems = cartItemDao.findCartItemDTOById(cart1.getCartId());
-			model.addAttribute("cart", cart);
-			model.addAttribute("cartItems", cartItems);
-			model.addAttribute("totalPrice", totalPrice);
+			cart.setAddress(user.getAddress());
+			cart.setCart(user);
+			cart.setName(user.getFullName());
+			cart.setPhone(user.getPhone());
+			cart.setEmail(user.getEmail());
+			cartDao.save(cart);
 		}
-		else {
-			Double totalPrice = cartItemDao.getTotal(userId);
-			List<CartItem> cartItems = cartItemDao.findByCartId(cart.getCartId());
-//			List<CartItemDTO> cartItems = cartItemDao.findCartItemDTOById(cart.getCartId());
-			model.addAttribute("cart", cart);
-			model.addAttribute("cartItems", cartItems);
-			model.addAttribute("totalPrice", totalPrice);
-		}
+		
+		List<CartItem> cartItems = cartItemDao.findByCartId(cart.getCartId());
+		model.addAttribute("cart", cart);
+		model.addAttribute("cartItems", cartItems);
+//		Object [] cartItemDTO=cartItems.toArray();
+//		Map<Integer, Boolean> selectedTours = new HashMap<>();
+//		 
+//	    for (CartItem item : cartItems) {
+//	        selectedTours.put(item.getTourId().getTourId(), false);
+//	    }
+//	    model.addAttribute("selectedTours", selectedTours);
 		return "user/cart1";
 	}
 	@GetMapping("cart/delete/{id}")
@@ -216,14 +227,18 @@ public class HomeController {
 		return "redirect:/travelfpoly/cart";
 	}
 	@PostMapping("cart/book/{id}")
-	public String book(@PathVariable("id") Integer id
-			,Model model
-			,@RequestParam("fullname") String fullname
-			,@RequestParam("phone") String phone
-			,@RequestParam("address") String address
-			,@RequestParam("email") String email
+	public String book(@PathVariable("id") Integer id,
+			Model model,
+			@RequestBody Map<String, Object> payload
 			) {
-		
+		Integer quantityAdult = (Integer) payload.get("quantityAdult");
+	    Integer quantityChildren = (Integer) payload.get("quantityChildren");
+	    String fullname = (String) payload.get("fullname");
+	    String phone = (String) payload.get("phone");
+	    String address = (String) payload.get("address");
+	    String email = (String) payload.get("email");
+		System.out.println(quantityAdult);
+		System.out.println(quantityChildren);
 		Account account = accountDao.findById(id).get();
 		Integer cartId = cartDao.findByUserId(id).getCartId();
 		List<CartItem> listCart = cartItemDao.findByCartId(cartId);
@@ -247,9 +262,9 @@ public class HomeController {
 				detailOrder.setEndDate(cartItem.getEndDate());
 				detailOrder.setPriceAdult(cartItem.getTourId().getPriceAdult());
 				detailOrder.setPriceChildren(cartItem.getTourId().getPriceChildren());
-				detailOrder.setQuantityAdult(cartItem.getQuantityAdult());
-				detailOrder.setQuantityChildren(cartItem.getQuantityChildren());
-				detailOrder.setStatus(1);
+				detailOrder.setQuantityAdult(quantityAdult);
+				detailOrder.setQuantityChildren(quantityChildren);
+				detailOrder.setStatus(0);
 				detailOrder.setOrderDetailTour(tour);
 				
 				orderDetailTourDao.save(detailOrder);
@@ -427,6 +442,12 @@ public class HomeController {
 		TourImage image = tourImageDao.findByTourId(id);
 		Tour tour = tourDao.findByTourId(id);
 		List<TourSchedule> schedules = tourScheduleDao.findByTourId(id);
+		Map<String, String> paymentMethods = new HashMap<>();
+		paymentMethods.put("cash", "Payment in cash");
+		paymentMethods.put("paypal", "PayPal");
+		paymentMethods.put("vnpay", "VN Pay");
+		
+	    model.addAttribute("paymentMethods", paymentMethods);
 		model.addAttribute("image", image);
 		model.addAttribute("tour", tour);
 		model.addAttribute("schedules", schedules);
@@ -443,6 +464,7 @@ public class HomeController {
 			,@RequestParam("startdate") java.sql.Date date
 			,@RequestParam("quantityAdult") Integer quantityAdult
 			,@RequestParam("quantityChildren") Integer quantityChildren
+			,@RequestParam("paymentMethod") String paymentMethod
 			) {
 		Account account = accountDao.findById(UserId).get();
 		Tour tour= tourDao.findById(TourId).get();
@@ -456,6 +478,7 @@ public class HomeController {
 				order.setPhone(phone);
 				order.setOrderTour(account);
 				orderTourDao.save(order);
+				
 				//Add to Order detail Tour
 				OrderDetailTour orderDetail= new OrderDetailTour();
 				orderDetail.setStarDate(DateHelper.converDateSql(date));
@@ -463,16 +486,29 @@ public class HomeController {
 				orderDetail.setBookDate(new Date());
 				orderDetail.setPriceAdult(tour.getPriceAdult());
 				orderDetail.setPriceChildren(tour.getPriceChildren());
-				orderDetail.setStatus(1);
+				orderDetail.setStatus(0);
 				orderDetail.setQuantityAdult(quantityAdult);
 				orderDetail.setQuantityChildren(quantityChildren);
 				orderDetail.setOrderDetailTour(tour);
 				orderDetail.setOrderTour(order);
+				orderDetail = orderDetailTourDao.saveAndFlush(orderDetail);
+				orderDetail.setBase64(base64Service.generateQRCodeAndEncodeToBase64(orderDetail.getOrderDetailTourId()));
 				orderDetailTourDao.save(orderDetail);
+				
+				if (paymentMethod.equals("paypal")) {
+					return "redirect:/travelfpoly/payment/index?id="+orderDetail.getOrderDetailTourId();
+				}
+				if (paymentMethod.equals("vnpay")) {
+					return "redirect:/travelfpoly/payment/vnpay/pay?id="+orderDetail.getOrderDetailTourId();
+				}
+				InvoiceDTO invoice = orderDetailTourDao.detailInvoice(orderDetail.getOrderDetailTourId());
+				mailService.sendMailWithCustomer(invoice);
+				
 				//set quantity Tour
 				tour.setQuantityAdult(tour.getQuantityAdult() - quantityAdult);
 				tour.setQuantityChildren(tour.getQuantityChildren() - quantityChildren);
 				tourDao.save(tour);
+				
 				return "redirect:/travelfpoly/order";
 			}
 			model.addAttribute("message", "Book tour is error please check your information!");
@@ -541,4 +577,5 @@ public class HomeController {
         String regex = "^[-+]?\\d+(\\.\\d+)?$";
         return input.matches(regex);
     }
+	
 }
