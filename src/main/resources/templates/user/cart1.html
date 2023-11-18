@@ -203,20 +203,20 @@
 									<td>[[${cartItem.TourId.Name}]]</td>
 									<td>[[${#dates.format(cartItem.StartDate, 'dd-MM-yyyy')}]] - [[${#dates.format(cartItem.EndDate, 'dd-MM-yyyy')}]]</td>
 									<td>
-										<select th:name="quantityAdult" id="adult" class="form-control">
-											<option th:value="${cartItem.QuantityAdult}">[[${cartItem.QuantityAdult}]]</option>
-											<option th:each="quantityAdult : ${#numbers.sequence(0,cartItem.TourId.quantityAdult)}" th:value="${quantityAdult}">
-												[[${quantityAdult}]]
-											</option>
-										</select>
+										<select th:name="quantityAdult" class="form-control" id="adult">
+									        <option>[[${cartItem.QuantityAdult}]]</option>
+									        <option th:each="quantityAdult : ${#numbers.sequence(0,cartItem.TourId.quantityAdult)}" th:value="${quantityAdult}">
+									            [[${quantityAdult}]]
+									        </option>
+									    </select>
 									</td>
 									<td>
-										<select th:name="quantityChildren" id="children" class="form-control">
-											<option th:value="${cartItem.QuantityChildren}">[[${cartItem.QuantityChildren}]]</option>
-											<option th:each="quantityChildren : ${#numbers.sequence(0,cartItem.TourId.quantityChildren)}" th:value="${quantityChildren}">
-												[[${quantityChildren}]]
-											</option>
-										</select>	
+										<select th:name="quantityChildren" class="form-control" id="children">
+									        <option>[[${cartItem.QuantityChildren}]]</option>
+									        <option th:each="quantityChildren : ${#numbers.sequence(0,cartItem.TourId.quantityChildren)}" th:value="${quantityChildren}">
+									            [[${quantityChildren}]]
+									        </option>
+									    </select>
 									</td>
 									<td id="priceAdult" th:data-price="${cartItem.TourId.PriceAdult}">
 										[[${cartItem.TourId.PriceAdult}]]$ 
@@ -231,6 +231,12 @@
 									</td>
 									
 									<td style="text-align: center; vertical-align: middle;">
+										<a th:href="@{|/travelfpoly/cart/delete/${cartItem.CartItemId}|}">
+											<button class="btn btn-primary btn-sm trash" type="button"
+												title="Xóa">
+												<i class="fas fa-trash-alt"></i>
+											</button>
+										</a>
 										<a th:href="@{|/travelfpoly/cart/delete/${cartItem.CartItemId}|}">
 											<button class="btn btn-primary btn-sm trash" type="button"
 												title="Xóa">
@@ -259,7 +265,7 @@
 			<div class="col-md-4">
 				<div th:object="${cart}" class="tile">
 					<h3 class="tile-title">Order notification</h3>
-					<form method="post">
+					<form method="post" th:action="@{|/travelfpoly/cart/book/*{Cart.UserId}|}">
 						<div class="row">
 							<div class="form-group  col-md-12">
 								<label class="control-label">Fullname</label> 
@@ -299,7 +305,7 @@
 						</div>
 						<div class="row justify-content-between px-3 tile-footer">
 							<div class="col-md-5">
-								<button th:formaction="@{|/travelfpoly/cart/book/*{Cart.UserId}|}" class="btn btn-primary luu-san-pham">
+								<button class="btn btn-primary luu-san-pham" th:formaction="@{|/travelfpoly/cart/book/*{Cart.UserId}|}">
 									Book Tour
 								</button>
 							</div>
