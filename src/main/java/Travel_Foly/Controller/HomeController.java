@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -226,14 +227,18 @@ public class HomeController {
 		return "redirect:/travelfpoly/cart";
 	}
 	@PostMapping("cart/book/{id}")
-	public String book(@PathVariable("id") Integer id
-			,Model model
-			,@RequestParam("fullname") String fullname
-			,@RequestParam("phone") String phone
-			,@RequestParam("address") String address
-			,@RequestParam("email") String email
+	public String book(@PathVariable("id") Integer id,
+			Model model,
+			@RequestBody Map<String, Object> payload
 			) {
-		
+		Integer quantityAdult = (Integer) payload.get("quantityAdult");
+	    Integer quantityChildren = (Integer) payload.get("quantityChildren");
+	    String fullname = (String) payload.get("fullname");
+	    String phone = (String) payload.get("phone");
+	    String address = (String) payload.get("address");
+	    String email = (String) payload.get("email");
+		System.out.println(quantityAdult);
+		System.out.println(quantityChildren);
 		Account account = accountDao.findById(id).get();
 		Integer cartId = cartDao.findByUserId(id).getCartId();
 		List<CartItem> listCart = cartItemDao.findByCartId(cartId);
@@ -257,9 +262,9 @@ public class HomeController {
 				detailOrder.setEndDate(cartItem.getEndDate());
 				detailOrder.setPriceAdult(cartItem.getTourId().getPriceAdult());
 				detailOrder.setPriceChildren(cartItem.getTourId().getPriceChildren());
-				detailOrder.setQuantityAdult(cartItem.getQuantityAdult());
-				detailOrder.setQuantityChildren(cartItem.getQuantityChildren());
-				detailOrder.setStatus(1);
+				detailOrder.setQuantityAdult(quantityAdult);
+				detailOrder.setQuantityChildren(quantityChildren);
+				detailOrder.setStatus(0);
 				detailOrder.setOrderDetailTour(tour);
 				
 				orderDetailTourDao.save(detailOrder);
