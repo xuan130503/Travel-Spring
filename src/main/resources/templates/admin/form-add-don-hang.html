@@ -261,65 +261,65 @@
                 </style>
             </head>
             <body>
-	           <div style="font-size: 13px; background-color: #FFFFFF;width: 300px; height:500px; padding: 0 10px; margin: auto;">
-		           <div style="background-color: #f8f8f8; text-align: center;">
+	           <div style="font-size: 15px; background-color: #FFFFFF;width: 100%; margin: auto; padding:0 10px;">
+		           <div style="background-color: #f8f8f8; text-align: center; margin:0; padding:0;">
 		               <h2 style="font-size: 18px; font-weight: bold;">Travel Fpoly</h2>
 		           </div>
 		
-		           <div style="text-align: center;">
-		               <h6 style="font-size: 12px; margin-bottom: 0 !important; padding: 0;">Tân Hưng Thuận, Quận 12, TP.HCM</h6>
+		           <div style="text-align: center; margin:0; padding: 0;">	
+		               <h6 style="font-size: 12px; margin:0; padding: 0;">Tân Hưng Thuận, Quận 12, TP.HCM</h6>
 		           </div>
 		           
 		           <div style="text-align: center; background-color: #f8f8f8;">
-		               <h6 style="font-size: 15px; font-weight: normal; margin-bottom: 0 !important; padding: 0;">0977487714</h6>
+		               <h6 style="font-size: 15px; font-weight: normal; margin:0; !important; padding: 0;">0977487714</h6>
 		           </div>
 		           
 		           <div style="text-align: center;">
-		               <h2 style="padding: 0; margin-bottom: 0 !important; font-size: 18px; font-weight: bold;">
+		               <h2 style="padding: 0; margin:0; !important; font-size: 18px; font-weight: bold;">
 		                   HÓA ĐƠN
 		               </h2>
 		           </div>
 		
 		           <div style="display:flex;">
-		               <h5 style="font-size: 13px; margin-bottom: 0 !important; padding: 5px 0; font-weight: bold;">Ngày:&#160;${datePrint} &#160; ${timePrint}</h5>
+		               <h5 style="font-size: 15px; margin:0; !important; padding: 25px 0; font-weight: bold;">Ngày:&#160;${datePrint} &#160; ${timePrint}</h5>
 		           		<div>
 		           			<img src="data:image/png;base64,${img}" width="150" height="150">
 		           		</div>
 		           </div>
 		
 		           <div style=" background-color: #f8f8f8;">
-		               <h5 style="font-size: 13px; margin-bottom: 0 !important; padding: 5px 0; font-weight: bold;">NVBH:&#160;tanduong</h5>
+		               <h5 style="font-size: 15px; margin:0; !important; padding: 5px 0; font-weight: bold;">NVBH:&#160;tanduong</h5>
 		           </div>
 		
 		           <div style="">
-		               <h5 style="font-size: 13px; margin-bottom: 0 !important; padding: 5px 0; font-weight: bold;">KH:&#160;${cusName}</h5>
+		               <h5 style="font-size: 15px; margin:0; !important; padding: 5px 0; font-weight: bold;">KH:&#160;${cusName}</h5>
 		           </div>
 		
 		           <div style=" background-color: #f8f8f8;">
-		               <h5 style="font-size: 13px; margin-bottom: 0 !important; padding: 5px 0; font-weight: bold;">SĐT:&#160;${phone}</h5>
+		               <h5 style="font-size: 15px; margin:0; !important; padding: 5px 0; font-weight: bold;">SĐT:&#160;${phone}</h5>
 		           </div>
 		
 		           <div style=" background-color: #f8f8f8;">
-		               <h6 style="font-size: 13px; margin-bottom: 0 !important; padding: 5px 0;">Ngày đi:&#160; ${startDate}</h6>
+		               <h6 style="font-size: 15px; margin:0; !important; padding: 5px 0;">Ngày đi:&#160; ${startDate}</h6>
 		           </div>
 		           <div style=" background-color: #f8f8f8;">
-		               <h6 style="font-size: 13px; margin-bottom: 0 !important; padding: 5px 0;">Ngày về:&#160;${endDate}</h6>
+		               <h6 style="font-size: 15px; margin:0; !important; padding: 5px 0;">Ngày về:&#160;${endDate}</h6>
 		           </div>
-		           <div style="font-size: 13px;">
+		           <div style="font-size: 15px;">
 		               <table style="border: 1px solid black;">
 		                   <thead>
 		                       <tr>
 		                           <th style="border: 1px solid black; border-collapse: collapse;">Tên Tour</th>
 		                           <th style="border: 1px solid black; border-collapse: collapse;">Số vé</th>
-		                           <th style="border: 1px solid black; border-collapse: collapse;">Giá tiền</th>
+		                           <th style="border: 1px solid black; border-collapse: collapse;">Giá tiền&#160;($)</th>
 		                           <th style="border: 1px solid black; border-collapse: collapse;">Thành tiền</th>
 		                       </tr>
 		                   </thead>
 		                   <tbody>
 		                       <tr style="background-color: #f8f8f8;">
 		                           <td style="border: 1px solid black; border-collapse: collapse; text-align: left;">${destination}</td>
-		                           <td style="border: 1px solid black; border-collapse: collapse;">${quantityAdult} &#160; (${quantityChildren})</td>
-		                           <td style="border: 1px solid black; border-collapse: collapse;">${priceAdult} &#160;(${priceChildren})</td>
+		                           <td style="border: 1px solid black; border-collapse: collapse;">${quantityAdult} &#160; (Children:&#160;${quantityChildren})</td>
+		                           <td style="border: 1px solid black; border-collapse: collapse;">${priceAdult} &#160;(Children:&#160;${priceChildren})</td>
 		                           <td style="border: 1px solid black; border-collapse: collapse;">${total}</td>
 		                       </tr>
 		                       
@@ -328,13 +328,13 @@
 		           </div>
 		           <div>
 		               <div style="display: flex; justify-content: space-between; background-color: #f8f8f8;">
-		                   <h6 style="font-size: 13px; margin-bottom: 0 !important; padding: 5px 0;">Trạng thái</h6>
-		                   <h6 style="font-size: 13px; margin-bottom: 0 !important; padding: 5px 0;">Đã thanh toán</h6>
+		                   <h6 style="font-size: 15px; margin:0; !important; padding: 5px 0;">Trạng thái</h6>
+		                   <h6 style="font-size: 15px; margin:0; !important; padding: 5px 0;">Đã thanh toán</h6>
 		               </div>
 		
 		               <div style="background-color: #f8f8f8;">
-		                   <h6 style="font-size: 13px; margin-bottom: 0 !important; padding: 5px 0;">Tổng tiền thanh toán:</h6>
-		                   <h6 style="font-size: 13px; margin-bottom: 0 !important; padding: 5px 0;">${total}(Không tính thuế)</h6>
+		                   <h6 style="font-size: 15px; margin:0; !important; padding: 5px 0;">Tổng tiền thanh toán:</h6>
+		                   <h6 style="font-size: 15px; margin:0; !important; padding: 5px 0;">${total}$ &#160;(Không tính thuế)</h6>
 		               </div>
 		           </div>
 		       </div>
