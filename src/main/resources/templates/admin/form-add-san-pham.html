@@ -40,88 +40,104 @@
         <div class="tile">
           <h3 class="tile-title">Tạo mới sản phẩm</h3>
           <div class="tile-body">
-            <div class="row element-button">
-              <div class="col-sm-2">
-                <a th:href="@{/travelfpoly/admin/show}" class="btn btn-add btn-sm"><i
-                    class="fas fa-folder-plus"></i>Thêm
-                  loại Tour</a>
+            <form th:action="@{/travelfpoly/admin/save}" th:object="${tour}" method="post" class="row">
+              <div class="form-group col-md-6">
+                <label class="control-label">Mã tour</label>
+                <input class="form-control" th:field="*{TourId}" type="text">
               </div>
-            </div>
+              <div class="form-group col-md-6">
+                <label for="email" class="control-label">Tên tour</label>
+                <input class="form-control" th:field="*{Name}" type="text">
+                <span th:if="${#fields.hasErrors('Name')}" th:errors="*{Name}" class="text-danger"></span><br />
 
-            <form method="post" class="row">
-              <!-- <form th:action="@{/travelfpoly/admin/createTour}" th:object="${tour}" method="post" class="row">
-                <div class="form-group col-md-6">
-                  <label class="control-label">Mã tour</label>
-                  <input class="form-control" field="*{TourId}" name="TourId" type="text">
-                </div>
-                <div class="form-group col-md-6">
-                  <label for="email" class="control-label">Tên tour</label>
-                  <input class="form-control" field="*{Name}" name="Name" type="text">
-                </div>
+              </div>
 
-                <div class="form-group col-md-6">
-                  <label class="control-label">Trạng thái</label>
-                  <div class="form-check">
-                    <input class="form-check-input" value="true" type="radio" id="flexRadioDefault1" field="Available"
-                      name="Available" checked>
-                    <label class="form-check-label" for="flexRadioDefault1">
-                      Sẵn sàng
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" value="false" type="radio" id="flexRadioDefault2" field="Available"
-                      name="Available">
-                    <label class="form-check-label" for="flexRadioDefault2">
-                      Chưa sẵn sàng
-                    </label>
-                  </div>
+              <div class="form-group col-md-6">
+                <label class="control-label">Trạng thái</label>
+                <div class="form-check">
+                  <input class="form-check-input" value="true" type="radio" id="flexRadioDefault1"
+                    th:field="*{Available}" checked>
+                  <label class="form-check-label" for="flexRadioDefault1">
+                    Sẵn sàng
+                  </label>
                 </div>
-                <div class="form-group col-md-6">
-                  <label class="control-label">Địa điểm đi</label>
-                  <input class="form-control" type="text" field="Departure" name="Departure">
-                </div>
-                <div class="form-group col-md-6">
-                  <label class="control-label">Địa điểm đến</label>
-                  <input class="form-control" type="text" field="Destination" name="Destination">
-                </div>
+                <div class="form-check">
+                  <input class="form-check-input" value="false" type="radio" id="flexRadioDefault2"
+                    th:field="*{Available}">
+                  <label class="form-check-label" for="flexRadioDefault2">
+                    Chưa sẵn sàng
+                  </label>
 
-                <div class="form-group col-md-6">
-                  <label class="control-label">giá người lớn</label>
-                  <input class="form-control" type="text" field="PriceAdult" name="PriceAdult">
                 </div>
+                <span class="text-danger" th:if="${#fields.hasErrors('Available')}"
+                  th:errors="*{Available}"></span><br />
+              </div>
+              <div class="form-group col-md-6">
+                <label class="control-label">Mô tả</label>
+                <input class="form-control" type="text" th:field="*{Description}">
+                <span class="text-danger" th:if="${#fields.hasErrors('Description')}"
+                  th:errors="*{Description}"></span><br />
+              </div>
+              <div class="form-group col-md-6">
+                <label class="control-label">Địa điểm đi</label>
+                <input class="form-control" type="text" th:field="*{Departure}">
+                <span class="text-danger" th:if="${#fields.hasErrors('Departure')}"
+                  th:errors="*{Departure}"></span><br />
+              </div>
+              <div class="form-group col-md-6">
+                <label class="control-label">Địa điểm đến</label>
+                <input class="form-control" type="text" th:field="*{Destination}">
+                <span class="text-danger" th:if="${#fields.hasErrors('Destination')}"
+                  th:errors="*{Destination}"></span><br />
+              </div>
 
-                <div class="form-group col-md-6">
-                  <label class="control-label">giá người trẻ em </label>
-                  <input class="form-control" type="text" field="PriceChildren" name="PriceChildren">
-                </div>
-                <div class="form-group col-md-6">
-                  <label class="control-label">số lượng người lớn</label>
-                  <input class="form-control" type="text" field="QuantityAdult" name="QuantityAdult">
-                </div>
-                <div class="form-group col-md-6">
-                  <label class="control-label">Số lượng trẻ em</label>
-                  <input class="form-control" type="text" field="QuantityChildren" name="QuantityChildren">
-                </div>
-                <div class="form-group col-md-6">
-                  <label class="control-label">Introduction</label>
-                  <input class="form-control" type="text" field="Introduction" name="Introduction">
-                </div>
-                <div class="form-group col-md-6">
-                  <label class="control-label">Duration</label>
-                  <input class="form-control" type="text" field="Duration" name="Duration">
-                </div>
+              <div class="form-group col-md-6">
+                <label class="control-label">giá người lớn</label>
+                <input class="form-control" type="text" th:field="*{PriceAdult}">
+                <span class="text-danger" th:if="${#fields.hasErrors('PriceAdult')}"
+                  th:errors="*{PriceAdult}"></span><br />
+              </div>
 
-                <button class="btn btn-save" type="submit" style="margin-left: 15px;">Lưu</button>
-                <button class="btn btn-primary" type="submit" style="margin-left: 15px;">Sửa</button>
-                <button class="btn btn-cancel" type="submit" style="margin-left: 15px;">Làm mới</button> -->
+              <div class="form-group col-md-6">
+                <label class="control-label">giá người trẻ em </label>
+                <input class="form-control" type="text" th:field="*{PriceChildren}">
+                <span class="text-danger" th:if="${#fields.hasErrors('PriceChildren')}"
+                  th:errors="*{PriceChildren}"></span><br />
+              </div>
+              <div class="form-group col-md-6">
+                <label class="control-label">số lượng người lớn</label>
+                <input class="form-control" type="text" th:field="*{QuantityAdult}">
+                <span class="text-danger" th:if="${#fields.hasErrors('QuantityAdult')}"
+                  th:errors="*{QuantityAdult}"></span><br />
+              </div>
+              <div class="form-group col-md-6">
+                <label class="control-label">Số lượng trẻ em</label>
+                <input class="form-control" type="text" th:field="*{QuantityChildren}">
+                <span class="text-danger" th:if="${#fields.hasErrors('QuantityChildren')}"
+                  th:errors="*{QuantityChildren}"></span><br />
+              </div>
+              <div class="form-group col-md-6">
+                <label class="control-label">Introduction</label>
+                <textarea class="form-control" name="" id="" cols="30" rows="10" th:field="*{Introduction}"></textarea>
 
+                <span class="text-danger" th:if="${#fields.hasErrors('Introduction')}"
+                  th:errors="*{Introduction}"></span><br />
+              </div>
+              <div class="form-group col-md-6">
+                <label class="control-label">Duration</label>
+                <input class="form-control" type="text" th:field="*{Duration}">
+                <span class="text-danger" th:if="${#fields.hasErrors('Duration')}" th:errors="*{Duration}"></span><br />
+              </div>
+              <button class="btn btn-save" type="submit" style="margin-left: 15px;">Lưu</button>
             </form>
+
 
 
 
             <table class="table mt-4">
               <thead>
                 <tr>
+                  <th scope="col">id</th>
                   <th scope="col">Loại Tour</th>
                   <th scope="col">Tình trạng</th>
                   <th scope="col">Mô tả</th>
@@ -137,7 +153,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr th:each="tour : ${getListTour}">
+                <tr th:each="tour : ${tours}">
                   <td th:text="${tour.TourId}"></td>
                   <td th:text="${tour.Name}"></td>
                   <td th:text="${tour.Available}"></td>
@@ -167,21 +183,21 @@
           </div>
         </div>
       </div>
-      <div class="row mt-5">
+      <div class="row mt-1" style="padding-left: 450px;">
         <div class="col text-center">
           <div class="block-27">
-            <!-- <ul>
-              <li>
-                <a th:href="@{/travelfpoly/admin/addproduct(page=${tours.number - 1})}">&lt;</a>
+            <ul>
+              <li th:if="${tours.number > 1}">
+                <a th:href="@{'?pageNo='+${tours.number-1}}">&lt;</a>
               </li>
               <li th:each="item : ${#numbers.sequence(0, tours.totalPages-1)}"
                 th:class="${item} == ${tours.number} ? 'active' : ''">
-                <a th:href="@{/travelfpoly/admin/addproduct(page=${item})}" th:text="${item+1}"></a>
+                <a th:text="${item+1}" th:href="@{'?pageNo='+${item}}"></a>
               </li>
-              <li>
-                <a th:href="@{/travelfpoly/admin/addproduct(page=${tours.number + 1})}">&gt;</a>
+              <li th:if="${tours.number < tours.totalPages-1}">
+                <a th:href="@{'?pageNo='+${tours.number+1}}">&gt;</a>
               </li>
-            </ul> -->
+            </ul>
           </div>
         </div>
       </div>
