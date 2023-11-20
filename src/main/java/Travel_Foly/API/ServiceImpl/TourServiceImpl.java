@@ -1,7 +1,12 @@
 package Travel_Foly.API.ServiceImpl;
 
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import Travel_Foly.API.Service.TourService;
 import Travel_Foly.DAO.TourDAO;
@@ -34,14 +39,13 @@ public class TourServiceImpl implements TourService {
     }
 
     @Override
-    public Tour findByTourId(Integer TourId) {
-        return this.tourDAO.findByTourId(TourId);
+    public Optional<Tour> findByTourId(Integer TourId) {
+        return tourDAO.findById(TourId);
     }
 
-    // @Override
-    // public List<Tour> searchTours(String keyword) {
-    // return this.tourDAO.getSearchTours(keyword);
-
-    // }
+    @Override
+    public Page<Tour> getAll(Pageable pageable) {
+        return this.tourDAO.findAll(pageable);
+    }
 
 }
