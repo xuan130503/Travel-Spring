@@ -226,6 +226,32 @@ public class HomeController {
 		setAmount();
 		return "redirect:/travelfpoly/cart";
 	}
+	@PostMapping("cart/update/{id}")
+	public String updateCartItem(@PathVariable("id") Integer id,
+						Model model,
+						@RequestParam("startDate") java.sql.Date startDate,
+						@RequestParam("adult") Integer quantityAdult,
+						@RequestParam("children") Integer quantityChildren
+					) {
+		CartItem item =cartItemDao.findById(id).get();
+		Tour tour = tourDao.findByTourId(item.getTourId().getTourId());
+		if(quantityAdult>tour.getQuantityAdult()||quantityChildren>tour.getQuantityChildren()) {
+			model.addAttribute("message", "The number of tickets exceeds the allowed number");
+			AccountDTO account = (AccountDTO)session.getAttribute("account");
+			Integer userId = account.getUserId();
+			Account user = accountDao.findById(userId).get();
+			Cart cart = cartDao.findByUserId(userId);
+			List<CartItem> cartItems = cartItemDao.findByCartId(cart.getCartId());
+			model.addAttribute("cart", cart);
+			model.addAttribute("cartItems", cartItems);
+			return "user/cart1";
+		}
+		item.setStartDate(startDate);
+		item.setQuantityAdult(quantityAdult);
+		item.setQuantityChildren(quantityChildren);
+		cartItemDao.save(item);
+		return "redirect:/travelfpoly/cart";
+	}
 	@PostMapping("cart/book/{id}")
 	public String book(@PathVariable("id") Integer id,
 			Model model,
