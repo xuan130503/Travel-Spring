@@ -43,9 +43,11 @@ public class TourController {
     }
 
     @PostMapping("save")
-    public String saveTour(@Valid @ModelAttribute Tour tour, BindingResult result, Model model) {
+    public String saveTour(@Valid @ModelAttribute Tour tour, BindingResult result, Model model,
+            @RequestParam(defaultValue = "0") Integer pageNo, @RequestParam(defaultValue = "5") Integer sizeNo) {
         if (result.hasErrors()) {
-            List<Tour> tours = tourService.getAllTours();
+            Pageable pageable = PageRequest.of(pageNo, sizeNo);
+            Page<Tour> tours = tourService.getAll(pageable);
             model.addAttribute("tours", tours);
             return "admin/form-add-san-pham";
         }
