@@ -16,19 +16,21 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="TourServices")
+@Table(name = "TourServices")
 public class TourService {
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer TourServiceId;
-	
+
 	@Column(columnDefinition = "nvarchar(100)")
 	private String Name;
-	
+
 	@Column(columnDefinition = "nvarchar(200)")
 	private String Description;
-	
+
 	private Double Surcharge;
-	
-	@ManyToOne @JoinColumn(name="TourId")
+
+	@ManyToOne
+	@JoinColumn(name = "TourId")
 	private Tour TourService;
 }
