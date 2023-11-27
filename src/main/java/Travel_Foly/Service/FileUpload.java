@@ -28,6 +28,13 @@ public class FileUpload {
 	    options.put("public_id", folderName + "/" + UUID.randomUUID());
 	    return cloudinary.uploader().upload(multipartFile.getBytes(), options).get("url").toString();
 	}
+	public String uploadWithName(MultipartFile multipartFile, String folderName, String nameImg)
+			throws Exception {
+
+	    Map<String, String> options = new HashMap<>();
+	    options.put("public_id", "Travel_FPoly/Image_Tourism/" + folderName + "/" + nameImg);
+	    return cloudinary.uploader().upload(multipartFile.getBytes(), options).get("url").toString();
+	}
 	
 	public String uploadBase64(String baseCode, Integer id) throws IOException {
 		Map<String, String> options = new HashMap<>();

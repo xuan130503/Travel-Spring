@@ -183,7 +183,7 @@
 		</div>
 	</section>
 	
-	<div class="container mt-5">
+	<div class="container-fluid px-5 mt-5">
 		<div class="row formOrder">
           <h3 class="tile">Order Tour</h3>
             <form class="row" th:object="${orderDetailTour}" th:method="post" enctype="multipart/form-data">
@@ -268,8 +268,13 @@
                 </th>
                 <th scope="col" >
                 	Duration
-                	<a th:href="@{/travelfpoly/order(field=StarDate,sort=asc)}"><i class="fas fa-arrow-up"></i></a>
-					<a th:href="@{/travelfpoly/order(field=StarDate,sort=desc)}"><i class="fas fa-arrow-down"></i></a>
+                	<a th:href="@{/travelfpoly/order(field=Duration,sort=asc)}"><i class="fas fa-arrow-up"></i></a>
+					<a th:href="@{/travelfpoly/order(field=Duration,sort=desc)}"><i class="fas fa-arrow-down"></i></a>
+                </th>
+                <th scope="col" >
+                	Status
+                	<a th:href="@{/travelfpoly/order(field=Status,sort=asc)}"><i class="fas fa-arrow-up"></i></a>
+					<a th:href="@{/travelfpoly/order(field=Status,sort=desc)}"><i class="fas fa-arrow-down"></i></a>
                 </th>
                 <th scope="col" >
                 	Setting
@@ -290,6 +295,11 @@
                 </td>
                 <td>[[${#dates.format(order.BookDate, 'MM-dd-yyyy')}]]</td>
                 <td>[[${#dates.format(order.StarDate, 'MM-dd-yyyy')}]] &#10149; [[${#dates.format(order.EndDate, 'MM-dd-yyyy')}]]</td>
+                <td>
+					<span th:if="${order.Status == 0}" style="color: #e03e2d; line-height: 22.4px;">Unpaid !</span>
+                  	<span th:if="${order.Status == 1}" style="color: #ffc900; line-height: 22.4px;">Paying !</span>
+                  	<span th:if="${order.Status == 2}" style="color: #2dc26b; line-height: 22.4px;">Paid !</span>
+				</td>
               	<td style="text-align: center; vertical-align: middle;">
               		<a th:href="@{|/travelfpoly/order/fill/${order.OrderDetailTourId}|}">
 						<button class="btn btn-primary btn-sm trash" type="button"
@@ -305,6 +315,7 @@
 					</a>
 					
 				</td>
+				
               </tr>
               
             </tbody>

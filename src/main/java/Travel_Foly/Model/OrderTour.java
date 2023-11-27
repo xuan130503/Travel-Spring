@@ -21,11 +21,10 @@ public class OrderTour {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer OrderTourId;
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "AccountId")
-	private Account OrderTour;
+
 	@OneToMany(mappedBy = "OrderTour")
 	private List<OrderDetailTour> OrderDetailTours;
+	
 	@Column(columnDefinition = "nvarchar(50)")
 	private String Name;
 	private String Email;

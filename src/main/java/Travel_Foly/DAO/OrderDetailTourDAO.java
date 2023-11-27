@@ -11,14 +11,9 @@ import Travel_Foly.DTO.InvoiceDTO;
 import Travel_Foly.Model.OrderDetailTour;
 @Repository
 public interface OrderDetailTourDAO extends JpaRepository<OrderDetailTour,Integer>{
-	@Query("Select de From OrderDetailTour de "
-			+ "Join OrderTour o On o.OrderTourId = de.OrderTour.OrderTourId "
-			+ "Join Tour t On t.TourId = de.OrderDetailTour.TourId "
-			+ "Join Account a On a.UserId = o.OrderTour.UserId "
-			+ "Where o.OrderTour.UserId =?1 "
-			+ "And de.Status=1"
-			)
-	Page<OrderDetailTour> findOrderByUserId(Integer id,Pageable page);
+	@Query("SELECT de FROM OrderDetailTour de "
+		       + "WHERE de.UserOrder.UserId = ?1 AND de.Available = true")
+	Page<OrderDetailTour> findOrderByUserId(Integer userId, Pageable page);
 
 	@Query("Select de From OrderDetailTour de Where de.OrderDetailTourId = ?1")
 	OrderDetailTour findByOrderDetailTourId(Integer Id);

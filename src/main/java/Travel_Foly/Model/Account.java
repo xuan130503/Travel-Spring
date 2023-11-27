@@ -60,8 +60,8 @@ public class Account  implements UserDetails{
 	@OneToMany(mappedBy = "HotelCommentUser")
 	private List<HotelComment> HotelComments;
 	
-	@OneToMany(mappedBy = "OrderTour")
-	private List<OrderTour> OrderTours;
+	@OneToMany(mappedBy = "UserOrder")
+	private List<OrderDetailTour> OrderDetailTours;
 	
 	@OneToMany(mappedBy = "OrderHotel")
 	private List<OrderHotel> OrderHotels;

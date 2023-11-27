@@ -1,5 +1,6 @@
 package Travel_Foly.Controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +49,25 @@ public class PaymentController {
 		model.addAttribute("name", invoice.getDestination());
 		model.addAttribute("total", total);
 		session.setAttribute("tourId", invoice.getOrderDetailTourId());
+		return "user/payment";
+	}
+	@GetMapping("listOrder")
+	public String listOrder(@RequestParam("listOrderId") List<Integer> listOrderId, Model model) {
+		StringBuilder nameBuilder = new StringBuilder();
+		Double total=0.0;
+		for(Integer index :listOrderId) {
+			InvoiceDTO invoice = orderDetailTourDao.detailInvoice(index);
+			total += (invoice.getPriceAdult()*invoice.getQuantityAdult())+(invoice.getPriceChildren()*invoice.getQuantityChildren());
+			 if (nameBuilder.length() > 0) {
+		            nameBuilder.append("-");
+		        }
+		        nameBuilder.append(invoice.getDestination());
+		}
+		System.out.println("Total:"+total);
+		System.out.println("Name"+nameBuilder);
+		model.addAttribute("name", nameBuilder.toString());
+		model.addAttribute("total", total);
+		session.setAttribute("tourId", listOrderId);
 		return "user/payment";
 	}
 	@GetMapping("review_payment")
@@ -112,13 +132,14 @@ public class PaymentController {
 		System.out.println("PaymentId:"+paymentId);
 		System.out.println("PayerId:"+payerId);
 		//send mail
-		Integer id =session.getAttribute("tourId");
-		OrderDetailTour order = orderDetailTourDao.findByOrderDetailTourId(id);
-		order.setStatus(2);
-		orderDetailTourDao.save(order);
-		InvoiceDTO invoice = orderDetailTourDao.detailInvoice(id);
-		mailService.sendMailWithCustomer(invoice);
-		
+		List<Integer> id =session.getAttribute("tourId");
+		for(Integer index : id) {
+			OrderDetailTour order = orderDetailTourDao.findByOrderDetailTourId(index);
+			order.setStatus(2);
+			orderDetailTourDao.save(order);
+			InvoiceDTO invoice = orderDetailTourDao.detailInvoice(index);
+			mailService.sendMailWithCustomer(invoice);
+		}
         try {
             Payment payment = paymentService.executePayment(paymentId, payerId);
              

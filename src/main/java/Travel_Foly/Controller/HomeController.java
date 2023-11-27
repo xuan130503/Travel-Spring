@@ -1,13 +1,14 @@
 package Travel_Foly.Controller;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-
+import org.springframework.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -42,6 +43,7 @@ import Travel_Foly.DAO.TourImageDAO;
 import Travel_Foly.DAO.TourScheduleDAO;
 import Travel_Foly.DTO.AccountDTO;
 import Travel_Foly.DTO.CartItemDTO;
+import Travel_Foly.DTO.CheckoutCartDTO;
 import Travel_Foly.DTO.HotelDTO;
 import Travel_Foly.DTO.InvoiceDTO;
 import Travel_Foly.DTO.TourWithImageDTO;
@@ -252,66 +254,137 @@ public class HomeController {
 		cartItemDao.save(item);
 		return "redirect:/travelfpoly/cart";
 	}
-	@PostMapping("cart/book/{id}")
-	public String book(@PathVariable("id") Integer id,
-			Model model,
-			@RequestBody Map<String, Object> payload
-			) {
-		Integer quantityAdult = (Integer) payload.get("quantityAdult");
-	    Integer quantityChildren = (Integer) payload.get("quantityChildren");
-	    String fullname = (String) payload.get("fullname");
-	    String phone = (String) payload.get("phone");
-	    String address = (String) payload.get("address");
-	    String email = (String) payload.get("email");
-		System.out.println(quantityAdult);
-		System.out.println(quantityChildren);
-		Account account = accountDao.findById(id).get();
-		Integer cartId = cartDao.findByUserId(id).getCartId();
-		List<CartItem> listCart = cartItemDao.findByCartId(cartId);
-		if(fullname!=null && phone!=null && address!=null && email!=null) {
-			//addToOrder
-			OrderTour order = new OrderTour();
-			order.setAddress(address);
-			order.setName(fullname);
-			order.setEmail(email);
-			order.setPhone(phone);
-			order.setOrderTour(account);
-			orderTourDao.save(order);
-			//add list CartItem in order Detail tour
-		
-			for (CartItem cartItem : listCart) {
-				OrderDetailTour detailOrder = new OrderDetailTour();
-				Tour tour = tourDao.findByTourId(cartItem.getTourId().getTourId());
-				detailOrder.setOrderTour(order);
-				detailOrder.setBookDate(new Date());
-				detailOrder.setStarDate(cartItem.getStartDate());
-				detailOrder.setEndDate(cartItem.getEndDate());
-				detailOrder.setPriceAdult(cartItem.getTourId().getPriceAdult());
-				detailOrder.setPriceChildren(cartItem.getTourId().getPriceChildren());
-				detailOrder.setQuantityAdult(quantityAdult);
-				detailOrder.setQuantityChildren(quantityChildren);
-				detailOrder.setStatus(0);
-				detailOrder.setOrderDetailTour(tour);
-				
-				orderDetailTourDao.save(detailOrder);
-				cartItemDao.deleteById(cartItem.getCartItemId());
-				
-				//set quantity tour
-				
-				tour.setQuantityAdult(tour.getQuantityAdult()-cartItem.getQuantityAdult());
-				tour.setQuantityChildren(tour.getQuantityChildren()-cartItem.getQuantityChildren());
-				tourDao.save(tour);
-			}
+//	@PostMapping("cart/book/{id}")
+//	public String book(@PathVariable("id") Integer id,
+//			Model model,
+//			@RequestBody Map<String, Object> payload
+//			) {
+//		Integer quantityAdult = (Integer) payload.get("quantityAdult");
+//	    Integer quantityChildren = (Integer) payload.get("quantityChildren");
+//	    String fullname = (String) payload.get("fullname");
+//	    String phone = (String) payload.get("phone");
+//	    String address = (String) payload.get("address");
+//	    String email = (String) payload.get("email");
+//		System.out.println(quantityAdult);
+//		System.out.println(quantityChildren);
+//		Account account = accountDao.findById(id).get();
+//		Integer cartId = cartDao.findByUserId(id).getCartId();
+//		List<CartItem> listCart = cartItemDao.findByCartId(cartId);
+//		if(fullname!=null && phone!=null && address!=null && email!=null) {
+//			//addToOrder
+//			OrderTour order = new OrderTour();
+//			order.setAddress(address);
+//			order.setName(fullname);
+//			order.setEmail(email);
+//			order.setPhone(phone);
+//			orderTourDao.save(order);
+//			//add list CartItem in order Detail tour
+//		
+//			for (CartItem cartItem : listCart) {
+//				OrderDetailTour detailOrder = new OrderDetailTour();
+//				Tour tour = tourDao.findByTourId(cartItem.getTourId().getTourId());
+//				detailOrder.setOrderTour(order);
+//				detailOrder.setBookDate(new Date());
+//				detailOrder.setStarDate(cartItem.getStartDate());
+//				detailOrder.setEndDate(cartItem.getEndDate());
+//				detailOrder.setPriceAdult(cartItem.getTourId().getPriceAdult());
+//				detailOrder.setPriceChildren(cartItem.getTourId().getPriceChildren());
+//				detailOrder.setQuantityAdult(quantityAdult);
+//				detailOrder.setQuantityChildren(quantityChildren);
+//				detailOrder.setStatus(0);
+//				detailOrder.setOrderDetailTour(tour);
+//				
+//				orderDetailTourDao.save(detailOrder);
+//				cartItemDao.deleteById(cartItem.getCartItemId());
+//				
+//				//set quantity tour
+//				
+//				tour.setQuantityAdult(tour.getQuantityAdult()-cartItem.getQuantityAdult());
+//				tour.setQuantityChildren(tour.getQuantityChildren()-cartItem.getQuantityChildren());
+//				tourDao.save(tour);
+//			}
+//			
+//			session.setAttribute("amount", cartItemDao.getAmount(id));
+//			return "redirect:/travelfpoly/order";
+//		}
+//		else {
+//			model.addAttribute("message", "Không được bỏ trống các trường");
+//			return "user/cart1";
+//		}
+//		
+//	}
+	
+	@PostMapping("cart/buySelectedItems")
+	public ResponseEntity<String> checkoutCart(@RequestBody CheckoutCartDTO selectedItems) {
+		AccountDTO account = (AccountDTO)session.getAttribute("account");
+		Integer userId = account.getUserId();
+		Account user = accountDao.findById(userId).get();
+		List<Integer> listOrderId = new ArrayList<>();
+		for( Integer item: selectedItems.getSelectedItems()) {
 			
-			session.setAttribute("amount", cartItemDao.getAmount(id));
-			return "redirect:/travelfpoly/order";
-		}
-		else {
-			model.addAttribute("message", "Không được bỏ trống các trường");
-			return "user/cart1";
+			OrderTour order = new OrderTour();
+			order.setName(selectedItems.getFullname());
+			order.setEmail(selectedItems.getEmail());
+			order.setAddress(selectedItems.getAddress());
+			order.setPhone(selectedItems.getPhone());
+			orderTourDao.save(order);
+			
+			CartItem cart = new CartItem();
+			OrderDetailTour orderDetail = new OrderDetailTour();
+			cart = cartItemDao.findById(item).get();
+			
+			orderDetail.setStarDate(cart.getStartDate());
+			orderDetail.setEndDate(cart.getEndDate());
+			orderDetail.setBookDate(new Date());
+			orderDetail.setPriceAdult(cart.getTourId().getPriceAdult());
+			orderDetail.setPriceChildren(cart.getTourId().getPriceChildren());
+			orderDetail.setStatus(0);
+			orderDetail.setAvailable(true);
+			orderDetail.setQuantityAdult(cart.getQuantityAdult());
+			orderDetail.setQuantityChildren(cart.getQuantityChildren());
+			orderDetail.setOrderDetailTour(cart.getTourId());
+			orderDetail.setOrderTour(order);
+			orderDetail.setUserOrder(user);
+			orderDetail = orderDetailTourDao.saveAndFlush(orderDetail);
+			orderDetail.setBase64(base64Service.generateQRCodeAndEncodeToBase64(orderDetail.getOrderDetailTourId()));
+			orderDetailTourDao.save(orderDetail);
+			
+			listOrderId.add(orderDetail.getOrderDetailTourId());
+//			mailService.sendMailWithCustomer(invoice);
+			//set quantity tour
+			Tour tour = tourDao.findByTourId(cart.getTourId().getTourId());
+			tour.setQuantityAdult(tour.getQuantityAdult()-cart.getQuantityAdult());
+			tour.setQuantityChildren(tour.getQuantityChildren()-cart.getQuantityChildren());
+			tourDao.save(tour);
+			cartItemDao.deleteById(cart.getCartItemId());
+			setAmount();
 		}
 		
+		if(selectedItems.getPayment().equals("cash") || selectedItems.getPayment() == null) {
+			for(Integer index: listOrderId) {
+				InvoiceDTO invoice = orderDetailTourDao.detailInvoice(index);
+				mailService.sendMailWithCustomer(invoice);
+			}
+			return ResponseEntity.ok("/travelfpoly/order");
+		}
+		if (selectedItems.getPayment().equals("paypal")) {
+			for(Integer invoice: listOrderId) {
+				OrderDetailTour detail = orderDetailTourDao.findById(invoice).get();
+				detail.setStatus(2);
+				orderDetailTourDao.save(detail);
+			}
+			String redirectUrl = "/travelfpoly/payment/listOrder?listOrderId=" + StringUtils.collectionToCommaDelimitedString(listOrderId);
+			return ResponseEntity.ok(redirectUrl);
+			
+		}
+		if (selectedItems.getPayment().equals("vnpay")) {
+			String redirectUrl = "/travelfpoly/payment/listOrder?listOrderId=" + StringUtils.collectionToCommaDelimitedString(listOrderId);
+			return ResponseEntity.ok("redirect:/user/order?listOrderId=" + redirectUrl);
+		}
+		
+		return ResponseEntity.ok("/travelfpoly/order");
 	}
+	
 	@GetMapping("order")
 	public String orderTour(Model model
 							,@RequestParam("field") Optional<String> field
@@ -356,7 +429,7 @@ public class HomeController {
 	@GetMapping("order/delete/{id}")
 	public String deleteTour(@PathVariable("id") Integer id) {
 		OrderDetailTour order = orderDetailTourDao.findById(id).get();
-		order.setStatus(0);
+		order.setAvailable(false);
 		orderDetailTourDao.save(order);
 		//set quantity tour
 		Integer tourId=order.getOrderDetailTour().getTourId();
@@ -412,7 +485,7 @@ public class HomeController {
 			,@RequestParam("address") String address
 			,@RequestParam("startdate") java.sql.Date startdate
 			,@RequestParam("quantityAdult") Integer quantityAdult
-			,@RequestParam("quantityAdult") Integer quantityChildren) {
+			,@RequestParam("quantityChildren") Integer quantityChildren) {
 		
 		try {
 			Account account = accountDao.findById(UserId).get();
@@ -502,7 +575,6 @@ public class HomeController {
 				order.setName(fullname);
 				order.setEmail(email);
 				order.setPhone(phone);
-				order.setOrderTour(account);
 				orderTourDao.save(order);
 				
 				//Add to Order detail Tour
@@ -513,10 +585,12 @@ public class HomeController {
 				orderDetail.setPriceAdult(tour.getPriceAdult());
 				orderDetail.setPriceChildren(tour.getPriceChildren());
 				orderDetail.setStatus(0);
+				orderDetail.setAvailable(true);
 				orderDetail.setQuantityAdult(quantityAdult);
 				orderDetail.setQuantityChildren(quantityChildren);
 				orderDetail.setOrderDetailTour(tour);
 				orderDetail.setOrderTour(order);
+				orderDetail.setUserOrder(account);
 				orderDetail = orderDetailTourDao.saveAndFlush(orderDetail);
 				orderDetail.setBase64(base64Service.generateQRCodeAndEncodeToBase64(orderDetail.getOrderDetailTourId()));
 				orderDetailTourDao.save(orderDetail);

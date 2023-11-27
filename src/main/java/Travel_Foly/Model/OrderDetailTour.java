@@ -30,6 +30,7 @@ public class OrderDetailTour {
 	private Date EndDate;
 	private Date BookDate;
 	private Integer Status;
+	private Boolean Available;
 	@Column(columnDefinition = "nvarchar(max)")
 	private String Base64;
 	
@@ -40,4 +41,8 @@ public class OrderDetailTour {
 	@ManyToOne(fetch = FetchType.LAZY) 
 	@JoinColumn(name = "OrderTourId")
 	private OrderTour OrderTour;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "AccountId")
+	private Account UserOrder;
 }
