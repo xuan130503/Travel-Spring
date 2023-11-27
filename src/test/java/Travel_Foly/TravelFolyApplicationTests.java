@@ -8,6 +8,7 @@ class TravelFolyApplicationTests {
 
 	@Test
 	void contextLoads() {
+		System.out.println("Hello world!");
 	}
 
 	

@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
   <!-- or -->
   <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
@@ -129,8 +130,12 @@
                 <span class="text-danger" th:if="${#fields.hasErrors('Duration')}" th:errors="*{Duration}"></span><br />
               </div>
               <div class="form-group col-md-6">
-                <label class="control-label">Image:</label>
+                <label class="control-label">Avatar:</label>
                 <input class="form-control" type="file" name="image1">
+              </div>
+              <div class="form-group col-md-6">
+                <label class="control-label">Image:</label>
+                <input type="file" name="images" id="images" multiple><br>
               </div>
               <button class="btn btn-save" type="submit" style="margin-left: 15px;">Lưu</button>
             </form>
@@ -174,10 +179,10 @@
 
                   <td>
                     <a th:href="@{/travelfpoly/admin/updateTour/{TourId}(TourId=${tour.TourId})}">
-                      <i class="fas fa-pen-square"></i>
+                      <i class='bx bx-edit' ></i>
                     </a>
                     <a th:href="@{/travelfpoly/admin/deleteTour/{TourId}(TourId=${tour.TourId})}">
-                      <i class="fas fa-trash-alt"></i>
+                      <i class='bx bxs-trash'></i>
                     </a>
                   </td>
                 </tr>
