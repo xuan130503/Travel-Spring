@@ -20,42 +20,65 @@ import lombok.RequiredArgsConstructor;
 public class FileUpload {
 
 	private final Cloudinary cloudinary;
-	
-	public String upload(MultipartFile multipartFile,String folderName)
+
+	public String upload(MultipartFile multipartFile, String folderName)
 			throws Exception {
 
-	    Map<String, String> options = new HashMap<>();
-	    options.put("public_id", folderName + "/" + UUID.randomUUID());
-	    return cloudinary.uploader().upload(multipartFile.getBytes(), options).get("url").toString();
+		Map<String, String> options = new HashMap<>();
+		options.put("public_id", folderName + "/" + UUID.randomUUID());
+		return cloudinary.uploader().upload(multipartFile.getBytes(), options).get("url").toString();
 	}
+
 	public String uploadWithName(MultipartFile multipartFile, String folderName, String nameImg)
 			throws Exception {
 
-	    Map<String, String> options = new HashMap<>();
-	    options.put("public_id", "Travel_FPoly/Image_Tourism/" + folderName + "/" + nameImg);
-	    return cloudinary.uploader().upload(multipartFile.getBytes(), options).get("url").toString();
+		Map<String, String> options = new HashMap<>();
+		options.put("public_id", "Travel_FPoly/Image_Tourism/" + folderName + "/" + nameImg);
+		return cloudinary.uploader().upload(multipartFile.getBytes(), options).get("url").toString();
 	}
-	
+
 	public String uploadBase64(String baseCode, Integer id) throws IOException {
 		Map<String, String> options = new HashMap<>();
-	    options.put("public_id", "Travel_FPoly/QrTour/" + id);
-		return cloudinary.uploader().upload("data:image/png;base64,"+baseCode,options).get("url").toString();
+		options.put("public_id", "Travel_FPoly/QrTour/" + id);
+		return cloudinary.uploader().upload("data:image/png;base64," + baseCode, options).get("url").toString();
 	}
-	
+
 	public List<String> upload(List<MultipartFile> imageFiles, String folderName) throws IOException {
-	    List<String> imageUrls = new ArrayList<>();
+		List<String> imageUrls = new ArrayList<>();
 
-	    for (MultipartFile multipartFile : imageFiles) {
-	        Map<String, String> options = new HashMap<>();
-	        options.put("public_id", "Travel_FPoly/Image_Tourism/" + folderName + "/" + UUID.randomUUID());
-	        String imageUrl = cloudinary.uploader().upload(multipartFile.getBytes(), options).get("url").toString();
-	        imageUrls.add(imageUrl);
-	    }
+		for (MultipartFile multipartFile : imageFiles) {
+			Map<String, String> options = new HashMap<>();
+			options.put("public_id", "Travel_FPoly/Image_Tourism/" + folderName + "/" + UUID.randomUUID());
+			String imageUrl = cloudinary.uploader().upload(multipartFile.getBytes(), options).get("url").toString();
+			imageUrls.add(imageUrl);
+		}
 
-	    return imageUrls;
+		return imageUrls;
 	}
-	
+
 	public void deleteImageOnCloudinary(String publicId) throws IOException {
-	    cloudinary.uploader().destroy(publicId, ObjectUtils.emptyMap());
+		cloudinary.uploader().destroy(publicId, ObjectUtils.emptyMap());
+	}
+
+	// cái này cua hotel
+	public String uploadWithNameHotel(MultipartFile multipartFile, String folderName, String nameImg)
+			throws Exception {
+
+		Map<String, String> options = new HashMap<>();
+		options.put("public_id", "Travel_FPoly/Image_Hotel/" + folderName + "/" + nameImg);
+		return cloudinary.uploader().upload(multipartFile.getBytes(), options).get("url").toString();
+	}
+
+	public List<String> uploadHotel(List<MultipartFile> imageFiles, String folderName) throws IOException {
+		List<String> imageUrls = new ArrayList<>();
+
+		for (MultipartFile multipartFile : imageFiles) {
+			Map<String, String> options = new HashMap<>();
+			options.put("public_id", "Travel_FPoly/Image_Hotel/" + folderName + "/" + UUID.randomUUID());
+			String imageUrl = cloudinary.uploader().upload(multipartFile.getBytes(), options).get("url").toString();
+			imageUrls.add(imageUrl);
+		}
+
+		return imageUrls;
 	}
 }
