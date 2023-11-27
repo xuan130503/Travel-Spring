@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Thêm sản phẩm | Quản trị Admin</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Main CSS-->
+    <link rel="stylesheet" type="text/css" href="/admin/css/main.css">
+    <link href="/user/images/bee.png" rel="icon">
+    <!-- Font-icon css-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <!-- or -->
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
+    <script src="http://code.jquery.com/jquery.min.js" type="text/javascript"></script>
+</head>
+
+<body class="app sidebar-mini rtl" style="margin: 0px;">
+    <!-- Navbar-->
+    <div th:insert="~{include/_HeaderAdmin}"></div>
+    <!-- Sidebar menu-->
+    <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+    <div th:insert="~{include/_AsideAdmin}"></div>
+    <main class="app-content" style="margin-left: 50px;">
+        <div class="app-title">
+            <ul class="app-breadcrumb breadcrumb">
+                <li class="breadcrumb-item">Danh sách sản phẩm</li>
+                <li class="breadcrumb-item"><a href="#">Thêm sản phẩm</a></li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="tile">
+                    <h3 class="tile-title">Tạo mới sản phẩm</h3>
+                    <div class="tile-body">
+                        <form th:action="@{/travelfpoly/admin/saveHotel}" th:object="${hotel}" method="post" class="row"
+                            enctype="multipart/form-data">
+                            <div class="form-group col-md-6">
+                                <label class="control-label">Mã tour</label>
+                                <input class="form-control" th:field="*{HotelId}" type="text">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="email" class="control-label">Tên tour</label>
+                                <input class="form-control" th:field="*{Name}" type="text">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="email" class="control-label">Price</label>
+                                <input class="form-control" th:field="*{Price}" type="text">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="control-label">Trạng thái</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" value="true" type="radio" id="flexRadioDefault1"
+                                        th:field="*{Available}" checked>
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        Sẵn sàng
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" value="false" type="radio" id="flexRadioDefault2"
+                                        th:field="*{Available}">
+                                    <label class="form-check-label" for="flexRadioDefault2">
+                                        Chưa sẵn sàng
+                                    </label>
+
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="email" class="control-label">Description</label>
+                                <input class="form-control" th:field="*{Description}" type="text">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="email" class="control-label">Address</label>
+                                <input class="form-control" th:field="*{Address}" type="text">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="email" class="control-label">Map</label>
+                                <input class="form-control" th:field="*{Map}" type="text">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="email" class="control-label">Start</label>
+                                <input class="form-control" th:field="*{Start}" type="text">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="email" class="control-label">Quantity</label>
+                                <input class="form-control" th:field="*{Quantity}" type="text">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="control-label">avata:</label>
+                                <input class="form-control" type="file" name="image1">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="control-label">avata:</label>
+                                <input class="form-control" type="file" name="images" id="images" multiple>
+                            </div>
+
+
+                            <button class="btn btn-save" type="submit" style="margin-left: 15px;">Lưu</button>
+                        </form>
+                        <table class="table mt-4">
+                            <thead>
+                                <tr>
+                                    <th scope="col">id</th>
+                                    <th scope="col">Loại Tour</th>
+                                    <th scope="col">Name/th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Available</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Address</th>
+                                    <th scope="col">Map</th>
+                                    <th scope="col">Start</th>
+                                    <th scope="col">Quantity</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="hotel : ${hotels}">
+                                    <td th:text="${hotel.HotelId}"></td>
+                                    <td th:text="${hotel.Name}"></td>
+                                    <td th:text="${hotel.Price}"></td>
+                                    <td th:text="${hotel.Available}"></td>
+                                    <td th:text="${hotel.Description}"></td>
+                                    <td th:text="${hotel.Address}"></td>
+                                    <td th:text="${hotel.Map}"></td>
+                                    <td th:text="${hotel.Start}"></td>
+                                    <td th:text="${hotel.Quantity}"></td>
+                                    <td>
+                                        <a
+                                            th:href="@{/travelfpoly/admin/updateHotel/{HotelId}(HotelId=${hotel.HotelId})}">
+                                            <i class="fas fa-pen-square"></i>
+                                        </a>
+                                        <a
+                                            th:href="@{/travelfpoly/admin/deleteHotel/{HotelId}(HotelId=${hotel.HotelId})}">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="row mt-1" style="padding-left: 450px;">
+        <div class="col text-center">
+          <div class="block-27">
+            <ul>
+              <li th:if="${tours.number > 1}">
+                <a th:href="@{'?pageNo='+${tours.number-1}}">&lt;</a>
+              </li>
+              <li th:each="item : ${#numbers.sequence(0, tours.totalPages-1)}"
+                th:class="${item} == ${tours.number} ? 'active' : ''">
+                <a th:text="${item+1}" th:href="@{'?pageNo='+${item}}"></a>
+              </li>
+              <li th:if="${tours.number < tours.totalPages-1}">
+                <a th:href="@{'?pageNo='+${tours.number+1}}">&gt;</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div> -->
+        </div>
+    </main>
+
+    <script src="/admin/js/jquery-3.2.1.min.js"></script>
+    <script src="/admin/js/popper.min.js"></script>
+    <script src="/admin/js/bootstrap.min.js"></script>
+    <script src="/admin/js/main.js"></script>
+    <script src="/admin/js/plugins/pace.min.js"></script>
+
+</body>
+
+</html>
