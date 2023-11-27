@@ -47,7 +47,7 @@ public class FileUpload {
 
 	    for (MultipartFile multipartFile : imageFiles) {
 	        Map<String, String> options = new HashMap<>();
-	        options.put("public_id", folderName + "/" + UUID.randomUUID());
+	        options.put("public_id", "Travel_FPoly/Image_Tourism/" + folderName + "/" + UUID.randomUUID());
 	        String imageUrl = cloudinary.uploader().upload(multipartFile.getBytes(), options).get("url").toString();
 	        imageUrls.add(imageUrl);
 	    }

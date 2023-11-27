@@ -1,6 +1,7 @@
 package Travel_Foly.Controller;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -60,7 +61,8 @@ public class TourController {
     public String saveTour(@Valid @ModelAttribute Tour tour, BindingResult result, Model model,
             @RequestParam(defaultValue = "0") Integer pageNo, 
             @RequestParam(defaultValue = "5") Integer sizeNo,
-            @RequestParam("image1") MultipartFile image1) throws Exception {
+            @RequestParam("image1") MultipartFile image1,
+            @RequestParam("images") List<MultipartFile> images) throws Exception {
         if (result.hasErrors()) {
             Pageable pageable = PageRequest.of(pageNo, sizeNo);
             Page<Tour> tours = tourService.getAll(pageable);
@@ -70,8 +72,16 @@ public class TourController {
       //push image to cloudinary
         this.tourService.saveTour(tour);
         String img = cloud.uploadWithName(image1, tour.getName(), "avatar");
+        List<String> listImageName = cloud.upload(images, tour.getName());
+        
         TourImage tourImage = new TourImage();
         tourImage.setAvatar(img);
+        tourImage.setImage1(listImageName.get(0));
+        tourImage.setImage2(listImageName.get(1));
+        tourImage.setImage3(listImageName.get(2));
+        tourImage.setImage4(listImageName.get(3));
+        tourImage.setImage5(listImageName.get(4));
+        tourImage.setImage6(listImageName.get(5));
         tourImage.setTourImage(tour);
         this.tourImageDao.save(tourImage);
         

@@ -378,6 +378,11 @@ public class HomeController {
 			
 		}
 		if (selectedItems.getPayment().equals("vnpay")) {
+			for(Integer invoice: listOrderId) {
+				OrderDetailTour detail = orderDetailTourDao.findById(invoice).get();
+				detail.setStatus(2);
+				orderDetailTourDao.save(detail);
+			}
 			String redirectUrl = "/travelfpoly/payment/listOrder?listOrderId=" + StringUtils.collectionToCommaDelimitedString(listOrderId);
 			return ResponseEntity.ok("redirect:/user/order?listOrderId=" + redirectUrl);
 		}
@@ -535,6 +540,7 @@ public class HomeController {
 //		return "user/productDetail";
 //	}
 	
+	
 	@GetMapping("tour-detail/{id}")
 	public String productDetail(@PathVariable("id") Integer id, Model model) {
 		
@@ -594,6 +600,11 @@ public class HomeController {
 				orderDetail = orderDetailTourDao.saveAndFlush(orderDetail);
 				orderDetail.setBase64(base64Service.generateQRCodeAndEncodeToBase64(orderDetail.getOrderDetailTourId()));
 				orderDetailTourDao.save(orderDetail);
+				
+				//set t quantity tour
+				tour.setQuantityAdult(tour.getQuantityAdult()-orderDetail.getQuantityAdult());
+				tour.setQuantityChildren(tour.getQuantityChildren()-orderDetail.getQuantityChildren());
+				tourDao.save(tour);
 				
 				if (paymentMethod.equals("paypal")) {
 					return "redirect:/travelfpoly/payment/index?id="+orderDetail.getOrderDetailTourId();

@@ -195,20 +195,19 @@
 </style>
 </head>
 <body onload="time()">
-	<div th:insert="~{include/_loading.html}"></div>
 	<div class="container">
-		<div class="left" style="height: 100%;">
+		<div class="left">
 			<div class="info-box">
 				<div class="receipt">
 					Receipt for </br><span>TravelFpoly</span>
 				</div>
 				<div class="entry">
 					<i class="icon-wallet" aria-hidden="true"></i>
-					<p>Amount:</br><span>$[[${transaction.amount.total}]] USD</span></p>
+					<p>Amount:</br><span>[[${mount}]] VND</span></p>
 				</div>
 				<div class="entry">
 					<i class="icon-calendar" aria-hidden="true"></i>
-					<p>Date:</br><span>[[${date}]]</span></p>
+					<p>Date:</br><span>[[${payDate}]]</span></p>
 				</div>
 				<div class="entry">
 					<i class="icon-star" aria-hidden="true"></i>
@@ -223,18 +222,16 @@
 		<div class="right">
 			<div class="content">
 				<div class="header">
-					<img src="/user/images/logopaypal.svg">
+					<img src="/user/images/logovnPay.svg">
 					<h4 style="font-size:10px;" id="clock"></h4>
 				</div>
 				<div class="main">
 					<h3>Tour payment</h3>
-					<h5>Subtotal: $[[${transaction.amount.details.subtotal}]] USD</h5>
-					<h5>Shipping: $[[${transaction.amount.details.shipping}]]</h5>
-					<h5>Tax: $[[${transaction.amount.details.tax}]]</h5>
-					<h5>Total: $[[${transaction.amount.total}]] USD</h5>
+					<h5>Total: [[${mount}]] VND</h5>
+					<h5>Status: [[${status}]]</h5>
 				</div>
 				<div class="message">
-					<p>Hello [[${payer.firstName}]],</br>You sent a payment of $[[${transaction.amount.total}]] USD to TravelFpoly (<a href="mailto:travelfpoly@gmail.com">travelfpoly@gmail.com</a>)</p>
+					<p>Hello,</br>You sent a payment of [[${mount}]] VND to TravelFpoly (<a href="mailto:travelfpoly@gmail.com">travelfpoly@gmail.com</a>)</p>
 					<h5>Your ticket will be sent to your email soon,</br>please check your email to receive your ticket.</h6>
 				</div>
                 <a href="/travelfpoly/order">

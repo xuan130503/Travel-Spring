@@ -1,5 +1,7 @@
 package Travel_Foly.Controller;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,12 +46,17 @@ public class PaymentController {
 	@GetMapping("index")
 	public String index(@RequestParam("id") Integer id, Model model) {
 		InvoiceDTO invoice = orderDetailTourDao.detailInvoice(id);
-		
+		List<Integer> listOrderId = new ArrayList<>();
+		listOrderId.add(id);
 		Double total = (invoice.getPriceAdult()*invoice.getQuantityAdult())+(invoice.getPriceChildren()*invoice.getQuantityChildren());
 		model.addAttribute("name", invoice.getDestination());
 		model.addAttribute("total", total);
-		session.setAttribute("tourId", invoice.getOrderDetailTourId());
+		session.setAttribute("tourId", listOrderId);
 		return "user/payment";
+	}
+	@GetMapping("vnpaycheck")
+	public String vnpay() {
+		return "user/vnpayInvoice";
 	}
 	@GetMapping("listOrder")
 	public String listOrder(@RequestParam("listOrderId") List<Integer> listOrderId, Model model) {
@@ -123,6 +130,7 @@ public class PaymentController {
         }
 		
 	}
+	
 	@PostMapping("execute_payment")
 	public String excutePayment(Model model) {
 		
@@ -140,15 +148,15 @@ public class PaymentController {
 			InvoiceDTO invoice = orderDetailTourDao.detailInvoice(index);
 			mailService.sendMailWithCustomer(invoice);
 		}
+		Date date = new Date();
         try {
             Payment payment = paymentService.executePayment(paymentId, payerId);
              
             PayerInfo payerInfo = payment.getPayer().getPayerInfo();
             Transaction transaction = payment.getTransactions().get(0);
-             
             model.addAttribute("payer", payerInfo);
             model.addAttribute("transaction", transaction);          
- 
+            model.addAttribute("date", date);
             return "user/receipt";
              
         } catch (PayPalRESTException ex) {
