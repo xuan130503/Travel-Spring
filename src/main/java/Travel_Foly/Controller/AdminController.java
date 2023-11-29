@@ -58,11 +58,16 @@ public class AdminController {
 		Integer reportTourQuantity = tourDao.reportTourQuantity(1);
 		Integer reportOrder = orderDetailTourDao.reportOrder();
 		Integer reportUser = accountDao.reportUser();
+		Integer getall = orderDetailTourDao.getAllOrderDetailTours();
+		Double getRevenue = orderDetailTourDao.getRevenueOrderDetailTour(2023, 11, null, null);
 
 		model.addAttribute("tour", reportTour);
 		model.addAttribute("tourQuantity", reportTourQuantity);
 		model.addAttribute("order", reportOrder);
 		model.addAttribute("user", reportUser);
+		model.addAttribute("get", getall);
+		model.addAttribute("getRebennu", getRevenue);
+		System.out.println(getRevenue);
 
 		// table order
 		Pageable pageableTour = PageRequest.of(page.orElse(0), 5);

@@ -41,7 +41,8 @@
         <div class="tile">
           <h3 class="tile-title">Tạo mới sản phẩm</h3>
           <div class="tile-body">
-            <form th:action="@{/travelfpoly/admin/save}" th:object="${tour}" method="post" class="row" enctype="multipart/form-data">
+            <form th:action="@{/travelfpoly/admin/save}" th:object="${tour}" method="post" class="row"
+              enctype="multipart/form-data">
               <div class="form-group col-md-6">
                 <label class="control-label">Mã tour</label>
                 <input class="form-control" th:field="*{TourId}" type="text">
@@ -81,6 +82,8 @@
               </div>
               <div class="form-group col-md-6">
                 <label class="control-label">Địa điểm đi</label>
+                <!-- <select name="Departure" id="province" th:field="*{Departure}">
+                </select> -->
                 <input class="form-control" type="text" th:field="*{Departure}">
                 <span class="text-danger" th:if="${#fields.hasErrors('Departure')}"
                   th:errors="*{Departure}"></span><br />
@@ -179,7 +182,7 @@
 
                   <td>
                     <a th:href="@{/travelfpoly/admin/updateTour/{TourId}(TourId=${tour.TourId})}">
-                      <i class='bx bx-edit' ></i>
+                      <i class='bx bx-edit'></i>
                     </a>
                     <a th:href="@{/travelfpoly/admin/deleteTour/{TourId}(TourId=${tour.TourId})}">
                       <i class='bx bxs-trash'></i>
@@ -212,12 +215,94 @@
       </div>
     </div>
   </main>
+  <!-- <div class="" style=" padding-left:  500px;">
+    <div class="container">
+      <h1>Chọn danh sách tỉnh</h1>
+      <form action=""> -->
+  <!-- <select name="" id="province">
+        </select> -->
+  <!-- <select name="" id="district">
+          <option value="">chọn quận</option>
+        </select>
+        <select name="" id="ward">
+          <option value="">chọn phường</option>
+        </select> -->
+  <!-- </form> -->
+
+
+  <!-- <h2 id="result"></h2>
+    </div> -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+      integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+      crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js"
+      integrity="sha512-bPh3uwgU5qEMipS/VOmRqynnMXGGSRv+72H/N260MQeXZIK4PG48401Bsby9Nq5P5fz7hy5UGNmC/W1Z51h2GQ=="
+      crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+
+  </div>
 
   <script src="/admin/js/jquery-3.2.1.min.js"></script>
   <script src="/admin/js/popper.min.js"></script>
   <script src="/admin/js/bootstrap.min.js"></script>
   <script src="/admin/js/main.js"></script>
   <script src="/admin/js/plugins/pace.min.js"></script>
+  <!-- <script>
+    // 1. what is API
+    // 2. How do I call API
+    // 3. Explain code
+    const host = "https://provinces.open-api.vn/api/";
+    var callAPI = (api) => {
+      return axios.get(api)
+        .then((response) => {
+          renderData(response.data, "province");
+        });
+    }
+    callAPI('https://provinces.open-api.vn/api/?depth=1');
+    var callApiDistrict = (api) => {
+      return axios.get(api)
+        .then((response) => {
+          renderData(response.data.districts, "district");
+        });
+    }
+    var callApiWard = (api) => {
+      return axios.get(api)
+        .then((response) => {
+          renderData(response.data.wards, "ward");
+        });
+    }
+
+    var renderData = (array, select) => {
+      let row = ' <option disable value="">chọn</option>';
+      array.forEach(element => {
+        row += `<option value="${element.code}">${element.name}</option>`
+      });
+      document.querySelector("#" + select).innerHTML = row
+    }
+
+    // $("#province").change(() => {
+    //   callApiDistrict(host + "p/" + $("#province").val() + "?depth=2");
+    //   printResult();
+    // });
+    // $("#district").change(() => {
+    //   callApiWard(host + "d/" + $("#district").val() + "?depth=2");
+    //   printResult();
+    // });
+    // $("#ward").change(() => {
+    //   printResult();
+    // })
+
+    // var printResult = () => {
+    //   if ($("#district").val() != "" && $("#province").val() != "" &&
+    //     $("#ward").val() != "") {
+    //     let result = $("#province option:selected").text() +
+    //       " | " + $("#district option:selected").text() + " | " +
+    //       $("#ward option:selected").text();
+    //     $("#result").text(result)
+    //   }
+
+    // }
+  </script> -->
+
 
 </body>
 
