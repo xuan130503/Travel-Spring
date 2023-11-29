@@ -109,7 +109,7 @@
                                 <tr>
                                     <th scope="col">id</th>
                                     <th scope="col">Loại Tour</th>
-                                    <th scope="col">Name/th>
+                                    <th scope="col">Name</th>
                                     <th scope="col">Price</th>
                                     <th scope="col">Available</th>
                                     <th scope="col">Description</th>
@@ -123,13 +123,23 @@
                                 <tr th:each="hotel : ${hotels}">
                                     <td th:text="${hotel.HotelId}"></td>
                                     <td th:text="${hotel.Name}"></td>
-                                    <td th:text="${hotel.Price}"></td>
+                                    <!-- <td th:text="${hotel.Price}"></td>
                                     <td th:text="${hotel.Available}"></td>
                                     <td th:text="${hotel.Description}"></td>
                                     <td th:text="${hotel.Address}"></td>
                                     <td th:text="${hotel.Map}"></td>
                                     <td th:text="${hotel.Start}"></td>
-                                    <td th:text="${hotel.Quantity}"></td>
+                                    <td th:text="${hotel.Quantity}"></td> -->
+
+                                    <td>
+                                        <!-- Check if the product has images before trying to display them -->
+                                        <div
+                                            th:if="${hotel.HotelImages != null and not #lists.isEmpty(hotel.HotelImages)}">
+                                            <img style="width: 70px; height:70px;"
+                                                th:each="image : ${hotel.HotelImages}" th:src="${image.Image1}"
+                                                alt="Hotel Image" />
+                                        </div>
+                                    </td>
                                     <td>
                                         <a
                                             th:href="@{/travelfpoly/admin/updateHotel/{HotelId}(HotelId=${hotel.HotelId})}">

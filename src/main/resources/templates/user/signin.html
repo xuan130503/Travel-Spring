@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta charset="UTF-8" />
-<link href="/user/images/bee.png" rel="icon">
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="stylesheet" href="/user/css/login1.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-<title>Login Form</title>
+	<meta charset="UTF-8" />
+	<link href="/user/images/bee.png" rel="icon">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="/user/css/login1.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+	<title>Login Form</title>
 </head>
+
 <body>
 	<div class="container" id="container">
 		<div class="form-container sign-in-container">
@@ -16,18 +18,18 @@
 				<div class="social-container">
 					<a href="#" class="social" style="background: rgba(255, 255, 255);">
 						<i class="fab fa-facebook-f"></i>
-					</a> 
+					</a>
 					<a href="/oauth2/authorization/google" class="social" style="background: rgba(255, 255, 255);">
 						<i class="fab fa-google-plus-g"></i></a>
 					<a href="/oauth2/authorization/github" class="social" style="background: rgba(255, 255, 255);">
 						<i class="fab fa-github"></i>
 					</a>
 				</div>
-				<span style="font-weight: bold;">or use your account</span> 
-				<input type="text" name="username" placeholder="UserName" /> 
-				<input type="password" name="password" placeholder="Password" /> 
+				<span style="font-weight: bold;">or use your account</span>
+				<input type="text" name="username" placeholder="UserName" />
+				<input type="password" name="password" placeholder="Password" />
 				<span style="color: red;">[[${message}]]</span>
-				<a href="/travelfpoly/account/forgot" style="font-weight: bold">
+				<a href="/travelfpoly/account/forgot_password" style="font-weight: bold">
 					Forgot your password?
 				</a>
 				<button formaction="/travelfpoly/account/login" class="btn-sigin">Sign In</button>
@@ -54,4 +56,5 @@
 		</p>
 	</footer>
 </body>
+
 </html>

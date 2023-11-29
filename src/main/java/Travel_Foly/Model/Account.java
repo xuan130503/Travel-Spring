@@ -26,16 +26,18 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name="Accounts")
+@Table(name = "Accounts")
 
-public class Account  implements UserDetails{
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class Account implements UserDetails {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer UserId;
 	@Column(unique = true)
 	private String UserName;
@@ -50,31 +52,33 @@ public class Account  implements UserDetails{
 	@Column(columnDefinition = "nvarchar(200)")
 	private String Address;
 	private String Phone;
-	
-	@ManyToOne @JoinColumn(name="IntimateId")
+	private String resetPasswordToken;
+
+	@ManyToOne
+	@JoinColumn(name = "IntimateId")
 	private Intimate Account;
-	
+
 	@OneToMany(mappedBy = "TourCommentUser")
 	private List<TourComment> TourComments;
-	
+
 	@OneToMany(mappedBy = "HotelCommentUser")
 	private List<HotelComment> HotelComments;
-	
+
 	@OneToMany(mappedBy = "UserOrder")
 	private List<OrderDetailTour> OrderDetailTours;
-	
+
 	@OneToMany(mappedBy = "OrderHotel")
 	private List<OrderHotel> OrderHotels;
-	
-	//One to One Cart
+
+	// One to One Cart
 	@OneToOne(mappedBy = "Cart", cascade = CascadeType.ALL, orphanRemoval = true)
 	@PrimaryKeyJoinColumn
 	private Cart cart;
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		SimpleGrantedAuthority simpleGrant = new SimpleGrantedAuthority(this.Role ? "ROLE_ADMIN":"ROLE_USER");
-		
+		SimpleGrantedAuthority simpleGrant = new SimpleGrantedAuthority(this.Role ? "ROLE_ADMIN" : "ROLE_USER");
+
 		return Arrays.asList(simpleGrant);
 	}
 
