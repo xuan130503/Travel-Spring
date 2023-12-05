@@ -66,7 +66,7 @@ public class AdminController {
 		model.addAttribute("order", reportOrder);
 		model.addAttribute("user", reportUser);
 		model.addAttribute("get", getall);
-		model.addAttribute("getRebennu", getRevenue);
+		model.addAttribute("getRebennu", getRevenue == null ? 0:getRevenue);
 		System.out.println(getRevenue);
 
 		// table order
@@ -136,14 +136,17 @@ public class AdminController {
 		return "admin/form-add-don-hang";
 	}
 
-	@GetMapping("addorder/print/{id}")
-	public String printInvoice(Model model, @PathVariable("id") Integer id) {
-
-		OrderDetailTour order = orderDetailTourDao.findByOrderDetailTourId(id);
-
-		return "admin/printer";
+	@PostMapping("addorder/create/{id}")
+	public String updateOrder(Model model,
+			@PathVariable("id") Integer id,
+			@RequestParam("CustomerName") String userName,
+//			@RequestParam("StartDate") java.util.Date date,
+			@RequestParam("QuantityAdult") Integer QuantityAdult,
+			@RequestParam("QuantityChildren") Integer QuantityChildren
+			) {
+		System.out.println(id);
+		return "redirect:/travelfpoly/admin/addorder";
 	}
-
 	// toi day
 
 	@GetMapping("addstaff")
