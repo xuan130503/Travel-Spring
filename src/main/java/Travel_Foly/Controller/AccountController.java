@@ -75,7 +75,11 @@ public class AccountController {
 		getPricipal(principal);
 		return "user/signin";
 	}
-
+	@GetMapping("getPrincipal")
+	public Principal getPrincipal(Principal principal) {
+		System.out.println(principal.toString());
+		return principal;
+	}
 	@PostMapping("login")
 	public void loginUser(
 			Model model,
@@ -155,7 +159,7 @@ public class AccountController {
 		MimeMessage message = mailSender.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(message);
 
-		helper.setFrom("contact@shopme.com", "Shopme Support");
+		helper.setFrom("contact@shopme.com", "TravelFpoly Support");
 		helper.setTo(recipientEmail);
 
 		String subject = "Here's the link to reset your password";
@@ -179,23 +183,29 @@ public class AccountController {
 		String email = request.getParameter("email");
 		String token = RandomString.make(30);
 		try {
-			accountService.updateResetPasswordToken(token, email);
-			String resetPasswordLink = Utility.getSiteURL(request) + "/travelfpoly/account/reset_password?token="
+			String status = accountService.updateResetPasswordToken(token, email);
+			if(status.equals("Success")) {
+				String resetPasswordLink = Utility.getSiteURL(request) + "/travelfpoly/account/reset_password?token="
 					+ token;
-			sendEmail(email, resetPasswordLink);
-			model.addAttribute("message", "We have sent a reset password link to your email. Please check.");
+				sendEmail(email, resetPasswordLink);
+				model.addAttribute("message", "We have sent a reset password link to your email. Please check.");
+			}
+			
+			else {
+				model.addAttribute("message", status);
+			}
 
 		} catch (UnsupportedEncodingException | MessagingException e) {
-			model.addAttribute("error", "Error while sending email");
+			model.addAttribute("message", "Error while sending email");
 		}
-		return "redirect:/travelfpoly/account/forgot_password";
+		return "user/forgot_password_form";
 	}
 
 	@GetMapping("reset_password")
 	public String showResetPasswordForm(@Param(value = "token") String token, Model model) {
 		Account account = accountService.getByResetPasswordToken(token);
 		model.addAttribute("token", token);
-
+		
 		if (account == null) {
 			model.addAttribute("message", "Invalid Token");
 			return "message";
