@@ -41,20 +41,26 @@
                                 <input class="form-control" th:field="*{TourScheduleId}" type="text">
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="email" class="control-label">tiêu đề lịch trình tham quan</label>
+                                <label for="Title" class="control-label">tiêu đề lịch trình tham quan</label>
                                 <input class="form-control" th:field="*{Title}" type="text">
+                                <span th:if="${#fields.hasErrors('Title')}" th:errors="*{Title}"></span>
+
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="email" class="control-label">Sự miêu tả</label>
+                                <label for="Description" class="control-label">Sự miêu tả</label>
                                 <input class="form-control" th:field="*{Description}" type="text">
+                                <span th:if="${#fields.hasErrors('Description')}" th:errors="*{Description}"></span>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="email" class="control-label">Số Ngày đi</label>
+                                <label for="Date" class="control-label">Số Ngày đi</label>
                                 <input class="form-control" th:field="*{Date}" type="text">
+                                <span th:if="${#fields.hasErrors('Date')}" th:errors="*{Date}"></span>
+
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="email" class="control-label">thời gian</label>
-                                <input class="form-control" th:field="*{Date}" type="time">
+                                <label for="Time" class="control-label">thời gian</label>
+                                <input class="form-control" th:field="*{Time}" type="time">
+                                <span th:if="${#fields.hasErrors('Time')}" th:errors="*{Time}"></span>
                             </div>
                             <div class="form-group col-md-12">
                                 <button class="btn btn-save" type="submit" style="margin-left: 15px;">Lưu</button>
@@ -100,7 +106,24 @@
                     </div>
                 </div>
             </div>
-
+            <div class="row mt-1" style="padding-left: 450px;">
+                <div class="col text-center">
+                    <div class="block-27">
+                        <ul>
+                            <li th:if="${tourSchedules.number > 1}">
+                                <a th:href="@{'?pageNo='+${tourSchedules.number-1}}">&lt;</a>
+                            </li>
+                            <li th:each="item : ${#numbers.sequence(0, tourSchedules.totalPages-1)}"
+                                th:class="${item} == ${tourSchedules.number} ? 'active' : ''">
+                                <a th:text="${item+1}" th:href="@{'?pageNo='+${item}}"></a>
+                            </li>
+                            <li th:if="${tourSchedules.number < tourSchedules.totalPages-1}">
+                                <a th:href="@{'?pageNo='+${tourSchedules.number+1}}">&gt;</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
 

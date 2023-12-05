@@ -1,615 +1,477 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<title>DirEngine - Free Bootstrap 4 Template by Colorlib</title>
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link
-	href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700"
-	rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Alex+Brush"
-	rel="stylesheet">
-<link rel="stylesheet" href="/user/css/open-iconic-bootstrap.min.css">
-<link rel="stylesheet" href="/user/css/animate.css">
-<link href="/user/images/bee.png" rel="icon">
-<link rel="stylesheet" href="/user/css/owl.carousel.min.css">
-<link rel="stylesheet" href="/user/css/owl.theme.default.min.css">
-<link rel="stylesheet" href="/user/css/magnific-popup.css">
-<link rel="stylesheet" href="/user/css/aos.css">
-<link rel="stylesheet" href="/user/css/ionicons.min.css">
-<link rel="stylesheet" href="/user/css/bootstrap-datepicker.css">
-<link rel="stylesheet" href="/user/css/jquery.timepicker.css">
-<link rel="stylesheet" href="/user/css/flaticon.css">
-<link rel="stylesheet" href="/user/css/icomoon.css">
-<link rel="stylesheet" href="/user/css/style.css">
-<script nonce="e3793d60-1f44-4351-8767-2b431d562590">(function(w,d){!function(dK,dL,dM,dN){dK[dM]=dK[dM]||{};dK[dM].executed=[];dK.zaraz={deferred:[],listeners:[]};dK.zaraz.q=[];dK.zaraz._f=function(dO){return function(){var dP=Array.prototype.slice.call(arguments);dK.zaraz.q.push({m:dO,a:dP})}};for(const dQ of["track","set","debug"])dK.zaraz[dQ]=dK.zaraz._f(dQ);dK.zaraz.init=()=>{var dR=dL.getElementsByTagName(dN)[0],dS=dL.createElement(dN),dT=dL.getElementsByTagName("title")[0];dT&&(dK[dM].t=dL.getElementsByTagName("title")[0].text);dK[dM].x=Math.random();dK[dM].w=dK.screen.width;dK[dM].h=dK.screen.height;dK[dM].j=dK.innerHeight;dK[dM].e=dK.innerWidth;dK[dM].l=dK.location.href;dK[dM].r=dL.referrer;dK[dM].k=dK.screen.colorDepth;dK[dM].n=dL.characterSet;dK[dM].o=(new Date).getTimezoneOffset();if(dK.dataLayer)for(const dX of Object.entries(Object.entries(dataLayer).reduce(((dY,dZ)=>({...dY[1],...dZ[1]})),{})))zaraz.set(dX[0],dX[1],{scope:"page"});dK[dM].q=[];for(;dK.zaraz.q.length;){const d_=dK.zaraz.q.shift();dK[dM].q.push(d_)}dS.defer=!0;for(const ea of[localStorage,sessionStorage])Object.keys(ea||{}).filter((ec=>ec.startsWith("_zaraz_"))).forEach((eb=>{try{dK[dM]["z_"+eb.slice(7)]=JSON.parse(ea.getItem(eb))}catch{dK[dM]["z_"+eb.slice(7)]=ea.getItem(eb)}}));dS.referrerPolicy="origin";dS.src="../../cdn-cgi/zaraz/sd0d9.js?z="+btoa(encodeURIComponent(JSON.stringify(dK[dM])));dR.parentNode.insertBefore(dS,dR)};["complete","interactive"].includes(dL.readyState)?zaraz.init():dK.addEventListener("DOMContentLoaded",zaraz.init)}(w,d,"zarazData","script");})(window,document);</script>
+	<title>Travel-FPoly</title>
+	<meta charset="utf-8">
+	<link href="/user/images/bee.png" rel="icon">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link href="/user/images/bee.png" rel="icon">
+	<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Alex+Brush" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+	<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+	<script src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+	<script src="/node_modules/swiper/swiper.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+	<link rel="stylesheet" href="/user/css/open-iconic-bootstrap.min.css">
+	<link rel="stylesheet" href="/user/css/animate.css">
+	<link rel="stylesheet" href="/user/css/magnific-popup.css">
+	<link rel="stylesheet" href="/user/css/aos.css">
+	<link rel="stylesheet" href="/user/css/ionicons.min.css">
+	<link rel="stylesheet" href="/user/css/bootstrap-datepicker.css">
+	<link rel="stylesheet" href="/user/css/jquery.timepicker.css">
+	<link rel="stylesheet" href="/user/css/flaticon.css">
+	<link rel="stylesheet" href="/user/css/icomoon.css">
+	<link rel="stylesheet" href="/user/css/style.css">
+	<link rel="stylesheet" href="/node_modules/swiper/swiper.min.css">
+	<link rel="stylesheet" href="/user/css/tour-detail.css">
+	<script
+		nonce="6d052e1f-c170-4fc3-9b38-e3eeb83f439d">(function (w, d) { !function (dK, dL, dM, dN) { dK[dM] = dK[dM] || {}; dK[dM].executed = []; dK.zaraz = { deferred: [], listeners: [] }; dK.zaraz.q = []; dK.zaraz._f = function (dO) { return function () { var dP = Array.prototype.slice.call(arguments); dK.zaraz.q.push({ m: dO, a: dP }) } }; for (const dQ of ["track", "set", "debug"]) dK.zaraz[dQ] = dK.zaraz._f(dQ); dK.zaraz.init = () => { var dR = dL.getElementsByTagName(dN)[0], dS = dL.createElement(dN), dT = dL.getElementsByTagName("title")[0]; dT && (dK[dM].t = dL.getElementsByTagName("title")[0].text); dK[dM].x = Math.random(); dK[dM].w = dK.screen.width; dK[dM].h = dK.screen.height; dK[dM].j = dK.innerHeight; dK[dM].e = dK.innerWidth; dK[dM].l = dK.location.href; dK[dM].r = dL.referrer; dK[dM].k = dK.screen.colorDepth; dK[dM].n = dL.characterSet; dK[dM].o = (new Date).getTimezoneOffset(); if (dK.dataLayer) for (const dX of Object.entries(Object.entries(dataLayer).reduce(((dY, dZ) => ({ ...dY[1], ...dZ[1] })), {}))) zaraz.set(dX[0], dX[1], { scope: "page" }); dK[dM].q = []; for (; dK.zaraz.q.length;) { const d_ = dK.zaraz.q.shift(); dK[dM].q.push(d_) } dS.defer = !0; for (const ea of [localStorage, sessionStorage]) Object.keys(ea || {}).filter((ec => ec.startsWith("_zaraz_"))).forEach((eb => { try { dK[dM]["z_" + eb.slice(7)] = JSON.parse(ea.getItem(eb)) } catch { dK[dM]["z_" + eb.slice(7)] = ea.getItem(eb) } })); dS.referrerPolicy = "origin"; dS.src = "../../cdn-cgi/zaraz/sd0d9.js?z=" + btoa(encodeURIComponent(JSON.stringify(dK[dM]))); dR.parentNode.insertBefore(dS, dR) };["complete", "interactive"].includes(dL.readyState) ? zaraz.init() : dK.addEventListener("DOMContentLoaded", zaraz.init) }(w, d, "zarazData", "script"); })(window, document);</script>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<style type="text/css">
+		.form-select {
+			border: 0;
+			background-color: #97D9E1;
+			background-image: linear-gradient(0deg, #97D9E1 0%, #D9AFD9 100%);
+			color: inherit;
+			box-shadow: none;
+		}
+	</style>
 </head>
+
 <body>
 	<div th:insert="~{include/_loading.html}"></div>
 	<div th:insert="~{include/_Nav}"></div>
+	<section>
+		<div id="slider-container"
+			class="slider-container container-fluid m-0 p-0 row justify-content-lg-between p_header"
+			style="background: url(''); background-size: cover; background-repeat: no-repeat;">
+			<div class="overlay"></div>
+			<div class="col-12 col-lg-5 col-md-5 col-sm-12 content" style="z-index: 1;">
+				<div th:each="schedule, start:${schedules}"
+					th:class="${start.index == 0 ? 'slide-content active':'slide-content'}" style="color:white">
+					<h1 class="slide-title">[[${schedule.title}]]</h1>
+					<p class="slide-description">[[${schedule.description}]]</p>
+					<button type="button" class="btn btn-info">Order Now</button>
+				</div>
+			</div>
+			<div class="mt-5 col-12 col-lg-7 col-md-7 col-sm-12">
+				<section id="tranding">
+					<div class="container">
+						<div class="swiper tranding-slider">
+							<div class="swiper-wrapper">
+								<!-- Slide-start -->
+								<div th:each="schedule:${schedules}" class="swiper-slide tranding-slide">
+									<div class="tranding-slide-img">
+										<img th:src="${schedule.Image}" alt="Tranding">
+									</div>
+									<div class="tranding-slide-content">
+										<div class="tranding-slide-content-bottom">
 
-	<div class="hero-wrap js-fullheight"
-		style="background-image: url('/user/user/images/bg_5.jpg');">
-		<div class="overlay"></div>
-		<div class="container">
-			<div
-				class="row no-gutters slider-text js-fullheight align-items-center justify-content-center"
-				data-scrollax-parent="true">
-				<div class="col-md-9 ftco-animate text-center"
-					data-scrollax=" properties: { translateY: '70%' }">
-					<p class="breadcrumbs"
-						data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">
-						<span class="mr-2"><a href="index-2.html">Home</a></span> <span
-							class="mr-2"><a href="hotel.html">Hotel</a></span> <span>Hotel
-							Single</span>
-					</p>
-					<h1 class="mb-3 bread"
-						data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Hotels
-						Details</h1>
-				</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="tranding-slider-control">
+								<div class="swiper-button-prev slider-arrow">
+									<ion-icon name="arrow-back-outline"></ion-icon>
+								</div>
+								<div class="swiper-button-next slider-arrow">
+									<ion-icon name="arrow-forward-outline"></ion-icon>
+								</div>
+								<div class="swiper-pagination"></div>
+							</div>
+
+						</div>
+					</div>
+				</section>
 			</div>
 		</div>
-	</div>
-	<section class="ftco-section ftco-degree-bg">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-3 sidebar">
-					<div class="sidebar-wrap bg-light ftco-animate">
-						<h3 class="heading mb-4">Find City</h3>
-						<form action="#">
-							<div class="fields">
-								<div class="form-group">
-									<input type="text" class="form-control"
-										placeholder="Destination, City">
-								</div>
-								<div class="form-group">
-									<div class="select-wrap one-third">
-										<div class="icon">
-											<span class="ion-ios-arrow-down"></span>
-										</div>
-										<select name="" id="" class="form-control"
-											placeholder="Keyword search">
-											<option value="">Select Location</option>
-											<option value="">San Francisco USA</option>
-											<option value="">Berlin Germany</option>
-											<option value="">Lodon United Kingdom</option>
-											<option value="">Paris Italy</option>
-										</select>
-									</div>
-								</div>
-								<div class="form-group">
-									<input type="text" id="checkin_date" class="form-control"
-										placeholder="Date from">
-								</div>
-								<div class="form-group">
-									<input type="text" id="checkin_date" class="form-control"
-										placeholder="Date to">
-								</div>
-								<div class="form-group">
-									<div class="range-slider">
-										<span> <input type="number" value="25000" min="0"
-											max="120000" /> - <input type="number" value="50000" min="0"
-											max="120000" />
-										</span> <input value="1000" min="0" max="120000" step="500"
-											type="range" /> <input value="50000" min="0" max="120000"
-											step="500" type="range" />
-										</svg>
-									</div>
-								</div>
-								<div class="form-group">
-									<input type="submit" value="Search"
-										class="btn btn-primary py-3 px-5">
-								</div>
-							</div>
-						</form>
-					</div>
-					<div class="sidebar-wrap bg-light ftco-animate">
-						<h3 class="heading mb-4">Star Rating</h3>
-						<form method="post" class="star-rating">
-							<div class="form-check">
-								<input type="checkbox" class="form-check-input"
-									id="exampleCheck1"> <label class="form-check-label"
-									for="exampleCheck1">
-									<p class="rate">
-										<span><i class="icon-star"></i><i class="icon-star"></i><i
-											class="icon-star"></i><i class="icon-star"></i><i
-											class="icon-star"></i></span>
-									</p>
-								</label>
-							</div>
-							<div class="form-check">
-								<input type="checkbox" class="form-check-input"
-									id="exampleCheck1"> <label class="form-check-label"
-									for="exampleCheck1">
-									<p class="rate">
-										<span><i class="icon-star"></i><i class="icon-star"></i><i
-											class="icon-star"></i><i class="icon-star"></i><i
-											class="icon-star-o"></i></span>
-									</p>
-								</label>
-							</div>
-							<div class="form-check">
-								<input type="checkbox" class="form-check-input"
-									id="exampleCheck1"> <label class="form-check-label"
-									for="exampleCheck1">
-									<p class="rate">
-										<span><i class="icon-star"></i><i class="icon-star"></i><i
-											class="icon-star"></i><i class="icon-star-o"></i><i
-											class="icon-star-o"></i></span>
-									</p>
-								</label>
-							</div>
-							<div class="form-check">
-								<input type="checkbox" class="form-check-input"
-									id="exampleCheck1"> <label class="form-check-label"
-									for="exampleCheck1">
-									<p class="rate">
-										<span><i class="icon-star"></i><i class="icon-star"></i><i
-											class="icon-star-o"></i><i class="icon-star-o"></i><i
-											class="icon-star-o"></i></span>
-									</p>
-								</label>
-							</div>
-							<div class="form-check">
-								<input type="checkbox" class="form-check-input"
-									id="exampleCheck1"> <label class="form-check-label"
-									for="exampleCheck1">
-									<p class="rate">
-										<span><i class="icon-star"></i><i class="icon-star-o"></i><i
-											class="icon-star-o"></i><i class="icon-star-o"></i><i
-											class="icon-star-o"></i></span>
-									</p>
-								</label>
-							</div>
-						</form>
-					</div>
-				</div>
-				<div class="col-lg-9">
-					<div class="row">
-						<div class="col-md-12 ftco-animate">
-							<div class="single-slider owl-carousel">
-								<div class="item">
-									<div class="hotel-img"
-										style="background-image: url(/user/images/hotel-2.jpg);"></div>
-								</div>
-								<div class="item">
-									<div class="hotel-img"
-										style="background-image: url(/user/images/hotel-3.jpg);"></div>
-								</div>
-								<div class="item">
-									<div class="hotel-img"
-										style="background-image: url(/user/images/hotel-4.jpg);"></div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-12 hotel-single mt-4 mb-5 ftco-animate">
-							<span>Our Best hotels &amp; Rooms</span>
-							<h2>Luxury Hotel in Paris</h2>
-							<p class="rate mb-5">
-								<span class="loc"><a href="#"><i class="icon-map"></i>
-										291 South 21th Street, Suite 721 New York NY 10016</a></span> <span
-									class="star"> <i class="icon-star"></i> <i
-									class="icon-star"></i> <i class="icon-star"></i> <i
-									class="icon-star"></i> <i class="icon-star-o"></i> 8 Rating
-								</span>
-							</p>
-							<p>When she reached the first hills of the Italic Mountains,
-								she had a last view back on the skyline of her hometown
-								Bookmarksgrove, the headline of Alphabet Village and the subline
-								of her own road, the Line Lane. Pityful a rethoric question ran
-								over her cheek, then she continued her way.</p>
-							<div class="d-md-flex mt-5 mb-5">
-								<ul>
-									<li>The Big Oxmox advised her not to do so</li>
-									<li>When she reached the first hills of the Italic
-										Mountains</li>
-									<li>She had a last view back on the skyline of her
-										hometown</li>
-									<li>Bookmarksgrove, the headline of Alphabet</li>
-								</ul>
-								<ul class="ml-md-5">
-									<li>Question ran over her cheek, then she continued</li>
-									<li>Pityful a rethoric question ran</li>
-									<li>Mountains, she had a last view back on the skyline</li>
-									<li>Headline of Alphabet Village and the subline</li>
-								</ul>
-							</div>
-							<p>When she reached the first hills of the Italic Mountains,
-								she had a last view back on the skyline of her hometown
-								Bookmarksgrove, the headline of Alphabet Village and the subline
-								of her own road, the Line Lane. Pityful a rethoric question ran
-								over her cheek, then she continued her way.</p>
-						</div>
-						<div class="col-md-12 hotel-single ftco-animate mb-5 mt-4">
-							<h4 class="mb-4">Take A Tour</h4>
-							<div class="block-16">
-								<figure>
-									<img src="/user/user/images/hotel-6.jpg" alt="Image placeholder"
-										class="img-fluid">
-									<a href="https://vimeo.com/45830194"
-										class="play-button popup-vimeo"><span class="icon-play"></span></a>
-								</figure>
-							</div>
-						</div>
-						<div class="col-md-12 hotel-single ftco-animate mb-5 mt-4">
-							<h4 class="mb-4">Our Rooms</h4>
-							<div class="row">
-								<div class="col-md-4">
-									<div class="destination">
-										<a href="hotel-single.html" class="img img-2"
-											style="background-image: url(/user/images/room-4.jpg);"></a>
-										<div class="text p-3">
-											<div class="d-flex">
-												<div class="one">
-													<h3>
-														<a href="hotel-single.html">Hotel, Italy</a>
-													</h3>
-													<p class="rate">
-														<i class="icon-star"></i> <i class="icon-star"></i> <i
-															class="icon-star"></i> <i class="icon-star"></i> <i
-															class="icon-star-o"></i> <span>8 Rating</span>
-													</p>
-												</div>
-												<div class="two">
-													<span class="price per-price">$40<br>
-													<small>/night</small></span>
-												</div>
-											</div>
-											<p>Far far away, behind the word mountains, far from the
-												countries</p>
-											<hr>
-											<p class="bottom-area d-flex">
-												<span><i class="icon-map-o"></i> Miami, Fl</span> <span
-													class="ml-auto"><a href="#">Book Now</a></span>
-											</p>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4">
-									<div class="destination">
-										<a href="hotel-single.html" class="img img-2"
-											style="background-image: url(/user/images/room-5.jpg);"></a>
-										<div class="text p-3">
-											<div class="d-flex">
-												<div class="one">
-													<h3>
-														<a href="hotel-single.html">Hotel, Italy</a>
-													</h3>
-													<p class="rate">
-														<i class="icon-star"></i> <i class="icon-star"></i> <i
-															class="icon-star"></i> <i class="icon-star"></i> <i
-															class="icon-star-o"></i> <span>8 Rating</span>
-													</p>
-												</div>
-												<div class="two">
-													<span class="price per-price">$40<br>
-													<small>/night</small></span>
-												</div>
-											</div>
-											<p>Far far away, behind the word mountains, far from the
-												countries</p>
-											<hr>
-											<p class="bottom-area d-flex">
-												<span><i class="icon-map-o"></i> Miami, Fl</span> <span
-													class="ml-auto"><a href="#">Book Now</a></span>
-											</p>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4">
-									<div class="destination">
-										<a href="hotel-single.html" class="img img-2"
-											style="background-image: url(/user/images/room-6.jpg);"></a>
-										<div class="text p-3">
-											<div class="d-flex">
-												<div class="one">
-													<h3>
-														<a href="hotel-single.html">Hotel, Italy</a>
-													</h3>
-													<p class="rate">
-														<i class="icon-star"></i> <i class="icon-star"></i> <i
-															class="icon-star"></i> <i class="icon-star"></i> <i
-															class="icon-star-o"></i> <span>8 Rating</span>
-													</p>
-												</div>
-												<div class="two">
-													<span class="price per-price">$40<br>
-													<small>/night</small></span>
-												</div>
-											</div>
-											<p>Far far away, behind the word mountains, far from the
-												countries</p>
-											<hr>
-											<p class="bottom-area d-flex">
-												<span><i class="icon-map-o"></i> Miami, Fl</span> <span
-													class="ml-auto"><a href="#">Book Now</a></span>
-											</p>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-12 hotel-single ftco-animate mb-5 mt-4">
-							<h4 class="mb-5">Check Availability &amp; Booking</h4>
-							<div class="fields">
-								<div class="row">
-									<div class="col-md-6">
-										<div class="form-group">
-											<input type="text" class="form-control" placeholder="Name">
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<input type="text" class="form-control" placeholder="Email">
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<input type="text" id="checkin_date" class="form-control"
-												placeholder="Date from">
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<input type="text" id="checkin_date" class="form-control"
-												placeholder="Date to">
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<div class="select-wrap one-third">
-												<div class="icon">
-													<span class="ion-ios-arrow-down"></span>
-												</div>
-												<select name="" id="" class="form-control"
-													placeholder="Guest">
-													<option value="0">Guest</option>
-													<option value="1">1</option>
-													<option value="2">2</option>
-													<option value="3">3</option>
-													<option value="4">4</option>
-												</select>
-											</div>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<div class="select-wrap one-third">
-												<div class="icon">
-													<span class="ion-ios-arrow-down"></span>
-												</div>
-												<select name="" id="" class="form-control"
-													placeholder="Children">
-													<option value="0">Children</option>
-													<option value="1">1</option>
-													<option value="2">2</option>
-													<option value="3">3</option>
-													<option value="4">4</option>
-												</select>
-											</div>
-										</div>
-									</div>
-									<div class="col-md-12">
-										<div class="form-group">
-											<input type="submit" value="Check Availability"
-												class="btn btn-primary py-3">
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-12 hotel-single ftco-animate mb-5 mt-4">
-							<h4 class="mb-4">Review &amp; Ratings</h4>
-							<div class="row">
-								<div class="col-md-6">
-									<form method="post" class="star-rating">
-										<div class="form-check">
-											<input type="checkbox" class="form-check-input"
-												id="exampleCheck1"> <label class="form-check-label"
-												for="exampleCheck1">
-												<p class="rate">
-													<span><i class="icon-star"></i><i class="icon-star"></i><i
-														class="icon-star"></i><i class="icon-star"></i><i
-														class="icon-star"></i> 100 Ratings</span>
-												</p>
-											</label>
-										</div>
-										<div class="form-check">
-											<input type="checkbox" class="form-check-input"
-												id="exampleCheck1"> <label class="form-check-label"
-												for="exampleCheck1">
-												<p class="rate">
-													<span><i class="icon-star"></i><i class="icon-star"></i><i
-														class="icon-star"></i><i class="icon-star"></i><i
-														class="icon-star-o"></i> 30 Ratings</span>
-												</p>
-											</label>
-										</div>
-										<div class="form-check">
-											<input type="checkbox" class="form-check-input"
-												id="exampleCheck1"> <label class="form-check-label"
-												for="exampleCheck1">
-												<p class="rate">
-													<span><i class="icon-star"></i><i class="icon-star"></i><i
-														class="icon-star"></i><i class="icon-star-o"></i><i
-														class="icon-star-o"></i> 5 Ratings</span>
-												</p>
-											</label>
-										</div>
-										<div class="form-check">
-											<input type="checkbox" class="form-check-input"
-												id="exampleCheck1"> <label class="form-check-label"
-												for="exampleCheck1">
-												<p class="rate">
-													<span><i class="icon-star"></i><i class="icon-star"></i><i
-														class="icon-star-o"></i><i class="icon-star-o"></i><i
-														class="icon-star-o"></i> 0 Ratings</span>
-												</p>
-											</label>
-										</div>
-										<div class="form-check">
-											<input type="checkbox" class="form-check-input"
-												id="exampleCheck1"> <label class="form-check-label"
-												for="exampleCheck1">
-												<p class="rate">
-													<span><i class="icon-star"></i><i
-														class="icon-star-o"></i><i class="icon-star-o"></i><i
-														class="icon-star-o"></i><i class="icon-star-o"></i> 0
-														Ratings</span>
-												</p>
-											</label>
-										</div>
-									</form>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-12 hotel-single ftco-animate mb-5 mt-5">
-							<h4 class="mb-4">Related Hotels</h4>
-							<div class="row">
-								<div class="col-md-4">
-									<div class="destination">
-										<a href="hotel-single.html" class="img img-2"
-											style="background-image: url(/user/images/hotel-1.jpg);"></a>
-										<div class="text p-3">
-											<div class="d-flex">
-												<div class="one">
-													<h3>
-														<a href="hotel-single.html">Hotel, Italy</a>
-													</h3>
-													<p class="rate">
-														<i class="icon-star"></i> <i class="icon-star"></i> <i
-															class="icon-star"></i> <i class="icon-star"></i> <i
-															class="icon-star-o"></i> <span>8 Rating</span>
-													</p>
-												</div>
-												<div class="two">
-													<span class="price per-price">$40<br>
-													<small>/night</small></span>
-												</div>
-											</div>
-											<p>Far far away, behind the word mountains, far from the
-												countries</p>
-											<hr>
-											<p class="bottom-area d-flex">
-												<span><i class="icon-map-o"></i> Miami, Fl</span> <span
-													class="ml-auto"><a href="#">Book Now</a></span>
-											</p>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4">
-									<div class="destination">
-										<a href="hotel-single.html" class="img img-2"
-											style="background-image: url(/user/images/hotel-2.jpg);"></a>
-										<div class="text p-3">
-											<div class="d-flex">
-												<div class="one">
-													<h3>
-														<a href="hotel-single.html">Hotel, Italy</a>
-													</h3>
-													<p class="rate">
-														<i class="icon-star"></i> <i class="icon-star"></i> <i
-															class="icon-star"></i> <i class="icon-star"></i> <i
-															class="icon-star-o"></i> <span>8 Rating</span>
-													</p>
-												</div>
-												<div class="two">
-													<span class="price per-price">$40<br>
-													<small>/night</small></span>
-												</div>
-											</div>
-											<p>Far far away, behind the word mountains, far from the
-												countries</p>
-											<hr>
-											<p class="bottom-area d-flex">
-												<span><i class="icon-map-o"></i> Miami, Fl</span> <span
-													class="ml-auto"><a href="#">Book Now</a></span>
-											</p>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4">
-									<div class="destination">
-										<a href="hotel-single.html" class="img img-2"
-											style="background-image: url(/user/images/hotel-3.jpg);"></a>
-										<div class="text p-3">
-											<div class="d-flex">
-												<div class="one">
-													<h3>
-														<a href="hotel-single.html">Hotel, Italy</a>
-													</h3>
-													<p class="rate">
-														<i class="icon-star"></i> <i class="icon-star"></i> <i
-															class="icon-star"></i> <i class="icon-star"></i> <i
-															class="icon-star-o"></i> <span>8 Rating</span>
-													</p>
-												</div>
-												<div class="two">
-													<span class="price per-price">$40<br>
-													<small>/night</small></span>
-												</div>
-											</div>
-											<p>Far far away, behind the word mountains, far from the
-												countries</p>
-											<hr>
-											<p class="bottom-area d-flex">
-												<span><i class="icon-map-o"></i> Miami, Fl</span> <span
-													class="ml-auto"><a href="#">Book Now</a></span>
-											</p>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+		<script th:inline="javascript">
+
+			var TrandingSlider = new Swiper('.tranding-slider', {
+				effect: 'coverflow',
+				grabCursor: true,
+				centeredSlides: true,
+				loop: false,
+				slidesPerView: "auto",
+				coverflowEffect: {
+					rotate: 0,
+					stretch: 0,
+					depth: 100,
+					modifier: 2.5,
+				},
+				pagination: {
+					el: '.swiper-pagination',
+					clickable: true,
+				},
+				navigation: {
+					nextEl: '.swiper-button-next',
+					prevEl: '.swiper-button-prev',
+				}
+			});
+			function changeBackground(imageUrl) {
+				var sliderContainer = document.getElementById('slider-container');
+				sliderContainer.style.opacity = 0;
+				setTimeout(function () {
+					sliderContainer.style.backgroundImage = 'url(' + imageUrl + ')';
+					sliderContainer.style.opacity = 1;
+				}, 10);
+			}
+			document.querySelector('.swiper-button-next').addEventListener('click', function () {
+				var activeSlide = TrandingSlider.slides[TrandingSlider.activeIndex];
+				var imageUrl = activeSlide.querySelector('img').getAttribute('src');
+				var sliderContainer = document.getElementById('slider-container');
+				sliderContainer.style.backgroundImage = 'url(' + imageUrl + ')';
+				changeBackground(imageUrl);
+
+			});
+
+			document.querySelector('.swiper-button-prev').addEventListener('click', function () {
+				var activeSlide = TrandingSlider.slides[TrandingSlider.activeIndex];
+				var imageUrl = activeSlide.querySelector('img').getAttribute('src');
+				var sliderContainer = document.getElementById('slider-container');
+				sliderContainer.style.backgroundImage = 'url(' + imageUrl + ')';
+				changeBackground(imageUrl);
+
+			});
+			TrandingSlider.on('transitionEnd', function () {
+				var activeSlide = TrandingSlider.slides[TrandingSlider.activeIndex];
+				var imageUrl = activeSlide.querySelector('img').getAttribute('src');
+				var sliderContainer = document.getElementById('slider-container');
+				sliderContainer.style.backgroundImage = 'url(' + imageUrl + ')';
+				changeBackground(imageUrl);
+
+			});
+			var slideContents = document.querySelectorAll('.slide-content');
+
+			TrandingSlider.on('slideChange', function () {
+				var activeIndex = TrandingSlider.activeIndex;
+				slideContents.forEach(function (content) {
+					content.classList.remove('active');
+				});
+				slideContents[activeIndex].classList.add('active');
+			});
+
+		</script>
 	</section>
+	<section>
+		<div class="container-fluid" th:object="${hotel}">
+			<div class="row justify-content-between m-5 p-5">
+				<div class="col-7 col-lg-7 col-sm-12 col-md-7 row title">
+
+					<div class="col-12">
+						<section class="mt-3 title">
+							<div class="col-12">
+								<label for=""
+									style="font-size: 50px; font-family: Arial, Helvetica, sans-serif;">[[${hotel.Name}]]
+								</label>
+							</div>
+							<label style="font-size: 20px; font-family: Arial, Helvetica, sans-serif;">
+								Chi tiết hình ảnh phòng
+							</label>
+							<div th:object="${hotelImage}" class="m-0 p-0 row d-flex justify-content-between">
+								<div class="col-md-4 col-sm-5 col-4 col-lg-4 gy-4">
+									<div class="row">
+										<div class="col-11 col-sm-12 col-lg-11 col-md-11"
+											th:style="'background-image: url('+ ${hotelImage.Image1} +'); background-repeat: no-repeat; background-size: cover; height: 160px; border: 1px solid white; border-radius: 10%;'">
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4 col-sm-5 col-4 col-lg-4 gy-4">
+									<div class="row">
+										<div class="col-11 col-sm-12 col-lg-11 col-md-11"
+											th:style="'background-image: url('+ ${hotelImage.Image2} +'); background-repeat: no-repeat; background-size: cover; height: 160px; border: 1px solid white; border-radius: 10%;'">
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4 col-sm-5 col-4 col-lg-4 gy-4">
+									<div class="row">
+										<div class="col-11 col-sm-12 col-lg-11 col-md-11"
+											th:style="'background-image: url('+ ${hotelImage.Image3} +'); background-repeat: no-repeat; background-size: cover; height: 160px; border: 1px solid white; border-radius: 10%;'">
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4 col-sm-5 col-4 col-lg-4 gy-4">
+									<div class="row">
+										<div class="col-11 col-sm-12 col-lg-11 col-md-11"
+											th:style="'background-image: url('+ ${hotelImage.Image4} +'); background-repeat: no-repeat; background-size: cover; height: 160px; border: 1px solid white; border-radius: 10%;'">
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4 col-sm-5 col-4 col-lg-4 gy-4">
+									<div class="row">
+										<div class="col-11 col-sm-12 col-lg-11 col-md-11"
+											th:style="'background-image: url('+ ${hotelImage.Image5} +'); background-repeat: no-repeat; background-size: cover; height: 160px; border: 1px solid white; border-radius: 10%;'">
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4 col-sm-5 col-4 col-lg-4 gy-4">
+									<div class="row">
+										<div class="col-11 col-sm-12 col-lg-11 col-md-11"
+											th:style="'background-image: url('+ ${hotelImage.Image5} +'); background-repeat: no-repeat; background-size: cover; height: 160px; border: 1px solid white; border-radius: 10%;'">
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>
+
+					</div>
+				</div>
+
+				<!-- Form booking -->
+				<div class="col-5 col-lg-5 col-sm-6 col-md-5" style="z-index:0;">
+					<div class="col-12">
+						<div class="row">
+							<div class="booking-form">
+								<div class="form-header mb-3">
+									<h3>Make your adventure</h3>
+								</div>
+								<form method="post">
+									<div class="row mb-3">
+										<div class="col-md-12 mb-3">
+											<label class="title-input">FullName</label>
+											<input class="form-control" type="text" placeholder="Enter your Name...">
+										</div>
+										<div class="col-md-12 mb-3">
+											<label class="title-input">Email</label>
+											<input class="form-control" type="email" placeholder="Enter your Email">
+										</div>
+										<div class="col-md-6 mb-3">
+											<label class="title-input">Phone</label>
+											<input class="form-control" type="text" placeholder="Enter your Phone">
+										</div>
+										<div class="col-md-6 mb-3">
+											<label class="title-input">BookingDate</label>
+											<input class="form-control" type="date" placeholder="Enter your Phone">
+										</div>
+										<div class="form-btn mt-2">
+											<button th:herf="@{|/travelfpoly/cartHotel|}" class="submit-btn mb-3">Book
+												Now</button>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+					<hr class="new1">
+					<div class="col-12">
+						<div class="mt-5 title">
+							<h3>Thông tin khu vực</h3>
+
+							<div id="map" class="w-100">
+								<iframe
+									src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d125418.05621372208!2d106.65328639999998!3d10.7872256!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1svi!2s!4v1691645572040!5m2!1svi!2s"
+									width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+									referrerpolicy="no-referrer-when-downgrade">
+								</iframe>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+	</section>
+	<section>
+		<div class="text-right">
+			<a style="display: inline-block;" href="#reviews-anchor" id="open-review-box"
+				class="btn btn-success btn-green">Leave a Review</a>
+		</div>
+		<div class="row" id="post-review-box" style="display: none;">
+			<div class="col-md-12">
+				<form:form method="post" modelAttribute="review" id="reviewForm">
+
+					<form:hidden id="ratings-hidden" path="rating" />
+					<form:hidden path="product.id" />
+					<div class="col-xs-12 col-md-6">
+						<form:input path="userName" class="form-control animated" placeholder="Name" />
+					</div>
+					<div class="col-xs-12 col-md-6">
+						<form:input path="userEmail" id="userEmail" class="form-control animated" placeholder="Email" />
+					</div>
+					<div class="col-md-12" style="margin-top: 2rem;">
+						<form:textarea path="comment"
+							style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 54px;" rows="5"
+							id="new-review" class="form-control animated" placeholder="Enter your review here..."
+							name="comment" cols="50"></form:textarea>
+					</div>
+					<div class="text-right">
+						<div class="stars starrr" data-rating="0"></div>
+						<a href="#" class="btn btn-danger btn-sm" id="close-review-box"
+							style="margin-right: 10px; display: none;"> <span
+								class="glyphicon glyphicon-remove"></span>Cancel
+						</a>
+						<button class="btn btn-success btn-lg" type="submit">Save</button>
+					</div>
+				</form:form>
+			</div>
+		</div>
+		<!--popup-->
+		<div id="popup" class="popup-wrapper" style="display:none;">
+			<div class="popup-content">
+				<div class="popup-title">
+					<button type="button" class="popup-close">×</button>
+					<h3></h3>
+				</div>
+				<div class="popup-body">
+
+					Popup body</div>
+			</div>
+		</div>
+		<!-- scripts for stars and ajax -- >
+			 
+			<script type="text/javascript">
+				$(function(){
+			 
+				  // initialize the autosize plugin on the review text area
+				  $('#new-review').autosize({append: "\n"});
+			 
+				  var reviewBox = $('#post-review-box');
+				  var newReview = $('#new-review');
+				  var openReviewBtn = $('#open-review-box');
+				  var closeReviewBtn = $('#close-review-box');
+				  var ratingsField = $('#ratings-hidden');
+			 
+				  openReviewBtn.click(function(e)
+				  {
+					reviewBox.slideDown(400, function()
+					  {
+						$('#new-review').trigger('autosize.resize');
+						newReview.focus();
+					  });
+					openReviewBtn.fadeOut(100);
+					closeReviewBtn.show();
+				  });
+			 
+				  closeReviewBtn.click(function(e)
+				  {
+					e.preventDefault();
+					reviewBox.slideUp(300, function()
+					  {
+						newReview.focus();
+						openReviewBtn.fadeIn(200);
+					  });
+					closeReviewBtn.hide();
+			 
+				  });
+			 
+				  // If there were validation errors we need to open the comment form programmatically 
+			 
+				  // Bind the change event for the star rating - store the rating value in a hidden field
+				  $('.starrr').on('starrr:change', function(e, value){
+					ratingsField.val(value);
+					console.log(value);
+				  });
+				});
+			  </script>
+			 
+				<script type="text/javascript">
+				$(document).ready(function() {
+					var popup = $('#popup').popup({
+						width: 400,
+						height: 130
+					});
+			 
+				$('#reviewForm').submit(function(e) {
+					e.preventDefault();
+			 
+					var str = $("#reviewForm").serialize();
+			 
+					$.ajax({
+						type:"post",
+						dataType:'text',
+						data: str,
+						url:"${pageContext.request.contextPath}/createReview",
+						async: false,
+						success : function(data) {
+						if(data=="SUCCESS"){
+							document.getElementById('reviewPostMessage').innerHTML = "Review uploaded successfuly!";
+							popup.open();
+							$('#close-review-box').click();
+						}else{
+							document.getElementById('reviewPostMessage').innerHTML =data;
+							popup.open();
+						}
+					 }
+				 });
+			});
+			 });
+			</script>
+	</section>
+
+
+
 	<div th:insert="~{include/_Footer}"></div>
-
-	<div id="ftco-loader" class="show fullscreen">
-		<svg class="circular" width="48px" height="48px">
-			<circle class="path-bg" cx="24" cy="24" r="22" fill="none"
-				stroke-width="4" stroke="#eeeeee" />
-			<circle class="path" cx="24" cy="24" r="22" fill="none"
-				stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg>
-	</div>
-	<script src="/user/js/jquery.min.js"></script>
-	<script src="/user/js/jquery-migrate-3.0.1.min.js"></script>
-	<script src="/user/js/popper.min.js"></script>
-	<script src="/user/js/bootstrap.min.js"></script>
-	<script src="/user/js/jquery.easing.1.3.js"></script>
-	<script src="/user/js/jquery.waypoints.min.js"></script>
-	<script src="/user/js/jquery.stellar.min.js"></script>
-	<script src="/user/js/owl.carousel.min.js"></script>
-	<script src="/user/js/jquery.magnific-popup.min.js"></script>
-	<script src="/user/js/aos.js"></script>
-	<script src="/user/js/jquery.animateNumber.min.js"></script>
-	<script src="/user/js/bootstrap-datepicker.js"></script>
-	<script src="/user/js/jquery.timepicker.min.html"></script>
-	<script src="/user/js/scrollax.min.js"></script>
-	<script
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&amp;sensor=false"></script>
-	<script src="/user/js/google-map.js"></script>
-	<script src="/user/js/main.js"></script>
-
-	<script async
-		src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
 	<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+		function validateDate() {
+			var inputDate = document.getElementById('dateInput').value;
+			var currentDate = new Date().toISOString().split('T')[0];
 
-  gtag('config', 'UA-23581568-13');
-</script>
-	<script defer
-		src="https://static.cloudflareinsights.com/beacon.min.js/v52afc6f149f6479b8c77fa569edb01181681764108816"
-		integrity="sha512-jGCTpDpBAYDGNYR5ztKt4BQPGef1P0giN6ZGVUi835kFF88FOmmn8jBQWNgrNd8g/Yu421NdgWhwQoaOPFflDw=="
-		data-cf-beacon='{"rayId":"7de3eba528580ebc","version":"2023.4.0","b":1,"token":"cd0b4b3a733644fc843ef0b185f98241","si":100}'
-		crossorigin="anonymous"></script>
+			if (inputDate < currentDate) {
+				document.getElementById('error-message').innerText = 'Vui lòng chọn ngày trong tương lai.';
+				document.getElementById('dateInput').value = currentDate; // Nếu chọn ngày trước đó, đặt lại giá trị thành ngày hiện tại
+			} else {
+				document.getElementById('error-message').innerText = '';
+			}
+		}
+	</script>
+	<script>
+		const adultsSelect = document.getElementById('adult');
+		const childrenSelect = document.getElementById('children');
+		const priceAdult = document.getElementById('priceAdult');
+		const priceChildren = document.getElementById('priceChildren');
+		const displayElement = document.getElementById('totalPriceDisplay');
+
+		adultsSelect.addEventListener('change', calculateTotalPrice);
+		childrenSelect.addEventListener('change', calculateTotalPrice);
+
+		function calculateTotalPrice() {
+			const adultsQuantity = parseInt(adultsSelect.value);
+			const childrenQuantity = parseInt(childrenSelect.value);
+			const tourAdultPrice = parseFloat(priceAdult.getAttribute('data-price'));
+			const tourChildrenPrice = parseFloat(priceChildren.getAttribute('data-price'));
+			const totalPrice = (adultsQuantity * tourAdultPrice) + (childrenQuantity * tourChildrenPrice);
+			displayElement.textContent = totalPrice + '$';
+		}
+	</script>
+	<!-- <script src="/user/js/productdetail.js"></script> -->
+		<script src="/user/js/jquery.min.js"></script>
+		<script src="/user/js/jquery-migrate-3.0.1.min.js"></script>
+		<script src="/user/js/popper.min.js"></script>
+		<script src="/user/js/bootstrap.min.js"></script>
+		<script src="/user/js/jquery.easing.1.3.js"></script>
+		<script src="/user/js/jquery.waypoints.min.js"></script>
+		<script src="/user/js/jquery.stellar.min.js"></script>
+		<!-- <script src="/user/js/owl.carousel.min.js"></script> -->
+		<script src="/user/js/jquery.magnific-popup.min.js"></script>
+		<script src="/user/js/aos.js"></script>
+		<script src="/user/js/jquery.animateNumber.min.js"></script>
+		<script src="/user/js/bootstrap-datepicker.js"></script>
+		<!-- <script src="/user/js/jquery.timepicker.min.html"></script> -->
+		<script src="/user/js/scrollax.min.js"></script>
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag() { dataLayer.push(arguments); }
+			gtag('js', new Date());
+
+			gtag('config', 'UA-23581568-13');
+		</script>
+		<script defer
+			src="https://static.cloudflareinsights.com/beacon.min.js/v52afc6f149f6479b8c77fa569edb01181681764108816"
+			integrity="sha512-jGCTpDpBAYDGNYR5ztKt4BQPGef1P0giN6ZGVUi835kFF88FOmmn8jBQWNgrNd8g/Yu421NdgWhwQoaOPFflDw=="
+			data-cf-beacon='{"rayId":"7de3eacc580c0ebc","version":"2023.4.0","b":1,"token":"cd0b4b3a733644fc843ef0b185f98241","si":100}'
+			crossorigin="anonymous">
+			</script>
 </body>
 
-<!-- Mirrored from preview.colorlib.com/theme/direngine/hotel-single.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 28 Jun 2023 06:37:24 GMT -->
+<!-- Mirrored from preview.colorlib.com/theme/direngine/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 28 Jun 2023 06:37:10 GMT -->
+
 </html>
