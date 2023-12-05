@@ -34,18 +34,19 @@ import jakarta.validation.Valid;
 @Controller
 @RequestMapping("/travelfpoly/admin/")
 public class TourController {
-	
-	@Autowired
-	private FileUpload cloud;
-	
+
+    @Autowired
+    private FileUpload cloud;
+
     @Autowired
     private TourService tourService;
-    
+
     @Autowired
     private TourImageDAO tourImageDao;
-    
+
     @GetMapping("tour")
-    public String index(Model model, @RequestParam(defaultValue = "0") Integer pageNo,
+    public String index(Model model,
+            @RequestParam(defaultValue = "0") Integer pageNo,
             @RequestParam(defaultValue = "5") Integer sizeNo) {
         Pageable pageable = PageRequest.of(pageNo, sizeNo);
         Page<Tour> list = tourService.getAll(pageable);
@@ -59,7 +60,7 @@ public class TourController {
 
     @PostMapping("save")
     public String saveTour(@Valid @ModelAttribute Tour tour, BindingResult result, Model model,
-            @RequestParam(defaultValue = "0") Integer pageNo, 
+            @RequestParam(defaultValue = "0") Integer pageNo,
             @RequestParam(defaultValue = "5") Integer sizeNo,
             @RequestParam("image1") MultipartFile image1,
             @RequestParam("images") List<MultipartFile> images) throws Exception {
@@ -69,11 +70,11 @@ public class TourController {
             model.addAttribute("tours", tours);
             return "admin/form-add-san-pham";
         }
-      //push image to cloudinary
+        // push image to cloudinary
         this.tourService.saveTour(tour);
         String img = cloud.uploadWithName(image1, tour.getName(), "avatar");
         List<String> listImageName = cloud.upload(images, tour.getName());
-        
+
         TourImage tourImage = new TourImage();
         tourImage.setAvatar(img);
         tourImage.setImage1(listImageName.get(0));
@@ -84,7 +85,7 @@ public class TourController {
         tourImage.setImage6(listImageName.get(5));
         tourImage.setTourImage(tour);
         this.tourImageDao.save(tourImage);
-        
+
         return "redirect:/travelfpoly/admin/tour";
 
     }

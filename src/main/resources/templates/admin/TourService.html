@@ -41,16 +41,21 @@
                                 <input class="form-control" th:field="*{TourServiceId}" type="text">
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="email" class="control-label">Name</label>
+                                <label for="Name" class="control-label">Name</label>
                                 <input class="form-control" th:field="*{Name}" type="text">
+                                <span th:if="${#fields.hasErrors('Name')}" th:errors="*{Name}"></span>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="email" class="control-label">Description</label>
+                                <label for="Description" class="control-label">Description</label>
                                 <input class="form-control" th:field="*{Description}" type="text">
+                                <span th:if="${#fields.hasErrors('Description')}" th:errors="*{Description}"></span>
                             </div>
+
+
                             <div class="form-group col-md-6">
-                                <label for="email" class="control-label">Surcharge</label>
+                                <label for="Surcharge" class="control-label">Surcharge</label>
                                 <input class="form-control" th:field="*{Surcharge}" type="text">
+                                <span th:if="${#fields.hasErrors('Surcharge')}" th:errors="*{Surcharge}"></span>
                             </div>
 
                             <button class="btn btn-save" type="submit" style="margin-left: 15px;">Lưu</button>
@@ -91,7 +96,24 @@
                     </div>
                 </div>
             </div>
-
+            <div class="row mt-1" style="padding-left: 450px;">
+                <div class="col text-center">
+                    <div class="block-27">
+                        <ul>
+                            <li th:if="${tourServices.number > 1}">
+                                <a th:href="@{'?pageNo='+${tourServices.number-1}}">&lt;</a>
+                            </li>
+                            <li th:each="item : ${#numbers.sequence(0, tourServices.totalPages-1)}"
+                                th:class="${item} == ${tourServices.number} ? 'active' : ''">
+                                <a th:text="${item+1}" th:href="@{'?pageNo='+${item}}"></a>
+                            </li>
+                            <li th:if="${tourServices.number < tourServices.totalPages-1}">
+                                <a th:href="@{'?pageNo='+${tourServices.number+1}}">&gt;</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
 

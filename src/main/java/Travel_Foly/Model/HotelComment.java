@@ -13,7 +13,7 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name="HotelComments")
+@Table(name = "HotelComments")
 public class HotelComment {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,10 +21,10 @@ public class HotelComment {
 	@Column(columnDefinition = "nvarchar(500)")
 	private String Content;
 	private Integer Vote;
-	@ManyToOne(fetch = FetchType.LAZY) 
-	@JoinColumn(name="UserName")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "UserName")
 	private Account HotelCommentUser;
-	@ManyToOne(fetch = FetchType.LAZY) 
-	@JoinColumn(name="HotelId")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "HotelId")
 	private Hotel HotelCommentId;
 }
