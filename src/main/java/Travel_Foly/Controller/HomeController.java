@@ -607,9 +607,15 @@ public class HomeController {
 				tourDao.save(tour);
 				
 				if (paymentMethod.equals("paypal")) {
+					OrderDetailTour detail = orderDetailTourDao.findById(orderDetail.getOrderDetailTourId()).get();
+					detail.setStatus(2);
+					orderDetailTourDao.save(detail);
 					return "redirect:/travelfpoly/payment/index?id="+orderDetail.getOrderDetailTourId();
 				}
 				if (paymentMethod.equals("vnpay")) {
+					OrderDetailTour detail = orderDetailTourDao.findById(orderDetail.getOrderDetailTourId()).get();
+					detail.setStatus(2);
+					orderDetailTourDao.save(detail);
 					return "redirect:/travelfpoly/payment/vnpay/pay?id="+orderDetail.getOrderDetailTourId();
 				}
 				InvoiceDTO invoice = orderDetailTourDao.detailInvoice(orderDetail.getOrderDetailTourId());
