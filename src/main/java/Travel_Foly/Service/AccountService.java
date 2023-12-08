@@ -15,13 +15,17 @@ public class AccountService {
     @Autowired
     AccountDAO accountDAO;
 
-    public void updateResetPasswordToken(String token, String email) {
+    public String updateResetPasswordToken(String token, String email) {
         Account account = accountDAO.findByEmail(email);
         if (account != null) {
             account.setResetPasswordToken(token);
             accountDAO.save(account);
-
+            return "Success";
         }
+        else {
+        	return"Can not find your email";
+        }
+        
     }
 
     public Account getByResetPasswordToken(String token) {

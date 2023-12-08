@@ -8,6 +8,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,11 +25,14 @@ public class TourService {
 	private Integer TourServiceId;
 
 	@Column(columnDefinition = "nvarchar(100)")
+	@NotBlank(message = "Please enter your name")
 	private String Name;
 
 	@Column(columnDefinition = "nvarchar(200)")
+	@NotBlank(message = "Please enter your Description")
 	private String Description;
 
+	@NotNull(message = "Please enter your Surcharge")
 	private Double Surcharge;
 
 	@ManyToOne
