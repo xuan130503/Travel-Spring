@@ -1,80 +1,82 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<style type="text/css">
-        table { border: 0; }
-        table td { padding: 10px; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout-Tour</title>
+    <link rel="stylesheet" href="/user/css/payment.css">
+    <style>
+        .form-btn {
+            float: right;
+            margin-right: 10%;
+            padding: 15px 50px;
+            font-size: 16px;
+            font-weight: 700;
+            font-family: 'Poppins', sans-serif;
+            border-radius: 8px;
+            border: 2px solid #b53f3f;
+            box-shadow: 0 5px 5px #efefef;
+            appearance: none;
+            background: rgb(194, 39, 91) no-repeat;
+            background-position: 95% 55%;
+            background-size: 19px;
+            border-radius: 8px;
+            color: aliceblue;
+        }
+        
+        input {
+            background: none;
+            border: none;
+        }
     </style>
 </head>
+
 <body>
-	<div th:insert="~{include/_loading.html}"></div>
-	<div align="center">
-	    <h1>Check Out Tour</h1>
-	    <br/>
-	    <form th:action="@{/travelfpoly/payment/authorize_payment}" method="post">
-		    <table>
-			    <tr>
-		            <td>Product/Service:</td>
-		            <td><input type="text" name="product" th:value="${name}" /></td>
-		        </tr>
-		        <tr>
-		            <td>Sub Total:</td>
-		            <td><input type="text" name="subtotal" th:value="${total}" /></td>
-		        </tr>
-		        <tr>
-		            <td>Shipping:</td>
-		            <td><input type="text" name="shipping" value="0" /></td>
-		        </tr>    
-		        <tr>
-		            <td>Tax:</td>
-		            <td><input type="text" name="tax" value="0" /></td>
-		        </tr>    
-		        <tr>
-		            <td>Total Amount:</td>
-		            <td><input type="text" name="total" th:value="${total}" /></td>
-		        </tr>
-		        <tr>
-		            <td colspan="2" align="center">
-		                <input type="submit" value="Checkout" />
-		            </td>
-		        </tr>
-		        <!-- <tr>
-		            <td>Departure:</td>
-		            <td><input type="text" th:name="departure" th:value="${invoice.Departure}"/></td>
-		        </tr>
-		        <tr>
-		            <td>Destination:</td>
-		            <td><input type="text" th:name="destination" th:value="${invoice.Destination}"/></td>
-		        </tr>
-		        <tr>
-		            <td>Price Adult:</td>
-		            <td><input type="text" th:name="priceAdult" th:value="${invoice.PriceAdult}"/></td>
-		        </tr>    
-		        <tr>
-		            <td>Price Children:</td>
-		            <td><input type="text" th:name="priceChildren" th:value="${invoice.PriceChildren}"/></td>
-		        </tr>
-		        <tr>
-		            <td>Quantity Adult:</td>
-		            <td><input type="text" th:name="quantityAdult" th:value="${invoice.QuantityAdult}"/></td>
-		        </tr>
-		        <tr>
-		            <td>Quantity Children:</td>
-		            <td><input type="text" th:name="quantityChildren" th:value="${invoice.QuantityChildren}"/></td>
-		        </tr>
-		        <tr>
-		            <td>Total Amount:</td>
-		            <td><input type="text" th:name="total" th:value="${(invoice.QuantityAdult * invoice.PriceAdult)+(invoice.QuantityChildren * invoice.PriceChildren)}"/></td>
-		        </tr>
-		        <tr>
-		            <td colspan="2" align="center">
-		                <input type="submit" value="Checkout" />
-		            </td>
-		        </tr> -->
-		    </table>
-	    </form>
-	</div>
+    <section>
+        <div th:insert="~{include/_loading.html}"></div>
+        <h1>VNPay Response</h1>
+        <form action="" th:action="@{/travelfpoly/payment/authorize_payment}" method="post">
+            <div class="tbl-header">
+
+                <table cellpadding="0" cellspacing="0" border="0">
+                    <thead>
+                        <tr>
+                            <th>Product/Service</th>
+                            <th>Sub Total</th>
+                            <th>Shipping</th>
+                            <th>Tax</th>
+                            <th>Total Amount</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="tbl-content">
+                <table cellpadding="0" cellspacing="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td><input type="text" name="product" th:value="${name}" /></td>
+                            <td><input type="text" name="subtotal" th:value="${total}" /></td>
+                            <td><input type="text" name="shipping" value="0" /></td>
+                            <td><input type="text" name="tax" value="0" /></td>
+                            <td><input type="text" name="total" th:value="${total}" /></td>
+                            <tr>
+                                <td colspan="5" align="center">
+                                    <input type="submit" class="form-btn" value="Checkout" />
+                                </td>
+                            </tr>
+                    </tbody>
+                </table>
+            </div>
+        </form>
+    </section>
+
+    <div class="made-with-love col-12">
+        Made with
+        <i>♥</i> by
+        <a target="_blank" href="#">TravelFpoly</a>
+    </div>
+    <script src="/paying_respon/auto.js"></script>
 </body>
+
 </html>

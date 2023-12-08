@@ -1,93 +1,175 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<style type="text/css">
-    table { border: 0; }
-    table td { padding: 5px; }
-</style>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <!-- Custom Style -->
+    <link rel="stylesheet" href="/user/css/reviewPayment.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <title>Before Paying</title>
 </head>
+
 <body>
-	<div th:insert="~{include/_loading.html}"></div>
-	<div align="center">
-	    <h1>Please Review Before Paying</h1>
-	    <form th:action="@{/travelfpoly/payment/execute_payment}" method="post">
-		    <table>
-		        <tr>
-		            <td colspan="2"><b>Transaction Details:</b></td>
-		        </tr>
-		        <tr>
-		            <td>Description:</td>
-		            <td>[[${transaction.description}]]</td>
-		        </tr>
-		        <tr>
-		            <td>Subtotal:</td>
-		            <td>[[${transaction.amount.details.subtotal}]] USD</td>
-		        </tr>
-		        <tr>
-		            <td>Shipping:</td>
-		            <td>[[${transaction.amount.details.shipping}]] USD</td>
-		        </tr>
-		        <tr>
-		            <td>Tax:</td>
-		            <td>[[${transaction.amount.details.tax}]] USD</td>
-		        </tr>
-		        <tr>
-		            <td>Total:</td>
-		            <td>[[${transaction.amount.total}]] USD</td>
-		        </tr>
-		        <tr><td><br/></td></tr>
-		        <tr>
-		            <td colspan="2"><b>Payer Information:</b></td>
-		        </tr>
-		        <tr>
-		            <td>First Name:</td>
-		            <td>[[${payer.firstName}]]</td>
-		        </tr>
-		        <tr>
-		            <td>Last Name:</td>
-		            <td>[[${payer.lastName}]]</td>
-		        </tr>
-		        <tr>
-		            <td>Email:</td>
-		            <td>[[${payer.email}]]</td>
-		        </tr>
-		        <tr><td><br/></td></tr>
-		        <tr>
-		            <td colspan="2"><b>Shipping Address:</b></td>
-		        </tr>
-		        <tr>
-		            <td>Recipient Name:</td>
-		            <td>[[${shippingAddress.recipientName}]]</td>
-		        </tr>
-		        <tr>
-		            <td>Line 1:</td>
-		            <td>[[${shippingAddress.line1}]]</td>
-		        </tr>
-		        <tr>
-		            <td>City:</td>
-		            <td>[[${shippingAddress.city}]]</td>
-		        </tr>
-		        <tr>
-		            <td>State:</td>
-		            <td>[[${shippingAddress.state}]]</td>
-		        </tr>
-		        <tr>
-		            <td>Country Code:</td>
-		            <td>[[${shippingAddress.countryCode}]]</td>
-		        </tr>
-		        <tr>
-		            <td>Postal Code:</td>
-		            <td>[[${shippingAddress.postalCode}]]</td>
-		        </tr>
-		        <tr>
-		            <td colspan="2" align="center">
-		                <input type="submit" value="Pay Now" />
-		            </td>
-		        </tr>    
-		    </table>
-	    </form>
-	</div>
+    <div th:insert="~{include/_loading.html}"></div>
+    <div class="my-5 page" size="A4">
+        <div class="p-5">
+            <form th:action="@{/travelfpoly/payment/execute_payment}" method="post">
+                <section class="top-content bb d-flex justify-content-between">
+                    <div class="logo">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <img src="/before_paying/bee.png" alt="" class="img-fluid">
+                            </div>
+                            <div class="col-md-8 admin txn">
+                                <h1>TravelFPoly</h1>
+                                <p><span><i class="fa-regular fa-envelope"></i> <b>Travel@gmail.com</b></span></p>
+                                <span><i class="fa-solid fa-headphones-simple"></i> <b>09450790544</b></span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="top-left">
+                        <div class="graphic-path">
+                            <p>Invoice</p>
+                        </div>
+                        <div class="position-relative">
+                            <p>Invoice No. <span>XXXX</span></p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="store-user mt-3">
+                    <div class="col-11">
+                        <div class="row bb pb-3">
+                            <div class="col-md-6">
+                                <p>Payer Information,</p>
+                                <h2>[[${payer.firstName}]] [[${payer.lastName}]]</h2>
+                                <div class="txn mt-2">
+                                    <p><span><i class="fa-regular fa-envelope"></i> [[${payer.email}]]</span></p>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <p>Payment Method: <span>Banking</span></p>
+                                <p>Order Number: <span></span></p>
+                                <p>Deliver Date: <span>10-04.2021</span></p>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row ship bb">
+                        <div class="col-11">
+                            <h4 class="mt-2">Shipping Address</h4>
+                            <table class="table mt-2 infor-add">
+                                <thead>
+                                    <tr>
+                                        <td>Recipient Name</td>
+                                        <td>Line 1</td>
+                                        <td>City</td>
+                                        <td>State</td>
+                                        <td>Country Code</td>
+                                        <td>Postal code</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>[[${shippingAddress.recipientName}]]</td>
+
+                                        <td>[[${shippingAddress.line1}]]</td>
+
+                                        <td>[[${shippingAddress.city}]]</td>
+
+                                        <td>[[${shippingAddress.state}]]</td>
+
+                                        <td>[[${shippingAddress.countryCode}]]</td>
+
+                                        <td>[[${shippingAddress.postalCode}]]</td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+                <section class="balance-info">
+                    <div class="row">
+                        <div class="col-8">
+                            <!-- <p class="m-0 font-weight-bold"> Note: </p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. In delectus, adipisci vero est dolore praesentium.</p> -->
+                        </div>
+                        <div class="col-4">
+                            <table class="table border-0 table-hover">
+                                <tr>
+                                    <td>Subtotal:</td>
+                                    <td>[[${transaction.amount.details.subtotal}]] USD</td>
+                                </tr>
+                                <tr>
+                                    <td>Shipping:</td>
+                                    <td>[[${transaction.amount.details.shipping}]] USD</td>
+                                </tr>
+                                <tr>
+                                    <td>Tax:</td>
+                                    <td>[[${transaction.amount.details.tax}]] USD</td>
+                                </tr>
+
+                                <tfoot>
+                                    <tr>
+                                        <td>Total:</td>
+                                        <td>[[${transaction.amount.total}]] USD</td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+
+                            <!-- Signature -->
+                            <div class="col-12">
+                                <button class="form-btn">Pay Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Cart BG -->
+                <img src="/before_paying/cart.jpg" class="img-fluid cart-bg" alt="">
+
+                <footer>
+                    <hr>
+                    <p class="m-0 text-center">
+                        Website Book Tour Travel - <a href="#!"> TravelFPoly </a>
+                    </p>
+                    <div class="social pt-3">
+                        <span class="pr-2">
+                        <i class="fas fa-mobile-alt"></i>
+                        <span>0123456789</span>
+                        </span>
+                        <span class="pr-2">
+                        <i class="fas fa-envelope"></i>
+                        <span>me@saburali.com</span>
+                        </span>
+                        <span class="pr-2">
+                        <i class="fab fa-facebook-f"></i>
+                        <span>/sabur.7264</span>
+                        </span>
+                        <span class="pr-2">
+                        <i class="fab fa-youtube"></i>
+                        <span>/abdussabur</span>
+                        </span>
+                        <span class="pr-2">
+                        <i class="fab fa-github"></i>
+                        <span>/example</span>
+                        </span>
+                    </div>
+                </footer>
+            </form>
+        </div>
+    </div>
 </body>
+
 </html>

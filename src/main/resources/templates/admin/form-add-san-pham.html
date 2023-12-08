@@ -2,251 +2,237 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-  <title>Thêm sản phẩm | Quản trị Admin</title>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Main CSS-->
-  <link rel="stylesheet" type="text/css" href="/admin/css/main.css">
-  <link href="/user/images/bee.png" rel="icon">
-  <!-- Font-icon css-->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
-  <!-- or -->
-  <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
-  <link rel="stylesheet" type="text/css"
-    href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
-  <script src="http://code.jquery.com/jquery.min.js" type="text/javascript"></script>
+    <title>Thêm sản phẩm | Quản trị Admin</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Main CSS-->
+    <link rel="stylesheet" type="text/css" href="/admin/css/main.css">
+    <link href="/user/images/bee.png" rel="icon">
+    <!-- Font-icon css-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <!-- or -->
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
+    <script src="http://code.jquery.com/jquery.min.js" type="text/javascript"></script>
 </head>
 
 <body class="app sidebar-mini rtl" style="margin: 0px;">
-  <!-- Navbar-->
-  <div th:insert="~{include/_HeaderAdmin}"></div>
-  <!-- Sidebar menu-->
-  <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
-  <div th:insert="~{include/_AsideAdmin}"></div>
-  <main class="app-content" style="margin-left: 50px;">
-    <div class="app-title">
-      <ul class="app-breadcrumb breadcrumb">
-        <li class="breadcrumb-item">Danh sách sản phẩm</li>
-        <li class="breadcrumb-item"><a href="#">Thêm sản phẩm</a></li>
-      </ul>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <div class="tile">
-          <h3 class="tile-title">Tạo mới sản phẩm</h3>
-          <div class="tile-body">
-            <form th:action="@{/travelfpoly/admin/save}" th:object="${tour}" method="post" class="row"
-              enctype="multipart/form-data">
-              <div class="form-group col-md-6">
-                <label class="control-label">Mã tour</label>
-                <input class="form-control" th:field="*{TourId}" type="text">
-              </div>
-              <div class="form-group col-md-6">
-                <label for="email" class="control-label">Tên tour</label>
-                <input class="form-control" th:field="*{Name}" type="text">
-                <span th:if="${#fields.hasErrors('Name')}" th:errors="*{Name}" class="text-danger"></span><br />
+    <!-- Navbar-->
+    <div th:insert="~{include/_HeaderAdmin}"></div>
+    <!-- Sidebar menu-->
+    <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+    <div th:insert="~{include/_AsideAdmin}"></div>
+    <main class="app-content" style="margin-left: 50px;">
+        <div class="app-title">
+            <ul class="app-breadcrumb breadcrumb">
+                <li class="breadcrumb-item">Danh sách sản phẩm</li>
+                <li class="breadcrumb-item"><a href="#">Thêm sản phẩm</a></li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="tile">
+                    <h3 class="tile-title">Tạo mới sản phẩm</h3>
+                    <div class="tile-body">
+                        <form th:action="@{/travelfpoly/admin/save}" th:object="${tour}" method="post" class="row" enctype="multipart/form-data">
+                            <div class="form-group col-md-6">
+                                <label class="control-label">Mã tour</label>
+                                <input class="form-control" th:field="*{TourId}" type="text">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="email" class="control-label">Tên tour</label>
+                                <input class="form-control" th:field="*{Name}" type="text">
+                                <span th:if="${#fields.hasErrors('Name')}" th:errors="*{Name}" class="text-danger"></span><br />
 
-              </div>
+                            </div>
 
-              <div class="form-group col-md-6">
-                <label class="control-label">Trạng thái</label>
-                <div class="form-check">
-                  <input class="form-check-input" value="true" type="radio" id="flexRadioDefault1"
-                    th:field="*{Available}" checked>
-                  <label class="form-check-label" for="flexRadioDefault1">
+                            <div class="form-group col-md-6">
+                                <label class="control-label">Trạng thái</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" value="true" type="radio" id="flexRadioDefault1" th:field="*{Available}" checked>
+                                    <label class="form-check-label" for="flexRadioDefault1">
                     Sẵn sàng
                   </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" value="false" type="radio" id="flexRadioDefault2"
-                    th:field="*{Available}">
-                  <label class="form-check-label" for="flexRadioDefault2">
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" value="false" type="radio" id="flexRadioDefault2" th:field="*{Available}">
+                                    <label class="form-check-label" for="flexRadioDefault2">
                     Chưa sẵn sàng
                   </label>
 
-                </div>
-                <span class="text-danger" th:if="${#fields.hasErrors('Available')}"
-                  th:errors="*{Available}"></span><br />
-              </div>
-              <div class="form-group col-md-6">
-                <label class="control-label">Mô tả</label>
-                <input class="form-control" type="text" th:field="*{Description}">
-                <span class="text-danger" th:if="${#fields.hasErrors('Description')}"
-                  th:errors="*{Description}"></span><br />
-              </div>
-              <div class="form-group col-md-6">
-                <label class="control-label">Địa điểm đi</label>
-                <!-- <select name="Departure" id="province" th:field="*{Departure}">
+                                </div>
+                                <span class="text-danger" th:if="${#fields.hasErrors('Available')}" th:errors="*{Available}"></span><br />
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="control-label">Mô tả</label>
+                                <input class="form-control" type="text" th:field="*{Description}">
+                                <span class="text-danger" th:if="${#fields.hasErrors('Description')}" th:errors="*{Description}"></span><br />
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="control-label">Địa điểm đi</label>
+                                <!-- <select name="Departure" id="province" th:field="*{Departure}">
                 </select> -->
-                <input class="form-control" type="text" th:field="*{Departure}">
-                <span class="text-danger" th:if="${#fields.hasErrors('Departure')}"
-                  th:errors="*{Departure}"></span><br />
-              </div>
-              <div class="form-group col-md-6">
-                <label class="control-label">Địa điểm đến</label>
-                <input class="form-control" type="text" th:field="*{Destination}">
-                <span class="text-danger" th:if="${#fields.hasErrors('Destination')}"
-                  th:errors="*{Destination}"></span><br />
-              </div>
+                                <input class="form-control" type="text" th:field="*{Departure}">
+                                <span class="text-danger" th:if="${#fields.hasErrors('Departure')}" th:errors="*{Departure}"></span><br />
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="control-label">Địa điểm đến</label>
+                                <input class="form-control" type="text" th:field="*{Destination}">
+                                <span class="text-danger" th:if="${#fields.hasErrors('Destination')}" th:errors="*{Destination}"></span><br />
+                            </div>
 
-              <div class="form-group col-md-6">
-                <label class="control-label">giá người lớn</label>
-                <input class="form-control" type="text" th:field="*{PriceAdult}">
-                <span class="text-danger" th:if="${#fields.hasErrors('PriceAdult')}"
-                  th:errors="*{PriceAdult}"></span><br />
-              </div>
+                            <div class="form-group col-md-6">
+                                <label class="control-label">giá người lớn</label>
+                                <input class="form-control" type="text" th:field="*{PriceAdult}">
+                                <span class="text-danger" th:if="${#fields.hasErrors('PriceAdult')}" th:errors="*{PriceAdult}"></span><br />
+                            </div>
 
-              <div class="form-group col-md-6">
-                <label class="control-label">giá người trẻ em </label>
-                <input class="form-control" type="text" th:field="*{PriceChildren}">
-                <span class="text-danger" th:if="${#fields.hasErrors('PriceChildren')}"
-                  th:errors="*{PriceChildren}"></span><br />
-              </div>
-              <div class="form-group col-md-6">
-                <label class="control-label">số lượng người lớn</label>
-                <input class="form-control" type="text" th:field="*{QuantityAdult}">
-                <span class="text-danger" th:if="${#fields.hasErrors('QuantityAdult')}"
-                  th:errors="*{QuantityAdult}"></span><br />
-              </div>
-              <div class="form-group col-md-6">
-                <label class="control-label">Số lượng trẻ em</label>
-                <input class="form-control" type="text" th:field="*{QuantityChildren}">
-                <span class="text-danger" th:if="${#fields.hasErrors('QuantityChildren')}"
-                  th:errors="*{QuantityChildren}"></span><br />
-              </div>
-              <div class="form-group col-md-6">
-                <label class="control-label">Introduction</label>
-                <textarea class="form-control" name="" id="" cols="30" rows="10" th:field="*{Introduction}"></textarea>
+                            <div class="form-group col-md-6">
+                                <label class="control-label">giá người trẻ em </label>
+                                <input class="form-control" type="text" th:field="*{PriceChildren}">
+                                <span class="text-danger" th:if="${#fields.hasErrors('PriceChildren')}" th:errors="*{PriceChildren}"></span><br />
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="control-label">số lượng người lớn</label>
+                                <input class="form-control" type="text" th:field="*{QuantityAdult}">
+                                <span class="text-danger" th:if="${#fields.hasErrors('QuantityAdult')}" th:errors="*{QuantityAdult}"></span><br />
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="control-label">Số lượng trẻ em</label>
+                                <input class="form-control" type="text" th:field="*{QuantityChildren}">
+                                <span class="text-danger" th:if="${#fields.hasErrors('QuantityChildren')}" th:errors="*{QuantityChildren}"></span><br />
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="control-label">Introduction</label>
+                                <textarea class="form-control" name="" id="" cols="30" rows="10" th:field="*{Introduction}"></textarea>
 
-                <span class="text-danger" th:if="${#fields.hasErrors('Introduction')}"
-                  th:errors="*{Introduction}"></span><br />
-              </div>
-              <div class="form-group col-md-6">
-                <label class="control-label">Duration</label>
-                <input class="form-control" type="text" th:field="*{Duration}">
-                <span class="text-danger" th:if="${#fields.hasErrors('Duration')}" th:errors="*{Duration}"></span><br />
-              </div>
-              <div class="form-group col-md-6">
-                <label class="control-label">Avatar:</label>
-                <input class="form-control" type="file" name="image1">
-              </div>
-              <div class="form-group col-md-6">
-                <label class="control-label">Image:</label>
-                <input type="file" name="images" id="images" multiple><br>
-              </div>
-              <button class="btn btn-save" type="submit" style="margin-left: 15px;">Lưu</button>
-            </form>
+                                <span class="text-danger" th:if="${#fields.hasErrors('Introduction')}" th:errors="*{Introduction}"></span><br />
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="control-label">Duration</label>
+                                <input class="form-control" type="text" th:field="*{Duration}">
+                                <span class="text-danger" th:if="${#fields.hasErrors('Duration')}" th:errors="*{Duration}"></span><br />
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="control-label">Avatar:</label>
+                                <input class="form-control" type="file" name="image1">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="control-label">Image:</label>
+                                <input type="file" name="images" id="images" multiple><br>
+                            </div>
+                            <button class="btn btn-save" type="submit" style="margin-left: 15px;">Lưu</button>
+                        </form>
 
 
 
 
-            <table class="table mt-4">
-              <thead>
-                <tr>
-                  <th scope="col">id</th>
-                  <th scope="col">Loại Tour</th>
-                  <th scope="col">Tình trạng</th>
-                  <th scope="col">Mô tả</th>
-                  <th scope="col">Nơi đi</th>
-                  <th scope="col">Nơi đến</th>
-                  <th scope="col">Giá người lớn</th>
-                  <th scope="col">Giá trẻ em</th>
-                  <th scope="col">Số lượng người lớn</th>
-                  <th scope="col">số lượng trẻ em</th>
-                  <th scope="col">giới thiệu</th>
-                  <th scope="col">thời gian</th>
-                  <th scope="col"></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr th:each="tour : ${tours}">
-                  <td th:text="${tour.TourId}"></td>
-                  <td th:text="${tour.Name}"></td>
-                  <td th:text="${tour.Available}"></td>
-                  <td th:text="${tour.Description}"></td>
-                  <td th:text="${tour.Departure}"></td>
-                  <td th:text="${tour.Destination}"></td>
-                  <td th:text="${tour.PriceAdult}"></td>
-                  <td th:text="${tour.PriceChildren}"></td>
-                  <td th:text="${tour.QuantityAdult}"></td>
-                  <td th:text="${tour.QuantityChildren}"></td>
-                  <td th:text="${tour.Introduction}"></td>
-                  <td th:text="${tour.Duration}"></td>
+                        <table class="table mt-4">
+                            <thead>
+                                <tr>
+                                    <th scope="col">id</th>
+                                    <th scope="col">Loại Tour</th>
+                                    <th scope="col">Tình trạng</th>
+                                    <th scope="col">Mô tả</th>
+                                    <th scope="col">Nơi đi</th>
+                                    <th scope="col">Nơi đến</th>
+                                    <th scope="col">Giá người lớn</th>
+                                    <th scope="col">Giá trẻ em</th>
+                                    <th scope="col">Số lượng người lớn</th>
+                                    <th scope="col">số lượng trẻ em</th>
+                                    <th scope="col">giới thiệu</th>
+                                    <th scope="col">thời gian</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="tour : ${tours}">
+                                    <td th:text="${tour.TourId}"></td>
+                                    <td th:text="${tour.Name}"></td>
+                                    <td th:text="${tour.Available}"></td>
+                                    <td th:text="${tour.Description}"></td>
+                                    <td th:text="${tour.Departure}"></td>
+                                    <td th:text="${tour.Destination}"></td>
+                                    <td th:text="${tour.PriceAdult}"></td>
+                                    <td th:text="${tour.PriceChildren}"></td>
+                                    <td th:text="${tour.QuantityAdult}"></td>
+                                    <td th:text="${tour.QuantityChildren}"></td>
+                                    <td th:text="${tour.Introduction}"></td>
+                                    <td th:text="${tour.Duration}"></td>
 
 
-                  <td>
-                    <a th:href="@{/travelfpoly/admin/updateTour/{TourId}(TourId=${tour.TourId})}">
-                      <i class='bx bx-edit'></i>
-                    </a>
-                    <a th:href="@{/travelfpoly/admin/deleteTour/{TourId}(TourId=${tour.TourId})}">
-                      <i class='bx bxs-trash'></i>
-                    </a>
-                  </td>
-                </tr>
+                                    <td>
+                                        <a th:href="@{/travelfpoly/admin/updateTour/{TourId}(TourId=${tour.TourId})}">
+                                            <i class='bx bx-edit'></i>
+                                        </a>
+                                        <a th:href="@{/travelfpoly/admin/deleteTour/{TourId}(TourId=${tour.TourId})}">
+                                            <i class='bx bxs-trash'></i>
+                                        </a>
+                                    </td>
+                                </tr>
 
-              </tbody>
-            </table>
-          </div>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-1" style="padding-left: 450px;">
+                <div class="col text-center">
+                    <div class="block-27">
+                        <ul>
+                            <li th:if="${tours.number > 1}">
+                                <a th:href="@{'?pageNo='+${tours.number-1}}">&lt;</a>
+                            </li>
+                            <li th:each="item : ${#numbers.sequence(0, tours.totalPages-1)}" th:class="${item} == ${tours.number} ? 'active' : ''">
+                                <a th:text="${item+1}" th:href="@{'?pageNo='+${item}}"></a>
+                            </li>
+                            <li th:if="${tours.number < tours.totalPages-1}">
+                                <a th:href="@{'?pageNo='+${tours.number+1}}">&gt;</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="row mt-1" style="padding-left: 450px;">
-        <div class="col text-center">
-          <div class="block-27">
-            <ul>
-              <li th:if="${tours.number > 1}">
-                <a th:href="@{'?pageNo='+${tours.number-1}}">&lt;</a>
-              </li>
-              <li th:each="item : ${#numbers.sequence(0, tours.totalPages-1)}"
-                th:class="${item} == ${tours.number} ? 'active' : ''">
-                <a th:text="${item+1}" th:href="@{'?pageNo='+${item}}"></a>
-              </li>
-              <li th:if="${tours.number < tours.totalPages-1}">
-                <a th:href="@{'?pageNo='+${tours.number+1}}">&gt;</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </main>
-  <!-- <div class="" style=" padding-left:  500px;">
+    </main>
+    <!-- <div class="" style=" padding-left:  500px;">
     <div class="container">
       <h1>Chọn danh sách tỉnh</h1>
       <form action=""> -->
-  <!-- <select name="" id="province">
+    <!-- <select name="" id="province">
         </select> -->
-  <!-- <select name="" id="district">
+    <!-- <select name="" id="district">
           <option value="">chọn quận</option>
         </select>
         <select name="" id="ward">
           <option value="">chọn phường</option>
         </select> -->
-  <!-- </form> -->
+    <!-- </form> -->
 
 
-  <!-- <h2 id="result"></h2>
+    <!-- <h2 id="result"></h2>
     </div> -->
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
       integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
       crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js"
       integrity="sha512-bPh3uwgU5qEMipS/VOmRqynnMXGGSRv+72H/N260MQeXZIK4PG48401Bsby9Nq5P5fz7hy5UGNmC/W1Z51h2GQ=="
       crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
 
-  </div>
+    </div>
 
-  <script src="/admin/js/jquery-3.2.1.min.js"></script>
-  <script src="/admin/js/popper.min.js"></script>
-  <script src="/admin/js/bootstrap.min.js"></script>
-  <script src="/admin/js/main.js"></script>
-  <script src="/admin/js/plugins/pace.min.js"></script>
-  <!-- <script>
+    <script src="/admin/js/jquery-3.2.1.min.js"></script>
+    <script src="/admin/js/popper.min.js"></script>
+    <script src="/admin/js/bootstrap.min.js"></script>
+    <script src="/admin/js/main.js"></script>
+    <script src="/admin/js/plugins/pace.min.js"></script>
+    <!-- <script>
     // 1. what is API
     // 2. How do I call API
     // 3. Explain code
