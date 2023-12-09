@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import Travel_Foly.DTO.InvoiceDTO;
+import Travel_Foly.DTO.MonthlyRevenueDTO;
 import Travel_Foly.Model.OrderDetailTour;
 
 @Repository
@@ -79,5 +80,10 @@ public interface OrderDetailTourDAO extends JpaRepository<OrderDetailTour, Integ
 			+ "Or MONTH(o.BookDate) = ?2  "
 			+ "Or MONTH(o.BookDate) BETWEEN ?3 and ?4 ")
 	Double getRevenueOrderDetailTour(Integer year, Integer month, Integer startMonth, Integer endMonth);
-
+	
+	@Query("SELECT NEW Travel_Foly.DTO.MonthlyRevenueDTO(YEAR(o.BookDate), " +
+	        "MAPKEY(YEAR(o.BookDate), MONTH(o.BookDate)), " +
+	        "SUM((o.QuantityAdult*o.PriceAdult)+(o.QuantityChildren*o.PriceChildren))) " +
+	        "FROM OrderDetailTour o GROUP BY YEAR(o.BookDate), MONTH(o.BookDate)")
+	List<MonthlyRevenueDTO> getListMonthlyRevenue();
 }
