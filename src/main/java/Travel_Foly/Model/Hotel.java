@@ -15,7 +15,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="Hotels")
+@Table(name = "Hotels")
 public class Hotel {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,24 +31,26 @@ public class Hotel {
 	private String Map;
 	private Integer Start;
 	private Integer Quantity;
-	
-	@ManyToOne @JoinColumn(name="CategoryHotelId")
+
+	@ManyToOne
+	@JoinColumn(name = "CategoryHotelId")
 	private CategoryHotel CategoryHotel;
-	
-	@ManyToOne @JoinColumn(name="CategoryRoomId")
+
+	@ManyToOne
+	@JoinColumn(name = "CategoryRoomId")
 	private CategoryRoom CategoryRoom;
-	
+
 	@OneToMany(mappedBy = "HotelImage")
 	private List<HotelImage> HotelImages;
-	
+
 	@OneToMany(mappedBy = "HotelCommentId")
 	private List<HotelComment> HotelComments;
-	
+
 	@OneToMany(mappedBy = "OrderDetailHotel")
 	private List<OrderDetailHotel> OrderDetailHotels;
-	
-	//Cart
+
+	// Cart
 	@OneToMany(mappedBy = "HotelId")
 	private List<CartHotel> CartHotels;
-	
+
 }
