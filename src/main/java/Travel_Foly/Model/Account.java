@@ -67,8 +67,11 @@ public class Account implements UserDetails {
 	@OneToMany(mappedBy = "UserOrder")
 	private List<OrderDetailTour> OrderDetailTours;
 
-	@OneToMany(mappedBy = "OrderHotel")
-	private List<OrderHotel> OrderHotels;
+	@OneToMany(mappedBy = "account")
+	private List<OrderDetailHotel> OrderDetailHotels;
+
+	// @OneToMany(mappedBy = "OrderHotel")
+	// private List<OrderHotel> OrderHotels;
 
 	// One to One Cart
 	@OneToOne(mappedBy = "Cart", cascade = CascadeType.ALL, orphanRemoval = true)

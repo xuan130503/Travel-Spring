@@ -278,26 +278,7 @@
 
                         </section>
 
-                        <section
-                            style="background-color: white;border: white 1px; border-radius: 10px; box-shadow:whites;margin-bottom: 30px; padding: 20px;">
-                            <div style=" font-size: 25px;">Chi tiết giá</div>
-                            <div style="display: flex;">
-                                <div style=" padding-right:  400px; font-size: 20px;">
-                                    Thành Tiền :
-                                </div>
-                                <div style=" font-size: 25px; color: rgb(236, 130, 130);">
-                                    [[${hotel.price}]]
-                                </div>
-                            </div>
-                            <a th:href="@{/travelfpoly/name}">
-                                <button
-                                    style="margin-top: 10px;margin-left: 440px; padding: 10px 25px; background-color: orange; border-radius: 10px; border: solid 1px;  ">
-                                    Tiếp tục
-                                    đến Thanh Toán
-                                </button>
-                            </a>
 
-                        </section>
 
                     </div>
                 </div>
@@ -312,39 +293,42 @@
                                     <h3>Chi tiết thông tin người liên lạc</h3>
                                 </div>
                                 <hr style=" border: solid 1px;">
-                                <form th:action="@{/travelfpoly/SaveOrderHotel}" th:method="post">
+                                <form th:method="post">
                                     <div class="row mb-3">
                                         <div class="col-md-12 mb-3">
-                                            <label for="fullname">[[${fullname}]]</label>
+                                            <label for="fullname"><span>Họ tên người đặt :
+                                                </span>[[${fullname}]]</label>
                                             <input type="text" name="fullname" hidden th:value="${fullname}">
                                         </div>
                                         <div class="col-md-12 mb-3">
-                                            <label for="email">[[${email}]]</label>
+                                            <label for="email"><Span>Email : </Span>[[${email}]]</label>
                                             <input type="text" name="email" hidden th:value="${email}">
                                         </div>
                                         <div class="col-md-6 mb-3">
-                                            <label>[[${phone}]]</label>
+                                            <label><span>Số điện thoại : </span>[[${phone}]]</label>
                                             <input type="text" name="phone" hidden th:value="${phone}">
                                         </div>
                                         <div class="col-md-6 mb-3">
-                                            <label>[[${BookingDate}]]</label>
-                                            <input type="text" name="BookingDate" hidden th:value="${BookingDate}">
+                                            <label><span>Ngày đặt vé : </span>[[${BookingDate}]]</label>
+                                            <input type="date" name="BookingDate" hidden th:value="${BookingDate}">
                                         </div>
                                         <div class="col-md-6 mb-3">
-                                            <label>[[${checkin}]]</label>
-                                            <input type="text" name="checkin" hidden th:value="${checkin}">
+                                            <label> <span>Ngày nhận phòng : </span>[[${checkin}]]</label>
+                                            <input type="date" name="checkin" hidden th:value="${checkin}">
                                         </div>
                                         <div class="col-md-6 mb-3">
-                                            <label>[[${checkout}]]</label>
-                                            <input type="text" name="checkout" hidden th:value="${checkout}">
+                                            <label> <span> Ngày trả phong : </span>[[${checkout}]]</label>
+                                            <input type="date" name="checkout" hidden th:value="${checkout}">
                                         </div>
                                         <div class="col-md-6 mb-3">
-                                            <label>[[${hotel.price}]]</label>
+                                            <label><Span>Thành tiền : </Span>[[${hotel.price}]]</label>
                                             <input type="text" name="price" hidden th:value="${hotel.price}">
                                         </div>
 
                                     </div>
+                                    <!-- <button  th:action="@{/travelfpoly/SaveOrderHotel}" -->
                                     <button
+                                        th:formaction="@{/travelfpoly/SaveOrderHotel/{HotelId}/{userId} (HotelId=${hotel.HotelId}, userId=${session.account != null ? session.account.UserId : '' })}"
                                         style="margin-top: 10px; padding: 10px 25px; background-color: orange; border-radius: 10px; border: solid 1px;  ">
                                         Tiếp tục
                                         đến Thanh Toán

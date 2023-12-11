@@ -16,7 +16,7 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name="OrderHotels")
+@Table(name = "OrderHotels")
 public class OrderHotel {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,10 +27,10 @@ public class OrderHotel {
 	@Column(columnDefinition = "nvarchar(200)")
 	private String Address;
 	private String Phone;
-	@ManyToOne(fetch = FetchType.LAZY) 
-	@JoinColumn(name = "AccountId")
-	private Account OrderHotel;
-	
+	// @ManyToOne(fetch = FetchType.LAZY)
+	// @JoinColumn(name = "AccountId")
+	// private Account OrderHotel;
+
 	@OneToMany(mappedBy = "OrderHotel")
 	private List<OrderDetailHotel> OrderDetailHotels;
 }

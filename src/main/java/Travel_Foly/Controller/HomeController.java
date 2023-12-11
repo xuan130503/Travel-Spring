@@ -1379,8 +1379,9 @@ public class HomeController {
     public String ShowPage(Model model, @PathVariable(name = "id", required = false) Integer id,
             @RequestParam String fullname,
             @RequestParam("email") String email,
-            @RequestParam String phone, @RequestParam String BookingDate, @RequestParam String checkin,
-            @RequestParam String checkout) {
+            @RequestParam String phone, @RequestParam java.sql.Date BookingDate,
+            @RequestParam java.sql.Date checkin,
+            @RequestParam java.sql.Date checkout) {
         Hotel hotel = hotelDAO.findById(id).orElse(null);
         HotelImage hotelImage = hotelImageDAO.findById(id).orElse(null);
         List<TourSchedule> schedules = tourScheduleDao.findByTourId(id);
@@ -1397,18 +1398,20 @@ public class HomeController {
         return "user/orderhotel";
     }
 
-    @PostMapping("SaveOrderHotel")
+    @PostMapping("SaveOrderHotel/{HotelId}/{userId}")
     public String saveOrderHotel(
-
-            @RequestParam(name = "OrderHotelId", required = false) Integer OrderHotelId,
+            @PathVariable(name = "HotelId") Integer HotelId,
+            @PathVariable(name = "userId") Integer UserId,
             @RequestParam String fullname,
             @RequestParam String email,
             @RequestParam String phone,
-            @RequestParam(name = "OrderDetailHotelId", required = false) Integer OrderDetailHotelId,
+
             @RequestParam java.sql.Date checkin,
             @RequestParam java.sql.Date checkout,
             @RequestParam java.sql.Date BookingDate,
             @RequestParam Double price) {
+
+        Account account = accountDao.findById(UserId).get();
 
         OrderHotel orderHotel = new OrderHotel();
         orderHotel.setName(fullname);
@@ -1416,23 +1419,18 @@ public class HomeController {
         orderHotel.setPhone(phone);
         orderHotelDAO.save(orderHotel);
 
-        if (OrderDetailHotelId == null) {
-            OrderDetailHotel orderDetailHotel = new OrderDetailHotel();
-            orderDetailHotel.setCheckIn(DateHelper.converDateSql(checkin));
-            orderDetailHotel.setCheckOut(DateHelper.converDateSql(checkout));
-            orderDetailHotel.setPrice(price);
-            orderDetailHotel.setQuantity(1);
-            orderDetailHotel.setBookDate(BookingDate);
-            orderDetailHotel.setStatus(1);
+        OrderDetailHotel orderDetailHotel = new OrderDetailHotel();
+        orderDetailHotel.setCheckIn(DateHelper.converDateSql(checkin));
+        orderDetailHotel.setCheckOut(DateHelper.converDateSql(checkout));
+        orderDetailHotel.setPrice(price);
+        orderDetailHotel.setQuantity(1);
+        orderDetailHotel.setBookDate(DateHelper.converDateSql(BookingDate));
+        orderDetailHotel.setStatus(1);
+        orderDetailHotel.setOrderHotel(orderHotel);
+        orderDetailHotel.setAccount(account);
+        orderDetailHotel.setOrderDetailHotel(hotelDao.findById(UserId).get());
+        orderDetailHotelDAO.save(orderDetailHotel);
 
-            if (OrderHotelId != null) {
-                orderHotel = orderHotelDAO.findById(OrderHotelId)
-                        .orElseThrow(() -> new EntityNotFoundException("OrderHotel not found"));
-                orderDetailHotel.setOrderHotel(orderHotel);
-            }
-
-            orderDetailHotelDAO.save(orderDetailHotel);
-        }
         return "user/nextPay";
 
     }
