@@ -40,7 +40,7 @@ public class SecurityConfig {
 							"/travelfpoly/order/**", "/travelfpoly/addToCart/**", "/travelfpoly/bookNow/**")
 					.hasAnyRole("USER")
 					.anyRequest().permitAll();
-		})
+			})
 				.formLogin(login -> {
 					login.loginPage("/travelfpoly/account/login")
 							.loginProcessingUrl("/travelfpoly/account/login")
@@ -61,6 +61,7 @@ public class SecurityConfig {
 
 				.csrf(csrf -> csrf.disable())
 				.cors(cors -> cors.disable());
+		
 		return http.build();
 	}
 }

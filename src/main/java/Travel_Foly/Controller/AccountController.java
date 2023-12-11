@@ -88,6 +88,14 @@ public class AccountController {
 			account.setUserName(principal.getName());
 			account.setAccount(intimateDao.findById(1).get());
 			account.setRole(false);
+			account.setAddress("");
+			account.setFullName("");
+			account.setAddress("");
+			account.setAddress("");
+			account.setEmail("");
+			account.setPhone("");
+			account.setPassWord(encoder.encode(principal.getName()));
+			account.setAge(0);
 			account.setActivated(true);
 			accountDao.save(account);
 		}

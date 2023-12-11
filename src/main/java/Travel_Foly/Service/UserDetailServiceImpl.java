@@ -27,6 +27,7 @@ public class UserDetailServiceImpl implements UserDetailsService{
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		Optional<Account> account = accountDao.findByUsername(username);
+		System.out.println(account.get().getUsername());
 		return account.orElseThrow(() -> new UsernameNotFoundException("User not available"));
 	}
 
