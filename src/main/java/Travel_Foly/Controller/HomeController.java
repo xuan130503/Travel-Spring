@@ -37,6 +37,7 @@ import Travel_Foly.DAO.CartItemDAO;
 import Travel_Foly.DAO.CategoryTourDAO;
 import Travel_Foly.DAO.HotelDAO;
 import Travel_Foly.DAO.HotelImageDAO;
+import Travel_Foly.DAO.IntimateDAO;
 import Travel_Foly.DAO.OrderDetailTourDAO;
 import Travel_Foly.DAO.OrderTourDAO;
 import Travel_Foly.DAO.TourDAO;
@@ -55,6 +56,7 @@ import Travel_Foly.Model.CartItem;
 import Travel_Foly.Model.Hotel;
 import Travel_Foly.Model.HotelComment;
 import Travel_Foly.Model.HotelImage;
+import Travel_Foly.Model.Intimate;
 import Travel_Foly.Model.OrderDetailTour;
 import Travel_Foly.Model.OrderTour;
 import Travel_Foly.Model.Tour;
@@ -107,6 +109,8 @@ public class HomeController {
 	private HotelDAO hotelDAO;
 	@Autowired
 	private HotelImageDAO hotelImageDAO;
+	
+	@Autowired IntimateDAO intimateDao;
 
 	// get information after login successfully
 	public void getPricical(Principal principal) {
@@ -114,10 +118,21 @@ public class HomeController {
 			Authentication authentication = (Authentication) principal;
 			if (authentication.getPrincipal() instanceof Account) {
 				String username = ((Account) authentication.getPrincipal()).getUsername();
-				AccountDTO account = accountDao.findOneUsername(username);
-				Integer amount = cartItemDao.getAmount(account.getUserId());
-				session.setAttribute("account", account);
-				session.setAttribute("amount", amount);
+				System.out.println("User name: "+username);
+				if(username != null) {
+					AccountDTO account = accountDao.findOneUsername(username);
+					Integer amount = cartItemDao.getAmount(account.getUserId()) == null ? 0:cartItemDao.getAmount(account.getUserId());
+					
+					session.setAttribute("account", account);
+					session.setAttribute("amount", amount);
+				}
+				if(username == null && principal.getName() != null) {
+					System.out.println("name principal: " + principal.getName());
+					AccountDTO account = accountDao.findOneUsername(principal.getName());
+					Integer amount = cartItemDao.getAmount(account.getUserId()) == null ? 0:cartItemDao.getAmount(account.getUserId());
+					session.setAttribute("account", account);
+					session.setAttribute("amount", amount);
+				}
 			}
 		}
 	}
@@ -149,7 +164,7 @@ public class HomeController {
 		model.addAttribute("productHotel", hotel);
 		getPricical(princical);
 		AccountDTO account = (AccountDTO) session.getAttribute("account");
-		session.setAttribute("account", account);
+		System.out.println(account);
 		return "user/index-2";
 
 	}

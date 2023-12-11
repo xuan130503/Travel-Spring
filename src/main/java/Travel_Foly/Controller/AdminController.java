@@ -321,28 +321,35 @@ public class AdminController {
 
 	@GetMapping("report")
 	public String report(Model model) {
-		 Integer staff=accountDao.reportStaff();
-		 model.addAttribute("staff", staff);
-		 Integer staffIsBaned=accountDao.reportStaffisBaned();
-		 model.addAttribute("staffIsBaned", staffIsBaned);
-		 Integer reportTour = tourDao.reportTour();
-		 model.addAttribute("tour", reportTour);
-		 Integer reportTourQuantity = tourDao.reportTourQuantity(0);
-		 model.addAttribute("tourQuantity", reportTourQuantity);
-		 Integer reportOrder = orderDetailTourDao.reportOrder();
-		 model.addAttribute("order", reportOrder);
-		 Integer reportUser = accountDao.reportUser();
-		 model.addAttribute("user", reportUser);
+
+		List<MonthlyRevenueDTO> revenueYear = orderDetailTourDao.getListYearlyRevenue();
+		model.addAttribute("revenueYear", revenueYear);
+		return "admin/quan-ly-bao-cao";
+
+	}
+	//		 Integer staff=accountDao.reportStaff();
+//		 model.addAttribute("staff", staff);
+//		 Integer staffIsBaned=accountDao.reportStaffisBaned();
+//		 model.addAttribute("staffIsBaned", staffIsBaned);
+//		 Integer reportTour = tourDao.reportTour();
+//		 model.addAttribute("tour", reportTour);
+//		 Integer reportTourQuantity = tourDao.reportTourQuantity(0);
+//		 model.addAttribute("tourQuantity", reportTourQuantity);
+//		 Integer reportOrder = orderDetailTourDao.reportOrder();
+//		 model.addAttribute("order", reportOrder);
+//		 Integer reportUser = accountDao.reportUser();
+//		 model.addAttribute("user", reportUser);
 //		 Double totalIncome = orderDetailTourDao.findTotalIncome();
 //		 model.addAttribute("total", totalIncome);
 //		 Integer orderCancel = orderDetailTourDao.findOrderCancel();
 //		 model.addAttribute("orderCancel", orderCancel);
 //		 List<Tour> bestSellingTours = tourService.getBestSellingTours();
 //		 model.addAttribute("bestSellingTours", bestSellingTours);
-		List<MonthlyRevenueDTO> revenueYear = orderDetailTourDao.getListMonthlyRevenue();
-		model.addAttribute("revenueYear", revenueYear);
-		return "admin/quan-ly-bao-cao";
-
+	@GetMapping("testreport")
+	public String testReport() {
+		List<MonthlyRevenueDTO> revenueYear = orderDetailTourDao.getListYearlyRevenue();
+			System.out.println(revenueYear);
+		return "hello";
 	}
 
 	@GetMapping("login")

@@ -52,7 +52,7 @@ public class SecurityConfig {
 							.logoutSuccessUrl("/travelfpoly/account/login");
 				})
 				.oauth2Login(auth -> {
-					auth.defaultSuccessUrl("/travelfpoly/home", true);
+					auth.defaultSuccessUrl("/travelfpoly/account/getPrincipal", true);
 				})
 				.exceptionHandling(ex -> {
 					ex.accessDeniedHandler(
