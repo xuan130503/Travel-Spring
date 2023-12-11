@@ -16,7 +16,7 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name="OrderDetailHotels")
+@Table(name = "OrderDetailHotels")
 public class OrderDetailHotel {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,15 +25,20 @@ public class OrderDetailHotel {
 	private Date CheckOut;
 	private Integer Quantity;
 	private Double Price;
-	
+
 	// for 4 states: Booked, unpaid, paid, remove
 	private Integer Status;
 	private Date BookDate;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "HotelId")
 	private Hotel OrderDetailHotel;
-	
-	@ManyToOne(fetch = FetchType.LAZY) 
+
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "OrderHotelId")
 	private OrderHotel OrderHotel;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "AccountId")
+	private Account account;
+
 }
