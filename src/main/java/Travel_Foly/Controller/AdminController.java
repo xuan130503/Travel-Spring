@@ -24,6 +24,7 @@ import Travel_Foly.DAO.CategoryTourDAO;
 import Travel_Foly.DAO.OrderDetailTourDAO;
 import Travel_Foly.DAO.TourDAO;
 import Travel_Foly.DTO.InvoiceDTO;
+import Travel_Foly.DTO.MonthlyRevenueDTO;
 import Travel_Foly.Helper.DateHelper;
 import Travel_Foly.Model.Account;
 import Travel_Foly.Model.CategoryTour;
@@ -320,25 +321,26 @@ public class AdminController {
 
 	@GetMapping("report")
 	public String report(Model model) {
-		// Integer staff=accountDao.reportStaff();
-		// model.addAttribute("staff", staff);
-		// Integer staffIsBaned=accountDao.reportStaffisBaned();
-		// model.addAttribute("staffIsBaned", staffIsBaned);
-		// Integer reportTour = tourDao.reportTour();
-		// model.addAttribute("tour", reportTour);
-		// Integer reportTourQuantity = tourDao.reportTourQuantity(0);
-		// model.addAttribute("tourQuantity", reportTourQuantity);
-		// Integer reportOrder = orderDetailTourDao.reportOrder();
-		// model.addAttribute("order", reportOrder);
-		// Integer reportUser = accountDao.reportUser();
-		// model.addAttribute("user", reportUser);
-		// Double totalIncome = orderDetailTourDao.findTotalIncome();
-		// model.addAttribute("total", totalIncome);
-		// Integer orderCancel = orderDetailTourDao.findOrderCancel();
-		// model.addAttribute("orderCancel", orderCancel);
-		// List<Tour> bestSellingTours = tourService.getBestSellingTours();
-		// model.addAttribute("bestSellingTours", bestSellingTours);
-
+		 Integer staff=accountDao.reportStaff();
+		 model.addAttribute("staff", staff);
+		 Integer staffIsBaned=accountDao.reportStaffisBaned();
+		 model.addAttribute("staffIsBaned", staffIsBaned);
+		 Integer reportTour = tourDao.reportTour();
+		 model.addAttribute("tour", reportTour);
+		 Integer reportTourQuantity = tourDao.reportTourQuantity(0);
+		 model.addAttribute("tourQuantity", reportTourQuantity);
+		 Integer reportOrder = orderDetailTourDao.reportOrder();
+		 model.addAttribute("order", reportOrder);
+		 Integer reportUser = accountDao.reportUser();
+		 model.addAttribute("user", reportUser);
+//		 Double totalIncome = orderDetailTourDao.findTotalIncome();
+//		 model.addAttribute("total", totalIncome);
+//		 Integer orderCancel = orderDetailTourDao.findOrderCancel();
+//		 model.addAttribute("orderCancel", orderCancel);
+//		 List<Tour> bestSellingTours = tourService.getBestSellingTours();
+//		 model.addAttribute("bestSellingTours", bestSellingTours);
+		List<MonthlyRevenueDTO> revenueYear = orderDetailTourDao.getListMonthlyRevenue();
+		model.addAttribute("revenueYear", revenueYear);
 		return "admin/quan-ly-bao-cao";
 
 	}
