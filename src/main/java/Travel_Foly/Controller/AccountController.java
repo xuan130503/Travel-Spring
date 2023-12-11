@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import Travel_Foly.Config.Utility;
 import Travel_Foly.DAO.AccountDAO;
+import Travel_Foly.DAO.IntimateDAO;
 import Travel_Foly.DTO.AccountDTO;
 import Travel_Foly.DTO.RegisterDTO;
 import Travel_Foly.Model.Account;
@@ -40,7 +41,10 @@ import net.bytebuddy.utility.RandomString;
 public class AccountController {
 	@Autowired
 	AccountDAO accountDao;
-
+	
+	@Autowired
+	IntimateDAO intimateDao;
+	
 	@Autowired
 	private AccountService accountService;
 
@@ -56,6 +60,7 @@ public class AccountController {
 		if (principal != null && principal instanceof Authentication) {
 			Authentication authentication = (Authentication) principal;
 			if (authentication.getPrincipal() instanceof Account) {
+				
 				String username = ((Account) authentication.getPrincipal()).getUsername();
 				AccountDTO account = accountDao.findOneUsername(username);
 				session.setAttribute("account", account);
@@ -76,9 +81,19 @@ public class AccountController {
 		return "user/signin";
 	}
 	@GetMapping("getPrincipal")
-	public Principal getPrincipal(Principal principal) {
+	public String getPrincipal(Principal principal) {
+		AccountDTO acDTO = accountDao.findOneUsername(principal.getName());
+		if(acDTO == null) {
+			Account account = new Account();
+			account.setUserName(principal.getName());
+			account.setAccount(intimateDao.findById(1).get());
+			account.setRole(false);
+			account.setActivated(true);
+			accountDao.save(account);
+		}
+		
 		System.out.println(principal.toString());
-		return principal;
+		return "redirect:/travelfpoly/home";
 	}
 	@PostMapping("login")
 	public void loginUser(
