@@ -44,8 +44,7 @@ public class TourScheduleController {
     public String saveTourSchedule(@Valid @ModelAttribute TourSchedule tourSchedule,
             BindingResult result, Model model,
             @RequestParam(defaultValue = "0") Integer pageNo,
-            @RequestParam(defaultValue = "5") Integer sizeNo,
-            @RequestParam("image1") MultipartFile image1) {
+            @RequestParam(defaultValue = "5") Integer sizeNo) {
         if (result.hasErrors()) {
             Pageable pageable = PageRequest.of(pageNo, sizeNo);
             Page<TourSchedule> tourSchedules = tourScheduleService.getAll(pageable);

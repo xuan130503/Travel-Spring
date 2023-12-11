@@ -31,6 +31,9 @@
 	<link rel="stylesheet" href="/user/css/style.css">
 	<link rel="stylesheet" href="/node_modules/swiper/swiper.min.css">
 	<link rel="stylesheet" href="/user/css/tour-detail.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+		integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<script
 		nonce="6d052e1f-c170-4fc3-9b38-e3eeb83f439d">(function (w, d) { !function (dK, dL, dM, dN) { dK[dM] = dK[dM] || {}; dK[dM].executed = []; dK.zaraz = { deferred: [], listeners: [] }; dK.zaraz.q = []; dK.zaraz._f = function (dO) { return function () { var dP = Array.prototype.slice.call(arguments); dK.zaraz.q.push({ m: dO, a: dP }) } }; for (const dQ of ["track", "set", "debug"]) dK.zaraz[dQ] = dK.zaraz._f(dQ); dK.zaraz.init = () => { var dR = dL.getElementsByTagName(dN)[0], dS = dL.createElement(dN), dT = dL.getElementsByTagName("title")[0]; dT && (dK[dM].t = dL.getElementsByTagName("title")[0].text); dK[dM].x = Math.random(); dK[dM].w = dK.screen.width; dK[dM].h = dK.screen.height; dK[dM].j = dK.innerHeight; dK[dM].e = dK.innerWidth; dK[dM].l = dK.location.href; dK[dM].r = dL.referrer; dK[dM].k = dK.screen.colorDepth; dK[dM].n = dL.characterSet; dK[dM].o = (new Date).getTimezoneOffset(); if (dK.dataLayer) for (const dX of Object.entries(Object.entries(dataLayer).reduce(((dY, dZ) => ({ ...dY[1], ...dZ[1] })), {}))) zaraz.set(dX[0], dX[1], { scope: "page" }); dK[dM].q = []; for (; dK.zaraz.q.length;) { const d_ = dK.zaraz.q.shift(); dK[dM].q.push(d_) } dS.defer = !0; for (const ea of [localStorage, sessionStorage]) Object.keys(ea || {}).filter((ec => ec.startsWith("_zaraz_"))).forEach((eb => { try { dK[dM]["z_" + eb.slice(7)] = JSON.parse(ea.getItem(eb)) } catch { dK[dM]["z_" + eb.slice(7)] = ea.getItem(eb) } })); dS.referrerPolicy = "origin"; dS.src = "../../cdn-cgi/zaraz/sd0d9.js?z=" + btoa(encodeURIComponent(JSON.stringify(dK[dM]))); dR.parentNode.insertBefore(dS, dR) };["complete", "interactive"].includes(dL.readyState) ? zaraz.init() : dK.addEventListener("DOMContentLoaded", zaraz.init) }(w, d, "zarazData", "script"); })(window, document);</script>
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -222,6 +225,58 @@
 								</div>
 							</div>
 						</section>
+						<section style="padding-top: 20px;">
+							<div>
+								<div style=" font-size: 30px;">[[${hotel.Name}]]</div>
+								<div
+									style="display: grid; grid-template-columns: 1fr 1fr 1fr;   grid-column-gap: 20px;  grid-row-gap: 20px;">
+									<div>
+										<p>
+											<i class="fa-solid fa-bed"></i> 1 Giường (X2)
+										</p>
+										<p>
+											<i class="fa-solid fa-utensils"></i>
+											không có ăn sáng
+										</p>
+										<p style="color:green;">
+											<i class="fa-solid fa-wifi"></i>có wifi
+										</p>
+										<p style="color: green;">
+											<i class="fa-solid fa-ban-smoking"></i> KHônghút thuốc
+										</p>
+									</div>
+									<div>
+										<p><i class="fa-solid fa-user-group"></i>2 khách</p>
+
+										<p style="color: slategray;">
+											<i class="fa-regular fa-rectangle-xmark"></i>Không hoàn tiền
+										</p>
+										<p style="color: green;">
+											<i class="fa-solid fa-rectangle-xmark"></i>Miễn phí huỷ phòng
+										</p>
+										<p style="color: green;">
+											<i class="fa-regular fa-rectangle-xmark"></i>có thể đổi lịch
+										</p>
+
+									</div>
+									<div>
+										<p style=" text-decoration: line-through;"> [[${hotel.price}]] VND</p>
+
+										<p style="color: red; font-size: 30px;">
+											[[${discount}]] VND</p>
+										<p> /Phòng/ đêm</p>
+										<button
+											style="padding:10px 60px; background-color: rgb(203, 96, 57); border-radius: 10px;">
+											Đặt ngay
+
+										</button>
+
+									</div>
+
+								</div>
+							</div>
+
+						</section>
 
 					</div>
 				</div>
@@ -234,31 +289,63 @@
 								<div class="form-header mb-3">
 									<h3>Make your adventure</h3>
 								</div>
-								<form method="post">
-									<div class="row mb-3">
-										<div class="col-md-12 mb-3">
-											<label class="title-input">FullName</label>
-											<input class="form-control" type="text" placeholder="Enter your Name...">
-										</div>
-										<div class="col-md-12 mb-3">
-											<label class="title-input">Email</label>
-											<input class="form-control" type="email" placeholder="Enter your Email">
-										</div>
-										<div class="col-md-6 mb-3">
-											<label class="title-input">Phone</label>
-											<input class="form-control" type="text" placeholder="Enter your Phone">
-										</div>
-										<div class="col-md-6 mb-3">
-											<label class="title-input">BookingDate</label>
-											<input class="form-control" type="date" placeholder="Enter your Phone">
-										</div>
-										<div class="form-btn mt-2">
-											<button th:herf="@{|/travelfpoly/cartHotel|}" class="submit-btn mb-3">Book
-												Now</button>
-										</div>
+
+								<div class="row mb-3">
+									<div class="col-md-12 mb-3">
+										<label class="title-input" for="checkin">fullname</label>
+										<input class="form-control" type="date" id="checkin"
+											placeholder="Enter your Name...">
 									</div>
-								</form>
+
+									<div class="col-md-12 mb-3">
+										<label class="title-input" for="checkout">fullname</label>
+										<input class="form-control" type="date" id="checkout"
+											placeholder="Enter your Name...">
+									</div>
+
+									<div class="col-md-12 mb-3">
+										<label class="title-input" for="fullname">fullname</label>
+										<input class="form-control" type="text" id="fullname" th:name="fullname"
+											placeholder="Enter your Name...">
+									</div>
+									<div class="col-md-12 mb-3">
+										<label class="title-input" for="email">Email</label>
+										<input class="form-control" id="email" type="email"
+											placeholder="Enter your Email">
+									</div>
+									<div class="col-md-6 mb-3">
+										<label class="title-input">Phone</label>
+										<input class="form-control" id="phone" type="text"
+											placeholder="Enter your Phone">
+									</div>
+									<div class="col-md-6 mb-3">
+										<label class="title-input">BookingDate</label>
+										<input class="form-control" id="BookingDate" type="date"
+											placeholder="Enter your BookingDate">
+									</div>
+									<div class="form-btn mt-2">
+										<button onclick="goToPage2()">Go to Page 2</button>
+									</div>
+								</div>
+								<script>
+									function goToPage2() {
+										var id = `[[${hotel.HotelId}]]`;
+										var fullname = document.getElementById("fullname").value;
+										var email = document.getElementById("email").value;
+										var phone = document.getElementById("phone").value;
+										var BookingDate = document.getElementById("BookingDate").value;
+										var checkin = document.getElementById("checkin").value;
+										var checkout = document.getElementById("checkout").value;
+
+
+										// Construct URL with query parameters
+										var url = "/travelfpoly/hotel-detail/" + id + "/page2?fullname=" + fullname
+											+ "&email=" + encodeURIComponent(email) + "&phone=" + encodeURIComponent(phone) + "&BookingDate=" + encodeURIComponent(BookingDate) + "&checkin=" + encodeURIComponent(checkin) + "&checkout=" + encodeURIComponent(checkout);
+										window.location.href = url;
+									}
+								</script>
 							</div>
+
 						</div>
 					</div>
 					<hr class="new1">
@@ -325,153 +412,14 @@
 					Popup body</div>
 			</div>
 		</div>
-		<!-- scripts for stars and ajax -- >
-			 
-			<script type="text/javascript">
-				$(function(){
-			 
-				  // initialize the autosize plugin on the review text area
-				  $('#new-review').autosize({append: "\n"});
-			 
-				  var reviewBox = $('#post-review-box');
-				  var newReview = $('#new-review');
-				  var openReviewBtn = $('#open-review-box');
-				  var closeReviewBtn = $('#close-review-box');
-				  var ratingsField = $('#ratings-hidden');
-			 
-				  openReviewBtn.click(function(e)
-				  {
-					reviewBox.slideDown(400, function()
-					  {
-						$('#new-review').trigger('autosize.resize');
-						newReview.focus();
-					  });
-					openReviewBtn.fadeOut(100);
-					closeReviewBtn.show();
-				  });
-			 
-				  closeReviewBtn.click(function(e)
-				  {
-					e.preventDefault();
-					reviewBox.slideUp(300, function()
-					  {
-						newReview.focus();
-						openReviewBtn.fadeIn(200);
-					  });
-					closeReviewBtn.hide();
-			 
-				  });
-			 
-				  // If there were validation errors we need to open the comment form programmatically 
-			 
-				  // Bind the change event for the star rating - store the rating value in a hidden field
-				  $('.starrr').on('starrr:change', function(e, value){
-					ratingsField.val(value);
-					console.log(value);
-				  });
-				});
-			  </script>
-			 
-				<script type="text/javascript">
-				$(document).ready(function() {
-					var popup = $('#popup').popup({
-						width: 400,
-						height: 130
-					});
-			 
-				$('#reviewForm').submit(function(e) {
-					e.preventDefault();
-			 
-					var str = $("#reviewForm").serialize();
-			 
-					$.ajax({
-						type:"post",
-						dataType:'text',
-						data: str,
-						url:"${pageContext.request.contextPath}/createReview",
-						async: false,
-						success : function(data) {
-						if(data=="SUCCESS"){
-							document.getElementById('reviewPostMessage').innerHTML = "Review uploaded successfuly!";
-							popup.open();
-							$('#close-review-box').click();
-						}else{
-							document.getElementById('reviewPostMessage').innerHTML =data;
-							popup.open();
-						}
-					 }
-				 });
-			});
-			 });
-			</script>
-	</section>
+
+		<div th:insert="~{include/_Footer}"></div>
 
 
 
-	<div th:insert="~{include/_Footer}"></div>
-	<script>
-		function validateDate() {
-			var inputDate = document.getElementById('dateInput').value;
-			var currentDate = new Date().toISOString().split('T')[0];
-
-			if (inputDate < currentDate) {
-				document.getElementById('error-message').innerText = 'Vui lòng chọn ngày trong tương lai.';
-				document.getElementById('dateInput').value = currentDate; // Nếu chọn ngày trước đó, đặt lại giá trị thành ngày hiện tại
-			} else {
-				document.getElementById('error-message').innerText = '';
-			}
-		}
-	</script>
-	<script>
-		const adultsSelect = document.getElementById('adult');
-		const childrenSelect = document.getElementById('children');
-		const priceAdult = document.getElementById('priceAdult');
-		const priceChildren = document.getElementById('priceChildren');
-		const displayElement = document.getElementById('totalPriceDisplay');
-
-		adultsSelect.addEventListener('change', calculateTotalPrice);
-		childrenSelect.addEventListener('change', calculateTotalPrice);
-
-		function calculateTotalPrice() {
-			const adultsQuantity = parseInt(adultsSelect.value);
-			const childrenQuantity = parseInt(childrenSelect.value);
-			const tourAdultPrice = parseFloat(priceAdult.getAttribute('data-price'));
-			const tourChildrenPrice = parseFloat(priceChildren.getAttribute('data-price'));
-			const totalPrice = (adultsQuantity * tourAdultPrice) + (childrenQuantity * tourChildrenPrice);
-			displayElement.textContent = totalPrice + '$';
-		}
-	</script>
-	<!-- <script src="/user/js/productdetail.js"></script> -->
-		<script src="/user/js/jquery.min.js"></script>
-		<script src="/user/js/jquery-migrate-3.0.1.min.js"></script>
-		<script src="/user/js/popper.min.js"></script>
-		<script src="/user/js/bootstrap.min.js"></script>
-		<script src="/user/js/jquery.easing.1.3.js"></script>
-		<script src="/user/js/jquery.waypoints.min.js"></script>
-		<script src="/user/js/jquery.stellar.min.js"></script>
-		<!-- <script src="/user/js/owl.carousel.min.js"></script> -->
-		<script src="/user/js/jquery.magnific-popup.min.js"></script>
-		<script src="/user/js/aos.js"></script>
-		<script src="/user/js/jquery.animateNumber.min.js"></script>
-		<script src="/user/js/bootstrap-datepicker.js"></script>
-		<!-- <script src="/user/js/jquery.timepicker.min.html"></script> -->
-		<script src="/user/js/scrollax.min.js"></script>
-		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
-		<script>
-			window.dataLayer = window.dataLayer || [];
-			function gtag() { dataLayer.push(arguments); }
-			gtag('js', new Date());
-
-			gtag('config', 'UA-23581568-13');
-		</script>
-		<script defer
-			src="https://static.cloudflareinsights.com/beacon.min.js/v52afc6f149f6479b8c77fa569edb01181681764108816"
-			integrity="sha512-jGCTpDpBAYDGNYR5ztKt4BQPGef1P0giN6ZGVUi835kFF88FOmmn8jBQWNgrNd8g/Yu421NdgWhwQoaOPFflDw=="
-			data-cf-beacon='{"rayId":"7de3eacc580c0ebc","version":"2023.4.0","b":1,"token":"cd0b4b3a733644fc843ef0b185f98241","si":100}'
-			crossorigin="anonymous">
-			</script>
 </body>
 
-<!-- Mirrored from preview.colorlib.com/theme/direngine/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 28 Jun 2023 06:37:10 GMT -->
+
+
 
 </html>
