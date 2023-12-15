@@ -15,48 +15,49 @@ import com.nimbusds.jose.util.StandardCharset;
 import Travel_Foly.API.Service.MailService;
 import Travel_Foly.API.Service.ThymeleafInterface;
 import Travel_Foly.DTO.InvoiceDTO;
+import Travel_Foly.DTO.orderHotelDTO;
 import Travel_Foly.Service.FileUpload;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class MailServiceImpl implements MailService{
-	
+public class MailServiceImpl implements MailService {
+
 	@Autowired
 	JavaMailSender mailSender;
-	
+
 	@Autowired
 	ThymeleafInterface thymeleafService;
-	
+
 	private final FileUpload uploadCloundinary;
-//	
-//	@Autowired
-//	OrderDetailTourDAO orderDao;
-	
+	//
+	// @Autowired
+	// OrderDetailTourDAO orderDao;
+
 	@Value("${spring.mail.username}")
 	private String email;
-	
+
 	@Override
 	public void sendMailTest() {
 		try {
-			
+
 			MimeMessage message = mailSender.createMimeMessage();
 			MimeMessageHelper helper = new MimeMessageHelper(
-					message, 
-					MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED, 
+					message,
+					MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
 					StandardCharset.UTF_8.name());
-			
+
 			helper.setFrom(email);
-			helper.setText(thymeleafService.createContent("mail.html", null),true);
-			
+			helper.setText(thymeleafService.createContent("mail.html", null), true);
+
 			helper.setTo("tanduong969@gmail.com");
 			helper.setSubject("Mail Test Sender");
 			mailSender.send(message);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	@Override
@@ -64,14 +65,13 @@ public class MailServiceImpl implements MailService{
 		try {
 			MimeMessage message = mailSender.createMimeMessage();
 			MimeMessageHelper helper = new MimeMessageHelper(
-					message, 
-					MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED, 
-					StandardCharset.UTF_8.name()
-				);
-			
-//			String ImageUrl = uploadCloundinary.uploadBase64(dto.getBase64(), dto.getOrderDetailTourId());
-//			System.out.println(ImageUrl);
-			Map<String,Object> values = new HashMap<>();
+					message,
+					MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
+					StandardCharset.UTF_8.name());
+			// String ImageUrl = uploadCloundinary.uploadBase64(dto.getBase64(),
+			// dto.getOrderDetailTourId());
+			// System.out.println(ImageUrl);
+			Map<String, Object> values = new HashMap<>();
 			values.put("fullname", dto.getCustomerName());
 			values.put("email", dto.getEmail());
 			values.put("phone", dto.getPhone());
@@ -87,17 +87,75 @@ public class MailServiceImpl implements MailService{
 			values.put("quantityChildren", dto.getQuantityChildren());
 			values.put("base64", dto.getOrderDetailTourId());
 			values.put("status", dto.getStatus());
-			double total = (dto.getQuantityAdult()*dto.getPriceAdult())+(dto.getQuantityChildren()*dto.getPriceChildren());
+			double total = (dto.getQuantityAdult() * dto.getPriceAdult())
+					+ (dto.getQuantityChildren() * dto.getPriceChildren());
 			values.put("total", total);
 			helper.setTo(dto.getEmail());
 			helper.setSubject("TRAVEL FPOLY INFORMATION");
-			helper.setText(thymeleafService.createContent("mail.html", values),true);
+			helper.setText(thymeleafService.createContent("mail.html", values), true);
 			helper.setFrom(email);
 			mailSender.send(message);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
+	}
+
+	// orderhotel
+	@Override
+	public void sendMailwithCustomerOrderHotel(orderHotelDTO orderHotelDTO) {
+		// try {
+		// MimeMessage message = mailSender.createMimeMessage();
+		// MimeMessageHelper helper = new MimeMessageHelper(message,
+		// MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED);
+		// Map<String, Object> values = new HashMap<>();
+		// values.put("checkin", orderHotelDTO.getCheckIn());
+		// values.put("checkout", orderHotelDTO.getCheckOut());
+		// values.put("quantity", orderHotelDTO.getQuantity());
+		// values.put("price", orderHotelDTO.getPrice());
+		// values.put("status", orderHotelDTO.getStatus());
+		// values.put("bookdate", orderHotelDTO.getBookDate());
+		// values.put("fullname", orderHotelDTO.getName());
+		// values.put("phone", orderHotelDTO.getPhone());
+		// values.put("email", orderHotelDTO.getEmail());
+		// helper.setTo(orderHotelDTO.getEmail());
+		// helper.setSubject("TRAVEL FPOLY INFORMATION");
+		// helper.setText(thymeleafService.createContent("ordermail.html", values),
+		// true);
+		// helper.setFrom(email);
+		// mailSender.send(message);
+		// } catch (Exception e) {
+		// e.printStackTrace();
+		// }
+		try {
+			MimeMessage message = mailSender.createMimeMessage();
+			MimeMessageHelper helper = new MimeMessageHelper(
+					message,
+					MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
+					StandardCharset.UTF_8.name());
+			// String ImageUrl = uploadCloundinary.uploadBase64(dto.getBase64(),
+			// dto.getOrderDetailTourId());
+			// System.out.println(ImageUrl);
+			Map<String, Object> values = new HashMap<>();
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+			values.put("checkin", orderHotelDTO.getCheckIn());
+			values.put("checkout", orderHotelDTO.getCheckOut());
+			values.put("quantity", orderHotelDTO.getQuantity());
+			values.put("price", orderHotelDTO.getPrice());
+			values.put("status", orderHotelDTO.getStatus());
+			values.put("bookdate", orderHotelDTO.getBookDate());
+			values.put("base64", orderHotelDTO.getOrderDetailHotelId());
+			values.put("fullname", orderHotelDTO.getName());
+			values.put("phone", orderHotelDTO.getPhone());
+			values.put("email", orderHotelDTO.getEmail());
+			helper.setTo(orderHotelDTO.getEmail());
+			helper.setSubject("TRAVEL FPOLY INFORMATION");
+			helper.setText(thymeleafService.createContent("ordermail.html", values), true);
+			helper.setFrom(email);
+			mailSender.send(message);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

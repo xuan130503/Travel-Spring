@@ -3,6 +3,7 @@ package Travel_Foly.Model;
 import java.util.Date;
 import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -25,6 +26,9 @@ public class OrderDetailHotel {
 	private Date CheckOut;
 	private Integer Quantity;
 	private Double Price;
+
+	@Column(columnDefinition = "nvarchar(max)")
+	private String Base64;
 
 	// for 4 states: Booked, unpaid, paid, remove
 	private Integer Status;

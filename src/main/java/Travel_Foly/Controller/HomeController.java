@@ -3,19 +3,26 @@ package Travel_Foly.Controller;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import org.springframework.util.StringUtils;
+import org.checkerframework.checker.units.qual.min;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.data.convert.ReadingConverter;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMailMessage;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -51,6 +58,7 @@ import Travel_Foly.DTO.CheckoutCartDTO;
 import Travel_Foly.DTO.HotelDTO;
 import Travel_Foly.DTO.InvoiceDTO;
 import Travel_Foly.DTO.TourWithImageDTO;
+import Travel_Foly.DTO.orderHotelDTO;
 import Travel_Foly.Helper.DateHelper;
 import Travel_Foly.Model.Account;
 import Travel_Foly.Model.Cart;
@@ -68,6 +76,7 @@ import Travel_Foly.Model.TourImage;
 import Travel_Foly.Model.TourSchedule;
 import Travel_Foly.API.Service.MailService;
 import Travel_Foly.Service.SessionService;
+import jakarta.mail.internet.MimeMessage;
 import jakarta.persistence.EntityNotFoundException;
 
 @Controller
@@ -114,8 +123,12 @@ public class HomeController {
 	private HotelDAO hotelDAO;
 	@Autowired
 	private HotelImageDAO hotelImageDAO;
-	
-	@Autowired IntimateDAO intimateDao;
+
+	@Autowired
+	IntimateDAO intimateDao;
+
+	@Autowired
+	JavaMailSender javaMailSender;
 
 	// get information after login successfully
 	public void getPricical(Principal principal) {
@@ -123,23 +136,24 @@ public class HomeController {
 			Authentication authentication = (Authentication) principal;
 			if (authentication.getPrincipal() instanceof Account) {
 				String username = ((Account) authentication.getPrincipal()).getUsername();
-				if(username != null) {
+				if (username != null) {
 					AccountDTO account = accountDao.findOneUsername(username);
-					Integer amount = cartItemDao.getAmount(account.getUserId()) == null ? 0:cartItemDao.getAmount(account.getUserId());
-					
+					Integer amount = cartItemDao.getAmount(account.getUserId()) == null ? 0
+							: cartItemDao.getAmount(account.getUserId());
+
 					session.setAttribute("account", account);
 					session.setAttribute("amount", amount);
 				}
-				
-			}
-			else {
+
+			} else {
 				AccountDTO account = accountDao.findOneUsername(principal.getName());
-				Integer amount = cartItemDao.getAmount(account.getUserId()) == null ? 0:cartItemDao.getAmount(account.getUserId());
+				Integer amount = cartItemDao.getAmount(account.getUserId()) == null ? 0
+						: cartItemDao.getAmount(account.getUserId());
 				session.setAttribute("account", account);
 				session.setAttribute("amount", amount);
 			}
 		}
-		
+
 	}
 
 	public void setAmount() {
@@ -616,7 +630,8 @@ public class HomeController {
 				orderDetail.setOrderTour(order);
 				orderDetail.setUserOrder(account);
 				orderDetail = orderDetailTourDao.saveAndFlush(orderDetail);
-				orderDetail.setBase64(base64Service.generateQRCodeAndEncodeToBase64(orderDetail.getOrderDetailTourId()));
+				orderDetail
+						.setBase64(base64Service.generateQRCodeAndEncodeToBase64(orderDetail.getOrderDetailTourId()));
 				orderDetailTourDao.save(orderDetail);
 
 				// set t quantity tour
@@ -628,13 +643,13 @@ public class HomeController {
 					OrderDetailTour detail = orderDetailTourDao.findById(orderDetail.getOrderDetailTourId()).get();
 					detail.setStatus(2);
 					orderDetailTourDao.save(detail);
-					return "redirect:/travelfpoly/payment/index?id="+orderDetail.getOrderDetailTourId();
+					return "redirect:/travelfpoly/payment/index?id=" + orderDetail.getOrderDetailTourId();
 				}
 				if (paymentMethod.equals("vnpay")) {
 					OrderDetailTour detail = orderDetailTourDao.findById(orderDetail.getOrderDetailTourId()).get();
 					detail.setStatus(2);
 					orderDetailTourDao.save(detail);
-					return "redirect:/travelfpoly/payment/vnpay/pay?id="+orderDetail.getOrderDetailTourId();
+					return "redirect:/travelfpoly/payment/vnpay/pay?id=" + orderDetail.getOrderDetailTourId();
 				}
 				InvoiceDTO invoice = orderDetailTourDao.detailInvoice(orderDetail.getOrderDetailTourId());
 				mailService.sendMailWithCustomer(invoice);
@@ -682,8 +697,6 @@ public class HomeController {
 		return "user/contact";
 	}
 
-
-
 	@GetMapping("tour")
 	public String tour(Model model,
 			@RequestParam("pageTour") Optional<Integer> page) {
@@ -707,103 +720,113 @@ public class HomeController {
 		String regex = "^[-+]?\\d+(\\.\\d+)?$";
 		return input.matches(regex);
 	}
-    @Autowired
-    private OrderHotelDAO orderHotelDAO;
 
-    @Autowired
-    private OrderDetailHotelDAO orderDetailHotelDAO;
+	@Autowired
+	private OrderHotelDAO orderHotelDAO;
 
-    
-    @GetMapping("hotel")
-    public String hotel(Model model,
-            @RequestParam("pageHotel") Optional<Integer> page) {
-        Pageable pageable = PageRequest.of(page.orElse(0), 9);
-        Page<HotelDTO> hotels = hotelDao.findAllHotelWithImage(pageable);
-        model.addAttribute("hotels", hotels);
+	@Autowired
+	private OrderDetailHotelDAO orderDetailHotelDAO;
 
-        return "user/hotel";
-    }
+	@GetMapping("hotel")
+	public String hotel(Model model,
+			@RequestParam("pageHotel") Optional<Integer> page) {
+		Pageable pageable = PageRequest.of(page.orElse(0), 9);
+		Page<HotelDTO> hotels = hotelDao.findAllHotelWithImage(pageable);
+		model.addAttribute("hotels", hotels);
 
-    @GetMapping("hotel-detail/{id}")
-    public String hotelDetail(@PathVariable("id") Integer id, Model model) {
-        Hotel hotel = hotelDAO.findById(id).orElse(null);
-        HotelImage hotelImage = hotelImageDAO.findById(id).orElse(null);
-        List<TourSchedule> schedules = tourScheduleDao.findByTourId(id);
+		return "user/hotel";
+	}
 
-        model.addAttribute("schedules", schedules);
-        model.addAttribute("hotel", hotel);
-        model.addAttribute("hotelImage", hotelImage);
-        return "user/hotel-single";
-    }
+	@GetMapping("hotel-detail/{id}")
+	public String hotelDetail(@PathVariable("id") Integer id, Model model) {
+		Hotel hotel = hotelDAO.findById(id).orElse(null);
+		HotelImage hotelImage = hotelImageDAO.findById(id).orElse(null);
+		List<TourSchedule> schedules = tourScheduleDao.findByTourId(id);
 
-    @PostMapping("hotel-detail/{id}")
-    public String submitForm(@PathVariable(name = "id", required = false) Integer id,
-            String fullname, String email, String phone,
-            String BookingDate, String checkin, String checkout) {
-        return "redirect:/travelfpoly/hotel-detail/" + id + "/page2?fullname=" + fullname
-                + fullname + "?email=" + email
-                + "?phone=" + phone + "?BookingDate=" + BookingDate + "?checkin=" + checkin +
-                "?checkout=" + checkout;
-    }
+		model.addAttribute("schedules", schedules);
+		model.addAttribute("hotel", hotel);
+		model.addAttribute("hotelImage", hotelImage);
+		return "user/hotel-single";
+	}
 
-    @GetMapping("hotel-detail/{id}/page2")
-    public String ShowPage(Model model, @PathVariable(name = "id", required = false) Integer id,
-            @RequestParam String fullname,
-            @RequestParam("email") String email,
-            @RequestParam String phone, @RequestParam java.sql.Date BookingDate,
-            @RequestParam java.sql.Date checkin,
-            @RequestParam java.sql.Date checkout) {
-        Hotel hotel = hotelDAO.findById(id).orElse(null);
-        HotelImage hotelImage = hotelImageDAO.findById(id).orElse(null);
-        List<TourSchedule> schedules = tourScheduleDao.findByTourId(id);
-        model.addAttribute("schedules", schedules);
-        model.addAttribute("hotel", hotel);
-        model.addAttribute("hotelImage", hotelImage);
-        model.addAttribute("fullname", fullname);
-        model.addAttribute("email", email);
-        model.addAttribute("phone", phone);
-        model.addAttribute("BookingDate", BookingDate);
-        model.addAttribute("checkin", checkin);
-        model.addAttribute("checkout", checkout);
+	@PostMapping("hotel-detail/{id}")
+	public String submitForm(@PathVariable(name = "id", required = false) Integer id,
+			String fullname, String email, String phone,
+			String BookingDate, String checkin, String checkout) {
+		return "redirect:/travelfpoly/hotel-detail/" + id + "/page2?fullname=" + fullname
+				+ fullname + "?email=" + email
+				+ "?phone=" + phone + "?BookingDate=" + BookingDate + "?checkin=" + checkin +
+				"?checkout=" + checkout;
+	}
 
-        return "user/orderhotel";
-    }
+	@GetMapping("hotel-detail/{id}/page2")
+	public String ShowPage(Model model, @PathVariable(name = "id", required = false) Integer id,
+			@RequestParam String fullname,
+			@RequestParam("email") String email,
+			@RequestParam String phone, @RequestParam java.sql.Date BookingDate,
+			@RequestParam java.sql.Date checkin,
+			@RequestParam java.sql.Date checkout) {
+		Hotel hotel = hotelDAO.findById(id).orElse(null);
+		HotelImage hotelImage = hotelImageDAO.findById(id).orElse(null);
+		List<TourSchedule> schedules = tourScheduleDao.findByTourId(id);
+		model.addAttribute("schedules", schedules);
+		model.addAttribute("hotel", hotel);
+		model.addAttribute("hotelImage", hotelImage);
+		model.addAttribute("fullname", fullname);
+		model.addAttribute("email", email);
+		model.addAttribute("phone", phone);
+		model.addAttribute("BookingDate", BookingDate);
+		model.addAttribute("checkin", checkin);
+		model.addAttribute("checkout", checkout);
 
-    @PostMapping("SaveOrderHotel/{HotelId}/{userId}")
-    public String saveOrderHotel(
-            @PathVariable(name = "HotelId") Integer HotelId,
-            @PathVariable(name = "userId") Integer UserId,
-            @RequestParam String fullname,
-            @RequestParam String email,
-            @RequestParam String phone,
+		return "user/orderhotel";
+	}
 
-            @RequestParam java.sql.Date checkin,
-            @RequestParam java.sql.Date checkout,
-            @RequestParam java.sql.Date BookingDate,
-            @RequestParam Double price) {
+	@PostMapping("cartOrderHotel/{HotelId}/{userId}")
+	public String saveOrderHotel(
+			@PathVariable(name = "HotelId") Integer HotelId,
+			@PathVariable(name = "userId") Integer UserId,
+			@RequestParam String fullname,
+			@RequestParam("email") String email,
+			@RequestParam String phone,
+			@RequestParam java.sql.Date checkin,
+			@RequestParam java.sql.Date checkout,
+			@RequestParam java.sql.Date BookingDate,
+			@RequestParam Double price) {
+		Account account = accountDao.findById(UserId).get();
+		try {
 
-        Account account = accountDao.findById(UserId).get();
+			OrderHotel orderHotel = new OrderHotel();
+			orderHotel.setName(fullname);
+			orderHotel.setEmail(email);
+			orderHotel.setPhone(phone);
+			orderHotelDAO.save(orderHotel);
 
-        OrderHotel orderHotel = new OrderHotel();
-        orderHotel.setName(fullname);
-        orderHotel.setEmail(email);
-        orderHotel.setPhone(phone);
-        orderHotelDAO.save(orderHotel);
+			OrderDetailHotel orderDetailHotel = new OrderDetailHotel();
+			orderDetailHotel.setCheckIn(DateHelper.converDateSql(checkin));
+			orderDetailHotel.setCheckOut(DateHelper.converDateSql(checkout));
+			orderDetailHotel.setPrice(price);
+			orderDetailHotel.setQuantity(1);
+			orderDetailHotel.setBookDate(DateHelper.converDateSql(BookingDate));
+			orderDetailHotel.setStatus(1);
+			orderDetailHotel.setOrderHotel(orderHotel);
+			orderDetailHotel.setAccount(account);
+			orderDetailHotel.setOrderDetailHotel(hotelDao.findById(UserId).get());
+			orderDetailHotelDAO.saveAndFlush(orderDetailHotel);
+			orderDetailHotel.setBase64(
+					base64Service.generateQRCodeAndEncodeToBase64Hotel(orderDetailHotel.getOrderDetailHotelId()));
+			orderDetailHotelDAO.save(orderDetailHotel);
 
-        OrderDetailHotel orderDetailHotel = new OrderDetailHotel();
-        orderDetailHotel.setCheckIn(DateHelper.converDateSql(checkin));
-        orderDetailHotel.setCheckOut(DateHelper.converDateSql(checkout));
-        orderDetailHotel.setPrice(price);
-        orderDetailHotel.setQuantity(1);
-        orderDetailHotel.setBookDate(DateHelper.converDateSql(BookingDate));
-        orderDetailHotel.setStatus(1);
-        orderDetailHotel.setOrderHotel(orderHotel);
-        orderDetailHotel.setAccount(account);
-        orderDetailHotel.setOrderDetailHotel(hotelDao.findById(UserId).get());
-        orderDetailHotelDAO.save(orderDetailHotel);
+			orderHotelDTO order = orderDetailHotelDAO.OrderdetailHotelInvoice(orderDetailHotel.getOrderDetailHotelId());
+			mailService.sendMailwithCustomerOrderHotel(order);
 
-        return "user/nextPay";
+			System.out.println(order);
 
-    }
+			return "redirect:/travelfpoly/hotel";
+		} catch (Exception e) {
+			e.getStackTrace();
+			return "user/nextPay";
+		}
+	}
 
 }

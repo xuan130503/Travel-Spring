@@ -32,82 +32,82 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class Base64ServiceImpl implements Base64Service{
-	private final Cloudinary cloudinary;
-	@Override
-	public String encodeImage(String imgPath, String savePath) {
-		try {
-			FileInputStream stream = new FileInputStream(imgPath);
-	        int bufLength = 2048;
-	        byte[] buffer = new byte[2048];
-	
-	        byte[] data;
-	
-	        ByteArrayOutputStream out = new ByteArrayOutputStream();
-	        int readLength;
-	        while ((readLength = stream.read(buffer, 0, bufLength)) != -1) {
-	            out.write(buffer, 0, readLength);
-	        }
-	
-	        data = out.toByteArray();
-	
-	        String imageString = Base64.getEncoder().encodeToString(data);
-	
-	        FileWriter fileWriter = new FileWriter(savePath);
-	
-	        fileWriter.write(imageString);
-	
-	        // close streams
-	        fileWriter.close();
-	        out.close();
-	        stream.close();
-	        return imageString;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+public class Base64ServiceImpl implements Base64Service {
+    private final Cloudinary cloudinary;
+
+    @Override
+    public String encodeImage(String imgPath, String savePath) {
+        try {
+            FileInputStream stream = new FileInputStream(imgPath);
+            int bufLength = 2048;
+            byte[] buffer = new byte[2048];
+
+            byte[] data;
+
+            ByteArrayOutputStream out = new ByteArrayOutputStream();
+            int readLength;
+            while ((readLength = stream.read(buffer, 0, bufLength)) != -1) {
+                out.write(buffer, 0, readLength);
+            }
+
+            data = out.toByteArray();
+
+            String imageString = Base64.getEncoder().encodeToString(data);
+
+            FileWriter fileWriter = new FileWriter(savePath);
+
+            fileWriter.write(imageString);
+
+            // close streams
+            fileWriter.close();
+            out.close();
+            stream.close();
+            return imageString;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return null;
-	}
+    }
 
-	@Override
-	public void decodeImage(String txtPath, String savePath) {
-		try {
-			FileInputStream inputStream = new FileInputStream(txtPath);
+    @Override
+    public void decodeImage(String txtPath, String savePath) {
+        try {
+            FileInputStream inputStream = new FileInputStream(txtPath);
 
-	        ByteArrayOutputStream out = new ByteArrayOutputStream();
-	        int len = 2048;
-	        byte[] buffer = new byte[len];
-	        byte[] textData;
-	        int readLength;
+            ByteArrayOutputStream out = new ByteArrayOutputStream();
+            int len = 2048;
+            byte[] buffer = new byte[len];
+            byte[] textData;
+            int readLength;
 
-	        while ((readLength = inputStream.read(buffer, 0, len)) != -1) {
-	            out.write(buffer, 0, readLength);
-	        }
+            while ((readLength = inputStream.read(buffer, 0, len)) != -1) {
+                out.write(buffer, 0, readLength);
+            }
 
-	        textData = out.toByteArray();
+            textData = out.toByteArray();
 
+            byte[] data = Base64.getDecoder().decode(new String(textData));
 
-	        byte[] data = Base64.getDecoder().decode(new String(textData));
+            // Base64.getDecoder().decode(inputStream.readAllBytes());
 
-	        // Base64.getDecoder().decode(inputStream.readAllBytes());
+            FileOutputStream fileOutputStream = new FileOutputStream(savePath);
 
-	        FileOutputStream fileOutputStream = new FileOutputStream(savePath);
+            // write array of bytes to an image file
+            fileOutputStream.write(data);
+            out.close();
+            // close streams
+            fileOutputStream.close();
+            inputStream.close();
 
-	        // write array of bytes to an image file
-	        fileOutputStream.write(data);
-	        out.close();
-	        // close streams
-	        fileOutputStream.close();
-	        inputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-	}
+    }
 
-	@Override
-	public String endcodeBitMaxtrix(BitMatrix bitMatrix) {
-		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+    @Override
+    public String endcodeBitMaxtrix(BitMatrix bitMatrix) {
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         try {
             MatrixToImageWriter.writeToStream(bitMatrix, "PNG", outputStream);
         } catch (IOException e) {
@@ -115,10 +115,11 @@ public class Base64ServiceImpl implements Base64Service{
         }
         byte[] imageBytes = outputStream.toByteArray();
         return Base64.getEncoder().encodeToString(imageBytes);
-	}
-	@Override
-	public String generateQRCodeAndEncodeToBase64(Integer data) {
-		try {
+    }
+
+    @Override
+    public String generateQRCodeAndEncodeToBase64(Integer data) {
+        try {
             // Tạo đối tượng QRCodeWriter
             QRCodeWriter qrCodeWriter = new QRCodeWriter();
 
@@ -134,34 +135,31 @@ public class Base64ServiceImpl implements Base64Service{
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             MatrixToImageWriter.writeToStream(bitMatrix, "PNG", outputStream);
             byte[] imageBytes = outputStream.toByteArray();
-            
-            //push image to cloudinary
+
+            // push image to cloudinary
             Map<String, String> options = new HashMap<>();
             options.put("public_id", "Travel_FPoly/QrTour/" + data);
             cloudinary.uploader().upload(imageBytes, options);
-            
-            
+
             // decoder byte[] to base64
             String base64Image = Base64.getEncoder().encodeToString(imageBytes);
-            
-            
-            
+
             return base64Image;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
-	}
+    }
 
-	@Override
-	public String generateQRCodeWithIconAndEncodeToBase64(Integer data) {
-		try {
+    @Override
+    public String generateQRCodeWithIconAndEncodeToBase64(Integer data) {
+        try {
             QRCodeWriter qrCodeWriter = new QRCodeWriter();
-            
+
             Map<EncodeHintType, Object> hints = new HashMap<>();
             hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
             hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
-            
+
             BitMatrix bitMatrix = qrCodeWriter.encode(String.valueOf(data), BarcodeFormat.QR_CODE, 200, 200, hints);
             int width = bitMatrix.getWidth();
             int height = bitMatrix.getHeight();
@@ -173,7 +171,7 @@ public class Base64ServiceImpl implements Base64Service{
                     qrImage.setRGB(x, y, bitMatrix.get(x, y) ? 0xFF000000 : 0xFFFFFFFF);
                 }
             }
-            
+
             ClassPathResource iconResource = new ClassPathResource("/static/user/images/bee_small.png");
             BufferedImage iconImage = ImageIO.read(iconResource.getInputStream());
 
@@ -189,12 +187,47 @@ public class Base64ServiceImpl implements Base64Service{
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             ImageIO.write(qrImage, "png", outputStream);
             byte[] qrCodeBytes = outputStream.toByteArray();
-            
+
             Map<String, String> options = new HashMap<>();
             options.put("public_id", "Travel_FPoly/QrTour/" + data);
             cloudinary.uploader().upload(qrCodeBytes, options);
-            
+
             return Base64.getEncoder().encodeToString(qrCodeBytes);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /// OrderHotel
+    @Override
+    public String generateQRCodeAndEncodeToBase64Hotel(Integer id) {
+        try {
+            // Tạo đối tượng QRCodeWriter
+            QRCodeWriter qrCodeWriter = new QRCodeWriter();
+
+            // Thiết lập các thông số cho mã QR
+            Map<EncodeHintType, Object> hints = new HashMap<>();
+            hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
+            hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
+
+            // Tạo BitMatrix từ dữ liệu
+            BitMatrix bitMatrix = qrCodeWriter.encode(String.valueOf(id), BarcodeFormat.QR_CODE, 200, 200, hints);
+
+            // Tạo mảng byte từ BitMatrix
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            MatrixToImageWriter.writeToStream(bitMatrix, "PNG", outputStream);
+            byte[] imageBytes = outputStream.toByteArray();
+
+            // push image to cloudinary
+            Map<String, String> options = new HashMap<>();
+            options.put("public_id", "Travel_FPoly/QrHotel/" + id);
+            cloudinary.uploader().upload(imageBytes, options);
+
+            // decoder byte[] to base64
+            String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+
+            return base64Image;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
