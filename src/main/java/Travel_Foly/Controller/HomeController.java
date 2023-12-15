@@ -641,13 +641,13 @@ public class HomeController {
 
 				if (paymentMethod.equals("paypal")) {
 					OrderDetailTour detail = orderDetailTourDao.findById(orderDetail.getOrderDetailTourId()).get();
-					detail.setStatus(2);
+					detail.setStatus(1);
 					orderDetailTourDao.save(detail);
 					return "redirect:/travelfpoly/payment/index?id=" + orderDetail.getOrderDetailTourId();
 				}
 				if (paymentMethod.equals("vnpay")) {
 					OrderDetailTour detail = orderDetailTourDao.findById(orderDetail.getOrderDetailTourId()).get();
-					detail.setStatus(2);
+					detail.setStatus(1);
 					orderDetailTourDao.save(detail);
 					return "redirect:/travelfpoly/payment/vnpay/pay?id=" + orderDetail.getOrderDetailTourId();
 				}

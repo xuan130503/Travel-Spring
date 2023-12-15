@@ -8,7 +8,11 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
+import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import Travel_Foly.DAO.AccountDAO;
 import Travel_Foly.Service.UserDetailServiceImpl;
@@ -19,7 +23,8 @@ import Travel_Foly.Service.UserDetailServiceImpl;
 public class SecurityConfig {
 	@Autowired
 	AccountDAO accountDao;
-
+	@Autowired
+	UserDetailServiceImpl userDetail;
 	@Bean
 	public DaoAuthenticationProvider getDaoAuthenticationProvider() {
 		DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
@@ -28,7 +33,8 @@ public class SecurityConfig {
 
 		return daoAuthenticationProvider;
 	}
-
+	
+	
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.authorizeHttpRequests(auth -> {
@@ -55,6 +61,7 @@ public class SecurityConfig {
 				})
 				.oauth2Login(auth -> {
 					auth.defaultSuccessUrl("/travelfpoly/account/getPrincipal", true);
+					
 				})
 				.exceptionHandling(ex -> {
 					ex.accessDeniedHandler(
@@ -66,4 +73,5 @@ public class SecurityConfig {
 
 		return http.build();
 	}
+	
 }
