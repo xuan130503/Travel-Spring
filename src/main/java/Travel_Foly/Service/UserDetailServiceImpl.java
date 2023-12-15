@@ -15,6 +15,8 @@ import jakarta.servlet.http.HttpSession;
 
 @Service 
 public class UserDetailServiceImpl implements UserDetailsService{
+	
+	@Autowired
 	private AccountDAO accountDao;
 	
 	public UserDetailServiceImpl(AccountDAO accountDao) {

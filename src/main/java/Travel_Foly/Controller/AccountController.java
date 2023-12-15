@@ -12,6 +12,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,6 +31,7 @@ import Travel_Foly.DTO.RegisterDTO;
 import Travel_Foly.Model.Account;
 import Travel_Foly.Service.AccountService;
 import Travel_Foly.Service.SessionService;
+import Travel_Foly.Service.UserDetailServiceImpl;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import jakarta.servlet.http.HttpServletRequest;
@@ -50,7 +52,10 @@ public class AccountController {
 
 	@Autowired
 	private JavaMailSender mailSender;
-
+	
+	@Autowired
+	private UserDetailServiceImpl userDetail;
+	
 	@Autowired
 	SessionService session;
 
@@ -98,6 +103,9 @@ public class AccountController {
 			account.setAge(0);
 			account.setActivated(true);
 			accountDao.save(account);
+			UserDetails user =  userDetail.loadUserByUsername(account.getUsername());
+			
+			System.out.println(user.getAuthorities());
 		}
 		
 		System.out.println(principal.toString());

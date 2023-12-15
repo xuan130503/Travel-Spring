@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import Travel_Foly.DAO.AccountDAO;
 import Travel_Foly.DAO.CategoryTourDAO;
+import Travel_Foly.DAO.OrderDetailHotelDAO;
 import Travel_Foly.DAO.OrderDetailTourDAO;
 import Travel_Foly.DAO.TourDAO;
 import Travel_Foly.DTO.InvoiceDTO;
@@ -42,6 +43,10 @@ public class AdminController {
 	private TourDAO tourDao;
 	@Autowired
 	private OrderDetailTourDAO orderDetailTourDao;
+	
+	@Autowired
+	private OrderDetailHotelDAO orderDetailHotelDao;
+	
 	@Autowired
 	private AccountDAO accountDao;
 	@Autowired
@@ -324,6 +329,9 @@ public class AdminController {
 
 		List<MonthlyRevenueDTO> revenueYear = orderDetailTourDao.getListYearlyRevenue();
 		model.addAttribute("revenueYear", revenueYear);
+		List<MonthlyRevenueDTO> revenueHotelYear = orderDetailHotelDao.getListYearlyRevenue();
+		model.addAttribute("revenueHotelYear", revenueHotelYear);
+		
 		return "admin/quan-ly-bao-cao";
 
 	}
