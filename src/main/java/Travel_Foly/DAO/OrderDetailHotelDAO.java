@@ -11,7 +11,7 @@ import Travel_Foly.Model.OrderDetailHotel;
 @Repository
 public interface OrderDetailHotelDAO extends JpaRepository<OrderDetailHotel, Integer> {
     @Query("Select new Travel_Foly.DTO.orderHotelDTO("
-            + "de.OrderDetailHotelId, de.CheckIn,de.CheckOut,de.Quantity,de.Price,de.Status,de.BookDate,de.OrderHotel.Name, de.OrderHotel.Email, de.OrderHotel.Phone ) "
+            + "de.OrderDetailHotelId, de.CheckIn,de.CheckOut,de.Quantity,de.Price,de.Status,de.BookDate,de.OrderHotel.Name, de.OrderHotel.Email, de.OrderHotel.Phone,de.total ) "
             + "from OrderDetailHotel de "
             + "Join OrderHotel o On o.OrderHotelId = de.OrderHotel.OrderHotelId "
             + "where de.OrderDetailHotelId = ?1")

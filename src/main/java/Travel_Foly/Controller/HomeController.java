@@ -1,6 +1,7 @@
 package Travel_Foly.Controller;
 
 import java.security.Principal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Base64;
@@ -33,6 +34,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import java.time.temporal.ChronoUnit;
 
 import Travel_Foly.Service.FileUpload;
 
@@ -647,7 +649,7 @@ public class HomeController {
 				}
 				if (paymentMethod.equals("vnpay")) {
 					OrderDetailTour detail = orderDetailTourDao.findById(orderDetail.getOrderDetailTourId()).get();
-					detail.setStatus(2);
+					detail.setStatus(1);
 					orderDetailTourDao.save(detail);
 					return "redirect:/travelfpoly/payment/vnpay/pay?id=" + orderDetail.getOrderDetailTourId();
 				}
@@ -746,6 +748,7 @@ public class HomeController {
 		model.addAttribute("schedules", schedules);
 		model.addAttribute("hotel", hotel);
 		model.addAttribute("hotelImage", hotelImage);
+
 		return "user/hotel-single";
 	}
 
@@ -769,6 +772,14 @@ public class HomeController {
 		Hotel hotel = hotelDAO.findById(id).orElse(null);
 		HotelImage hotelImage = hotelImageDAO.findById(id).orElse(null);
 		List<TourSchedule> schedules = tourScheduleDao.findByTourId(id);
+
+		Map<String, String> paymentMethods = new HashMap<>();
+		paymentMethods.put("cash", "Payment in cash");
+		paymentMethods.put("paypal", "PayPal");
+		paymentMethods.put("vnpay", "VN Pay");
+
+		model.addAttribute("paymentMethods", paymentMethods);
+
 		model.addAttribute("schedules", schedules);
 		model.addAttribute("hotel", hotel);
 		model.addAttribute("hotelImage", hotelImage);
@@ -792,8 +803,15 @@ public class HomeController {
 			@RequestParam java.sql.Date checkin,
 			@RequestParam java.sql.Date checkout,
 			@RequestParam java.sql.Date BookingDate,
-			@RequestParam Double price) {
+			@RequestParam Double price,
+			@RequestParam("paymentMethod") String paymentMethod) {
 		Account account = accountDao.findById(UserId).get();
+
+		LocalDate checkinlocal = checkin.toLocalDate();
+		LocalDate checkoutlocal = checkout.toLocalDate();
+		long daysBetween = ChronoUnit.DAYS.between(checkinlocal, checkoutlocal);
+		int monthsBetween = (int) (daysBetween / 30);
+
 		try {
 
 			OrderHotel orderHotel = new OrderHotel();
@@ -815,12 +833,28 @@ public class HomeController {
 			orderDetailHotelDAO.saveAndFlush(orderDetailHotel);
 			orderDetailHotel.setBase64(
 					base64Service.generateQRCodeAndEncodeToBase64Hotel(orderDetailHotel.getOrderDetailHotelId()));
+			orderDetailHotel.setTotal((double) daysBetween * price);
 			orderDetailHotelDAO.save(orderDetailHotel);
 
 			orderHotelDTO order = orderDetailHotelDAO.OrderdetailHotelInvoice(orderDetailHotel.getOrderDetailHotelId());
 			mailService.sendMailwithCustomerOrderHotel(order);
 
-			System.out.println(order);
+			if (paymentMethod.equals("paypal")) {
+				OrderDetailHotel orderhotel = orderDetailHotelDAO
+						.findById(orderDetailHotel.getOrderDetailHotelId()).get();
+				orderDetailHotel.setStatus(2);
+				orderDetailHotelDAO.save(orderhotel);
+				return "redirect:/travelfpoly/payment/index?id=" +
+						orderDetailHotel.getOrderDetailHotelId();
+			}
+			if (paymentMethod.equals("vnpay")) {
+				OrderDetailHotel orderhotel = orderDetailHotelDAO
+						.findById(orderDetailHotel.getOrderDetailHotelId()).get();
+				orderDetailHotel.setStatus(0);
+				orderDetailHotelDAO.save(orderhotel);
+				return "redirect:/travelfpoly/payment/vnpay/pay?id=" +
+						orderDetailHotel.getOrderDetailHotelId();
+			}
 
 			return "redirect:/travelfpoly/hotel";
 		} catch (Exception e) {
