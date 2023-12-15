@@ -33,14 +33,16 @@ public class SecurityConfig {
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.authorizeHttpRequests(auth -> {
 			auth.requestMatchers("/travelfpoly/account/login", "/travelfpoly/account/logout", "/travelfpoly/home",
-					"/travelfpoly/tour-detail", "/travelfpoly/tour-detail/**").permitAll()
+					"/travelfpoly/tour-detail", "/travelfpoly/tour-detail/**")
+					.permitAll()
 					.requestMatchers("/travelfpoly/admin", "/travelfpoly/admin/**")
 					.hasAnyRole("ADMIN")
 					.requestMatchers("/travelfpoly/cart", "/travelfpoly/cart/**", "/travelfpoly/order",
-							"/travelfpoly/order/**", "/travelfpoly/addToCart/**", "/travelfpoly/bookNow/**")
+							"/travelfpoly/order/**", "/travelfpoly/addToCart/**", "/travelfpoly/bookNow/**",
+							"/travelfpoly/cartOrderHotel/**")
 					.hasAnyRole("USER")
 					.anyRequest().permitAll();
-			})
+		})
 				.formLogin(login -> {
 					login.loginPage("/travelfpoly/account/login")
 							.loginProcessingUrl("/travelfpoly/account/login")
@@ -61,7 +63,7 @@ public class SecurityConfig {
 
 				.csrf(csrf -> csrf.disable())
 				.cors(cors -> cors.disable());
-		
+
 		return http.build();
 	}
 }

@@ -328,7 +328,7 @@
                                     </div>
                                     <!-- <button  th:action="@{/travelfpoly/SaveOrderHotel}" -->
                                     <button
-                                        th:formaction="@{/travelfpoly/SaveOrderHotel/{HotelId}/{userId} (HotelId=${hotel.HotelId}, userId=${session.account != null ? session.account.UserId : '' })}"
+                                        th:formaction="@{/travelfpoly/cartOrderHotel/{HotelId}/{userId} (HotelId=${hotel.HotelId}, userId=${session.account != null ? session.account.UserId : '' })}"
                                         style="margin-top: 10px; padding: 10px 25px; background-color: orange; border-radius: 10px; border: solid 1px;  ">
                                         Tiếp tục
                                         đến Thanh Toán
