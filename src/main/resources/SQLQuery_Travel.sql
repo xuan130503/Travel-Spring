@@ -498,7 +498,7 @@ INSERT INTO hotel_images(hotel_id,avatar, image1, image2, image3, image4, image5
   select * from accounts
 	select * from tour_images
 	select * from tour_schedules
-	delete accounts where accounts.user_id = 12
+	delete accounts where accounts.user_id = 18
 INSERT INTO order_detail_tours (quantity_adult, quantity_children, price_adult, price_children, star_date, end_date, book_date, status, available, base64, tour_id, order_tour_id, account_id)
 VALUES 
 (2, 1, 100.0, 50.0, '2023-01-01', '2023-01-10', '2021-1-15', 1, 1, 'base64data1', 1, 1, 1),
@@ -537,3 +537,4 @@ VALUES
 
 	select @@version
 	Microsoft SQL Server 2019 (RTM) - 15.0.2000.5 (X64)   Sep 24 2019 13:48:23   Copyright (C) 2019 Microsoft Corporation  Developer Edition (64-bit) on Windows 10 Home 10.0 <X64> (Build 22621: ) 
+
