@@ -321,8 +321,18 @@
                                             <input type="date" name="checkout" hidden th:value="${checkout}">
                                         </div>
                                         <div class="col-md-6 mb-3">
-                                            <label><Span>Thành tiền : </Span>[[${hotel.price}]]</label>
+                                            <label><Span> Giá phòng/Ngày : </Span>[[${hotel.price}]]</label>
                                             <input type="text" name="price" hidden th:value="${hotel.price}">
+                                        </div>
+
+                                        <div class="col-md-6 mt-5">
+                                            <select class="form-select" th:name="paymentMethod"
+                                                aria-label="Default select example"
+                                                style="height:36px; border-radius:10px; font-size:18px;">
+                                                <option selected> Payment Methods</option>
+                                                <option th:each="payment : ${paymentMethods}" th:value="${payment.key}">
+                                                    [[${payment.value}]]</option>
+                                            </select>
                                         </div>
 
                                     </div>

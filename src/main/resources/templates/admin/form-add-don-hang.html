@@ -19,13 +19,13 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
-	<style type="text/css">
-		.template-a80 {
-            width: 240px!important;
-            padding: 14px;
-            margin:0 8px;
-        }
-	</style>
+  <style type="text/css">
+    .template-a80 {
+      width: 240px !important;
+      padding: 14px;
+      margin: 0 8px;
+    }
+  </style>
 </head>
 
 <body onload="time()" class="app sidebar-mini rtl" style="margin-top: 0;">
@@ -69,8 +69,8 @@
             <form class="row" th:object="${invoice}" th:method="post">
               <div class="form-group  col-md-4">
                 <label class="control-label">Mã tour</label>
-                <input th:name="orderDetailTourId" th:value="*{orderDetailTourId}" class="form-control" type="text" disabled
-                  required>
+                <input th:name="orderDetailTourId" th:value="*{orderDetailTourId}" class="form-control" type="text"
+                  disabled required>
               </div>
               <div class="form-group  col-md-4">
                 <label class="control-label">Điểm xuất phát</label>
@@ -123,12 +123,12 @@
                   <span th:if="${invoice.Status == 2}" style="color: #2dc26b; line-height: 22.4px;">Paid !</span>
                 </span>
               </div>
-              <button class="btn btn-primary" th:formaction="@{|/travelfpoly/admin/addorder/create/*{orderDetailTourId}|}" type="submit"
+              <button class="btn btn-primary"
+                th:formaction="@{|/travelfpoly/admin/addorder/create/*{orderDetailTourId}|}" type="submit"
                 style="margin-left: 15px;">Sửa</button>
-                <a href="/travelfpoly/admin/addorder">
-                	<button class="btn btn-cancel" type="submit"
-                	style="margin-left: 15px;">Làm mới</button>
-                </a>
+              <a href="/travelfpoly/admin/addorder">
+                <button class="btn btn-cancel" type="submit" style="margin-left: 15px;">Làm mới</button>
+              </a>
             </form>
 
           </div>
@@ -223,124 +223,249 @@
     </div>
   </div>
   <div class="content-template-child template-a80" style="display: none;" th:object="${invoice}">
-        <style>@media print { @page { margin: 0.2mm 1.4mm 0.2mm 1.4mm; font-family: Arial, Helvetica, sans-serif;  } p {margin: 5px} hr {margin: 3px} tbody.loop tr, tbody.loop td, table thead tr th { border: 1px solid #5a5a5a; } .border-none tbody.loop tr,.border-none tbody.loop td { border: none !important; }  .content-template-child .loop td{padding-left: 2px !important; padding-right: 2px !important} .content-template-child { font-family: Arial, Helvetica, sans-serif !important; } .content-template-child .table-loop .td { padding-left: 5px !important; }   .content-template-child .template-a58{ padding: 8px !important; } .content-template-child .template-a80{ padding: 8px !important; } .content-template-child .template-a4{ width: 210mm !important; padding: 8px !important; } .content-template-child .template-a5{ width: 148mm !important; padding: 8px !important; } .content-template-child .template-a6{ width: 105mm !important; padding: 8px !important; } .content-template-child table{ border-collapse: collapse !important; width: 100% !important; } .content-template-child figure.table { margin: 0 !important; width: 100% !important; margin-top: 10px !important; } .content-template-child figure.table p { margin: 0 !important; } .content-template-child img.barcode { max-width: 200px !important; } .content-template-child hr { border-color: black !important; border: unset !important; border-bottom: 1px solid !important; } .content-template-child .table tr td{padding: 5px 2px !important;} table tr td{padding: 3px 3px;} table {margin: 5px 0px !important;} .loop td > span {word-break: break-word;}}tbody.loop tr, tbody.loop td, table thead tr th { border: 1px solid #5a5a5a; }</style>
-        <table border="0" cellpadding="1" cellspacing="1" style="width: 100%;">
-            <tbody>
-                <tr class="ten_cua_hang">
-                    <td style="text-align: center;"><span style="font-family:Arial, Helvetica, sans-serif;font-size:14px;"><strong><span class="mention" data-mention="Misa eShop">Travel Fpoly</span> </strong> </span></td>
-                </tr>
-                <tr class="dia_chi_cua_hang">
-                    <td style="text-align: center;"><span style="font-family:Arial, Helvetica, sans-serif;font-size:11px;"><span class="mention" data-mention="521 Trương Định, Thịnh Liệt, Hoàng Mai, Hà Nội">Công viên Quang Trung, Quận 12, TP.HCM</span> </span></td>
-                </tr>
-                <tr class="sdt_cua_hang">
-                    <td style="text-align: center;"><span style="font-family:Arial, Helvetica, sans-serif;font-size:11px;">0977487714</span></td>
-                </tr>
-            </tbody>
-        </table>
-        
-        <table border="0" cellpadding="1" cellspacing="1" style="width: 100%;">
-            <tbody>
-                <tr>
-                    <td style="text-align: center;"><span style="font-family:Arial, Helvetica, sans-serif;font-size:14px;"><strong>HÓA ĐƠN</strong> </span></td>
-                </tr>
-                
-                <tr class="so_hoa_don">
-                    <td style="text-align: center;"><span style="font-family:Arial, Helvetica, sans-serif;font-size:11px;"><strong>Số: <span class="mention" data-mention="HHT-2012490013">[[*{orderDetailTourId}]]</span> </strong> </span><br>
-                    &nbsp;</td>
-                </tr>
-            </tbody>
-        </table>
-        
-        
-        <div style="display: flex;">
-            <table border="0" cellpadding="1" cellspacing="1" style="width:50%;">
-                <tbody>
-                    <tr class="ngay_bh_ddmmyy">
-                        <td id="ngayThangNamGio"></td>
-                    </tr>
-                    
-                    <tr class="ten_khach_hang">
-                        <td><span style="font-size:11px;"><strong>KH:</strong>[[*{CustomerName}]]</span></td>
-                    </tr>
-                    
-                    <tr class="so_dien_thoai_khach">
-                        <td><span style="font-size:11px;"><strong>SÐT:</strong> [[*{Phone}]]</span></td>
-                    </tr>
-                    <tr class="nhan_vien_bh">
-                        <td><span style="font-size:11px;"><strong>NVBH:</strong>tanduong</span></td>
-                    </tr>
-                </tbody>
-            </table>
-            <table border="0" cellpadding="1" cellspacing="1" style="width:50%;">
-                <tbody>
-                    <tr class="ngay_bh_ddmmyy">
-                        <td><img th:src="'data:image/png;base64,' + *{Base64}" width="100" height="100"></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <table border="0" cellpadding="1" cellspacing="1" style="width:100%;">
-            <tbody>
-                <tr class="ngay_giao_hang">
-                    <td><span style="font-size:11px;"><strong>Ngày đi:</strong> [[*{StartDate}]]</span></td>
-                </tr>
-                <tr class="ngay_giao_hang">
-                    <td><span style="font-size:11px;"><strong>Ngày về:</strong> [[*{EndDate}]]</span></td>
-                </tr>
-                <tr class="dia_chi_nguoi_nhan">
-                    <td><span style="font-size:11px;"><strong>Điểm xuất phát:</strong> [[*{Departure}]]</span></td>
-                </tr>
-                <tr class="dia_chi_nguoi_nhan">
-                    <td><span style="font-size:11px;"><strong>Điểm đến</strong> [[*{Destination}]]</span></td>
-                </tr>
-            </tbody>
-        </table>
-        <table border="1" cellpadding="1" cellspacing="1" style="width:100%;">
-            <tbody class="loop">
-                <tr>
-                    <td style="text-align: center;"><strong><span style="font-size:11px;">Tên Tour</span> </strong></td>
-                    <td style="text-align: center;"><strong><span style="font-size:11px;">SL</span> </strong></td>
-                    <td style="text-align: center;"><strong><span style="font-size:11px;">ÐG</span> </strong></td>
-                    <td style="text-align: center;"><strong><span style="font-size:11px;">TT</span> </strong></td>
-                </tr>
-                <tr>
-                    <td><span style="font-size:11px;">[[*{Destination}]]</span></td>
-                    <td style="text-align: center;"><span style="font-size:11px;">[[*{QuantityAdult}]] - Child: [[*{QuantityChildren}]]</span></td>
-                    <td style="text-align: right; "><span style="font-size:11px;">[[*{PriceAdult}]] - Child: [[*{PriceChildren}]]</span></td>
-                    <td style="text-align: right;"><span style="font-size:11px;">[[${total}]]</span></td>
-                </tr>
-            </tbody>
-        </table>
-        
-        <table border="0" cellpadding="1" cellspacing="1" style="width:100%;">
-            <tbody>
-                <tr>
-                    <td>
-                    <table border="0" cellpadding="1" cellspacing="1" style="width:100%;margin:0!important;">
-                        <tbody>
-                            <tr class="tong_so_luong_hang_mua">
-                                <td style="width: 50%;"><em><strong><span style="font-size:12px;">Tổng SL mua</span> </strong> </em></td>
-                                <td style="text-align: right;"><strong><span style="font-size:11px;">[[*{QuantityAdult} + *{QuantityChildren}]]</span> </strong></td>
-                            </tr>
-                            
-                            <tr class="ma_uu_dai">
-                                <td style="width: 50%;"><em><span style="font-size:12px;">&nbsp; &nbsp; &nbsp; &nbsp;Mã ưu đãi (SSBCSS22)</span> </em></td>
-                                <td style="text-align: right;"><em><span style="font-size:12px;">0</span> </em></td>
-                            </tr>
-                            <tr>
-                                <td style="width: 50%;"><strong><span style="font-size:14px;">Tổng thanh toán:</span> </strong></td>
-                                <td style="text-align: right;"><strong><span style="font-size:14px;">[[${total}]]</span> </strong></td>
-                            </tr>
-                            
-                            
-                        </tbody>
-                    </table>
-                    <p style="margin-left: auto; text-align: center;"><span style="font-size:12px;"><font face="Arial, Helvetica, sans-serif"><strong>Trân trọng cảm ơn!</strong> </font> </span></p>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+    <style>
+      @media print {
+        @page {
+          margin: 0.2mm 1.4mm 0.2mm 1.4mm;
+          font-family: Arial, Helvetica, sans-serif;
+        }
+
+        p {
+          margin: 5px
+        }
+
+        hr {
+          margin: 3px
+        }
+
+        tbody.loop tr,
+        tbody.loop td,
+        table thead tr th {
+          border: 1px solid #5a5a5a;
+        }
+
+        .border-none tbody.loop tr,
+        .border-none tbody.loop td {
+          border: none !important;
+        }
+
+        .content-template-child .loop td {
+          padding-left: 2px !important;
+          padding-right: 2px !important
+        }
+
+        .content-template-child {
+          font-family: Arial, Helvetica, sans-serif !important;
+        }
+
+        .content-template-child .table-loop .td {
+          padding-left: 5px !important;
+        }
+
+        .content-template-child .template-a58 {
+          padding: 8px !important;
+        }
+
+        .content-template-child .template-a80 {
+          padding: 8px !important;
+        }
+
+        .content-template-child .template-a4 {
+          width: 210mm !important;
+          padding: 8px !important;
+        }
+
+        .content-template-child .template-a5 {
+          width: 148mm !important;
+          padding: 8px !important;
+        }
+
+        .content-template-child .template-a6 {
+          width: 105mm !important;
+          padding: 8px !important;
+        }
+
+        .content-template-child table {
+          border-collapse: collapse !important;
+          width: 100% !important;
+        }
+
+        .content-template-child figure.table {
+          margin: 0 !important;
+          width: 100% !important;
+          margin-top: 10px !important;
+        }
+
+        .content-template-child figure.table p {
+          margin: 0 !important;
+        }
+
+        .content-template-child img.barcode {
+          max-width: 200px !important;
+        }
+
+        .content-template-child hr {
+          border-color: black !important;
+          border: unset !important;
+          border-bottom: 1px solid !important;
+        }
+
+        .content-template-child .table tr td {
+          padding: 5px 2px !important;
+        }
+
+        table tr td {
+          padding: 3px 3px;
+        }
+
+        table {
+          margin: 5px 0px !important;
+        }
+
+        .loop td>span {
+          word-break: break-word;
+        }
+      }
+
+      tbody.loop tr,
+      tbody.loop td,
+      table thead tr th {
+        border: 1px solid #5a5a5a;
+      }
+    </style>
+    <table border="0" cellpadding="1" cellspacing="1" style="width: 100%;">
+      <tbody>
+        <tr class="ten_cua_hang">
+          <td style="text-align: center;"><span
+              style="font-family:Arial, Helvetica, sans-serif;font-size:14px;"><strong><span class="mention"
+                  data-mention="Misa eShop">Travel Fpoly</span> </strong> </span></td>
+        </tr>
+        <tr class="dia_chi_cua_hang">
+          <td style="text-align: center;"><span style="font-family:Arial, Helvetica, sans-serif;font-size:11px;"><span
+                class="mention" data-mention="521 Trương Định, Thịnh Liệt, Hoàng Mai, Hà Nội">Công viên Quang Trung,
+                Quận 12, TP.HCM</span> </span></td>
+        </tr>
+        <tr class="sdt_cua_hang">
+          <td style="text-align: center;"><span
+              style="font-family:Arial, Helvetica, sans-serif;font-size:11px;">0977487714</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table border="0" cellpadding="1" cellspacing="1" style="width: 100%;">
+      <tbody>
+        <tr>
+          <td style="text-align: center;"><span
+              style="font-family:Arial, Helvetica, sans-serif;font-size:14px;"><strong>HÓA ĐƠN</strong> </span></td>
+        </tr>
+
+        <tr class="so_hoa_don">
+          <td style="text-align: center;"><span
+              style="font-family:Arial, Helvetica, sans-serif;font-size:11px;"><strong>Số: <span class="mention"
+                  data-mention="HHT-2012490013">[[*{orderDetailTourId}]]</span> </strong> </span><br>
+            &nbsp;</td>
+        </tr>
+      </tbody>
+    </table>
+
+
+    <div style="display: flex;">
+      <table border="0" cellpadding="1" cellspacing="1" style="width:50%;">
+        <tbody>
+          <tr class="ngay_bh_ddmmyy">
+            <td id="ngayThangNamGio"></td>
+          </tr>
+
+          <tr class="ten_khach_hang">
+            <td><span style="font-size:11px;"><strong>KH:</strong>[[*{CustomerName}]]</span></td>
+          </tr>
+
+          <tr class="so_dien_thoai_khach">
+            <td><span style="font-size:11px;"><strong>SÐT:</strong> [[*{Phone}]]</span></td>
+          </tr>
+          <tr class="nhan_vien_bh">
+            <td><span style="font-size:11px;"><strong>NVBH:</strong>tanduong</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <table border="0" cellpadding="1" cellspacing="1" style="width:50%;">
+        <tbody>
+          <tr class="ngay_bh_ddmmyy">
+            <td><img th:src="'data:image/png;base64,' + *{Base64}" width="100" height="100"></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
+    <table border="0" cellpadding="1" cellspacing="1" style="width:100%;">
+      <tbody>
+        <tr class="ngay_giao_hang">
+          <td><span style="font-size:11px;"><strong>Ngày đi:</strong> [[*{StartDate}]]</span></td>
+        </tr>
+        <tr class="ngay_giao_hang">
+          <td><span style="font-size:11px;"><strong>Ngày về:</strong> [[*{EndDate}]]</span></td>
+        </tr>
+        <tr class="dia_chi_nguoi_nhan">
+          <td><span style="font-size:11px;"><strong>Điểm xuất phát:</strong> [[*{Departure}]]</span></td>
+        </tr>
+        <tr class="dia_chi_nguoi_nhan">
+          <td><span style="font-size:11px;"><strong>Điểm đến</strong> [[*{Destination}]]</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <table border="1" cellpadding="1" cellspacing="1" style="width:100%;">
+      <tbody class="loop">
+        <tr>
+          <td style="text-align: center;"><strong><span style="font-size:11px;">Tên Tour</span> </strong></td>
+          <td style="text-align: center;"><strong><span style="font-size:11px;">SL</span> </strong></td>
+          <td style="text-align: center;"><strong><span style="font-size:11px;">ÐG</span> </strong></td>
+          <td style="text-align: center;"><strong><span style="font-size:11px;">TT</span> </strong></td>
+        </tr>
+        <tr>
+          <td><span style="font-size:11px;">[[*{Destination}]]</span></td>
+          <td style="text-align: center;"><span style="font-size:11px;">[[*{QuantityAdult}]] - Child:
+              [[*{QuantityChildren}]]</span></td>
+          <td style="text-align: right; "><span style="font-size:11px;">[[*{PriceAdult}]] - Child:
+              [[*{PriceChildren}]]</span></td>
+          <td style="text-align: right;"><span style="font-size:11px;">[[${total}]]</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table border="0" cellpadding="1" cellspacing="1" style="width:100%;">
+      <tbody>
+        <tr>
+          <td>
+            <table border="0" cellpadding="1" cellspacing="1" style="width:100%;margin:0!important;">
+              <tbody>
+                <tr class="tong_so_luong_hang_mua">
+                  <td style="width: 50%;"><em><strong><span style="font-size:12px;">Tổng SL mua</span> </strong> </em>
+                  </td>
+                  <td style="text-align: right;"><strong><span style="font-size:11px;">[[*{QuantityAdult} +
+                        *{QuantityChildren}]]</span> </strong></td>
+                </tr>
+
+                <tr class="ma_uu_dai">
+                  <td style="width: 50%;"><em><span style="font-size:12px;">&nbsp; &nbsp; &nbsp; &nbsp;Mã ưu đãi
+                        (SSBCSS22)</span> </em></td>
+                  <td style="text-align: right;"><em><span style="font-size:12px;">0</span> </em></td>
+                </tr>
+                <tr>
+                  <td style="width: 50%;"><strong><span style="font-size:14px;">Tổng thanh toán:</span> </strong></td>
+                  <td style="text-align: right;"><strong><span style="font-size:14px;">[[${total}]]</span> </strong>
+                  </td>
+                </tr>
+
+
+              </tbody>
+            </table>
+            <p style="margin-left: auto; text-align: center;"><span style="font-size:12px;">
+                <font face="Arial, Helvetica, sans-serif"><strong>Trân trọng cảm ơn!</strong> </font>
+              </span></p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
   <!--
   MODAL
 -->
@@ -349,7 +474,7 @@
       var contentToPrint = document.querySelector('.template-a80');
       const printWindow = window.open('', '_blank');
       printWindow.document.body.innerHTML = contentToPrint.innerHTML;
-      
+
       printWindow.document.close();
       setTimeout(() => {
         printWindow.print();
@@ -369,17 +494,17 @@
     });
   </script>
   <script>
-  // Hàm để lấy ngày và giờ hiện tại
-	  function layNgayGioHienTai() {
-	    var today = new Date();
-	    var date = today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear();
-	    var time = today.getHours() + ":" + today.getMinutes();
-	    return date + ' ' + time;
-	  }
-	
-	  // Đặt giá trị của thẻ td bằng ngày và giờ hiện tại
-	  document.getElementById('ngayThangNamGio').innerHTML = '<span style="font-size:11px;"><strong>Ngày:</strong> ' + layNgayGioHienTai() + '</span>';
-</script>
+    // Hàm để lấy ngày và giờ hiện tại
+    function layNgayGioHienTai() {
+      var today = new Date();
+      var date = today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear();
+      var time = today.getHours() + ":" + today.getMinutes();
+      return date + ' ' + time;
+    }
+
+    // Đặt giá trị của thẻ td bằng ngày và giờ hiện tại
+    document.getElementById('ngayThangNamGio').innerHTML = '<span style="font-size:11px;"><strong>Ngày:</strong> ' + layNgayGioHienTai() + '</span>';
+  </script>
   <!-- Essential javascripts for application to work-->
   <script src="/admin/js/jquery-3.2.1.min.js"></script>
   <script src="/admin/js/popper.min.js"></script>

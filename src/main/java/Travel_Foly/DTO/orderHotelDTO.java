@@ -21,4 +21,6 @@ public class orderHotelDTO {
     private String Name;
     private String Email;
     private String Phone;
+
+    private Double total;
 }

@@ -30,6 +30,8 @@ public class OrderDetailHotel {
 	@Column(columnDefinition = "nvarchar(max)")
 	private String Base64;
 
+	private Double total;
+
 	// for 4 states: Booked, unpaid, paid, remove
 	private Integer Status;
 	private Date BookDate;
