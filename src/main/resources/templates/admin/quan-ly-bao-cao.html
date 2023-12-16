@@ -348,44 +348,107 @@
 	    /*<![CDATA[*/
 		var revenueYearData = /*[[${revenueYear}]]*/ [];
 		var revenueHotelYearData = /*[[${revenueHotelYear}]]*/ [];
-		console.log(revenueHotelYearData);
+		var quantityTourYear = /*[[${quantityTourYear}]]*/ [];
+		var quantityHotelYear = /*[[${quantityHotelYear}]]*/ [];
 		/*]]>*/
 		const dataYear1 = [];
 
 		revenueYearData.forEach(item => {
 		    const existingYear = dataYear1.find(dataItem => dataItem.year === item.year);
-		
+
 		    if (existingYear) {
 		        if (item.month > 0 && item.month <= 12) {
 		            existingYear.data1[item.month - 1] = item.totalRevenue || 0;
-		            existingYear.data2[item.month - 1] = item.totalRevenue * 2 || 0;
-		            existingYear.data3[item.month - 1] = item.totalRevenue * 3 || 0;
-		            existingYear.data4[item.month - 1] = item.totalRevenue * 4 || 0;
 		        }
 		    } else {
-		        // Nếu năm chưa tồn tại, thêm một đối tượng mới vào mảng dataYear
 		        const newData1 = Array(12).fill(0);
-		        const newData2 = Array(12).fill(0);
-		        const newData3 = Array(12).fill(0);
-		        const newData4 = Array(12).fill(0);
-		
+
 		        if (item.month > 0 && item.month <= 12) {
 		            newData1[item.month - 1] = item.totalRevenue || 0;
-		            newData2[item.month - 1] = item.totalRevenue * 2 || 0;
-		            newData3[item.month - 1] = item.totalRevenue * 3 || 0;
-		            newData4[item.month - 1] = item.totalRevenue * 4 || 0;
 		        }
-		
+
 		        dataYear1.push({
 		            year: item.year,
 		            data1: newData1,
+		            data2: Array(12).fill(0),
+		            data3: Array(12).fill(0),
+		            data4: Array(12).fill(0)
+		        });
+		    }
+		});
+
+		revenueHotelYearData.forEach(item => {
+		    const existingYear = dataYear1.find(dataItem => dataItem.year === item.year);
+
+		    if (existingYear) {
+		        if (item.month > 0 && item.month <= 12) {
+		            existingYear.data2[item.month - 1] = item.totalRevenue || 0;
+		        }
+		    } else {
+		        const newData2 = Array(12).fill(0);
+
+		        if (item.month > 0 && item.month <= 12) {
+		            newData2[item.month - 1] = item.totalRevenue || 0;
+		        }
+
+		        dataYear1.push({
+		            year: item.year,
+		            data1: Array(12).fill(0),
 		            data2: newData2,
-		            data3: newData3,
-		            data4: newData4
+		            data3: Array(12).fill(0),
+		            data4: Array(12).fill(0)
 		        });
 		    }
 		});
 		
+		quantityTourYear.forEach(item => {
+		    const existingYear = dataYear1.find(dataItem => dataItem.year === item.year);
+
+		    if (existingYear) {
+		        if (item.month > 0 && item.month <= 12) {
+		            existingYear.data3[item.month - 1] = item.totalRevenue || 0;
+		        }
+		    } else {
+		        const newData2 = Array(12).fill(0);
+
+		        if (item.month > 0 && item.month <= 12) {
+		            newData3[item.month - 1] = item.totalRevenue || 0;
+		        }
+
+		        dataYear1.push({
+		            year: item.year,
+		            data1: Array(12).fill(0),
+		            data2: Array(12).fill(0),
+		            data3: newData3,
+		            data4: Array(12).fill(0)
+		        });
+		    }
+		});
+		
+		quantityHotelYear.forEach(item => {
+		    const existingYear = dataYear1.find(dataItem => dataItem.year === item.year);
+
+		    if (existingYear) {
+		        if (item.month > 0 && item.month <= 12) {
+		            existingYear.data4[item.month - 1] = item.totalRevenue || 0;
+		        }
+		    } else {
+		        const newData2 = Array(12).fill(0);
+
+		        if (item.month > 0 && item.month <= 12) {
+		            newData4[item.month - 1] = item.totalRevenue || 0;
+		        }
+
+		        dataYear1.push({
+		            year: item.year,
+		            data1: Array(12).fill(0),
+		            data2: Array(12).fill(0),
+		            data3: Array(12).fill(0),
+		            data4: newData4
+		        });
+		    }
+		});
+
 		console.log(dataYear1);
 	  	
 	    const dataPoints1= [1,4,3,34,56,6,68,1,4,3,34,56];
@@ -419,7 +482,7 @@
 	      },
 	      {
 	        type: 'line',
-	        label: 'Số lượng Tour',
+	        label: 'Số lượng Tour được mua',
 	        data: dataPoints3,
 	        backgroundColor: [
 	          'rgba(255, 26, 104, 0.2)'
@@ -431,7 +494,7 @@
 	      },
 	      {
 	        type: 'line',
-	        label: 'Số lượng Hotel',
+	        label: 'Số lượng Hotel được mua',
 	        data: dataPoints4,
 	        backgroundColor: [
 	          'rgba(54, 162, 235, 0.2)'

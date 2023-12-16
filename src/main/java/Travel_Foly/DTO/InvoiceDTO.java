@@ -14,6 +14,7 @@ public class InvoiceDTO {
 	private String CustomerName;
 	private String Email;
 	private String Phone;
+	private String TourName;
 	private String Departure;
 	private String Destination;
 	private Integer Duration;
@@ -21,6 +22,7 @@ public class InvoiceDTO {
 	private Double PriceChildren;
 	private Integer QuantityAdult;
 	private Integer QuantityChildren;
+	private Double Total;
 	private Date StartDate;
 	private Date EndDate;
 	private String Base64;

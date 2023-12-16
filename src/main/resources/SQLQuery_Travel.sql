@@ -20,12 +20,13 @@ use Travel;
 	 --1234
 	 ('vantu003','$2a$12$a1rIDHNWRd/GhUCmOhJW6.0SrxFaF/gNSTESrULuey.ble4fCbSES', 1, N'168 Võ Văn Kiệt', 21, 'vantu@gmail.com', 'Tô Vân Tú', '0785123655',1,null)
 	-- Thêm loại tours
-	INSERT INTO category_tours (name) 
+	select * from category_tours
+	INSERT INTO category_tours (name,avatar) 
 	VALUES
-    (N'Thiên nhiên'),
-    (N'Di tích lịch sử'),
-    (N'Mạo hiểm'),
-    (N'Nghỉ dưỡng');
+    (N'Thiên nhiên','https://res.cloudinary.com/dpyp2vvdm/image/upload/v1689940609/Travel_FPoly/Image_Tourism/Ha_Long_Bay/image2.jpg'),
+    (N'Di tích lịch sử','https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018361/Travel_FPoly/Image_Tourism/Old_City_HoiAn/avatar.jpg'),
+    (N'Mạo hiểm','https://res.cloudinary.com/dpyp2vvdm/image/upload/v1691214448/Travel_FPoly/Image_Tourism/TayBac/image1.jpg'),
+    (N'Nghỉ dưỡng','https://res.cloudinary.com/dpyp2vvdm/image/upload/v1690018095/Travel_FPoly/Image_Tourism/Da_Nang/image9.jpg');
 	/* */
 	--Thêm tour
 	select * from tours
@@ -495,10 +496,11 @@ INSERT INTO hotel_images(hotel_id,avatar, image1, image2, image3, image4, image5
   select *from order_detail_tours
   select * from category_tours
   select * from tours
+   select * from cart_items
   select * from accounts
 	select * from tour_images
 	select * from tour_schedules
-	delete accounts where accounts.user_id = 18
+	delete accounts where accounts.user_id = 24
 INSERT INTO order_detail_tours (quantity_adult, quantity_children, price_adult, price_children, star_date, end_date, book_date, status, available, base64, tour_id, order_tour_id, account_id)
 VALUES 
 (2, 1, 100.0, 50.0, '2023-01-01', '2023-01-10', '2021-1-15', 1, 1, 'base64data1', 1, 1, 1),

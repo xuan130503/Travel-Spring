@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class orderHotelDTO {
     private Integer OrderDetailHotelId;
+    private String NameHotel;
     private Date CheckIn;
     private Date CheckOut;
     private Integer Quantity;

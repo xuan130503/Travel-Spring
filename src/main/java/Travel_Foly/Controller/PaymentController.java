@@ -26,6 +26,7 @@ import Travel_Foly.DAO.OrderDetailTourDAO;
 import Travel_Foly.DTO.InvoiceDTO;
 import Travel_Foly.DTO.OrderDetailTourDTO;
 import Travel_Foly.DTO.orderHotelDTO;
+import Travel_Foly.Model.OrderDetailHotel;
 import Travel_Foly.Model.OrderDetailTour;
 import Travel_Foly.Service.SessionService;
 
@@ -53,8 +54,7 @@ public class PaymentController {
 		InvoiceDTO invoice = orderDetailTourDao.detailInvoice(id);
 		List<Integer> listOrderId = new ArrayList<>();
 		listOrderId.add(id);
-		Double total = (invoice.getPriceAdult() * invoice.getQuantityAdult())
-				+ (invoice.getPriceChildren() * invoice.getQuantityChildren());
+		Double total = invoice.getTotal();
 		model.addAttribute("name", invoice.getDestination());
 		model.addAttribute("total", total);
 		session.setAttribute("tourId", listOrderId);
@@ -68,9 +68,9 @@ public class PaymentController {
 		List<Integer> listOrderId = new ArrayList<>();
 		listOrderId.add(id);
 		Double total = order.getTotal();
-		model.addAttribute("name", order.getName());
+		model.addAttribute("name", order.getNameHotel());
 		model.addAttribute("total", total);
-		session.setAttribute("tourId", listOrderId);
+		session.setAttribute("hotelId", listOrderId);
 		return "user/payment";
 	}
 
@@ -85,12 +85,11 @@ public class PaymentController {
 		Double total = 0.0;
 		for (Integer index : listOrderId) {
 			InvoiceDTO invoice = orderDetailTourDao.detailInvoice(index);
-			total += (invoice.getPriceAdult() * invoice.getQuantityAdult())
-					+ (invoice.getPriceChildren() * invoice.getQuantityChildren());
+			total += invoice.getTotal();
 			if (nameBuilder.length() > 0) {
 				nameBuilder.append("-");
 			}
-			nameBuilder.append(invoice.getDestination());
+			nameBuilder.append(invoice.getTourName());
 		}
 		System.out.println("Total:" + total);
 		System.out.println("Name" + nameBuilder);
@@ -163,14 +162,27 @@ public class PaymentController {
 		System.out.println("PaymentId:" + paymentId);
 		System.out.println("PayerId:" + payerId);
 		// send mail
-		List<Integer> id = session.getAttribute("tourId");
-		for (Integer index : id) {
-			OrderDetailTour order = orderDetailTourDao.findByOrderDetailTourId(index);
-			order.setStatus(2);
-			orderDetailTourDao.save(order);
-			InvoiceDTO invoice = orderDetailTourDao.detailInvoice(index);
-			mailService.sendMailWithCustomer(invoice);
+		List<Integer> id = new ArrayList<>();
+		if(session.getAttribute("tourId")!=null) {
+			id = session.getAttribute("tourId");
+			for (Integer index : id) {
+				OrderDetailTour order = orderDetailTourDao.findByOrderDetailTourId(index);
+				order.setStatus(2);
+				orderDetailTourDao.save(order);
+				InvoiceDTO invoice = orderDetailTourDao.detailInvoice(index);
+				mailService.sendMailWithCustomer(invoice);
+			}
 		}
+		if(session.getAttribute("hotelId")!=null) {
+			for (Integer index : id) {
+				OrderDetailHotel order = orderDetailHotelDAO.findOneById(index);
+				order.setStatus(2);
+				orderDetailHotelDAO.save(order);
+				orderHotelDTO invoice = orderDetailHotelDAO.OrderdetailHotelInvoice(index);
+				mailService.sendMailwithCustomerOrderHotel(invoice);
+			}
+		}
+		
 		Date date = new Date();
 		try {
 			Payment payment = paymentService.executePayment(paymentId, payerId);
