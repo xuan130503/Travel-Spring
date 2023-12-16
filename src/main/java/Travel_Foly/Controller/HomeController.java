@@ -361,6 +361,7 @@ public class HomeController {
 		Integer userId = account.getUserId();
 		Account user = accountDao.findById(userId).get();
 		List<Integer> listOrderId = new ArrayList<>();
+		
 		for (Integer item : selectedItems.getSelectedItems()) {
 
 			OrderTour order = new OrderTour();
@@ -372,7 +373,7 @@ public class HomeController {
 
 			CartItem cart = new CartItem();
 			OrderDetailTour orderDetail = new OrderDetailTour();
-			cart = cartItemDao.findById(item).get();
+			cart = cartItemDao.findOneCartItemId(item);
 
 			orderDetail.setStarDate(cart.getStartDate());
 			orderDetail.setEndDate(cart.getEndDate());
@@ -384,6 +385,7 @@ public class HomeController {
 			orderDetail.setQuantityAdult(cart.getQuantityAdult());
 			orderDetail.setQuantityChildren(cart.getQuantityChildren());
 			orderDetail.setOrderDetailTour(cart.getTourId());
+			orderDetail.setTotal(( cart.getTourId().getPriceAdult() * cart.getQuantityAdult())+( cart.getTourId().getPriceChildren() * cart.getQuantityChildren() ));
 			orderDetail.setOrderTour(order);
 			orderDetail.setUserOrder(user);
 			orderDetail = orderDetailTourDao.saveAndFlush(orderDetail);
@@ -411,7 +413,7 @@ public class HomeController {
 		if (selectedItems.getPayment().equals("paypal")) {
 			for (Integer invoice : listOrderId) {
 				OrderDetailTour detail = orderDetailTourDao.findById(invoice).get();
-				detail.setStatus(2);
+				detail.setStatus(1);
 				orderDetailTourDao.save(detail);
 			}
 			String redirectUrl = "/travelfpoly/payment/listOrder?listOrderId="
@@ -422,12 +424,12 @@ public class HomeController {
 		if (selectedItems.getPayment().equals("vnpay")) {
 			for (Integer invoice : listOrderId) {
 				OrderDetailTour detail = orderDetailTourDao.findById(invoice).get();
-				detail.setStatus(2);
+				detail.setStatus(1);
 				orderDetailTourDao.save(detail);
 			}
-			String redirectUrl = "/travelfpoly/payment/listOrder?listOrderId="
+			String redirectUrl = "/travelfpoly/payment/vnpay/paylist?listOrderId="
 					+ StringUtils.collectionToCommaDelimitedString(listOrderId);
-			return ResponseEntity.ok("redirect:/user/order?listOrderId=" + redirectUrl);
+			return ResponseEntity.ok(redirectUrl);
 		}
 
 		return ResponseEntity.ok("/travelfpoly/order");
@@ -628,6 +630,7 @@ public class HomeController {
 				orderDetail.setAvailable(true);
 				orderDetail.setQuantityAdult(quantityAdult);
 				orderDetail.setQuantityChildren(quantityChildren);
+				orderDetail.setTotal( (quantityAdult * tour.getPriceAdult())+ (quantityChildren * tour.getPriceChildren()) );
 				orderDetail.setOrderDetailTour(tour);
 				orderDetail.setOrderTour(order);
 				orderDetail.setUserOrder(account);
@@ -640,7 +643,7 @@ public class HomeController {
 				tour.setQuantityAdult(tour.getQuantityAdult() - orderDetail.getQuantityAdult());
 				tour.setQuantityChildren(tour.getQuantityChildren() - orderDetail.getQuantityChildren());
 				tourDao.save(tour);
-
+				
 				if (paymentMethod.equals("paypal")) {
 					OrderDetailTour detail = orderDetailTourDao.findById(orderDetail.getOrderDetailTourId()).get();
 					detail.setStatus(1);
@@ -653,13 +656,10 @@ public class HomeController {
 					orderDetailTourDao.save(detail);
 					return "redirect:/travelfpoly/payment/vnpay/pay?id=" + orderDetail.getOrderDetailTourId();
 				}
+				
 				InvoiceDTO invoice = orderDetailTourDao.detailInvoice(orderDetail.getOrderDetailTourId());
 				mailService.sendMailWithCustomer(invoice);
 
-				// set quantity Tour
-				tour.setQuantityAdult(tour.getQuantityAdult() - quantityAdult);
-				tour.setQuantityChildren(tour.getQuantityChildren() - quantityChildren);
-				tourDao.save(tour);
 
 				return "redirect:/travelfpoly/order";
 			}
@@ -836,15 +836,13 @@ public class HomeController {
 			orderDetailHotel.setTotal((double) daysBetween * price);
 			orderDetailHotelDAO.save(orderDetailHotel);
 
-			orderHotelDTO order = orderDetailHotelDAO.OrderdetailHotelInvoice(orderDetailHotel.getOrderDetailHotelId());
-			mailService.sendMailwithCustomerOrderHotel(order);
 
 			if (paymentMethod.equals("paypal")) {
 				OrderDetailHotel orderhotel = orderDetailHotelDAO
 						.findById(orderDetailHotel.getOrderDetailHotelId()).get();
 				orderDetailHotel.setStatus(2);
 				orderDetailHotelDAO.save(orderhotel);
-				return "redirect:/travelfpoly/payment/index?id=" +
+				return "redirect:/travelfpoly/payment/paypalhotel?id=" +
 						orderDetailHotel.getOrderDetailHotelId();
 			}
 			if (paymentMethod.equals("vnpay")) {
@@ -852,10 +850,13 @@ public class HomeController {
 						.findById(orderDetailHotel.getOrderDetailHotelId()).get();
 				orderDetailHotel.setStatus(0);
 				orderDetailHotelDAO.save(orderhotel);
-				return "redirect:/travelfpoly/payment/vnpay/pay?id=" +
+				return "redirect:/travelfpoly/payment/vnpay/payhotel?id=" +
 						orderDetailHotel.getOrderDetailHotelId();
 			}
-
+			
+			orderHotelDTO order = orderDetailHotelDAO.OrderdetailHotelInvoice(orderDetailHotel.getOrderDetailHotelId());
+			mailService.sendMailwithCustomerOrderHotel(order);
+			
 			return "redirect:/travelfpoly/hotel";
 		} catch (Exception e) {
 			e.getStackTrace();

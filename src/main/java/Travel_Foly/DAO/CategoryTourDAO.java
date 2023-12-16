@@ -9,11 +9,10 @@ import org.springframework.stereotype.Repository;
 import Travel_Foly.Model.CategoryTour;
 @Repository
 public interface CategoryTourDAO extends JpaRepository<CategoryTour,Integer>{
-	@Query("Select c.CategoryTourId, c.Name, img.Avatar, count(t.TourId) From CategoryTour c "
-			+ "Join Tour t On t.Tour.CategoryTourId = c.CategoryTourId "
-			+ "Join TourImage img On img.TourImage.TourId = t.TourId "
-			+ "Group By c.CategoryTourId, c.Name, img.Avatar, t.TourId "
-			+ "Order By Rand()"
-			)
-	List<Object[]> findAllCategory();
+	@Query("SELECT c.CategoryTourId, c.Name, c.Avatar, COUNT(t.TourId) AS quantity " +
+		       "FROM CategoryTour c " +
+		       "JOIN Tour t ON t.Tour.CategoryTourId = c.CategoryTourId " +
+		       "GROUP BY c.CategoryTourId, c.Name, c.Avatar " +
+		       "ORDER BY quantity DESC")
+		List<Object[]> findAllCategory();
 }
