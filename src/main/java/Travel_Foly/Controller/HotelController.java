@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import Travel_Foly.DAO.HotelImageDAO;
 import Travel_Foly.Model.Hotel;
 import Travel_Foly.Model.HotelImage;
+import Travel_Foly.Model.TourImage;
 import Travel_Foly.Service.FileUpload;
 import Travel_Foly.Service.HotelService;
 
@@ -47,7 +48,7 @@ public class HotelController {
             @RequestParam("images") List<MultipartFile> images
 
     ) throws Exception {
-        hotelService.addHotel(hotel);
+        this.hotelService.addHotel(hotel);
         String image = fileUpload.uploadWithNameHotel(image1, hotel.getName(), "avatar");
         List<String> listImageName = fileUpload.uploadHotel(images, hotel.getName());
         HotelImage hotelImage = new HotelImage();
@@ -58,6 +59,10 @@ public class HotelController {
         hotelImage.setImage4(listImageName.get(3));
         hotelImage.setImage5(listImageName.get(4));
         hotelImage.setImage6(listImageName.get(5));
+        hotelImage.setImage7(listImageName.get(6));
+        hotelImage.setImage8(listImageName.get(7));
+        hotelImage.setImage9(listImageName.get(8));
+        hotelImage.setImage10(listImageName.get(9));
         hotelImage.setHotelImage(hotel);
         this.hotelImageDAO.save(hotelImage);
 
@@ -73,9 +78,10 @@ public class HotelController {
         return "admin/Hotel";
     }
 
-    @GetMapping("deleteHotel/{HotelId}")
-    public String deleteHotel(@PathVariable Integer HotelId) {
+    @GetMapping("deleteHotel/{HotelId}/{HotelImageId}")
+    public String deleteHotel(@PathVariable Integer HotelId, @PathVariable Integer HotelImageId) {
+        this.hotelImageDAO.deleteById(HotelImageId);
         this.hotelService.deleteHotel(HotelId);
-        return "riderect:/travelfpoly/admin/hotel";
+        return "redirect:/travelfpoly/admin/hotel";
     }
 }

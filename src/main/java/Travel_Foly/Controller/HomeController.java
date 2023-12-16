@@ -646,13 +646,13 @@ public class HomeController {
 				
 				if (paymentMethod.equals("paypal")) {
 					OrderDetailTour detail = orderDetailTourDao.findById(orderDetail.getOrderDetailTourId()).get();
-					detail.setStatus(1);
+					detail.setStatus(2);
 					orderDetailTourDao.save(detail);
 					return "redirect:/travelfpoly/payment/index?id=" + orderDetail.getOrderDetailTourId();
 				}
 				if (paymentMethod.equals("vnpay")) {
 					OrderDetailTour detail = orderDetailTourDao.findById(orderDetail.getOrderDetailTourId()).get();
-					detail.setStatus(1);
+					detail.setStatus(2);
 					orderDetailTourDao.save(detail);
 					return "redirect:/travelfpoly/payment/vnpay/pay?id=" + orderDetail.getOrderDetailTourId();
 				}
@@ -773,12 +773,12 @@ public class HomeController {
 		HotelImage hotelImage = hotelImageDAO.findById(id).orElse(null);
 		List<TourSchedule> schedules = tourScheduleDao.findByTourId(id);
 
-		Map<String, String> paymentMethods = new HashMap<>();
-		paymentMethods.put("cash", "Payment in cash");
-		paymentMethods.put("paypal", "PayPal");
-		paymentMethods.put("vnpay", "VN Pay");
+		// Map<String, String> paymentMethods = new HashMap<>();
+		// paymentMethods.put("cash", "Payment in cash");
+		// paymentMethods.put("paypal", "PayPal");
+		// paymentMethods.put("vnpay", "VN Pay");
 
-		model.addAttribute("paymentMethods", paymentMethods);
+		// model.addAttribute("paymentMethods", paymentMethods);
 
 		model.addAttribute("schedules", schedules);
 		model.addAttribute("hotel", hotel);
@@ -826,7 +826,7 @@ public class HomeController {
 			orderDetailHotel.setPrice(price);
 			orderDetailHotel.setQuantity(1);
 			orderDetailHotel.setBookDate(DateHelper.converDateSql(BookingDate));
-			orderDetailHotel.setStatus(1);
+			orderDetailHotel.setStatus(0);
 			orderDetailHotel.setOrderHotel(orderHotel);
 			orderDetailHotel.setAccount(account);
 			orderDetailHotel.setOrderDetailHotel(hotelDao.findById(UserId).get());
@@ -835,7 +835,6 @@ public class HomeController {
 					base64Service.generateQRCodeAndEncodeToBase64Hotel(orderDetailHotel.getOrderDetailHotelId()));
 			orderDetailHotel.setTotal((double) daysBetween * price);
 			orderDetailHotelDAO.save(orderDetailHotel);
-
 
 			if (paymentMethod.equals("paypal")) {
 				OrderDetailHotel orderhotel = orderDetailHotelDAO
@@ -856,7 +855,7 @@ public class HomeController {
 			
 			orderHotelDTO order = orderDetailHotelDAO.OrderdetailHotelInvoice(orderDetailHotel.getOrderDetailHotelId());
 			mailService.sendMailwithCustomerOrderHotel(order);
-			
+
 			return "redirect:/travelfpoly/hotel";
 		} catch (Exception e) {
 			e.getStackTrace();

@@ -83,6 +83,10 @@ public class TourController {
         tourImage.setImage4(listImageName.get(3));
         tourImage.setImage5(listImageName.get(4));
         tourImage.setImage6(listImageName.get(5));
+        tourImage.setImage7(listImageName.get(6));
+        tourImage.setImage8(listImageName.get(7));
+        tourImage.setImage9(listImageName.get(8));
+        tourImage.setImage10(listImageName.get(9));
         tourImage.setTourImage(tour);
         this.tourImageDao.save(tourImage);
 
@@ -107,9 +111,11 @@ public class TourController {
         return "admin/form-add-san-pham";
     }
 
-    @GetMapping("deleteTour/{TourId}")
-    public String deleteTour(@PathVariable("TourId") Integer TourId) {
+    @GetMapping("deleteTour/{TourId}/{TourImageId}")
+    public String deleteTour(@PathVariable("TourId") Integer TourId, @PathVariable("TourImageId") Integer TourImageId) {
+        this.tourImageDao.deleteById(TourImageId);
         this.tourService.deleteTour(TourId);
+
         return "redirect:/travelfpoly/admin/tour";
 
     }
