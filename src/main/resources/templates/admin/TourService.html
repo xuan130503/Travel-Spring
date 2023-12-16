@@ -115,16 +115,15 @@
                                     <td th:text="${tourServices.Name}"></td>
                                     <td th:text="${tourServices.Description}"></td>
                                     <td th:text="${tourServices.Surcharge}"></td>
-
-
                                     <td>
                                         <a
                                             th:href="@{/travelfpoly/admin/updateTourService/{TourServiceId}(TourServiceId=${tourServices.TourServiceId})}">
-                                            <i class="fas fa-pen-square"></i>
+                                            <iconify-icon style="font-size: 18px;"
+                                                icon="grommet-icons:document-update"></iconify-icon>
                                         </a>
                                         <a
                                             th:href="@{/travelfpoly/admin/deleteTourService/{TourServiceId}(TourServiceId=${tourServices.TourServiceId})}">
-                                            <i class="fas fa-trash-alt"></i>
+                                            <iconify-icon style="font-size: 18px;" icon="mi:delete"></iconify-icon>
                                         </a>
                                     </td>
                                 </tr>

@@ -19,6 +19,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script>
 
     function readURL(input, thumbimage) {
@@ -81,64 +83,96 @@
 
           <h3 class="tile-title">Tạo mới nhân viên</h3>
           <div class="tile-body">
-            <div class="row element-button">
+            <!-- <div class="row element-button">
               <div class="col-sm-2">
                 <a class="btn btn-add btn-sm" data-toggle="modal" data-target="#exampleModalCenter"><b><i
                       class="fas fa-folder-plus"></i> Tạo chức vụ mới</b></a>
               </div>
 
+            </div> -->
+
+            <div class="container mt-3">
+
+
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+                Thêm nhân viên
+              </button>
             </div>
-            <form class="row" th:object="${account}" th:method="post" enctype="multipart/form-data">
-              <div class="form-group  col-md-4">
-                <label class="control-label">User name</label>
-                <input th:name="username" th:value="*{username}" class="form-control" type="text" required>
-              </div>
-              <div class="form-group  col-md-4">
-                <label class="control-label">Password</label>
-                <input th:name="password" th:value="*{password}" class="form-control" type="password" required>
-              </div>
-              <div class="form-group col-md-4">
-                <label class="control-label">Họ và tên</label>
-                <input th:name="fullname" th:value="*{FullName}" class="form-control" type="text" required>
-              </div>
-              <div class="form-group col-md-4">
-                <label class="control-label">Địa chỉ email</label>
-                <input th:name="email" th:value="*{Email}" class="form-control" type="text" required>
-              </div>
-              <div class="form-group col-md-4">
-                <label class="control-label">Địa chỉ thường trú</label>
-                <input th:name="address" th:value="*{Address}" class="form-control" type="text" required>
-              </div>
-              <div class="form-group  col-md-4">
-                <label class="control-label">Số điện thoại</label>
-                <input th:name="phone" th:value="*{Phone}" class="form-control" type="number" required>
-              </div>
-              <div class="form-group col-md-4">
-                <label class="control-label">Tuổi</label>
-                <input th:name="age" th:value="*{Age}" class="form-control" type="text">
-              </div>
-              <div class="form-group col-md-12">
-                <label class="control-label">Ảnh sản phẩm</label>
-                <div id="myfileupload">
-                  <input type="file" id="uploadfile" th:name="image" onchange="readURL(this);" />
-                </div>
-                <div id="thumbbox">
-                  <img height="150" width="100" th:src="@{/images/{img}# (img=*{Image})}" alt="Thumb image" />
-                </div>
-                <div id="boxchoice">
-                  <a href="javascript:" class="Choicefile"><i class="fas fa-cloud-upload-alt"></i> Chọn ảnh</a>
-                  <p style="clear:both"></p>
-                </div>
 
-              </div>
+            <!-- The Modal -->
+            <div class="modal" id="myModal">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
 
-              <button class="btn btn-save" th:formaction="@{/travelfpoly/admin/addstaff/create}" type="submit"
-                style="margin-left: 15px;">Lưu</button>
-              <button class="btn btn-primary" th:formaction="@{/travelfpoly/admin/addstaff/create}" type="submit"
-                style="margin-left: 15px;">Sửa</button>
-              <button class="btn btn-cancel" th:formaction="@{/travelfpoly/admin/addstaff}" type="submit"
-                style="margin-left: 15px;">Làm mới</button>
-            </form>
+                  <!-- Modal Header -->
+                  <div class="modal-header">
+                    <h4 class="modal-title">Modal Heading</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                  </div>
+
+                  <!-- Modal body -->
+                  <div class="modal-body">
+                    <form class="row" th:object="${account}" th:method="post" enctype="multipart/form-data">
+                      <div class="form-group  col-md-4">
+                        <label class="control-label">User name</label>
+                        <input th:name="username" th:value="*{username}" class="form-control" type="text" required>
+                      </div>
+                      <div class="form-group  col-md-4">
+                        <label class="control-label">Password</label>
+                        <input th:name="password" th:value="*{password}" class="form-control" type="password" required>
+                      </div>
+                      <div class="form-group col-md-4">
+                        <label class="control-label">Họ và tên</label>
+                        <input th:name="fullname" th:value="*{FullName}" class="form-control" type="text" required>
+                      </div>
+                      <div class="form-group col-md-4">
+                        <label class="control-label">Địa chỉ email</label>
+                        <input th:name="email" th:value="*{Email}" class="form-control" type="text" required>
+                      </div>
+                      <div class="form-group col-md-4">
+                        <label class="control-label">Địa chỉ thường trú</label>
+                        <input th:name="address" th:value="*{Address}" class="form-control" type="text" required>
+                      </div>
+                      <div class="form-group  col-md-4">
+                        <label class="control-label">Số điện thoại</label>
+                        <input th:name="phone" th:value="*{Phone}" class="form-control" type="number" required>
+                      </div>
+                      <div class="form-group col-md-4">
+                        <label class="control-label">Tuổi</label>
+                        <input th:name="age" th:value="*{Age}" class="form-control" type="text">
+                      </div>
+                      <div class="form-group col-md-12">
+                        <label class="control-label">Ảnh sản phẩm</label>
+                        <div id="myfileupload">
+                          <input type="file" id="uploadfile" th:name="image" onchange="readURL(this);" />
+                        </div>
+                        <div id="thumbbox">
+                          <img height="150" width="100" th:src="@{/images/{img}# (img=*{Image})}" alt="Thumb image" />
+                        </div>
+                        <div id="boxchoice">
+                          <a href="javascript:" class="Choicefile"><i class="fas fa-cloud-upload-alt"></i> Chọn ảnh</a>
+                          <p style="clear:both"></p>
+                        </div>
+
+                      </div>
+
+                      <button class="btn btn-primary" th:formaction="@{/travelfpoly/admin/addstaff/create}"
+                        type="submit">Lưu</button>
+                      <button class="btn btn-warning" th:formaction="@{/travelfpoly/admin/addstaff/create}"
+                        type="submit">Sửa</button>
+                      <button class="btn btn-success" th:formaction="@{/travelfpoly/admin/addstaff}" type="submit">Làm
+                        mới</button>
+                    </form>
+                  </div>
+
+                  <!-- Modal footer -->
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                  </div>
+
+                </div>
+              </div>
+            </div>
 
           </div>
 
@@ -164,10 +198,10 @@
                 <td>[[${account.Age}]]</td>
                 <td>
                   <a th:href="@{|/travelfpoly/admin/addstaff/${account.UserId}|}">
-                    <i class="fas fa-pen-square"></i>
+                    <iconify-icon style="font-size: 18px;" icon="grommet-icons:document-update"></iconify-icon>
                   </a>
                   <a th:href="@{|/travelfpoly/admin/addstaff/delete/${account.UserId}|}">
-                    <i class="fas fa-trash-alt"></i>
+                    <iconify-icon style="font-size: 18px;" icon="mi:delete"></iconify-icon>
                   </a>
                 </td>
               </tr>

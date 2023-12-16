@@ -643,13 +643,13 @@ public class HomeController {
 
 				if (paymentMethod.equals("paypal")) {
 					OrderDetailTour detail = orderDetailTourDao.findById(orderDetail.getOrderDetailTourId()).get();
-					detail.setStatus(1);
+					detail.setStatus(2);
 					orderDetailTourDao.save(detail);
 					return "redirect:/travelfpoly/payment/index?id=" + orderDetail.getOrderDetailTourId();
 				}
 				if (paymentMethod.equals("vnpay")) {
 					OrderDetailTour detail = orderDetailTourDao.findById(orderDetail.getOrderDetailTourId()).get();
-					detail.setStatus(1);
+					detail.setStatus(2);
 					orderDetailTourDao.save(detail);
 					return "redirect:/travelfpoly/payment/vnpay/pay?id=" + orderDetail.getOrderDetailTourId();
 				}
@@ -773,12 +773,12 @@ public class HomeController {
 		HotelImage hotelImage = hotelImageDAO.findById(id).orElse(null);
 		List<TourSchedule> schedules = tourScheduleDao.findByTourId(id);
 
-		Map<String, String> paymentMethods = new HashMap<>();
-		paymentMethods.put("cash", "Payment in cash");
-		paymentMethods.put("paypal", "PayPal");
-		paymentMethods.put("vnpay", "VN Pay");
+		// Map<String, String> paymentMethods = new HashMap<>();
+		// paymentMethods.put("cash", "Payment in cash");
+		// paymentMethods.put("paypal", "PayPal");
+		// paymentMethods.put("vnpay", "VN Pay");
 
-		model.addAttribute("paymentMethods", paymentMethods);
+		// model.addAttribute("paymentMethods", paymentMethods);
 
 		model.addAttribute("schedules", schedules);
 		model.addAttribute("hotel", hotel);
@@ -826,7 +826,7 @@ public class HomeController {
 			orderDetailHotel.setPrice(price);
 			orderDetailHotel.setQuantity(1);
 			orderDetailHotel.setBookDate(DateHelper.converDateSql(BookingDate));
-			orderDetailHotel.setStatus(1);
+			orderDetailHotel.setStatus(0);
 			orderDetailHotel.setOrderHotel(orderHotel);
 			orderDetailHotel.setAccount(account);
 			orderDetailHotel.setOrderDetailHotel(hotelDao.findById(UserId).get());
@@ -839,22 +839,22 @@ public class HomeController {
 			orderHotelDTO order = orderDetailHotelDAO.OrderdetailHotelInvoice(orderDetailHotel.getOrderDetailHotelId());
 			mailService.sendMailwithCustomerOrderHotel(order);
 
-			if (paymentMethod.equals("paypal")) {
-				OrderDetailHotel orderhotel = orderDetailHotelDAO
-						.findById(orderDetailHotel.getOrderDetailHotelId()).get();
-				orderDetailHotel.setStatus(2);
-				orderDetailHotelDAO.save(orderhotel);
-				return "redirect:/travelfpoly/payment/index?id=" +
-						orderDetailHotel.getOrderDetailHotelId();
-			}
-			if (paymentMethod.equals("vnpay")) {
-				OrderDetailHotel orderhotel = orderDetailHotelDAO
-						.findById(orderDetailHotel.getOrderDetailHotelId()).get();
-				orderDetailHotel.setStatus(0);
-				orderDetailHotelDAO.save(orderhotel);
-				return "redirect:/travelfpoly/payment/vnpay/pay?id=" +
-						orderDetailHotel.getOrderDetailHotelId();
-			}
+			// if (paymentMethod.equals("paypal")) {
+			// OrderDetailHotel orderhotel = orderDetailHotelDAO
+			// .findById(orderDetailHotel.getOrderDetailHotelId()).get();
+			// orderDetailHotel.setStatus(1);
+			// orderDetailHotelDAO.save(orderhotel);
+			// return "redirect:/travelfpoly/payment/paypalhotel?id=" +
+			// orderDetailHotel.getOrderDetailHotelId();
+			// }
+			// if (paymentMethod.equals("vnpay")) {
+			// OrderDetailHotel orderhotel = orderDetailHotelDAO
+			// .findById(orderDetailHotel.getOrderDetailHotelId()).get();
+			// orderDetailHotel.setStatus(1);
+			// orderDetailHotelDAO.save(orderhotel);
+			// return "redirect:/travelfpoly/payment/vnpay/payhotel?id=" +
+			// orderDetailHotel.getOrderDetailHotelId();
+			// }
 
 			return "redirect:/travelfpoly/hotel";
 		} catch (Exception e) {

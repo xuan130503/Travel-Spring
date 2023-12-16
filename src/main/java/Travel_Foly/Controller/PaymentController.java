@@ -61,23 +61,23 @@ public class PaymentController {
 		return "user/payment";
 	}
 
-	// order hotel paypal
-	@GetMapping("paypalhotel")
-	public String paypalhotel(@RequestParam("id") Integer id, Model model) {
-		orderHotelDTO order = orderDetailHotelDAO.OrderdetailHotelInvoice(id);
-		List<Integer> listOrderId = new ArrayList<>();
-		listOrderId.add(id);
-		Double total = order.getTotal();
-		model.addAttribute("name", order.getName());
-		model.addAttribute("total", total);
-		session.setAttribute("tourId", listOrderId);
-		return "user/payment";
-	}
+	// // order hotel paypal
+	// @GetMapping("paypalhotel")
+	// public String paypalhotel(@RequestParam("id") Integer id, Model model) {
+	// orderHotelDTO order = orderDetailHotelDAO.OrderdetailHotelInvoice(id);
+	// List<Integer> listOrderId = new ArrayList<>();
+	// listOrderId.add(id);
+	// Double total = order.getTotal();
+	// model.addAttribute("name", order.getName());
+	// model.addAttribute("total", total);
+	// session.setAttribute("tourId", listOrderId);
+	// return "user/payment";
+	// }
 
-	@GetMapping("vnpaycheck")
-	public String vnpay() {
-		return "user/vnpayInvoice";
-	}
+	// @GetMapping("vnpaycheck")
+	// public String vnpay() {
+	// return "user/vnpayInvoice";
+	// }
 
 	@GetMapping("listOrder")
 	public String listOrder(@RequestParam("listOrderId") List<Integer> listOrderId, Model model) {
