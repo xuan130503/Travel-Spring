@@ -329,8 +329,15 @@ public class AdminController {
 
 		List<MonthlyRevenueDTO> revenueYear = orderDetailTourDao.getListYearlyRevenue();
 		model.addAttribute("revenueYear", revenueYear);
+		
 		List<MonthlyRevenueDTO> revenueHotelYear = orderDetailHotelDao.getListYearlyRevenue();
 		model.addAttribute("revenueHotelYear", revenueHotelYear);
+		
+		List<MonthlyRevenueDTO> quantityTourYear = orderDetailTourDao.getListQuantityOrderTour();
+		model.addAttribute("quantityTourYear", quantityTourYear);
+		
+		List<MonthlyRevenueDTO> quantityHotelYear = orderDetailHotelDao.getListQuantityOrderHotel();
+		model.addAttribute("quantityHotelYear", quantityHotelYear);
 		
 		return "admin/quan-ly-bao-cao";
 

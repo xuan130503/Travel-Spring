@@ -242,20 +242,10 @@
 									<td>[[${cartItem.TourId.Name}]]</td>
 									<td>[[${#dates.format(cartItem.StartDate, 'dd-MM-yyyy')}]] - [[${#dates.format(cartItem.EndDate, 'dd-MM-yyyy')}]]</td>
 									<td>
-										<select th:name="quantityAdult" class="form-control" id="adult">
-									        <option>[[${cartItem.QuantityAdult}]]</option>
-									        <option th:each="quantityAdult : ${#numbers.sequence(0,cartItem.TourId.quantityAdult)}" th:value="${quantityAdult}">
-									            [[${quantityAdult}]]
-									        </option>
-									    </select>
+									   	[[${cartItem.QuantityAdult}]]
 									</td>
 									<td>
-										<select th:name="quantityChildren" class="form-control" id="children">
-									        <option>[[${cartItem.QuantityChildren}]]</option>
-									        <option th:each="quantityChildren : ${#numbers.sequence(0,cartItem.TourId.quantityChildren)}" th:value="${quantityChildren}">
-									            [[${quantityChildren}]]
-									        </option>
-									    </select>
+									    [[${cartItem.QuantityChildren}]]	
 									</td>
 									<td id="priceAdult" th:data-price="${cartItem.TourId.PriceAdult}">
 										[[${cartItem.TourId.PriceAdult}]]$ 
@@ -413,6 +403,7 @@
 	                selectedItems.splice(index, 1);
 	            }
 	        }
+	        console.log(selectedItems);
 	    }
 	    function gatherFormData() {
 	        var formData = {
@@ -423,7 +414,7 @@
 	            payment: document.getElementById('payment').value,
 	            selectedItems: selectedItems
 	        };
-
+			
 	        return formData;
 	    }
 

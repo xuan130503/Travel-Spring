@@ -48,7 +48,7 @@ public interface OrderDetailTourDAO extends JpaRepository<OrderDetailTour, Integ
 	// Integer findOrderCancel();
 
 	@Query("Select new Travel_Foly.DTO.InvoiceDTO("
-			+ "de.OrderDetailTourId, de.OrderTour.Name, de.OrderTour.Email, de.OrderTour.Phone, t.Departure, t.Destination, t.Duration, de.PriceAdult, de.PriceChildren, de.QuantityAdult, de.QuantityChildren, de.StarDate, de.EndDate, de.Base64, de.Status) "
+			+ "de.OrderDetailTourId, de.OrderTour.Name, de.OrderTour.Email, de.OrderTour.Phone, t.Name, t.Departure, t.Destination, t.Duration, de.PriceAdult, de.PriceChildren, de.QuantityAdult, de.QuantityChildren, de.Total, de.StarDate, de.EndDate, de.Base64, de.Status) "
 			+ "from OrderDetailTour de "
 			+ "Join Tour t On t.TourId = de.OrderDetailTour.TourId "
 			+ "Join OrderTour o On o.OrderTourId = de.OrderTour.OrderTourId "
@@ -75,15 +75,20 @@ public interface OrderDetailTourDAO extends JpaRepository<OrderDetailTour, Integ
 	@Query("Select count(o) from OrderDetailTour o")
 	Integer getAllOrderDetailTours();
 
-	@Query("Select SUM((o.QuantityAdult*o.PriceAdult)+(o.QuantityChildren*o.PriceChildren)) FROM OrderDetailTour o "
+	@Query("Select SUM(o.Total) FROM OrderDetailTour o "
 			+ "WHERE YEAR(o.BookDate) = ?1 "
 			+ "Or MONTH(o.BookDate) = ?2  "
 			+ "Or MONTH(o.BookDate) BETWEEN ?3 and ?4 ")
 	Double getRevenueOrderDetailTour(Integer year, Integer month, Integer startMonth, Integer endMonth);
 	
 	@Query("SELECT NEW Travel_Foly.DTO.MonthlyRevenueDTO(YEAR(o.BookDate), MONTH(o.BookDate), " +
-	        "SUM((o.QuantityAdult * o.PriceAdult) + (o.QuantityChildren * o.PriceChildren))) " +
+	        "SUM(o.Total)) " +
 	        "FROM OrderDetailTour o " +
 	        "GROUP BY YEAR(o.BookDate), MONTH(o.BookDate)")
 	List<MonthlyRevenueDTO> getListYearlyRevenue();
+	@Query("SELECT NEW Travel_Foly.DTO.MonthlyRevenueDTO(YEAR(o.BookDate), MONTH(o.BookDate), " +
+	        "CAST(COUNT(o.QuantityAdult+o.QuantityChildren) AS DOUBLE)) " +
+	        "FROM OrderDetailTour o " +
+	        "GROUP BY YEAR(o.BookDate), MONTH(o.BookDate)")
+	List<MonthlyRevenueDTO> getListQuantityOrderTour();
 }

@@ -87,9 +87,7 @@ public class MailServiceImpl implements MailService {
 			values.put("quantityChildren", dto.getQuantityChildren());
 			values.put("base64", dto.getOrderDetailTourId());
 			values.put("status", dto.getStatus());
-			double total = (dto.getQuantityAdult() * dto.getPriceAdult())
-					+ (dto.getQuantityChildren() * dto.getPriceChildren());
-			values.put("total", total);
+			values.put("total", dto.getTotal());
 			helper.setTo(dto.getEmail());
 			helper.setSubject("TRAVEL FPOLY INFORMATION");
 			helper.setText(thymeleafService.createContent("mail.html", values), true);

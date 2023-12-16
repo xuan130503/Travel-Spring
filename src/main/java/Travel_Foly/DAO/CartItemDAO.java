@@ -16,6 +16,9 @@ public interface CartItemDAO  extends JpaRepository<CartItem, Integer>{
 			+ "Where c.Cart.UserId = ?1")
 	Integer getAmount(Integer id);
 	
+	@Query("Select c From CartItem c Where c.CartItemId = ?1")
+	CartItem findOneCartItemId(Integer id);
+	
 	@Query("Select ci From CartItem ci Where ci.CartItem.CartId=?1")
 	List<CartItem> findByCartId(Integer cartId);
 	

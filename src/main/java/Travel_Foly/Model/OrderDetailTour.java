@@ -29,6 +29,7 @@ public class OrderDetailTour {
 	private Date StarDate;
 	private Date EndDate;
 	private Date BookDate;
+	private Double Total;
 	private Integer Status;
 	private Boolean Available;
 	@Column(columnDefinition = "nvarchar(max)")

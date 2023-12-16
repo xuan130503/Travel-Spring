@@ -20,6 +20,7 @@ public class CategoryTour{
 	private Integer CategoryTourId;
 	@Column(columnDefinition = "nvarchar(100)")
 	private String Name;
+	private String Avatar;
 	@OneToMany(mappedBy = "Tour")
 	private List<Tour> Tours;
 }
