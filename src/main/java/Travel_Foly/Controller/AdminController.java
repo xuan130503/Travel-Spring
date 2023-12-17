@@ -98,8 +98,6 @@ public class AdminController {
 		Pageable pageable = PageRequest.of(page.orElse(0), 4);
 		Page<InvoiceDTO> invoices = orderDetailTourDao.findAlldetailInvoice(pageable);
 		InvoiceDTO invoice = new InvoiceDTO();
-		Double total = 0.0;
-		model.addAttribute("total", total == null ? 0 : total);
 		model.addAttribute("invoice", invoice);
 		model.addAttribute("listInvoice", invoices);
 		return "admin/form-add-don-hang";
@@ -113,16 +111,13 @@ public class AdminController {
 
 		Integer id = null;
 		InvoiceDTO invoice = new InvoiceDTO();
-		Double total = 0.0;
 		if (isStringNumeric(keyword)) {
 			id = Integer.parseInt(keyword);
 			invoice = orderDetailTourDao.detailInvoice(id);
-			total = (invoice.getPriceAdult() * invoice.getQuantityAdult())
-					+ (invoice.getPriceChildren() * invoice.getQuantityChildren());
 		}
 
 		Page<InvoiceDTO> invoices = orderDetailTourDao.searchInvoice(pageable, id, keyword, keyword);
-		model.addAttribute("total", total == null ? 0 : total);
+		model.addAttribute("total", invoice.getTotal() == null ? 0 : invoice.getTotal());
 		model.addAttribute("invoice", invoice);
 		model.addAttribute("listInvoice", invoices);
 		return "admin/form-add-don-hang";

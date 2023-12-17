@@ -56,14 +56,14 @@ public interface OrderDetailTourDAO extends JpaRepository<OrderDetailTour, Integ
 	InvoiceDTO detailInvoice(Integer orderDetailId);
 
 	@Query("Select new Travel_Foly.DTO.InvoiceDTO("
-			+ "de.OrderDetailTourId, de.OrderTour.Name, de.OrderTour.Email, de.OrderTour.Phone, t.Departure, t.Destination, t.Duration, de.PriceAdult, de.PriceChildren, de.QuantityAdult, de.QuantityChildren, de.StarDate, de.EndDate, de.Base64, de.Status) "
+			+ "de.OrderDetailTourId, de.OrderTour.Name, de.OrderTour.Email, de.OrderTour.Phone, t.Name, t.Departure, t.Destination, t.Duration, de.PriceAdult, de.PriceChildren, de.QuantityAdult, de.QuantityChildren, de.Total, de.StarDate, de.EndDate, de.Base64, de.Status) "
 			+ "from OrderDetailTour de "
 			+ "Join Tour t On t.TourId = de.OrderDetailTour.TourId "
 			+ "Join OrderTour o On o.OrderTourId = de.OrderTour.OrderTourId ")
 	Page<InvoiceDTO> findAlldetailInvoice(Pageable page);
 
 	@Query("Select new Travel_Foly.DTO.InvoiceDTO("
-			+ "de.OrderDetailTourId, de.OrderTour.Name, de.OrderTour.Email, de.OrderTour.Phone, t.Departure, t.Destination, t.Duration, de.PriceAdult, de.PriceChildren, de.QuantityAdult, de.QuantityChildren, de.StarDate, de.EndDate, de.Base64, de.Status) "
+			+ "de.OrderDetailTourId, de.OrderTour.Name, de.OrderTour.Email, de.OrderTour.Phone, t.Name, t.Departure, t.Destination, t.Duration, de.PriceAdult, de.PriceChildren, de.QuantityAdult, de.QuantityChildren, de.Total, de.StarDate, de.EndDate, de.Base64, de.Status) "
 			+ "from OrderDetailTour de "
 			+ "Join Tour t On t.TourId = de.OrderDetailTour.TourId "
 			+ "Join OrderTour o On o.OrderTourId = de.OrderTour.OrderTourId "

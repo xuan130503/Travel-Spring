@@ -306,11 +306,6 @@
 										<label class="title-input">Number Phone</label>
 										<input class="form-control" id="phone" type="text" placeholder="Number Phone">
 									</div>
-									<div class="col-md-6 mb-3">
-										<label class="title-input">BookingDate</label>
-										<input class="form-control" id="BookingDate" type="date"
-											placeholder="BookingDate">
-									</div>
 									<div class="col-md-12 mb-3">
 										<label class="title-input" for="checkin">Check In</label>
 										<input class="form-control" type="date" id="checkin"
@@ -332,14 +327,13 @@
 										var fullname = document.getElementById("fullname").value;
 										var email = document.getElementById("email").value;
 										var phone = document.getElementById("phone").value;
-										var BookingDate = document.getElementById("BookingDate").value;
 										var checkin = document.getElementById("checkin").value;
 										var checkout = document.getElementById("checkout").value;
 
 
 										// Construct URL with query parameters
 										var url = "/travelfpoly/hotel-detail/" + id + "/page2?fullname=" + fullname
-											+ "&email=" + encodeURIComponent(email) + "&phone=" + encodeURIComponent(phone) + "&BookingDate=" + encodeURIComponent(BookingDate) + "&checkin=" + encodeURIComponent(checkin) + "&checkout=" + encodeURIComponent(checkout);
+											+ "&email=" + encodeURIComponent(email) + "&phone=" + encodeURIComponent(phone) + "&checkin=" + encodeURIComponent(checkin) + "&checkout=" + encodeURIComponent(checkout);
 										window.location.href = url;
 									}
 								</script>

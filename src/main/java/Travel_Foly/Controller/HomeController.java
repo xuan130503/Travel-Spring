@@ -758,7 +758,7 @@ public class HomeController {
 			String BookingDate, String checkin, String checkout) {
 		return "redirect:/travelfpoly/hotel-detail/" + id + "/page2?fullname=" + fullname
 				+ fullname + "?email=" + email
-				+ "?phone=" + phone + "?BookingDate=" + BookingDate + "?checkin=" + checkin +
+				+ "?phone=" + phone + "?checkin=" + checkin +
 				"?checkout=" + checkout;
 	}
 
@@ -766,19 +766,19 @@ public class HomeController {
 	public String ShowPage(Model model, @PathVariable(name = "id", required = false) Integer id,
 			@RequestParam String fullname,
 			@RequestParam("email") String email,
-			@RequestParam String phone, @RequestParam java.sql.Date BookingDate,
+			@RequestParam String phone,
 			@RequestParam java.sql.Date checkin,
 			@RequestParam java.sql.Date checkout) {
 		Hotel hotel = hotelDAO.findById(id).orElse(null);
 		HotelImage hotelImage = hotelImageDAO.findById(id).orElse(null);
 		List<TourSchedule> schedules = tourScheduleDao.findByTourId(id);
 
-		// Map<String, String> paymentMethods = new HashMap<>();
-		// paymentMethods.put("cash", "Payment in cash");
-		// paymentMethods.put("paypal", "PayPal");
-		// paymentMethods.put("vnpay", "VN Pay");
+		 Map<String, String> paymentMethods = new HashMap<>();
+		 paymentMethods.put("cash", "Payment in cash");
+		 paymentMethods.put("paypal", "PayPal");
+		 paymentMethods.put("vnpay", "VN Pay");
 
-		// model.addAttribute("paymentMethods", paymentMethods);
+		 model.addAttribute("paymentMethods", paymentMethods);
 
 		model.addAttribute("schedules", schedules);
 		model.addAttribute("hotel", hotel);
@@ -786,7 +786,6 @@ public class HomeController {
 		model.addAttribute("fullname", fullname);
 		model.addAttribute("email", email);
 		model.addAttribute("phone", phone);
-		model.addAttribute("BookingDate", BookingDate);
 		model.addAttribute("checkin", checkin);
 		model.addAttribute("checkout", checkout);
 
@@ -802,7 +801,6 @@ public class HomeController {
 			@RequestParam String phone,
 			@RequestParam java.sql.Date checkin,
 			@RequestParam java.sql.Date checkout,
-			@RequestParam java.sql.Date BookingDate,
 			@RequestParam Double price,
 			@RequestParam("paymentMethod") String paymentMethod) {
 		Account account = accountDao.findById(UserId).get();
@@ -825,7 +823,7 @@ public class HomeController {
 			orderDetailHotel.setCheckOut(DateHelper.converDateSql(checkout));
 			orderDetailHotel.setPrice(price);
 			orderDetailHotel.setQuantity(1);
-			orderDetailHotel.setBookDate(DateHelper.converDateSql(BookingDate));
+			orderDetailHotel.setBookDate(new Date());
 			orderDetailHotel.setStatus(0);
 			orderDetailHotel.setOrderHotel(orderHotel);
 			orderDetailHotel.setAccount(account);
