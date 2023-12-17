@@ -44,8 +44,8 @@ public interface OrderDetailTourDAO extends JpaRepository<OrderDetailTour, Integ
 	// de.Status=true")
 	// Double findTotalIncome();
 	//
-	// @Query("Select count(*) From OrderDetailTour de Where de.Status=false")
-	// Integer findOrderCancel();
+	 @Query("Select count(*) From OrderDetailTour de Where de.Available=false")
+	 Integer findOrderCancel();
 
 	@Query("Select new Travel_Foly.DTO.InvoiceDTO("
 			+ "de.OrderDetailTourId, de.OrderTour.Name, de.OrderTour.Email, de.OrderTour.Phone, t.Name, t.Departure, t.Destination, t.Duration, de.PriceAdult, de.PriceChildren, de.QuantityAdult, de.QuantityChildren, de.Total, de.StarDate, de.EndDate, de.Base64, de.Status) "
@@ -75,11 +75,8 @@ public interface OrderDetailTourDAO extends JpaRepository<OrderDetailTour, Integ
 	@Query("Select count(o) from OrderDetailTour o")
 	Integer getAllOrderDetailTours();
 
-	@Query("Select SUM(o.Total) FROM OrderDetailTour o "
-			+ "WHERE YEAR(o.BookDate) = ?1 "
-			+ "Or MONTH(o.BookDate) = ?2  "
-			+ "Or MONTH(o.BookDate) BETWEEN ?3 and ?4 ")
-	Double getRevenueOrderDetailTour(Integer year, Integer month, Integer startMonth, Integer endMonth);
+	@Query("Select SUM(o.Total) FROM OrderDetailTour o")
+	Double getRevenueOrderDetailTour();
 	
 	@Query("SELECT NEW Travel_Foly.DTO.MonthlyRevenueDTO(YEAR(o.BookDate), MONTH(o.BookDate), " +
 	        "SUM(o.Total)) " +
@@ -91,4 +88,12 @@ public interface OrderDetailTourDAO extends JpaRepository<OrderDetailTour, Integ
 	        "FROM OrderDetailTour o " +
 	        "GROUP BY YEAR(o.BookDate), MONTH(o.BookDate)")
 	List<MonthlyRevenueDTO> getListQuantityOrderTour();
+	
+	@Query("SELECT t.TourId, t.Name, SUM(de.QuantityAdult + de.QuantityChildren) AS TotalQuantity, t.PriceAdult, t.PriceChildren, t.Tour.Name "
+			+ "FROM Tour t "
+			+ "JOIN OrderDetailTour de ON t.TourId = de.OrderDetailTour.TourId "
+			+ "GROUP BY t.TourId, t.Name, t.PriceAdult, t.PriceChildren, t.Tour.Name "
+			+ "ORDER BY TotalQuantity DESC "
+			+ "LIMIT 5")
+	List<Object[]> getBestSellingTour();
 }

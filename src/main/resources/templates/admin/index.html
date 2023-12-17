@@ -57,9 +57,9 @@
           <div class="col-md-6">
             <div class="widget-small info coloured-icon"><i class='icon bx bxs-data fa-3x'></i>
               <div class="info">
-                <h4>Tổng Tour</h4>
-                <p><b>[[${tour}]] Tour</b></p>
-                <p class="info-tong">Tổng số Tour được quản lý.</p>
+                <h4>Tổng Sản Phẩm</h4>
+                <p><b>[[${tour}]] Tour - [[${hotel}]] Hotel</b></p>
+                <p class="info-tong">Tổng số tour và hotel được quản lý.</p>
               </div>
             </div>
           </div>
@@ -68,8 +68,8 @@
             <div class="widget-small warning coloured-icon"><i class='icon bx bxs-shopping-bags fa-3x'></i>
               <div class="info">
                 <h4>Tổng đơn hàng</h4>
-                <p><b>[[${order}]] đơn hàng</b></p>
-                <p class="info-tong">Tổng số hóa đơn bán hàng trong tháng.</p>
+                <p><b>[[${orderTour}]] Tour - [[${orderHotel}]] Hotel</b></p>
+                <p class="info-tong">Tổng số hóa đơn bán hàng.</p>
               </div>
             </div>
           </div>
@@ -78,8 +78,8 @@
             <div class="widget-small danger coloured-icon"><i class='icon bx bxs-error-alt fa-3x'></i>
               <div class="info">
                 <h4>Sắp hết hàng</h4>
-                <p><b>[[${tourQuantity}]] Tour</b></p>
-                <p class="info-tong">Số Tour cảnh báo hết cần nhập thêm.</p>
+                <p><b>[[${tourQuantity}]] Tour - [[${hotelQuantity}]] Hotel</b></p>
+                <p class="info-tong">Số Tour-Hotel cảnh báo hết cần nhập thêm.</p>
               </div>
             </div>
           </div>
@@ -87,10 +87,9 @@
           <div class="col-md-6">
             <div class="widget-small danger coloured-icon"><i class='icon bx bxs-error-alt fa-3x'></i>
               <div class="info">
-                <h4>Sắp hết hàng</h4>
-                
-                <p><b>[[${getRebennu}]] Tour</b></p>
-                <p class="info-tong">Số Tour cảnh báo hết cần nhập thêm.</p>
+                <h4>Tổng doanh thu</h4>
+                <p><b>[[${getRevenue}]] $</b></p>
+                <p class="info-tong">Tổng doanh thu của tour và hotel</p>
               </div>
             </div>
           </div>
@@ -113,6 +112,12 @@
                     <tr th:each="order : ${listOrder.content}">
                       <td>[[${order.OrderDetailTourId}]]</td>
                       <td>[[${order.OrderTour.Name}]]</td>
+                      <td>[[${order.Total}]] $</td>
+                      <td>
+                      	<span th:if="${order.Status == 0}" style="background-color: #e03e2d; text-align:center; border-radius:10px; padding:8px; color:white; font-weight:bold; line-height: 22.4px;">Unpaid</span>
+                       	<span th:if="${order.Status == 1}" style="background-color: #ffc900; text-align:center; border-radius:10px; padding:8px; color:white; font-weight:bold; line-height: 22.4px;">Paying</span>
+                      	<span th:if="${order.Status == 2}" style="background-color: #2dc26b; text-align:center; border-radius:10px; padding:8px; color:white; font-weight:bold; line-height: 22.4px;">Paid</span>
+                      </td>
                     </tr>
 
                   </tbody>

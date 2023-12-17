@@ -52,119 +52,104 @@
     <div th:insert="~{include/_loading.html}"></div>
     <div th:insert="~{include/_Nav}"></div>
     <section>
-        <div id="slider-container"
-            class="slider-container container-fluid m-0 p-0 row justify-content-lg-between p_header"
-            style="background: url(''); background-size: cover; background-repeat: no-repeat;">
-            <div class="overlay"></div>
-            <div class="col-12 col-lg-5 col-md-5 col-sm-12 content" style="z-index: 1;">
-                <div th:each="schedule, start:${schedules}"
-                    th:class="${start.index == 0 ? 'slide-content active':'slide-content'}" style="color:white">
-                    <h1 class="slide-title">[[${schedule.title}]]</h1>
-                    <p class="slide-description">[[${schedule.description}]]</p>
-                    <button type="button" class="btn btn-info">Order Now</button>
-                </div>
-            </div>
-            <div class="mt-5 col-12 col-lg-7 col-md-7 col-sm-12">
-                <section id="tranding">
-                    <div class="container">
-                        <div class="swiper tranding-slider">
-                            <div class="swiper-wrapper">
-                                <!-- Slide-start -->
-                                <div th:each="schedule:${schedules}" class="swiper-slide tranding-slide">
-                                    <div class="tranding-slide-img">
-                                        <img th:src="${schedule.Image}" alt="Tranding">
-                                    </div>
-                                    <div class="tranding-slide-content">
-                                        <div class="tranding-slide-content-bottom">
+		<div id="slider-container"
+			class="slider-container container-fluid m-0 p-0 row justify-content-lg-between p_header"
+			style="background: url(''); background-size: cover; background-repeat: no-repeat;">
+			<div class="col-12 col-lg-5 col-md-5 col-sm-12">
+				
+			</div>
+			<div class="mt-5 col-12 col-lg-7 col-md-7 col-sm-12">
+				<section id="tranding">
+					<div class="container">
+						<div class="swiper tranding-slider">
+							<div class="swiper-wrapper">
+								<!-- Slide-start -->
+								<div th:each="img:${listImage}" class="swiper-slide tranding-slide">
+									<div class="tranding-slide-img">
+										<img th:src="${img}" alt="Tranding">
+									</div>
+									<div class="tranding-slide-content">
+										<div class="tranding-slide-content-bottom">
 
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+										</div>
+									</div>
+								</div>
+							</div>
 
-                            <div class="tranding-slider-control">
-                                <div class="swiper-button-prev slider-arrow">
-                                    <ion-icon name="arrow-back-outline"></ion-icon>
-                                </div>
-                                <div class="swiper-button-next slider-arrow">
-                                    <ion-icon name="arrow-forward-outline"></ion-icon>
-                                </div>
-                                <div class="swiper-pagination"></div>
-                            </div>
+							<div class="tranding-slider-control">
+								<div class="swiper-button-prev slider-arrow">
+									<ion-icon name="arrow-back-outline"></ion-icon>
+								</div>
+								<div class="swiper-button-next slider-arrow">
+									<ion-icon name="arrow-forward-outline"></ion-icon>
+								</div>
+								<div class="swiper-pagination"></div>
+							</div>
 
-                        </div>
-                    </div>
-                </section>
-            </div>
-        </div>
-        <script th:inline="javascript">
+						</div>
+					</div>
+				</section>
+			</div>
+		</div>
+		<script th:inline="javascript">
 
-            var TrandingSlider = new Swiper('.tranding-slider', {
-                effect: 'coverflow',
-                grabCursor: true,
-                centeredSlides: true,
-                loop: false,
-                slidesPerView: "auto",
-                coverflowEffect: {
-                    rotate: 0,
-                    stretch: 0,
-                    depth: 100,
-                    modifier: 2.5,
-                },
-                pagination: {
-                    el: '.swiper-pagination',
-                    clickable: true,
-                },
-                navigation: {
-                    nextEl: '.swiper-button-next',
-                    prevEl: '.swiper-button-prev',
-                }
-            });
-            function changeBackground(imageUrl) {
-                var sliderContainer = document.getElementById('slider-container');
-                sliderContainer.style.opacity = 0;
-                setTimeout(function () {
-                    sliderContainer.style.backgroundImage = 'url(' + imageUrl + ')';
-                    sliderContainer.style.opacity = 1;
-                }, 10);
-            }
-            document.querySelector('.swiper-button-next').addEventListener('click', function () {
-                var activeSlide = TrandingSlider.slides[TrandingSlider.activeIndex];
-                var imageUrl = activeSlide.querySelector('img').getAttribute('src');
-                var sliderContainer = document.getElementById('slider-container');
-                sliderContainer.style.backgroundImage = 'url(' + imageUrl + ')';
-                changeBackground(imageUrl);
+			var TrandingSlider = new Swiper('.tranding-slider', {
+				effect: 'coverflow',
+				grabCursor: true,
+				centeredSlides: true,
+				loop: false,
+				slidesPerView: "auto",
+				coverflowEffect: {
+					rotate: 0,
+					stretch: 0,
+					depth: 100,
+					modifier: 2.5,
+				},
+				pagination: {
+					el: '.swiper-pagination',
+					clickable: true,
+				},
+				navigation: {
+					nextEl: '.swiper-button-next',
+					prevEl: '.swiper-button-prev',
+				}
+			});
+			function changeBackground(imageUrl) {
+				var sliderContainer = document.getElementById('slider-container');
+				sliderContainer.style.opacity = 0;
+				setTimeout(function () {
+					sliderContainer.style.backgroundImage = 'url(' + imageUrl + ')';
+					sliderContainer.style.opacity = 1;
+				}, 10);
+			}
+			document.querySelector('.swiper-button-next').addEventListener('click', function () {
+				var activeSlide = TrandingSlider.slides[TrandingSlider.activeIndex];
+				var imageUrl = activeSlide.querySelector('img').getAttribute('src');
+				var sliderContainer = document.getElementById('slider-container');
+				sliderContainer.style.backgroundImage = 'url(' + imageUrl + ')';
+				changeBackground(imageUrl);
 
-            });
+			});
 
-            document.querySelector('.swiper-button-prev').addEventListener('click', function () {
-                var activeSlide = TrandingSlider.slides[TrandingSlider.activeIndex];
-                var imageUrl = activeSlide.querySelector('img').getAttribute('src');
-                var sliderContainer = document.getElementById('slider-container');
-                sliderContainer.style.backgroundImage = 'url(' + imageUrl + ')';
-                changeBackground(imageUrl);
+			document.querySelector('.swiper-button-prev').addEventListener('click', function () {
+				var activeSlide = TrandingSlider.slides[TrandingSlider.activeIndex];
+				var imageUrl = activeSlide.querySelector('img').getAttribute('src');
+				var sliderContainer = document.getElementById('slider-container');
+				sliderContainer.style.backgroundImage = 'url(' + imageUrl + ')';
+				changeBackground(imageUrl);
 
-            });
-            TrandingSlider.on('transitionEnd', function () {
-                var activeSlide = TrandingSlider.slides[TrandingSlider.activeIndex];
-                var imageUrl = activeSlide.querySelector('img').getAttribute('src');
-                var sliderContainer = document.getElementById('slider-container');
-                sliderContainer.style.backgroundImage = 'url(' + imageUrl + ')';
-                changeBackground(imageUrl);
+			});
+			TrandingSlider.on('transitionEnd', function () {
+				var activeSlide = TrandingSlider.slides[TrandingSlider.activeIndex];
+				var imageUrl = activeSlide.querySelector('img').getAttribute('src');
+				var sliderContainer = document.getElementById('slider-container');
+				sliderContainer.style.backgroundImage = 'url(' + imageUrl + ')';
+				changeBackground(imageUrl);
 
-            });
-            var slideContents = document.querySelectorAll('.slide-content');
+			});
 
-            TrandingSlider.on('slideChange', function () {
-                var activeIndex = TrandingSlider.activeIndex;
-                slideContents.forEach(function (content) {
-                    content.classList.remove('active');
-                });
-                slideContents[activeIndex].classList.add('active');
-            });
-
-        </script>
-    </section>
+		</script>
+	</section>
     <section>
         <div class="container-fluid" th:object="${hotel}">
             <div class="row justify-content-between m-5 p-5">
@@ -183,22 +168,14 @@
                                             style="padding: 5px;"></i>[[${hotel.Name}]]
                                     </div>
                                     <hr style="border: solid 1px;">
-                                    <div
-                                        style="display: grid; grid-template-columns: 1fr 1fr 1fr;   grid-column-gap: 20px;  grid-row-gap: 20px;">
-                                        <div>
-
-                                            <p>Ngày nhập phòng</p>
+                                    <div style="display: flex;">
+                                        <div style="margin:0 8px;">
+                                            <p >Check in: [[${checkin}]]</p>
                                         </div>
-                                        <div>
-                                            <p>Ngày Trả phòng</p>
+                                        <div style="margin:0 8px;">
+                                            <p >Check out: [[${checkout}]]</p>
 
                                         </div>
-                                        <div>
-                                            <p>số ngày nghỉ</p>
-
-                                        </div>
-
-
                                     </div>
                                 </div>
                             </div>
@@ -208,12 +185,12 @@
                                     <div style="font-size: 25px;">[[${hotel.Name}]]</div>
                                     <div class="row">
                                         <div class="col-sm-6">
-                                            <p style="color: slategray;">khách/Phòng</p>
-                                            <p style="color: slategray;">Kiểu giường</p>
+                                            <p style="color: slategray;">Client/room</p>
+                                            <p style="color: slategray;">Category room</p>
                                         </div>
                                         <div class="col-sm-6" style="">
-                                            <p style="color: black;">2 Khách</p>
-                                            <p style="color: black;">1 Giường đôi</p>
+                                            <p style="color: black;">2 Client</p>
+                                            <p style="color: black;">1 Double bed</p>
                                         </div>
 
                                     </div>
@@ -226,9 +203,8 @@
                                         </div>
                                         <div class="col-sm-8">
                                             <p style="color: rgb(125, 125, 125); padding: 5px 5px 0 0;"><i
-                                                    class="fa-solid fa-utensils"></i>Không bao gồm
-                                                ăn sáng</p>
-                                            <p style="color: rgb(50, 160, 50);">Miễn phí Wifi</p>
+                                                    class="fa-solid fa-utensils"></i>No breakfast</p>
+                                            <p style="color: rgb(50, 160, 50);">Free Wifi</p>
                                         </div>
                                     </div>
                                 </div>
@@ -238,22 +214,12 @@
                         </section>
                         <section
                             style="background-color: white;border: white 1px; border-radius: 10px; box-shadow:whites;margin-bottom: 30px;">
-                            <div style="font-size: 35px; color: black;">Chính sách lưu trú</div>
-                            <hr style="border: solid 1px;">
-                            <div style="color: black; font-size: 17px;"><i class="fa-regular fa-clock"></i> thời gian
-                                nhận phòng và trả phòng</div>
-                            <div style="display: flex;">
-                                <p style=" padding:3px 10px;">Giờ nhận phòng : </p>
-                                <p style=" padding:3px 10px; color: black;">Từ 14 : 00</p>
-
-                                <p style=" padding:3px 10px;">Giờ trả phòng:</p>
-                                <p style=" padding:3px 10px; color: black;">trước 12 : 00</p>
-                            </div>
+                            <div style="font-size: 35px; color: black;">Accommodation policy</div>
+                            
                             <hr style="border: solid 1px;">
                             <div style="font-size: 20px; color: black; padding: auto;">
                                 <i class="fa-solid fa-book-open" style="color: rgb(151, 150, 149); padding: 10px;"></i>
-                                Chính Sách Bổ
-                                Sung
+                                Additional Policies
                             </div>
                             <div
                                 style="padding-left: 50px; font-family: 'Times New Roman', Times, serif; padding-bottom: 40px;">
@@ -265,8 +231,7 @@
                             <hr style="border: solid 1px;">
                             <div style="font-size: 20px; color: black; padding: auto;">
                                 <i class="fa-solid fa-person-chalkboard"
-                                    style="color: rgb(151, 150, 149);padding: 10px;"></i>Hướng
-                                Dẫn Nhận Phòng Chung
+                                    style="color: rgb(151, 150, 149);padding: 10px;"></i>General Check-In Instructions
                             </div>
                             <div
                                 style="padding-left: 50px; font-family: 'Times New Roman', Times, serif; padding-bottom:40px    ;">
@@ -290,13 +255,13 @@
                             <div
                                 style="background-color: white;border: white 1px; border-radius: 10px; box-shadow:whites;margin-bottom: 30px;">
                                 <div class="">
-                                    <h3>Chi tiết thông tin người liên lạc</h3>
+                                    <h3>Detailed client information </h3>
                                 </div>
                                 <hr style=" border: solid 1px;">
                                 <form th:method="post">
                                     <div class="row mb-3">
                                         <div class="col-md-12 mb-3">
-                                            <label for="fullname"><span>Họ tên người đặt :
+                                            <label for="fullname"><span>Name :
                                                 </span>[[${fullname}]]</label>
                                             <input type="text" name="fullname" hidden th:value="${fullname}">
                                         </div>
@@ -305,27 +270,22 @@
                                             <input type="text" name="email" hidden th:value="${email}">
                                         </div>
                                         <div class="col-md-6 mb-3">
-                                            <label><span>Số điện thoại : </span>[[${phone}]]</label>
+                                            <label><span>Phone : </span>[[${phone}]]</label>
                                             <input type="text" name="phone" hidden th:value="${phone}">
                                         </div>
                                         <div class="col-md-6 mb-3">
-                                            <label><span>Ngày đặt vé : </span>[[${BookingDate}]]</label>
-                                            <input type="date" name="BookingDate" hidden th:value="${BookingDate}">
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label> <span>Ngày nhận phòng : </span>[[${checkin}]]</label>
+                                            <label> <span>Check in : </span>[[${checkin}]]</label>
                                             <input type="date" name="checkin" hidden th:value="${checkin}">
                                         </div>
                                         <div class="col-md-6 mb-3">
-                                            <label> <span> Ngày trả phong : </span>[[${checkout}]]</label>
-                                            <input type="date" name="checkout" hidden th:value="${checkout}">
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label><Span> Giá phòng/Ngày : </Span>[[${hotel.price}]]</label>
+                                            <label>Price/night :<span style="color:red;">[[${hotel.price}]]$</span></label>
                                             <input type="text" name="price" hidden th:value="${hotel.price}">
                                         </div>
-
-                                        <div class="col-md-6 mt-5">
+										<div class="col-md-6 mb-3">
+                                            <label> <span> Check out : </span>[[${checkout}]]</label>
+                                            <input type="date" name="checkout" hidden th:value="${checkout}">
+                                        </div>
+                                        <div class="col-md-6">
                                             <select class="form-select" th:name="paymentMethod"
                                                 aria-label="Default select example"
                                                 style="height:36px; border-radius:10px; font-size:18px;">
@@ -340,28 +300,16 @@
                                     <button
                                         th:formaction="@{/travelfpoly/cartOrderHotel/{HotelId}/{userId} (HotelId=${hotel.HotelId}, userId=${session.account != null ? session.account.UserId : '' })}"
                                         style="margin-top: 10px; padding: 10px 25px; background-color: orange; border-radius: 10px; border: solid 1px;  ">
-                                        Tiếp tục
-                                        đến Thanh Toán
+                                        Book now
                                     </button>
                                 </form>
                             </div>
-                            <div
-                                style="background-color: white;border: white 1px; border-radius: 10px; box-shadow:white;">
-                                <div>Chi tiết khách ở</div>
-                                <hr style="border: solid 1px;">
-                                <div>
-                                    <p>yêu cầu đặc biệt</p>
-                                    <p> Các yêu cầu đặc biệt sẽ tùy thuộc vào tính sẵn có và không được bảo đảm. Một số
-                                        yêu cầu có thể phát sinh phụ phí.</p>
-                                </div>
-                            </div>
-
                         </div>
                     </div>
                     <hr class="new1">
                     <div class="col-12">
                         <div class="mt-5 title">
-                            <h3>Thông tin khu vực</h3>
+                            <h3>REGIONAL INFORMATION</h3>
 
                             <div id="map" class="w-100">
                                 <iframe
@@ -376,52 +324,7 @@
 
             </div>
     </section>
-    <section>
-        <div class="text-right">
-            <a style="display: inline-block;" href="#reviews-anchor" id="open-review-box"
-                class="btn btn-success btn-green">Leave a Review</a>
-        </div>
-        <div class="row" id="post-review-box" style="display: none;">
-            <div class="col-md-12">
-                <form:form method="post" modelAttribute="review" id="reviewForm">
-
-                    <form:hidden id="ratings-hidden" path="rating" />
-                    <form:hidden path="product.id" />
-                    <div class="col-xs-12 col-md-6">
-                        <form:input path="userName" class="form-control animated" placeholder="Name" />
-                    </div>
-                    <div class="col-xs-12 col-md-6">
-                        <form:input path="userEmail" id="userEmail" class="form-control animated" placeholder="Email" />
-                    </div>
-                    <div class="col-md-12" style="margin-top: 2rem;">
-                        <form:textarea path="comment"
-                            style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 54px;" rows="5"
-                            id="new-review" class="form-control animated" placeholder="Enter your review here..."
-                            name="comment" cols="50"></form:textarea>
-                    </div>
-                    <div class="text-right">
-                        <div class="stars starrr" data-rating="0"></div>
-                        <a href="#" class="btn btn-danger btn-sm" id="close-review-box"
-                            style="margin-right: 10px; display: none;"> <span
-                                class="glyphicon glyphicon-remove"></span>Cancel
-                        </a>
-                        <button class="btn btn-success btn-lg" type="submit">Save</button>
-                    </div>
-                </form:form>
-            </div>
-        </div>
-        <!--popup-->
-        <div id="popup" class="popup-wrapper" style="display:none;">
-            <div class="popup-content">
-                <div class="popup-title">
-                    <button type="button" class="popup-close">×</button>
-                    <h3></h3>
-                </div>
-                <div class="popup-body">
-
-                    Popup body</div>
-            </div>
-        </div>
+    
         <div th:insert="~{include/_Footer}"></div>
 </body>
 

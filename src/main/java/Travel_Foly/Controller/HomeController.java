@@ -646,13 +646,13 @@ public class HomeController {
 				
 				if (paymentMethod.equals("paypal")) {
 					OrderDetailTour detail = orderDetailTourDao.findById(orderDetail.getOrderDetailTourId()).get();
-					detail.setStatus(2);
+					detail.setStatus(1);
 					orderDetailTourDao.save(detail);
 					return "redirect:/travelfpoly/payment/index?id=" + orderDetail.getOrderDetailTourId();
 				}
 				if (paymentMethod.equals("vnpay")) {
 					OrderDetailTour detail = orderDetailTourDao.findById(orderDetail.getOrderDetailTourId()).get();
-					detail.setStatus(2);
+					detail.setStatus(1);
 					orderDetailTourDao.save(detail);
 					return "redirect:/travelfpoly/payment/vnpay/pay?id=" + orderDetail.getOrderDetailTourId();
 				}
@@ -743,9 +743,15 @@ public class HomeController {
 	public String hotelDetail(@PathVariable("id") Integer id, Model model) {
 		Hotel hotel = hotelDAO.findById(id).orElse(null);
 		HotelImage hotelImage = hotelImageDAO.findById(id).orElse(null);
-		List<TourSchedule> schedules = tourScheduleDao.findByTourId(id);
-
-		model.addAttribute("schedules", schedules);
+		
+		List<String> listImage = new ArrayList<>();
+		listImage.add(hotelImage.getImage1());
+		listImage.add(hotelImage.getImage2());
+		listImage.add(hotelImage.getImage3());
+		listImage.add(hotelImage.getImage4());
+		listImage.add(hotelImage.getImage5());
+		
+		model.addAttribute("listImage", listImage);
 		model.addAttribute("hotel", hotel);
 		model.addAttribute("hotelImage", hotelImage);
 
@@ -771,7 +777,6 @@ public class HomeController {
 			@RequestParam java.sql.Date checkout) {
 		Hotel hotel = hotelDAO.findById(id).orElse(null);
 		HotelImage hotelImage = hotelImageDAO.findById(id).orElse(null);
-		List<TourSchedule> schedules = tourScheduleDao.findByTourId(id);
 
 		 Map<String, String> paymentMethods = new HashMap<>();
 		 paymentMethods.put("cash", "Payment in cash");
@@ -780,7 +785,14 @@ public class HomeController {
 
 		 model.addAttribute("paymentMethods", paymentMethods);
 
-		model.addAttribute("schedules", schedules);
+		 List<String> listImage = new ArrayList<>();
+			listImage.add(hotelImage.getImage1());
+			listImage.add(hotelImage.getImage2());
+			listImage.add(hotelImage.getImage3());
+			listImage.add(hotelImage.getImage4());
+			listImage.add(hotelImage.getImage5());
+			
+		model.addAttribute("listImage", listImage);
 		model.addAttribute("hotel", hotel);
 		model.addAttribute("hotelImage", hotelImage);
 		model.addAttribute("fullname", fullname);
@@ -837,7 +849,7 @@ public class HomeController {
 			if (paymentMethod.equals("paypal")) {
 				OrderDetailHotel orderhotel = orderDetailHotelDAO
 						.findById(orderDetailHotel.getOrderDetailHotelId()).get();
-				orderDetailHotel.setStatus(2);
+				orderDetailHotel.setStatus(1);
 				orderDetailHotelDAO.save(orderhotel);
 				return "redirect:/travelfpoly/payment/paypalhotel?id=" +
 						orderDetailHotel.getOrderDetailHotelId();
@@ -845,7 +857,7 @@ public class HomeController {
 			if (paymentMethod.equals("vnpay")) {
 				OrderDetailHotel orderhotel = orderDetailHotelDAO
 						.findById(orderDetailHotel.getOrderDetailHotelId()).get();
-				orderDetailHotel.setStatus(0);
+				orderDetailHotel.setStatus(1);
 				orderDetailHotelDAO.save(orderhotel);
 				return "redirect:/travelfpoly/payment/vnpay/payhotel?id=" +
 						orderDetailHotel.getOrderDetailHotelId();

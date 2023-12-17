@@ -55,14 +55,8 @@
 		<div id="slider-container"
 			class="slider-container container-fluid m-0 p-0 row justify-content-lg-between p_header"
 			style="background: url(''); background-size: cover; background-repeat: no-repeat;">
-			<div class="overlay"></div>
-			<div class="col-12 col-lg-5 col-md-5 col-sm-12 content" style="z-index: 1;">
-				<div th:each="schedule, start:${schedules}"
-					th:class="${start.index == 0 ? 'slide-content active':'slide-content'}" style="color:white">
-					<h1 class="slide-title">[[${schedule.title}]]</h1>
-					<p class="slide-description">[[${schedule.description}]]</p>
-					<button type="button" class="btn btn-info">Order Now</button>
-				</div>
+			<div class="col-12 col-lg-5 col-md-5 col-sm-12">
+				
 			</div>
 			<div class="mt-5 col-12 col-lg-7 col-md-7 col-sm-12">
 				<section id="tranding">
@@ -70,9 +64,9 @@
 						<div class="swiper tranding-slider">
 							<div class="swiper-wrapper">
 								<!-- Slide-start -->
-								<div th:each="schedule:${schedules}" class="swiper-slide tranding-slide">
+								<div th:each="img:${listImage}" class="swiper-slide tranding-slide">
 									<div class="tranding-slide-img">
-										<img th:src="${schedule.Image}" alt="Tranding">
+										<img th:src="${img}" alt="Tranding">
 									</div>
 									<div class="tranding-slide-content">
 										<div class="tranding-slide-content-bottom">
@@ -153,15 +147,6 @@
 				changeBackground(imageUrl);
 
 			});
-			var slideContents = document.querySelectorAll('.slide-content');
-
-			TrandingSlider.on('slideChange', function () {
-				var activeIndex = TrandingSlider.activeIndex;
-				slideContents.forEach(function (content) {
-					content.classList.remove('active');
-				});
-				slideContents[activeIndex].classList.add('active');
-			});
 
 		</script>
 	</section>
@@ -178,7 +163,7 @@
 								</label>
 							</div>
 							<label style="font-size: 20px; font-family: Arial, Helvetica, sans-serif;">
-								Chi tiết hình ảnh phòng
+								Room image  detail
 							</label>
 							<div th:object="${hotelImage}" class="m-0 p-0 row d-flex justify-content-between">
 								<div class="col-md-4 col-sm-5 col-4 col-lg-4 gy-4">
@@ -236,26 +221,26 @@
 										</p>
 										<p>
 											<i class="fa-solid fa-utensils"></i>
-											không có ăn sáng
+											no breakfast
 										</p>
 										<p style="color:green;">
-											<i class="fa-solid fa-wifi"></i>có wifi
+											<i class="fa-solid fa-wifi"></i>have wifi
 										</p>
 										<p style="color: green;">
-											<i class="fa-solid fa-ban-smoking"></i> KHônghút thuốc
+											<i class="fa-solid fa-ban-smoking"></i> No smoking
 										</p>
 									</div>
 									<div>
-										<p><i class="fa-solid fa-user-group"></i>2 khách</p>
+										<p><i class="fa-solid fa-user-group"></i>2 client</p>
 
 										<p style="color: slategray;">
-											<i class="fa-regular fa-rectangle-xmark"></i>Không hoàn tiền
+											<i class="fa-regular fa-rectangle-xmark"></i>No refund
 										</p>
 										<p style="color: green;">
-											<i class="fa-solid fa-rectangle-xmark"></i>Miễn phí huỷ phòng
+											<i class="fa-solid fa-rectangle-xmark"></i>Free check-out
 										</p>
 										<p style="color: green;">
-											<i class="fa-regular fa-rectangle-xmark"></i>có thể đổi lịch
+											<i class="fa-regular fa-rectangle-xmark"></i>Can reschedule
 										</p>
 
 									</div>
@@ -264,13 +249,8 @@
 
 										<p style="color: red; font-size: 30px;">
 											[[${discount}]] VND</p>
-										<p> /Phòng/ đêm</p>
-										<button
-											style="padding:10px 60px; background-color: rgb(203, 96, 57); border-radius: 10px;">
-											Đặt ngay
-
-										</button>
-
+										<p> /Room/ night</p>
+									
 									</div>
 
 								</div>
@@ -318,7 +298,9 @@
 											placeholder="Booking CheckIn">
 									</div>
 									<div class="form-btn mt-2">
-										<button onclick="goToPage2()">Go to Page 2</button>
+										<button onclick="goToPage2()" style="padding:10px 60px; background-color: rgb(203, 96, 57); border-radius: 10px;">
+											Next
+										</button>
 									</div>
 								</div>
 								<script>
@@ -329,7 +311,6 @@
 										var phone = document.getElementById("phone").value;
 										var checkin = document.getElementById("checkin").value;
 										var checkout = document.getElementById("checkout").value;
-
 
 										// Construct URL with query parameters
 										var url = "/travelfpoly/hotel-detail/" + id + "/page2?fullname=" + fullname
@@ -344,7 +325,7 @@
 					<hr class="new1">
 					<div class="col-12">
 						<div class="mt-5 title">
-							<h3>Thông tin khu vực</h3>
+							<h3>REGIONAL INFORMATION</h3>
 
 							<div id="map" class="w-100">
 								<iframe

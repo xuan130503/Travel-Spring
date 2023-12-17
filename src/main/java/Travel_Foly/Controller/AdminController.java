@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import Travel_Foly.DAO.AccountDAO;
 import Travel_Foly.DAO.CategoryTourDAO;
+import Travel_Foly.DAO.HotelDAO;
 import Travel_Foly.DAO.OrderDetailHotelDAO;
 import Travel_Foly.DAO.OrderDetailTourDAO;
 import Travel_Foly.DAO.TourDAO;
@@ -48,6 +49,9 @@ public class AdminController {
 	private OrderDetailHotelDAO orderDetailHotelDao;
 	
 	@Autowired
+	private HotelDAO hotelDao;
+	
+	@Autowired
 	private AccountDAO accountDao;
 	@Autowired
 	private CategoryTourDAO categoryTourDao;
@@ -61,19 +65,24 @@ public class AdminController {
 	public String index(Model model, @RequestParam("page") Optional<Integer> page,
 			@RequestParam("pageUser") Optional<Integer> pageUser) {
 		Integer reportTour = tourDao.reportTour();
+		Integer reportHotel = hotelDao.reportHotel();
 		Integer reportTourQuantity = tourDao.reportTourQuantity(1);
-		Integer reportOrder = orderDetailTourDao.reportOrder();
+		Integer hotelQuantity = hotelDao.reportTourQuantity(1);
+		Integer reportOrderTour = orderDetailTourDao.reportOrder();
+		Integer reportOrderHotel = orderDetailHotelDao.reportOrder();
 		Integer reportUser = accountDao.reportUser();
 		Integer getall = orderDetailTourDao.getAllOrderDetailTours();
-		Double getRevenue = orderDetailTourDao.getRevenueOrderDetailTour(2023, 11, null, null);
+		Double getRevenue = orderDetailTourDao.getRevenueOrderDetailTour() + orderDetailHotelDao.getRevenueOrderDetailHotel();
 
 		model.addAttribute("tour", reportTour);
+		model.addAttribute("hotel", reportHotel);
 		model.addAttribute("tourQuantity", reportTourQuantity);
-		model.addAttribute("order", reportOrder);
+		model.addAttribute("hotelQuantity", hotelQuantity);
+		model.addAttribute("orderTour", reportOrderTour);
+		model.addAttribute("orderHotel", reportOrderHotel);
 		model.addAttribute("user", reportUser);
 		model.addAttribute("get", getall);
-		model.addAttribute("getRebennu", getRevenue == null ? 0:getRevenue);
-		System.out.println(getRevenue);
+		model.addAttribute("getRevenue", getRevenue == null ? 0:getRevenue);
 
 		// table order
 		Pageable pageableTour = PageRequest.of(page.orElse(0), 5);
@@ -321,7 +330,7 @@ public class AdminController {
 
 	@GetMapping("report")
 	public String report(Model model) {
-
+		
 		List<MonthlyRevenueDTO> revenueYear = orderDetailTourDao.getListYearlyRevenue();
 		model.addAttribute("revenueYear", revenueYear);
 		
@@ -333,6 +342,41 @@ public class AdminController {
 		
 		List<MonthlyRevenueDTO> quantityHotelYear = orderDetailHotelDao.getListQuantityOrderHotel();
 		model.addAttribute("quantityHotelYear", quantityHotelYear);
+		
+		Integer reportTour = tourDao.reportTour();
+		Integer reportHotel = hotelDao.reportHotel();
+		Integer reportTourQuantity = tourDao.reportTourQuantity(0);
+		Integer hotelQuantity = hotelDao.reportTourQuantity(0);
+		Integer reportOrderTour = orderDetailTourDao.reportOrder();
+		Integer reportOrderHotel = orderDetailHotelDao.reportOrder();
+		Integer reportAdmin = accountDao.reportAdmin();
+		Integer getall = orderDetailTourDao.getAllOrderDetailTours();	
+		Double getRevenue = orderDetailTourDao.getRevenueOrderDetailTour() + orderDetailHotelDao.getRevenueOrderDetailHotel();
+		Integer staff=accountDao.reportStaff();
+		Integer staffIsBaned=accountDao.reportStaffisBaned();
+		Integer orderCancel = orderDetailTourDao.findOrderCancel();
+		Integer reportUser = accountDao.reportUser();
+		
+		List<Object[]> bestSellingTour = orderDetailTourDao.getBestSellingTour();
+		model.addAttribute("bestSellingTours", bestSellingTour);
+		
+		List<Object[]> bestSellingHotel = orderDetailHotelDao.getBestSellingHotel();
+		model.addAttribute("bestSellingHotels", bestSellingHotel);
+		
+		model.addAttribute("user", reportUser);
+		model.addAttribute("staff", staff);
+		model.addAttribute("orderCancel", orderCancel);
+		model.addAttribute("staffIsBaned", staffIsBaned);
+		model.addAttribute("tour", reportTour);
+		model.addAttribute("hotel", reportHotel);
+		model.addAttribute("tourQuantity", reportTourQuantity);
+		model.addAttribute("hotelQuantity", hotelQuantity);
+		model.addAttribute("orderTour", reportOrderTour);
+		model.addAttribute("orderHotel", reportOrderHotel);
+		model.addAttribute("reportAdmin", reportAdmin);
+		model.addAttribute("get", getall);
+		model.addAttribute("getRevenue", getRevenue == null ? 0:getRevenue);
+
 		
 		return "admin/quan-ly-bao-cao";
 

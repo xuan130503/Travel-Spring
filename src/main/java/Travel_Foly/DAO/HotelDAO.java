@@ -19,4 +19,11 @@ public interface HotelDAO extends JpaRepository<Hotel, Integer> {
 
 	@Query("SELECT c FROM Hotel c WHERE c.Name like %?1%")
 	List<Hotel> searchHotels(String keyword);
+	
+	@Query("Select count(h) From Hotel h")
+	Integer reportHotel();
+	
+	@Query("Select count(h) From Hotel h "
+			+ "Where h.Quantity <= ?1 ")
+	Integer reportTourQuantity(Integer quantity);
 }

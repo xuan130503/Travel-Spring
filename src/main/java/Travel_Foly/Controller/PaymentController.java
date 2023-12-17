@@ -163,23 +163,28 @@ public class PaymentController {
 		System.out.println("PayerId:" + payerId);
 		// send mail
 		List<Integer> id = new ArrayList<>();
-		if(session.getAttribute("tourId")!=null) {
+		if(session.getAttribute("tourId")!= null) {
 			id = session.getAttribute("tourId");
 			for (Integer index : id) {
+				System.out.println("TourId: "+ index);
 				OrderDetailTour order = orderDetailTourDao.findByOrderDetailTourId(index);
 				order.setStatus(2);
 				orderDetailTourDao.save(order);
 				InvoiceDTO invoice = orderDetailTourDao.detailInvoice(index);
 				mailService.sendMailWithCustomer(invoice);
+				
 			}
 		}
-		if(session.getAttribute("hotelId")!=null) {
+		if(session.getAttribute("hotelId")!= null) {
+			id = session.getAttribute("hotelId");
 			for (Integer index : id) {
+				System.out.println("HotelId: "+ index);
 				OrderDetailHotel order = orderDetailHotelDAO.findOneById(index);
 				order.setStatus(2);
 				orderDetailHotelDAO.save(order);
 				orderHotelDTO invoice = orderDetailHotelDAO.OrderdetailHotelInvoice(index);
 				mailService.sendMailwithCustomerOrderHotel(invoice);
+				
 			}
 		}
 		
