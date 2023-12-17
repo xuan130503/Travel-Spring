@@ -31,7 +31,10 @@ public interface AccountDAO extends JpaRepository<Account, Integer> {
 			+ "Where a.Role=false "
 			+ "and a.Activated=true")
 	Integer reportUser();
-
+	@Query("Select count(a) from Account a "
+			+ "Where a.Role=false "
+			+ "and a.Activated=false")
+	Integer reportAdmin();
 	@Query("Select count(a) from Account a "
 			+ "Where a.Role=true "
 			+ "and a.Activated=true")

@@ -34,4 +34,18 @@ public interface OrderDetailHotelDAO extends JpaRepository<OrderDetailHotel, Int
 	        "FROM OrderDetailHotel o " +
 	        "GROUP BY YEAR(o.BookDate), MONTH(o.BookDate)")
 	List<MonthlyRevenueDTO> getListQuantityOrderHotel();
+    
+    @Query("Select SUM(o.total) FROM OrderDetailHotel o")
+	Double getRevenueOrderDetailHotel();
+    
+    @Query("Select count(de) From OrderDetailHotel de")
+	Integer reportOrder();
+    
+    @Query("SELECT t.HotelId, t.Name, SUM(t.Quantity) AS TotalQuantity, t.Price, t.CategoryHotel.Name, t.CategoryRoom.Name "
+			+ "FROM Hotel t "
+			+ "JOIN OrderDetailHotel de ON t.HotelId = de.OrderDetailHotel.HotelId "
+			+ "GROUP BY t.HotelId, t.Name, t.Price, t.CategoryHotel.Name, t.CategoryRoom.Name "
+			+ "ORDER BY TotalQuantity DESC "
+			+ "LIMIT 5")
+	List<Object[]> getBestSellingHotel();
 }
