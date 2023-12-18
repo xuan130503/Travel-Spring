@@ -582,6 +582,4 @@ VALUES
 (2, 100.0, '2023-01-01', '2023-01-10', 200.0, '2021-1-15', 1, 1, 1, 1),
 (2, 100.0, '2023-01-01', '2023-01-10', 200.0, '2021-12-15', 1, 1, 1, 1)
 
-	select @@version
-	Microsoft SQL Server 2019 (RTM) - 15.0.2000.5 (X64)   Sep 24 2019 13:48:23   Copyright (C) 2019 Microsoft Corporation  Developer Edition (64-bit) on Windows 10 Home 10.0 <X64> (Build 22621: ) 
-
+ docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=YourStrong@Passw0rd" -p 1444:1433 --name sql1 --hostname sql1  -d mcr.microsoft.com/mssql/server:2019-latest
