@@ -25,11 +25,11 @@ import Travel_Foly.DTO.OrderDetailTourDTO;
 
 @Service
 public class paymentServiceImpl implements paymentService{
-//	AeRpO0g4Kk_keDh6jDLNQOd32QBuw-a56wTtjcZ74_Z1toV8P6BQCDn2b2wWimJ1QfaN4jJQsfTJSlsO
-	private static final String CLIENT_ID="AdnW78R-tUIGj5Jd8Rkt_dAkOF1e0eyUaYUn2pqE6sWKm6geDx4fotS9nfee3xIKqhfpOSXneeyyAmyo";
-//	EH2srCMawkNLARvmvyAd8bnr9rlGLrxHJ9XKNWg0PdgkqEAql5BCbforWNS_g2ww_c6FmHP9SC9UWd1x
-	private static final String CLIENT_SECRET="EDm9UZ_MBfipBzCkcuIQox5RWkc4uyISL8WKDjxelH2VDOFjMiKF6jNitkBhLbHdNTXLXC4t8x5A8Vqh";
-	private static final String MODE = "sandbox";
+//  AdnW78R-tUIGj5Jd8Rkt_dAkOF1e0eyUaYUn2pqE6sWKm6geDx4fotS9nfee3xIKqhfpOSXneeyyAmyo
+	private static final String CLIENT_ID="AeRpO0g4Kk_keDh6jDLNQOd32QBuw-a56wTtjcZ74_Z1toV8P6BQCDn2b2wWimJ1QfaN4jJQsfTJSlsO";
+//	EDm9UZ_MBfipBzCkcuIQox5RWkc4uyISL8WKDjxelH2VDOFjMiKF6jNitkBhLbHdNTXLXC4t8x5A8Vqh
+	private static final String CLIENT_SECRET="EH2srCMawkNLARvmvyAd8bnr9rlGLrxHJ9XKNWg0PdgkqEAql5BCbforWNS_g2ww_c6FmHP9SC9UWd1x";
+	private static final String MODE = "live";
 	@Override
 	public String authorizePayment(OrderDetailTourDTO orderDetail) throws PayPalRESTException {       
  
