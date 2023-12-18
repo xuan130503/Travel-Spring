@@ -56,7 +56,7 @@
 			class="slider-container container-fluid m-0 p-0 row justify-content-lg-between p_header"
 			style="background: url(''); background-size: cover; background-repeat: no-repeat;">
 			<div class="col-12 col-lg-5 col-md-5 col-sm-12">
-				
+
 			</div>
 			<div class="mt-5 col-12 col-lg-7 col-md-7 col-sm-12">
 				<section id="tranding">
@@ -163,7 +163,7 @@
 								</label>
 							</div>
 							<label style="font-size: 20px; font-family: Arial, Helvetica, sans-serif;">
-								Room image  detail
+								Room image detail
 							</label>
 							<div th:object="${hotelImage}" class="m-0 p-0 row d-flex justify-content-between">
 								<div class="col-md-4 col-sm-5 col-4 col-lg-4 gy-4">
@@ -250,7 +250,7 @@
 										<p style="color: red; font-size: 30px;">
 											[[${discount}]] VND</p>
 										<p> /Room/ night</p>
-									
+
 									</div>
 
 								</div>
@@ -271,8 +271,6 @@
 								</div>
 
 								<div class="row mb-3">
-
-
 									<div class="col-md-12 mb-3">
 										<label class="title-input" for="fullname">Fullname</label>
 										<input class="form-control" type="text" id="fullname" th:name="fullname"
@@ -298,24 +296,84 @@
 											placeholder="Booking CheckIn">
 									</div>
 									<div class="form-btn mt-2">
-										<button onclick="goToPage2()" style="padding:10px 60px; background-color: rgb(203, 96, 57); border-radius: 10px;">
+										<button onclick="goToPage2()"
+											style="padding:10px 60px; background-color: rgb(203, 96, 57); border-radius: 10px;">
 											Next
 										</button>
 									</div>
 								</div>
 								<script>
 									function goToPage2() {
-										var id = `[[${hotel.HotelId}]]`;
-										var fullname = document.getElementById("fullname").value;
-										var email = document.getElementById("email").value;
-										var phone = document.getElementById("phone").value;
-										var checkin = document.getElementById("checkin").value;
-										var checkout = document.getElementById("checkout").value;
+										if (validateForm()) {
+											var id = `[[${hotel.HotelId}]]`;
+											var fullname = document.getElementById("fullname").value;
+											var email = document.getElementById("email").value;
+											var phone = document.getElementById("phone").value;
+											var checkin = document.getElementById("checkin").value;
+											var checkout = document.getElementById("checkout").value;
 
-										// Construct URL with query parameters
-										var url = "/travelfpoly/hotel-detail/" + id + "/page2?fullname=" + fullname
-											+ "&email=" + encodeURIComponent(email) + "&phone=" + encodeURIComponent(phone) + "&checkin=" + encodeURIComponent(checkin) + "&checkout=" + encodeURIComponent(checkout);
-										window.location.href = url;
+											// Construct URL with query parameters
+											var url = "/travelfpoly/hotel-detail/" + id + "/page2?fullname=" + fullname
+												+ "&email=" + encodeURIComponent(email) + "&phone=" + encodeURIComponent(phone) + "&checkin=" + encodeURIComponent(checkin) + "&checkout=" + encodeURIComponent(checkout);
+											window.location.href = url;
+										}
+									}
+									function validateForm() {
+										var fullnameRegex = /^[\p{L}\s]+$/u;
+
+										var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+										var phoneRegex = /^\d{10}$/;
+
+										// var dateRegexcheckin = /^\d{4}-\d{2}-\d{2}$/;
+										// var dateRegexcheckout = /^\d{4}-\d{2}-\d{2}$/;
+
+
+
+										var fullname = document.getElementById("fullname").value.trim();
+										var email = document.getElementById("email").value.trim();
+										var phone = document.getElementById("phone").value.trim();
+										var checkin = document.getElementById("checkin").value.trim();
+										var checkout = document.getElementById("checkout").value.trim();
+
+
+										// Kiểm tra không để trống
+										if (fullname === '') {
+											alert('Full name cannot be left blank');
+											return false;
+										} else if (!fullnameRegex.test(fullname)) {
+											alert('Full name is not valid');
+											return false;
+										} else if (email === '') {
+											alert('email cannot be left blank');
+											return false;
+										} else if (!emailRegex.test(email)) {
+											alert('email is not valid');
+											return false;
+										} else if (phone === '') {
+											alert('Number Phone cannot be left blank');
+											return false;
+										} else if (!phoneRegex.test(phone)) {
+											alert('Number Phone is not valid only ten');
+											return false;
+										} else if (checkin === '') {
+											alert('CheckIn cannot be left blank');
+											return false;
+										} else if (checkout === '') {
+											alert('Checkout cannot be left blank');
+											return false;
+										} else {
+											var checkinDate = new Date(checkin);
+											var checkoutDate = new Date(checkout);
+
+											if (checkoutDate <= checkinDate) {
+												alert('Checkout date must be greater than CheckIn date');
+												return false;
+											}
+
+										}
+										// Bạn có thể thêm kiểm tra regex cho email, checkin, checkout tương tự
+										return true;
 									}
 								</script>
 							</div>

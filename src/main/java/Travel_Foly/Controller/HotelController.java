@@ -3,6 +3,8 @@ package Travel_Foly.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +20,7 @@ import Travel_Foly.DAO.HotelImageDAO;
 import Travel_Foly.Model.Hotel;
 import Travel_Foly.Model.HotelImage;
 import Travel_Foly.Model.TourImage;
+import Travel_Foly.Model.TourService;
 import Travel_Foly.Service.FileUpload;
 import Travel_Foly.Service.HotelService;
 
@@ -35,10 +38,19 @@ public class HotelController {
     private HotelImageDAO hotelImageDAO;
 
     @GetMapping("hotel")
-    public String indexHotel(Model model) {
-        List<Hotel> hotels = hotelService.getAllHotel();
+    public String indexHotel(Model model, @RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo,
+            @Param("keyword") String keyword) {
+        Page<Hotel> hotels = hotelService.getAll(pageNo);
+        if (keyword != null) {
+            hotels = this.hotelService.SearchPageTourService(keyword,
+                    pageNo);
+            model.addAttribute("keyword", keyword);
+        }
+
         model.addAttribute("hotels", hotels);
         model.addAttribute("hotel", new Hotel());
+        model.addAttribute("totalPage", hotels.getTotalPages());
+        model.addAttribute("currentPage", pageNo);
         return "admin/Hotel";
     }
 
@@ -49,7 +61,8 @@ public class HotelController {
 
     ) throws Exception {
         this.hotelService.addHotel(hotel);
-        String image = fileUpload.uploadWithNameHotel(image1, hotel.getName(), "avatar");
+        String image = fileUpload.uploadWithNameHotel(image1, hotel.getName(),
+                "avatar");
         List<String> listImageName = fileUpload.uploadHotel(images, hotel.getName());
         HotelImage hotelImage = new HotelImage();
         hotelImage.setAvatar(image);
@@ -70,11 +83,20 @@ public class HotelController {
     }
 
     @GetMapping("updateHotel/{HotelId}")
-    public String updateHotel(@PathVariable Integer HotelId, Model model) {
+    public String updateHotel(@PathVariable Integer HotelId, Model model,
+            @RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo,
+            @Param("keyword") String keyword) {
         Hotel hotel = hotelService.getHotelById(HotelId);
         model.addAttribute("hotel", hotel);
-        List<Hotel> hotels = hotelService.getAllHotel();
+        Page<Hotel> hotels = hotelService.getAll(pageNo);
+        if (keyword != null) {
+            hotels = this.hotelService.SearchPageTourService(keyword,
+                    pageNo);
+            model.addAttribute("keyword", keyword);
+        }
         model.addAttribute("hotels", hotels);
+        model.addAttribute("totalPage", hotels.getTotalPages());
+        model.addAttribute("currentPage", pageNo);
         return "admin/Hotel";
     }
 

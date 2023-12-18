@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -33,8 +35,28 @@ public class TourServiceSer {
         this.tourServiceDAO.deleteById(TourServiceId);
     }
 
-    public Page<TourService> getAll(Pageable pageable) {
+    public Page<TourService> getAll(Integer pageNo) {
+        Pageable pageable = PageRequest.of(pageNo - 1, 5);
         return this.tourServiceDAO.findAll(pageable);
+    }
+
+    public List<TourService> searchTourService(String keyword) {
+        return this.tourServiceDAO.searchTourSearch(keyword);
+    }
+
+    public Page<TourService> SearchPageTourService(String keyword, Integer pageNo) {
+        List list = this.tourServiceDAO.searchTourSearch(keyword);
+
+        Pageable pageable = PageRequest.of(pageNo - 1, 5);
+
+        Integer start = (int) pageable.getOffset();
+        Integer end = (int) ((pageable.getOffset() + pageable.getPageSize()) > list.size() ? list.size()
+                : pageable.getOffset() + pageable.getPageSize());
+
+        list = list.subList(start, end);
+
+        return new PageImpl<TourService>(list, pageable,
+                this.tourServiceDAO.searchTourSearch(keyword).size());
     }
 
 }

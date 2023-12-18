@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import Travel_Foly.DTO.TourWithImageDTO;
+import Travel_Foly.Model.Hotel;
 import Travel_Foly.Model.Tour;
 
 @Repository
@@ -59,6 +60,6 @@ public interface TourDAO extends JpaRepository<Tour, Integer> {
 
 	// @Query("select t from Tour where t.Name like %?1%")
 	// List<Tour> searchTour(String keyword);
-	// @Query("Select t from Tour t Where t.Name = %?1%")
-	// List<Tour> getSearchTours(String keyword);
+	@Query("SELECT t FROM Tour t WHERE t.Name like %?1%")
+	List<Tour> TourSearch(String keyword);
 }

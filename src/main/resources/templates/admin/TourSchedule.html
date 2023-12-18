@@ -37,11 +37,16 @@
                 <div class="tile">
                     <h3 class="tile-title">Tạo mới sản phẩm</h3>
                     <div class="tile-body">
-                        <div class="container mt-3">
+                        <div class="container mt-3 d-flex">
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                 data-bs-target="#myModal">
                                 Thêm Lịch trình tham quan
                             </button>
+                            <form class="col-sm-4 d-flex" style="margin-left: 600px;">
+                                <input class="form-control me-2" th:name="keyword" type="search" placeholder="Search"
+                                    aria-label="Search" th:value="${keyword}">
+                                <button class="btn btn-outline-success" type="submit">Search</button>
+                            </form>
                         </div>
 
                         <!-- The Modal -->
@@ -140,19 +145,19 @@
                     </div>
                 </div>
             </div>
-            <div class="row mt-1" style="padding-left: 450px;">
-                <div class="col text-center">
+            <div class="row mt-1">
+                <div class=" col text-center">
                     <div class="block-27">
                         <ul>
-                            <li th:if="${tourSchedules.number > 1}">
-                                <a th:href="@{'?pageNo='+${tourSchedules.number-1}}">&lt;</a>
+                            <li th:if="${currentPage > 1}">
+                                <a th:href="@{'?pageNo='+${currentPage-1}}">&lt;</a>
                             </li>
-                            <li th:each="item : ${#numbers.sequence(0, tourSchedules.totalPages-1)}"
-                                th:class="${item} == ${tourSchedules.number} ? 'active' : ''">
-                                <a th:text="${item+1}" th:href="@{'?pageNo='+${item}}"></a>
+                            <li th:each="item : ${#numbers.sequence(1, totalPage)}"
+                                th:class="${currentPage == item ? 'active' : ''}">
+                                <a th:text="${item}" th:href="@{'?pageNo='+${item}}"></a>
                             </li>
-                            <li th:if="${tourSchedules.number < tourSchedules.totalPages-1}">
-                                <a th:href="@{'?pageNo='+${tourSchedules.number+1}}">&gt;</a>
+                            <li th:if="${currentPage < totalPage}">
+                                <a th:href="@{'?pageNo='+${currentPage+1}}">&gt;</a>
                             </li>
                         </ul>
                     </div>

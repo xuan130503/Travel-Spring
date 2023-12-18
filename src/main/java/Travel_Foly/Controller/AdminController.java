@@ -3,12 +3,14 @@ package Travel_Foly.Controller;
 import java.io.File;
 import java.sql.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,6 +34,7 @@ import Travel_Foly.Model.Account;
 import Travel_Foly.Model.CategoryTour;
 import Travel_Foly.Model.OrderDetailTour;
 import Travel_Foly.Model.Tour;
+import Travel_Foly.Service.AccountService;
 import Travel_Foly.Service.SessionService;
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -44,13 +47,13 @@ public class AdminController {
 	private TourDAO tourDao;
 	@Autowired
 	private OrderDetailTourDAO orderDetailTourDao;
-	
+
 	@Autowired
 	private OrderDetailHotelDAO orderDetailHotelDao;
-	
+
 	@Autowired
 	private HotelDAO hotelDao;
-	
+
 	@Autowired
 	private AccountDAO accountDao;
 	@Autowired
@@ -58,6 +61,9 @@ public class AdminController {
 
 	@Autowired
 	private SessionService session;
+
+	@Autowired
+	private AccountService accountService;
 
 	private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
@@ -72,7 +78,8 @@ public class AdminController {
 		Integer reportOrderHotel = orderDetailHotelDao.reportOrder();
 		Integer reportUser = accountDao.reportUser();
 		Integer getall = orderDetailTourDao.getAllOrderDetailTours();
-		Double getRevenue = orderDetailTourDao.getRevenueOrderDetailTour() + orderDetailHotelDao.getRevenueOrderDetailHotel();
+		Double getRevenue = orderDetailTourDao.getRevenueOrderDetailTour()
+				+ orderDetailHotelDao.getRevenueOrderDetailHotel();
 
 		model.addAttribute("tour", reportTour);
 		model.addAttribute("hotel", reportHotel);
@@ -82,7 +89,7 @@ public class AdminController {
 		model.addAttribute("orderHotel", reportOrderHotel);
 		model.addAttribute("user", reportUser);
 		model.addAttribute("get", getall);
-		model.addAttribute("getRevenue", getRevenue == null ? 0:getRevenue);
+		model.addAttribute("getRevenue", getRevenue == null ? 0 : getRevenue);
 
 		// table order
 		Pageable pageableTour = PageRequest.of(page.orElse(0), 5);
@@ -150,10 +157,9 @@ public class AdminController {
 	public String updateOrder(Model model,
 			@PathVariable("id") Integer id,
 			@RequestParam("CustomerName") String userName,
-//			@RequestParam("StartDate") java.util.Date date,
+			// @RequestParam("StartDate") java.util.Date date,
 			@RequestParam("QuantityAdult") Integer QuantityAdult,
-			@RequestParam("QuantityChildren") Integer QuantityChildren
-			) {
+			@RequestParam("QuantityChildren") Integer QuantityChildren) {
 		System.out.println(id);
 		return "redirect:/travelfpoly/admin/addorder";
 	}
@@ -186,8 +192,7 @@ public class AdminController {
 	public String addStaff(Model model, @RequestParam("username") String username,
 			@RequestParam("password") String password, @RequestParam("fullname") String fullname,
 			@RequestParam("email") String email, @RequestParam("address") String address,
-			@RequestParam("phone") String phone, @RequestParam("age") Integer age,
-			@RequestParam("image") MultipartFile file) {
+			@RequestParam("phone") String phone, @RequestParam("age") Integer age) {
 
 		Account checkAccount = accountDao.findOneByUserName(username);
 		if (checkAccount != null) {
@@ -197,12 +202,12 @@ public class AdminController {
 			checkAccount.setAddress(address);
 			checkAccount.setPhone(phone);
 			checkAccount.setAge(age);
-			if (file != null) {
-				checkAccount.setImage(file.getOriginalFilename());
-				saveFile(file, "/images");
-			} else {
-				checkAccount.setImage("");
-			}
+			// if (file != null) {
+			// checkAccount.setImage(file.getOriginalFilename());
+			// saveFile(file, "/images");
+			// } else {
+			// checkAccount.setImage("");
+			// }
 			checkAccount.setActivated(true);
 			checkAccount.setRole(true);
 			accountDao.save(checkAccount);
@@ -215,12 +220,12 @@ public class AdminController {
 			account.setAddress(address);
 			account.setPhone(phone);
 			account.setAge(age);
-			if (file != null) {
-				account.setImage(file.getOriginalFilename());
-				saveFile(file, "/images");
-			} else {
-				account.setImage("");
-			}
+			// if (file != null) {
+			// account.setImage(file.getOriginalFilename());
+			// saveFile(file, "/images");
+			// } else {
+			// account.setImage("");
+			// }
 			account.setRole(true);
 			account.setActivated(true);
 			accountDao.save(account);
@@ -330,19 +335,19 @@ public class AdminController {
 
 	@GetMapping("report")
 	public String report(Model model) {
-		
+
 		List<MonthlyRevenueDTO> revenueYear = orderDetailTourDao.getListYearlyRevenue();
 		model.addAttribute("revenueYear", revenueYear);
-		
+
 		List<MonthlyRevenueDTO> revenueHotelYear = orderDetailHotelDao.getListYearlyRevenue();
 		model.addAttribute("revenueHotelYear", revenueHotelYear);
-		
+
 		List<MonthlyRevenueDTO> quantityTourYear = orderDetailTourDao.getListQuantityOrderTour();
 		model.addAttribute("quantityTourYear", quantityTourYear);
-		
+
 		List<MonthlyRevenueDTO> quantityHotelYear = orderDetailHotelDao.getListQuantityOrderHotel();
 		model.addAttribute("quantityHotelYear", quantityHotelYear);
-		
+
 		Integer reportTour = tourDao.reportTour();
 		Integer reportHotel = hotelDao.reportHotel();
 		Integer reportTourQuantity = tourDao.reportTourQuantity(0);
@@ -350,19 +355,20 @@ public class AdminController {
 		Integer reportOrderTour = orderDetailTourDao.reportOrder();
 		Integer reportOrderHotel = orderDetailHotelDao.reportOrder();
 		Integer reportAdmin = accountDao.reportAdmin();
-		Integer getall = orderDetailTourDao.getAllOrderDetailTours();	
-		Double getRevenue = orderDetailTourDao.getRevenueOrderDetailTour() + orderDetailHotelDao.getRevenueOrderDetailHotel();
-		Integer staff=accountDao.reportStaff();
-		Integer staffIsBaned=accountDao.reportStaffisBaned();
+		Integer getall = orderDetailTourDao.getAllOrderDetailTours();
+		Double getRevenue = orderDetailTourDao.getRevenueOrderDetailTour()
+				+ orderDetailHotelDao.getRevenueOrderDetailHotel();
+		Integer staff = accountDao.reportStaff();
+		Integer staffIsBaned = accountDao.reportStaffisBaned();
 		Integer orderCancel = orderDetailTourDao.findOrderCancel();
 		Integer reportUser = accountDao.reportUser();
-		
+
 		List<Object[]> bestSellingTour = orderDetailTourDao.getBestSellingTour();
 		model.addAttribute("bestSellingTours", bestSellingTour);
-		
+
 		List<Object[]> bestSellingHotel = orderDetailHotelDao.getBestSellingHotel();
 		model.addAttribute("bestSellingHotels", bestSellingHotel);
-		
+
 		model.addAttribute("user", reportUser);
 		model.addAttribute("staff", staff);
 		model.addAttribute("orderCancel", orderCancel);
@@ -375,34 +381,34 @@ public class AdminController {
 		model.addAttribute("orderHotel", reportOrderHotel);
 		model.addAttribute("reportAdmin", reportAdmin);
 		model.addAttribute("get", getall);
-		model.addAttribute("getRevenue", getRevenue == null ? 0:getRevenue);
+		model.addAttribute("getRevenue", getRevenue == null ? 0 : getRevenue);
 
-		
 		return "admin/quan-ly-bao-cao";
 
 	}
-	//		 Integer staff=accountDao.reportStaff();
-//		 model.addAttribute("staff", staff);
-//		 Integer staffIsBaned=accountDao.reportStaffisBaned();
-//		 model.addAttribute("staffIsBaned", staffIsBaned);
-//		 Integer reportTour = tourDao.reportTour();
-//		 model.addAttribute("tour", reportTour);
-//		 Integer reportTourQuantity = tourDao.reportTourQuantity(0);
-//		 model.addAttribute("tourQuantity", reportTourQuantity);
-//		 Integer reportOrder = orderDetailTourDao.reportOrder();
-//		 model.addAttribute("order", reportOrder);
-//		 Integer reportUser = accountDao.reportUser();
-//		 model.addAttribute("user", reportUser);
-//		 Double totalIncome = orderDetailTourDao.findTotalIncome();
-//		 model.addAttribute("total", totalIncome);
-//		 Integer orderCancel = orderDetailTourDao.findOrderCancel();
-//		 model.addAttribute("orderCancel", orderCancel);
-//		 List<Tour> bestSellingTours = tourService.getBestSellingTours();
-//		 model.addAttribute("bestSellingTours", bestSellingTours);
+
+	// Integer staff=accountDao.reportStaff();
+	// model.addAttribute("staff", staff);
+	// Integer staffIsBaned=accountDao.reportStaffisBaned();
+	// model.addAttribute("staffIsBaned", staffIsBaned);
+	// Integer reportTour = tourDao.reportTour();
+	// model.addAttribute("tour", reportTour);
+	// Integer reportTourQuantity = tourDao.reportTourQuantity(0);
+	// model.addAttribute("tourQuantity", reportTourQuantity);
+	// Integer reportOrder = orderDetailTourDao.reportOrder();
+	// model.addAttribute("order", reportOrder);
+	// Integer reportUser = accountDao.reportUser();
+	// model.addAttribute("user", reportUser);
+	// Double totalIncome = orderDetailTourDao.findTotalIncome();
+	// model.addAttribute("total", totalIncome);
+	// Integer orderCancel = orderDetailTourDao.findOrderCancel();
+	// model.addAttribute("orderCancel", orderCancel);
+	// List<Tour> bestSellingTours = tourService.getBestSellingTours();
+	// model.addAttribute("bestSellingTours", bestSellingTours);
 	@GetMapping("testreport")
 	public String testReport() {
 		List<MonthlyRevenueDTO> revenueYear = orderDetailTourDao.getListYearlyRevenue();
-			System.out.println(revenueYear);
+		System.out.println(revenueYear);
 		return "hello";
 	}
 
@@ -431,5 +437,22 @@ public class AdminController {
 	public boolean isStringNumeric(String input) {
 		String regex = "^[-+]?\\d+(\\.\\d+)?$";
 		return input.matches(regex);
+	}
+
+	// hiển thị thông tin user information
+
+	@GetMapping("user_information")
+	public String userinformation(Model model, @RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo,
+			@Param("keyword") String keyword) {
+		Page<Account> account = accountService.getAll(pageNo);
+		if (keyword != null) {
+			account = accountService.SearchPageTourService(keyword, pageNo);
+			model.addAttribute("keyword", keyword);
+
+		}
+		model.addAttribute("account", account);
+		model.addAttribute("totalPage", account.getTotalPages());
+		model.addAttribute("currentPage", pageNo);
+		return "admin/userInformation";
 	}
 }
