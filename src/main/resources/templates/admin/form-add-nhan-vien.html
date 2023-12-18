@@ -118,7 +118,7 @@
                         <input th:name="username" th:value="*{username}" class="form-control" type="text" required>
                       </div>
                       <div class="form-group  col-md-4">
-                        <label class="control-label">Password</label>
+                        <label class="control-label">Mật khẩu</label>
                         <input th:name="password" th:value="*{password}" class="form-control" type="password" required>
                       </div>
                       <div class="form-group col-md-4">
@@ -141,7 +141,7 @@
                         <label class="control-label">Tuổi</label>
                         <input th:name="age" th:value="*{Age}" class="form-control" type="text">
                       </div>
-                      <div class="form-group col-md-12">
+                      <!-- <div class="form-group col-md-12">
                         <label class="control-label">Ảnh sản phẩm</label>
                         <div id="myfileupload">
                           <input type="file" id="uploadfile" th:name="image" onchange="readURL(this);" />
@@ -154,7 +154,7 @@
                           <p style="clear:both"></p>
                         </div>
 
-                      </div>
+                      </div> -->
 
                       <button class="btn btn-primary" th:formaction="@{/travelfpoly/admin/addstaff/create}"
                         type="submit">Lưu</button>
@@ -183,19 +183,32 @@
                 <th scope="col">Email</th>
                 <th scope="col">Địa chỉ</th>
                 <th scope="col">Điện thoại</th>
-                <th scope="col">Hình ảnh</th>
                 <th scope="col">Tuổi</th>
+                <th scope="col">Hình ảnh</th>
                 <th scope="col"></th>
               </tr>
             </thead>
             <tbody>
               <tr th:each="account : ${listAccount.content}">
+
                 <th>[[${account.FullName}]]</th>
                 <td>[[${account.Email}]]</td>
                 <td>[[${account.Address}]]</td>
                 <td>[[${account.Phone}]]</td>
-                <td>[[${account.Image}]]</td>
                 <td>[[${account.Age}]]</td>
+                <td>[[${account.Address}]]</td>
+                <!-- <td><img th:src="${account.Image}" alt=""></td> -->
+
+                <!-- <td>
+               
+                  <div
+                      th:if="${hotel.HotelImages != null and not #lists.isEmpty(hotel.HotelImages)}">
+                      <img style="width: 70px; height:70px;"
+                          th:each="image : ${hotel.HotelImages}" th:src="${image.Image1}"
+                          alt="Hotel Image" />
+                  </div>
+              </td> -->
+
                 <td>
                   <a th:href="@{|/travelfpoly/admin/addstaff/${account.UserId}|}">
                     <iconify-icon style="font-size: 18px;" icon="grommet-icons:document-update"></iconify-icon>

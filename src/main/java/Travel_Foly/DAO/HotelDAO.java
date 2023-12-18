@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import Travel_Foly.DTO.HotelDTO;
 import Travel_Foly.Model.Hotel;
+import Travel_Foly.Model.TourSchedule;
 
 @Repository
 public interface HotelDAO extends JpaRepository<Hotel, Integer> {
@@ -19,11 +20,14 @@ public interface HotelDAO extends JpaRepository<Hotel, Integer> {
 
 	@Query("SELECT c FROM Hotel c WHERE c.Name like %?1%")
 	List<Hotel> searchHotels(String keyword);
-	
+
 	@Query("Select count(h) From Hotel h")
 	Integer reportHotel();
-	
+
 	@Query("Select count(h) From Hotel h "
 			+ "Where h.Quantity <= ?1 ")
 	Integer reportTourQuantity(Integer quantity);
+
+	@Query("SELECT t FROM Hotel t WHERE t.Name like %?1%")
+	List<Hotel> HotelSearch(String keyword);
 }

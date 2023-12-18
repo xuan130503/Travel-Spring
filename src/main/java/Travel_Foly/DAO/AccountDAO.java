@@ -1,6 +1,7 @@
 package Travel_Foly.DAO;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import Travel_Foly.DTO.AccountDTO;
 import Travel_Foly.Model.Account;
+import Travel_Foly.Model.Hotel;
 
 @Repository
 public interface AccountDAO extends JpaRepository<Account, Integer> {
@@ -31,10 +33,12 @@ public interface AccountDAO extends JpaRepository<Account, Integer> {
 			+ "Where a.Role=false "
 			+ "and a.Activated=true")
 	Integer reportUser();
+
 	@Query("Select count(a) from Account a "
 			+ "Where a.Role=false "
 			+ "and a.Activated=false")
 	Integer reportAdmin();
+
 	@Query("Select count(a) from Account a "
 			+ "Where a.Role=true "
 			+ "and a.Activated=true")
@@ -58,4 +62,7 @@ public interface AccountDAO extends JpaRepository<Account, Integer> {
 	Account findByEmail(String email);
 
 	Account findByResetPasswordToken(String token);
+
+	@Query("SELECT t FROM Account t WHERE t.Email like %?1%")
+	List<Account> AccountSearch(String keyword);
 }

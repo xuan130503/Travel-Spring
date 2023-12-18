@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -30,24 +31,35 @@ public class TourServiceController {
     private TourServiceSer tourServiceSer;
 
     @GetMapping("TourService")
-    public String index(Model model,
-            @RequestParam(defaultValue = "0") Integer pageNo,
-            @RequestParam(defaultValue = "5") Integer sizeNo) {
-        Pageable pageable = PageRequest.of(pageNo, sizeNo);
-        Page<TourService> tourServices = tourServiceSer.getAll(pageable);
+    public String index(Model model, @RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo,
+            @Param("keyword") String keyword) {
+        Page<TourService> tourServices = tourServiceSer.getAll(pageNo);
+        if (keyword != null) {
+            tourServices = this.tourServiceSer.SearchPageTourService(keyword,
+                    pageNo);
+            model.addAttribute("keyword", keyword);
+        }
         model.addAttribute("tourServices", tourServices);
         model.addAttribute("tourService", new TourService());
+        model.addAttribute("totalPage", tourServices.getTotalPages());
+        model.addAttribute("currentPage", pageNo);
         return "admin/TourService";
     }
 
     @PostMapping("SaveTourService")
-    public String SaveTourservice(@Valid @ModelAttribute TourService tourService, BindingResult result, Model model,
-            @RequestParam(defaultValue = "0") Integer pageNo,
-            @RequestParam(defaultValue = "5") Integer sizeNo) {
+    public String SaveTourservice(@Valid @ModelAttribute TourService tourService,
+            BindingResult result, Model model,
+            @RequestParam(defaultValue = "1") Integer pageNo, @Param("keyword") String keyword) {
         if (result.hasErrors()) {
-            Pageable pageable = PageRequest.of(pageNo, sizeNo);
-            Page<TourService> tourServices = tourServiceSer.getAll(pageable);
+            Page<TourService> tourServices = tourServiceSer.getAll(pageNo);
+            if (keyword != null) {
+                tourServices = this.tourServiceSer.SearchPageTourService(keyword,
+                        pageNo);
+                model.addAttribute("keyword", keyword);
+            }
             model.addAttribute("tourServices", tourServices);
+            model.addAttribute("totalPage", tourServices.getTotalPages());
+            model.addAttribute("currentPage", pageNo);
             return "admin/TourService";
         }
         this.tourServiceSer.SaveTourService(tourService);
@@ -56,14 +68,19 @@ public class TourServiceController {
     }
 
     @GetMapping("updateTourService/{TourServiceId}")
-    public String UpdateTourService(@PathVariable Integer TourServiceId, Model model,
-            @RequestParam(defaultValue = "0") Integer pageNo,
-            @RequestParam(defaultValue = "5") Integer sizeNo) {
-        Pageable pageable = PageRequest.of(pageNo, sizeNo);
+    public String UpdateTourService(@PathVariable Integer TourServiceId, Model model, @Param("keyword") String keyword,
+            @RequestParam(defaultValue = "1") Integer pageNo) {
         TourService tourService = tourServiceSer.getTourServiceById(TourServiceId);
         model.addAttribute("tourService", tourService);
-        Page<TourService> tourServices = tourServiceSer.getAll(pageable);
+        Page<TourService> tourServices = tourServiceSer.getAll(pageNo);
+        if (keyword != null) {
+            tourServices = this.tourServiceSer.SearchPageTourService(keyword,
+                    pageNo);
+            model.addAttribute("keyword", keyword);
+        }
         model.addAttribute("tourServices", tourServices);
+        model.addAttribute("totalPage", tourServices.getTotalPages());
+        model.addAttribute("currentPage", pageNo);
         return "admin/TourService";
     }
 

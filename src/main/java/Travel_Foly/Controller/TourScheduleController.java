@@ -1,12 +1,8 @@
 package Travel_Foly.Controller;
 
-import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -31,24 +27,38 @@ public class TourScheduleController {
 
     @GetMapping("TourSchedule")
     public String index(Model model,
-            @RequestParam(defaultValue = "0") Integer pageNo,
-            @RequestParam(defaultValue = "5") Integer sizeNo) {
-        Pageable pageable = PageRequest.of(pageNo, sizeNo);
-        Page<TourSchedule> tourSchedules = tourScheduleService.getAll(pageable);
+            @RequestParam(defaultValue = "1") Integer pageNo,
+            @Param("keyword") String keyword) {
+
+        Page<TourSchedule> tourSchedules = tourScheduleService.getAll(pageNo);
+        if (keyword != null) {
+            tourSchedules = this.tourScheduleService.SearchPageTourService(keyword,
+                    pageNo);
+            model.addAttribute("keyword", keyword);
+        }
         model.addAttribute("tourSchedules", tourSchedules);
         model.addAttribute("tourSchedule", new TourSchedule());
+        model.addAttribute("totalPage", tourSchedules.getTotalPages());
+        model.addAttribute("currentPage", pageNo);
         return "admin/TourSchedule";
     }
 
     @PostMapping("Save")
     public String saveTourSchedule(@Valid @ModelAttribute TourSchedule tourSchedule,
             BindingResult result, Model model,
-            @RequestParam(defaultValue = "0") Integer pageNo,
-            @RequestParam(defaultValue = "5") Integer sizeNo) {
+            @RequestParam(defaultValue = "1") Integer pageNo,
+            @Param("keyword") String keyword) {
         if (result.hasErrors()) {
-            Pageable pageable = PageRequest.of(pageNo, sizeNo);
-            Page<TourSchedule> tourSchedules = tourScheduleService.getAll(pageable);
+
+            Page<TourSchedule> tourSchedules = tourScheduleService.getAll(pageNo);
+            if (keyword != null) {
+                tourSchedules = this.tourScheduleService.SearchPageTourService(keyword,
+                        pageNo);
+                model.addAttribute("keyword", keyword);
+            }
             model.addAttribute("tourSchedules", tourSchedules);
+            model.addAttribute("totalPage", tourSchedules.getTotalPages());
+            model.addAttribute("currentPage", pageNo);
             return "admin/TourSchedule";
         }
         this.tourScheduleService.saveTourSchedule(tourSchedule);
@@ -58,13 +68,19 @@ public class TourScheduleController {
 
     @GetMapping("update/{TourScheduleId}")
     public String update(@PathVariable Integer TourScheduleId, Model model,
-            @RequestParam(defaultValue = "0") Integer pageNo,
-            @RequestParam(defaultValue = "5") Integer sizeNo) {
-        Pageable pageable = PageRequest.of(pageNo, sizeNo);
+            @RequestParam(defaultValue = "1") Integer pageNo,
+            @Param("keyword") String keyword) {
         TourSchedule tourSchedule = tourScheduleService.getTourScheduleById(TourScheduleId);
         model.addAttribute("tourSchedule", tourSchedule);
-        Page<TourSchedule> tourSchedules = tourScheduleService.getAll(pageable);
+        Page<TourSchedule> tourSchedules = tourScheduleService.getAll(pageNo);
+        if (keyword != null) {
+            tourSchedules = this.tourScheduleService.SearchPageTourService(keyword,
+                    pageNo);
+            model.addAttribute("keyword", keyword);
+        }
         model.addAttribute("tourSchedules", tourSchedules);
+        model.addAttribute("totalPage", tourSchedules.getTotalPages());
+        model.addAttribute("currentPage", pageNo);
         return "admin/TourSchedule";
     }
 
