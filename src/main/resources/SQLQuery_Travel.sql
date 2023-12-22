@@ -11,6 +11,7 @@ use Travel;
 	 INSERT INTO accounts(user_name, pass_word, activated, address,age, email, full_name, phone, role,intimate_id)
 	 VALUES
 	 --12345
+	('tanduong123','$2a$12$.FGCfBI6l8LlZgtT3q6dF.N73YqUgvjXQfod1tmO7wRltIaAtvYt.', 1, N'168 Võ Văn Kiệt', 21, 'tanduong969@gmail.com', 'Duong nhut tan', '0785123655',0,1),
 	('tanduong','$2a$12$.FGCfBI6l8LlZgtT3q6dF.N73YqUgvjXQfod1tmO7wRltIaAtvYt.', 1, N'168 Võ Văn Kiệt', 21, 'duongnhuttan@gmail.com', 'Duong nhut tan', '0785123655',0,1),
 	('vantien','$2a$12$LFUDKedfUtczXdjZLKjOcuGXmEnWMztOAn5l48YElQqfyvf7fN8Ty', 1, N'168 Võ Văn Kiệt', 21, 'duongnhuttan@gmail.com', 'Duong nhut tan', '0785123655',0,1),
 	
@@ -499,10 +500,10 @@ INSERT INTO hotel_images(hotel_id,avatar, image1, image2, image3, image4, image5
   select * from order_detail_hotels
   select * from tours
    select * from cart_items
+   select * from carts
   select * from accounts
 	select * from tour_images
 	select * from tour_schedules
-	delete accounts where accounts.user_id = 24
 INSERT INTO order_detail_tours (quantity_adult, quantity_children, price_adult, price_children, total, star_date, end_date, book_date, status, available, base64, tour_id, order_tour_id, account_id)
 VALUES 
 (2, 1, 100.0, 50.0, 250, '2023-01-01', '2023-01-10', '2021-1-15', 1, 1, 'base64data1', 1, 1, 1),
@@ -582,4 +583,3 @@ VALUES
 (2, 100.0, '2023-01-01', '2023-01-10', 200.0, '2021-1-15', 1, 1, 1, 1),
 (2, 100.0, '2023-01-01', '2023-01-10', 200.0, '2021-12-15', 1, 1, 1, 1)
 
- docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=YourStrong@Passw0rd" -p 1444:1433 --name sql1 --hostname sql1  -d mcr.microsoft.com/mssql/server:2019-latest

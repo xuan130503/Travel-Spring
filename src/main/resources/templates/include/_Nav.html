@@ -114,7 +114,7 @@
 			            <li><a class="dropdown-item" href="#">[[${session.account.UserName}]]</a></li>
 			            <li th:if="${session.account.Role==true}"><a class="dropdown-item" href="/travelfpoly/admin/index">[[#{nav.admin}]]</a></li>
 			            <li th:if="${session.account.Role==false}"><a class="dropdown-item" href="/travelfpoly/order">[[#{nav.myTour}]]</a></li>
-			            <li><a class="dropdown-item" href="#">[[#{nav.reset}]]</a></li>
+			            <li><a class="dropdown-item" th:href="@{/travelfpoly/account/reset_password_user/{id} (id = ${session.account.UserId})}">[[#{nav.reset}]]</a></li>
 			            <li><hr class="dropdown-divider"></li>
 			            <li><a class="dropdown-item" href="/travelfpoly/account/logout">[[#{nav.logout}]]</a></li>
 			          </ul>

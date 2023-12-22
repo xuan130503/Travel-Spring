@@ -19,9 +19,12 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.google.api.client.http.HttpRequest;
 
 import Travel_Foly.Config.Utility;
 import Travel_Foly.DAO.AccountDAO;
@@ -264,5 +267,25 @@ public class AccountController {
 
 		return "user/signin";
 	}
-
+	
+	@GetMapping("reset_password_user/{id}")
+	public String resetPassUser(@PathVariable("id") Integer id, Model model) {
+		
+		model.addAttribute("userId", id);
+		return "user/reset_password_user_form";
+	}
+	@PostMapping("reset_password_user/{id}")
+	public String resetPassUserPost(@PathVariable("id") Integer id, Model model, HttpServletRequest request) {
+		Account account = accountDao.findById(id).get();
+		System.out.println("name reset:"+account.getFullName());
+		String password = request.getParameter("password");
+		String passwordConfirm = request.getParameter("passConfirm");
+		if(password.equals(passwordConfirm)) {
+			account.setPassWord(encoder.encode(password));
+			accountDao.save(account);
+			return "redirect:/travelfpoly/account/login";
+		}
+		
+		return "redirect:/travelfpoly/account/reset_password_user_form/"+id;
+	}
 }
