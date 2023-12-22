@@ -241,18 +241,25 @@ public class HomeController {
 		Integer userId = account.getUserId();
 		Account user = accountDao.findById(userId).get();
 		Cart cart = cartDao.findByUserId(userId);
+		Cart cart1 = new Cart();
 		if (cart == null) {
-			cart.setAddress(user.getAddress());
-			cart.setCart(user);
-			cart.setName(user.getFullName());
-			cart.setPhone(user.getPhone());
-			cart.setEmail(user.getEmail());
-			cartDao.save(cart);
+			cart1.setAddress(user.getAddress()!= null? user.getAddress() :"");
+			cart1.setCart(user);
+			cart1.setName(user.getFullName() != null? user.getFullName() :"");
+			cart1.setPhone(user.getPhone() != null? user.getPhone() :"");
+			cart1.setEmail(user.getEmail() != null? user.getEmail() :"");
+			cartDao.save(cart1);
+			
+			List<CartItem> cartItems = cartItemDao.findByCartId(cart1.getCartId());
+			model.addAttribute("cart", cart1);
+			model.addAttribute("cartItems", cartItems);
 		}
-
-		List<CartItem> cartItems = cartItemDao.findByCartId(cart.getCartId());
-		model.addAttribute("cart", cart);
-		model.addAttribute("cartItems", cartItems);
+		else {
+			List<CartItem> cartItems = cartItemDao.findByCartId(cart.getCartId());
+			model.addAttribute("cart", cart);
+			model.addAttribute("cartItems", cartItems);
+		}
+		
 		// Object [] cartItemDTO=cartItems.toArray();
 		// Map<Integer, Boolean> selectedTours = new HashMap<>();
 		//
